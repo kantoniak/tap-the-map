@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.util.Log;
 
 import com.kantoniak.discrete_fox.ar.ARSurfaceView;
+import com.kantoniak.discrete_fox.communication.Question;
+import com.kantoniak.discrete_fox.communication.QuestionChest;
 
 import cn.easyar.Engine;
 
@@ -25,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        QuestionChest qc = new QuestionChest();
+        Question q1 = qc.getQuestion(0);
+        Question q2 = qc.getQuestion(1);
+        Question q3 = qc.getQuestion(2);
+        //q.
+        //qc.hasNext();
+        //qc.nextQuestion();
         setupAR();
         requestCameraPermission();
     }
