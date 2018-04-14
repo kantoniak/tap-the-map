@@ -28,10 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         QuestionChest qc = new QuestionChest();
-        Question q1 = qc.getQuestion(0);
-        Question q2 = qc.getQuestion(1);
-        Question q3 = qc.getQuestion(2);
-        Question q4 = qc.getQuestion(3);
+        // Arrays are soooo cool!
+        int n = qc.numberOfQuestions();
+        Question[] q = new Question[n];
+        for (int i = 0; i < n; i++)
+        {
+            q[i] = qc.getQuestion(i);
+        }
         //q.
         //qc.hasNext();
         //qc.nextQuestion();

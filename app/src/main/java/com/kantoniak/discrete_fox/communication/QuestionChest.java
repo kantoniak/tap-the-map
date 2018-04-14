@@ -4,55 +4,37 @@ import java.util.ArrayList;
 
 public class QuestionChest {
     ArrayList<Question> questionsArrayList;
-    private static final String QUERY1 = "nama_10_gdp?precision=1&na_item=B1GQ&unit=CP_MEUR&time=2016&filterNonGeo=1";
-    private static final String QUERY2 = "ilc_mdho05?sex=T&precision=1&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=UK&lastTimePeriod=3&incgrp=TOTAL&unit=PC&age=TOTAL&hhtyp=TOTAL";
-    private static final String QUERY3 = "une_rt_a?sex=T&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DK&geo=EE&geo=EL&geo=ES&geo=FI&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK&geo=DE&geo=FR&geo=PT&geo=EU28&precision=1&lastTimePeriod=3&unit=PC_POP&age=TOTAL";
-    private static final String QUERY4 = "lan_lcv_fao?landcover=LCC1&precision=1&lastTimePeriod=1&unit=PC&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK";
-    private static final int OFFSET1 = 1;
-    private static final int OFFSET2 = 6;
-    private static final int OFFSET3 = 2;
-    private static final int OFFSET4 = 1;
+    // GDP, No toilet, Unemployment, forest cover, population density, waste
+    private static final String[] QUERY = {
+            "nama_10_gdp?precision=1&na_item=B1GQ&unit=CP_MEUR&time=2016&filterNonGeo=1",
+            "ilc_mdho05?sex=T&precision=1&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=UK&lastTimePeriod=3&incgrp=TOTAL&unit=PC&age=TOTAL&hhtyp=TOTAL",
+            "une_rt_a?sex=T&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DK&geo=EE&geo=EL&geo=ES&geo=FI&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK&geo=DE&geo=FR&geo=PT&geo=EU28&precision=1&lastTimePeriod=3&unit=PC_POP&age=TOTAL",
+            "lan_lcv_fao?landcover=LCC1&precision=1&unit=PC&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
+            "demo_r_d3dens?unit=HAB_KM2&precision=1&lastTimePeriod=3&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
+            "env_wasmun?precision=1&lastTimePeriod=3&wst_oper=GEN&unit=KG_HAB&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
+    };
+
+    private static final int[] OFFSET = {1, 6, 2, 1, 1, 1};
 
     public QuestionChest() {
         questionsArrayList = new ArrayList<>();
-        DataProvider dp = new DataProvider(questionsArrayList);
-        AsyncTaskParams atp = new AsyncTaskParams(QUERY1, OFFSET1);
-        try {
-            APIResponse response = dp.execute(atp).get();
-            Question q = new Question(QUERY1, response.getContent().getHashMap(), 2016);
-            questionsArrayList.add(q);
-        } catch (Exception e) {
+        int n = QUERY.length;
+        for (int i = 0; i < n; i++) {
 
+            DataProvider dp = new DataProvider();
+            AsyncTaskParams atp = new AsyncTaskParams(QUERY[i], OFFSET[i]);
+            try {
+                APIResponse response = dp.execute(atp).get();
+                Question q = new Question(QUERY[i], response.getContent().getHashMap(), 2016);
+                questionsArrayList.add(q);
+            } catch (Exception e) {
+
+            }
         }
-        atp = new AsyncTaskParams(QUERY2, OFFSET2);
-        DataProvider dp2 = new DataProvider(questionsArrayList);
-        try {
-            APIResponse response = dp2.execute(atp).get();
-            Question q = new Question(QUERY2, response.getContent().getHashMap(), 2016);
-            questionsArrayList.add(q);
-        } catch (Exception e) {
+    }
 
-        }
-
-        atp = new AsyncTaskParams(QUERY3, OFFSET3);
-        DataProvider dp3 = new DataProvider(questionsArrayList);
-        try {
-            APIResponse response = dp3.execute(atp).get();
-            Question q = new Question(QUERY3, response.getContent().getHashMap(), 2016);
-            questionsArrayList.add(q);
-        } catch (Exception e) {
-
-        }
-
-        atp = new AsyncTaskParams(QUERY4, OFFSET4);
-        DataProvider dp4 = new DataProvider(questionsArrayList);
-        try {
-            APIResponse response = dp4.execute(atp).get();
-            Question q = new Question(QUERY4, response.getContent().getHashMap(), 2015);
-            questionsArrayList.add(q);
-        } catch (Exception e) {
-
-        }
+    public int numberOfQuestions() {
+        return questionsArrayList.size();
     }
 
     public Question getQuestion(int idx) {

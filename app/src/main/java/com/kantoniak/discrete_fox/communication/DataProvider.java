@@ -23,7 +23,6 @@ import static junit.framework.Assert.assertEquals;
 public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> {
     private static final String MAINURL ="http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/";
     private static final String TAG = "[DATAPROVIDER]";
-    WeakReference<ArrayList<Question>> mquestionArrayList;
 
     //private WeakReference<Context> mContext;
     private String mquery;
@@ -34,8 +33,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      *
      * @param context context of the current application
      */
-    public DataProvider(ArrayList<Question> questionArrayList) {
-        mquestionArrayList = new WeakReference<>(questionArrayList);
+    public DataProvider() {
     }
 
     /**
