@@ -83,21 +83,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        final Gameplay gameplay = new Gameplay(generateQuestions(), 3);
-        TextView title = findViewById(R.id.question);
-        title.setText(gameplay.getCurrentDesc());
-        LinearLayout next = findViewById(R.id.nextButton);
-        next.setOnClickListener(view -> {
-            Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
-            if (nextQuestion == null) {
-                return;
-            }
-            showQuestion(nextQuestion);
-        });
         setupAR();
-
         showScreen(R.id.screen_menu);
-
         requestCameraPermission();
     }
 
@@ -125,7 +112,17 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.start_button)
     public void startGame(View view) {
 
-        // Load questions bla bla bla...
+        final Gameplay gameplay = new Gameplay(generateQuestions(), 3);
+        TextView title = findViewById(R.id.question);
+        title.setText(gameplay.getCurrentDesc());
+        LinearLayout next = findViewById(R.id.nextButton);
+        next.setOnClickListener(btn -> {
+            Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
+            if (nextQuestion == null) {
+                return;
+            }
+            showQuestion(nextQuestion);
+        });
 
         showScreen(R.id.screen_question);
     }
