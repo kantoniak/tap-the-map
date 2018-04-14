@@ -3,7 +3,10 @@
     <!-- Globals -->
     <string name="app_name">Tap The Map</string>
 
-    <!-- UI -->
+    <!-- Main screen -->
+    <string name="button_start">Start!</string>
+
+    <!-- Sample data -->
     <string name="sample_question">What is the largest country in the UE?</string>
     <string name="question_gdp">What is GDP in the given country?</string>
     <string name="question_toilet">What is no toilet rate?</string>

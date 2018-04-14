@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.easyar.Engine;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -38,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
     private ARSurfaceView surfaceView;
     private final Map map = new Map();
 
+    // Screens
+    @BindView(R.id.overlay) ViewGroup mOverlayView;
+    @BindView(R.id.screen_menu) ViewGroup mScreenMenu;
+    @BindView(R.id.screen_question) ViewGroup mScreenQuestion;
+
+    // screen_menu
+    @BindView(R.id.start_button) Button mStartButton;
+
+    // screen_question
     @BindView(R.id.question) TextView mQuestionTextView;
     @BindView(R.id.legend_high_text) TextView mHighTextView;
     @BindView(R.id.legend_mid_text) TextView mMidTextView;
@@ -84,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
             showQuestion(nextQuestion);
         });
         setupAR();
+
+        showScreen(R.id.screen_menu);
+
         requestCameraPermission();
     }
 
@@ -95,6 +109,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         surfaceView = new ARSurfaceView(this, map);
+    }
+
+    private void hideAllScreens() {
+        for (int i = 0; i < mOverlayView.getChildCount(); i++) {
+            mOverlayView.getChildAt(i).setVisibility(View.GONE);
+        }
+    }
+
+    private void showScreen(int screenId) {
+        hideAllScreens();
+        mOverlayView.findViewById(screenId).setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.start_button)
+    public void startGame(View view) {
+
+        // Load questions bla bla bla...
+
+        showScreen(R.id.screen_question);
     }
 
     private void showQuestion(Question question) {

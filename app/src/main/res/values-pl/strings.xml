@@ -1,9 +1,12 @@
 <resources>
 
     <!-- Globals -->
-    <string name="app_name">discrete-fox</string>
+    <string name="app_name">Tap The Map</string>
 
-    <!-- UI -->
+    <!-- Main screen -->
+    <string name="button_start">Start!</string>
+
+    <!-- Sample data -->
     <string name="sample_question">Jakie jest największe państwo w UE?</string>
     <string name="question_gdp">Jakie PKB jest w danym kraju?</string>
     <string name="question_toilet">Jaka jest liczba gospodarstw domowych bez dostępu do toalety?</string>
