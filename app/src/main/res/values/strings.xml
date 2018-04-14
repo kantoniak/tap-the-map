@@ -3,4 +3,7 @@
     <!-- Globals -->
     <string name="app_name">discrete-fox</string>
 
+    <!-- UI -->
+    <string name="sample_question">What is the largest country in the UE?</string>
+
 </resources>

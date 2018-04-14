@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Marta\Desktop\discrete-fox\app\app.iml" filepath="C:\Users\Marta\Desktop\discrete-fox\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/discrete-fox.iml" filepath="$PROJECT_DIR$/discrete-fox.iml" />
+      <module fileurl="file://C:\Users\Marta\Desktop\discrete-fox\discrete-fox.iml" filepath="C:\Users\Marta\Desktop\discrete-fox\discrete-fox.iml" />
     </modules>
   </component>
 </project>
