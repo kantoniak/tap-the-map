@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Question q1 = qc.getQuestion(0);
         Question q2 = qc.getQuestion(1);
         Question q3 = qc.getQuestion(2);
+        Question q4 = qc.getQuestion(3);
         //q.
         //qc.hasNext();
         //qc.nextQuestion();

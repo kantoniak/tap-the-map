@@ -1,20 +1,18 @@
 package com.kantoniak.discrete_fox.communication;
 
 public class AsyncTaskParams {
-    public ContentObject getContent() {
-        return mcontent;
-    }
 
     public String getQuery() {
         return mquery;
     }
+    public int getOffset() { return moffset; }
 
+    int moffset;
     String mquery;
-    ContentObject mcontent;
 
-    AsyncTaskParams(String query, ContentObject content) {
+    AsyncTaskParams(String query, int offset) {
         mquery = query;
-        mcontent = content;
+        moffset = offset;
     }
 
 }

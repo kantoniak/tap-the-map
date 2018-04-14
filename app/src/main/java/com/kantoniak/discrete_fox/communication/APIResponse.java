@@ -9,7 +9,7 @@ import org.json.JSONObject;
 public class APIResponse {
     private static final String LINK = "http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=";
 
-    APIResponse(String version, String label, String href, String source, String updated, String status, JSONObject extension, JSONObject value, JSONObject dimension, JSONArray id, JSONArray size, ContentObject content) {
+    APIResponse(String version, String label, String href, String source, String updated, String status, JSONObject extension, JSONObject value, JSONObject dimension, JSONArray id, JSONArray size, int offset) {
         mVersion = version;
         mLabel = label;
         try {
@@ -20,8 +20,7 @@ public class APIResponse {
         mSource = source;
         mUpdated = updated;
 
-        mcontent = content;
-        mcontent.setup(dimension, value, id, size);
+        mcontent = new ContentObject(dimension, value, id, size, offset);
     }
 
     public String getVersion() {
