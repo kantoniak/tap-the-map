@@ -14,4 +14,12 @@
         app:layout_constraintRight_toRightOf="parent"
         android:background="#FF0000"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/screen_question" />
+
+    </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>
