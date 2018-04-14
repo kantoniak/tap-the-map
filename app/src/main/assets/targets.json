@@ -1,0 +1,9 @@
+{
+  "images" :
+  [
+    {
+      "image" : "tracker.png",
+      "uid" : "qr-tracker"
+    }
+  ]
+}
