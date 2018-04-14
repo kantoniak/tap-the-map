@@ -1,9 +1,11 @@
 <resources>
 
     <!-- Globals -->
-    <string name="app_name">discrete-fox</string>
+    <string name="app_name">Tap The Map</string>
 
     <!-- UI -->
     <string name="sample_question">What is the largest country in the UE?</string>
+    <string name="legend">Legend</string>
+
 
 </resources>
