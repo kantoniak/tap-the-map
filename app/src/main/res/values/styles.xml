@@ -12,6 +12,30 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="ElevatedContainer" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#00FF00</item>
+        <item name="android:elevation">3dp</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
 
+    <style name="LegendEntry" parent="ElevatedContainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">@dimen/standardPadding</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:background">@color/colorBackgroundLight</item>
+    </style>
+
+    <style name="LegendColor">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
+
+    <style name="LegendText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">@dimen/standardPadding</item>
+    </style>
 
 </resources>

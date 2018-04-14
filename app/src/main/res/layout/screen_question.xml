@@ -9,122 +9,82 @@
         android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sample_question"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/biggerPadding"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:padding="12dp"
-        android:background="#EF6c00"
-        android:elevation="3dp"
-        android:clipToPadding="false"
-        android:textSize="16sp"/>
+        android:textColor="@color/textColorOnPrimary"
+        android:textSize="@dimen/questionTextSize"
+        android:background="@color/colorPrimary"
+        style="@style/ElevatedContainer" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="@dimen/standardPadding"
+        android:layout_marginStart="@dimen/standardPadding"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:id="@+id/high"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:paddingRight="8dp">
-
+            style="@style/LegendEntry">
 
             <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/legend_high_color"
+                style="@style/LegendColor"
                 android:background="#33691E" />
 
             <TextView
-                android:layout_width="31dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
+                android:id="@+id/legend_high_text"
+                style="@style/LegendText"
                 android:text="High" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:paddingRight="8dp">
+        <LinearLayout style="@style/LegendEntry">
 
             <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/legend_mid_color"
+                style="@style/LegendColor"
                 android:background="#7CB342" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:text="Medium" />
+                android:id="@+id/legend_mid_text"
+                style="@style/LegendText"
+                android:text="Mid" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/low"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:paddingRight="8dp">
+            style="@style/LegendEntry">
 
             <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/legend_low_color"
+                style="@style/LegendColor"
                 android:background="#AED581" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
+                android:id="@+id/legend_low_text"
+                style="@style/LegendText"
                 android:text="Low" />
-        </LinearLayout>
 
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/nextButton"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginBottom="@dimen/biggerPadding"
+        android:layout_marginRight="@dimen/biggerPadding"
         android:background="@drawable/round_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:gravity="center"
-        android:clipToPadding="false"
-        android:elevation="3dp">
+        style="@style/ElevatedContainer">
 
         <ImageView
-            android:id="@+id/person_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_done_24dp"

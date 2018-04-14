@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paddings -->
+    <dimen name="standardPadding">8dp</dimen>
+    <dimen name="biggerPadding">12dp</dimen>
+
+    <!-- Text sizing -->
+    <dimen name="questionTextSize">16sp</dimen>
+</resources>
