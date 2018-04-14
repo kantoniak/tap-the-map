@@ -16,9 +16,6 @@ import java.util.List;
 
 public class Gameplay {
     public HashMap<String, String> country_codes;
-    final static int oneOff = 10;
-    final static int twoOff = 20;
-    final static int noAnswer = 30;
     int step;
     int currentQuestion;
     int mnumberOfCountries;
@@ -76,16 +73,11 @@ public class Gameplay {
     }
 
     private Integer calculateScore(Map map) {
-
         int score = 0;
         CountryUtil cu = new CountryUtil();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            if (decisions[i] == 0) {
-                score += noAnswer;
-            } else if (Math.abs(decisions[i] - mquestions.get(i).getCorrectAnswer(cu.convert(map.getCountries().get(country[i]).getCode()))) == 1) {
-                score += oneOff;
-            } else if (Math.abs(decisions[i] - mquestions.get(i).getCorrectAnswer(cu.convert(map.getCountries().get(country[i]).getCode()))) == 2) {
-                score += twoOff;
+            if (Math.abs(decisions[i] - mquestions.get(i).getCorrectAnswer(cu.convert(map.getCountries().get(country[i]).getCode()))) == 0) {
+                score += 1;
             }
         }
         return score;

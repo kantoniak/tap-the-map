@@ -12,10 +12,11 @@ public class CountryUtil {
     public CountryUtil() {
         mapp = new HashMap<>();
         List<String> shorty = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "ne", "pl", "pt", "ro", "se", "si", "sk");
-        List<String> longy = Arrays.asList("Austria", "Belgium", "Bulgaria", "Cyprus", "Czech Republic", "Germany (until 1990 former territory of the FRG)",
-        "Denmark", "Estonia", "Greece", "Spain", "European Union (current composition)", "Finland", "France",
-        "Croatia", "Hungary", "Ireland", "Italy", "Lithuania", "Luxembourg", "Latvia", "Malta", "Netherlands",
-        "Poland", "Portugal", "Romania", "Slovenia", "Slovakia", "United Kingdom");
+        List<String> longy = Arrays.asList(
+                "Austria", "Belgium", "Bulgaria", "Cyprus", "Czech Republic", "Germany (until 1990 former territory of the FRG)",
+        "Denmark", "Estonia", "Spain", "Finland", "France", "United Kingdom", "Greece",
+        "Croatia", "Hungary", "Ireland", "Italy", "Lithuania", "Luxembourg", "Latvia", "Netherlands",
+        "Poland", "Portugal", "Romania", "Sweden", "Slovenia", "Slovakia");
         for (int i = 0; i < shorty.size(); i++) {
             mapp.put(shorty.get(i), longy.get(i));
         }
