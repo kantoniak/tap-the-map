@@ -17,4 +17,20 @@ public class Map {
     public HashMap<String, Country> getCountries() {
         return countries;
     }
+
+    public void disableAllCountries() {
+        for (java.util.Map.Entry<String, Country> entry: getCountries().entrySet()) {
+            Country country = entry.getValue();
+            country.setDisabled(true);
+        }
+        enableCountry("pl");
+    }
+
+    public void enableCountry(String code) {
+        Country country = getCountries().get(code);
+        if (country == null) {
+            return;
+        }
+        country.setDisabled(false);
+    }
 }

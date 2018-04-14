@@ -18,6 +18,7 @@ public class Country {
     private final String code;
     private final int maxHeight;
     private int height = 0;
+    private boolean disabled;
 
     private Object3D baseObject;
     private Material baseMaterial;
@@ -26,6 +27,7 @@ public class Country {
     private Material topMaterial;
 
     private static int DEFAULT_COLOR = 0xE0E0E0;
+    private static int DISABLED_COLOR = 0x9E9E9E;
     private final int minColor;
     private final int maxColor;
 
@@ -34,6 +36,7 @@ public class Country {
         this.maxHeight = maxHeight;
         this.minColor = minColor;
         this.maxColor = maxColor;
+        this.disabled = true;
     }
 
     public void loadObject(Context context, TextureManager textureManager) {
@@ -80,18 +83,10 @@ public class Country {
     }
 
     public void onPicked() {
-        nextState();
-    }
+        if (disabled) {
+            return;
+        }
 
-    private void zeroChoice() {
-        height = 0;
-        baseObject.setScaleZ(0.001f);
-        topObject.setZ(0.001f);
-        baseMaterial.setColor(getBaseColor(DEFAULT_COLOR));
-        topMaterial.setColor(DEFAULT_COLOR);
-    }
-
-    public void nextState() {
         height++;
 
         if (height > maxHeight) {
@@ -106,6 +101,19 @@ public class Country {
         topMaterial.setColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio));
     }
 
+    private void zeroChoice() {
+        height = 0;
+        baseObject.setScaleZ(0.001f);
+        topObject.setZ(0.001f);
+        if (disabled) {
+            baseMaterial.setColor(DISABLED_COLOR);
+            topMaterial.setColor(DISABLED_COLOR);
+        } else {
+            baseMaterial.setColor(DEFAULT_COLOR);
+            topMaterial.setColor(DEFAULT_COLOR);
+        }
+    }
+
     private int getBaseColor(int topColor) {
         return ColorUtils.blendARGB(0x000000, topColor, 0.5f);
     }
@@ -116,5 +124,16 @@ public class Country {
 
     public String getCode() {
         return code;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+        if (disabled) {
+            baseMaterial.setColor(DISABLED_COLOR);
+            topMaterial.setColor(DISABLED_COLOR);
+        } else {
+            baseMaterial.setColor(DEFAULT_COLOR);
+            topMaterial.setColor(DEFAULT_COLOR);
+        }
     }
 }

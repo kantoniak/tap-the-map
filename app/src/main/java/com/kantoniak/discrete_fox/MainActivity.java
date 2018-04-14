@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.start_button)
     public void startGame(View view) {
 
+        map.disableAllCountries();
         final Gameplay gameplay = new Gameplay(generateQuestions(), 3);
         TextView title = findViewById(R.id.question);
         title.setText(gameplay.getCurrentDesc());
