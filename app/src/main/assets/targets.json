@@ -3,7 +3,8 @@
   [
     {
       "image" : "tracker.png",
-      "uid" : "qr-tracker"
+      "uid" : "qr-tracker",
+      "size" : [2.5, 2.5]
     }
   ]
 }
