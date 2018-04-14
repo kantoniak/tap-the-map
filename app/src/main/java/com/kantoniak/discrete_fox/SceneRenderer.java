@@ -22,6 +22,10 @@ public class SceneRenderer extends ARSceneRenderer {
     List<String> countryCodes = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "ne", "pl", "pt", "ro", "se", "si", "sk");
     List<Country> countries = new LinkedList<>();
 
+    public List<Country> getCountries() {
+        return countries;
+    }
+
     public SceneRenderer(MainActivity mainActivity, ARController arController) {
         super(mainActivity, arController);
         this.mainActivity = mainActivity;

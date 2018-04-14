@@ -1,5 +1,9 @@
 package com.kantoniak.discrete_fox.communication;
 
+import android.content.res.Resources;
+
+import com.kantoniak.discrete_fox.R;
+
 import java.util.ArrayList;
 
 public class QuestionChest {
@@ -14,9 +18,18 @@ public class QuestionChest {
             "env_wasmun?precision=1&lastTimePeriod=3&wst_oper=GEN&unit=KG_HAB&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
     };
 
+    private String[] DESCRIPTION;
+
     private static final int[] OFFSET = {1, 6, 2, 1, 1, 1};
 
-    public QuestionChest() {
+    public QuestionChest(Resources res) {
+        DESCRIPTION = new String[OFFSET.length];
+        DESCRIPTION[0] = res.getString(R.string.question_gdp);
+        DESCRIPTION[1] = res.getString(R.string.question_toilet);
+        DESCRIPTION[2] = res.getString(R.string.question_unemployment);
+        DESCRIPTION[3] = res.getString(R.string.question_forest);
+        DESCRIPTION[4] = res.getString(R.string.question_population_density);
+        DESCRIPTION[5] = res.getString(R.string.question_waste);
         questionsArrayList = new ArrayList<>();
         int n = QUERY.length;
         for (int i = 0; i < n; i++) {
@@ -25,7 +38,7 @@ public class QuestionChest {
             AsyncTaskParams atp = new AsyncTaskParams(QUERY[i], OFFSET[i]);
             try {
                 APIResponse response = dp.execute(atp).get();
-                Question q = new Question(QUERY[i], response.getContent().getHashMap(), 2016);
+                Question q = new Question(QUERY[i], response.getContent().getHashMap(), 2016, DESCRIPTION[i]);
                 questionsArrayList.add(q);
             } catch (Exception e) {
 

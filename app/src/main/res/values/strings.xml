@@ -5,7 +5,11 @@
 
     <!-- UI -->
     <string name="sample_question">What is the largest country in the UE?</string>
-    <string name="legend">Legend</string>
-
+    <string name="question_gdp">What is GDP in the given country?</string>
+    <string name="question_toilet">What is no toilet rate?</string>
+    <string name="question_unemployment">What is the unemployment rate?</string>
+    <string name="question_forest">What is forest cover?</string>
+    <string name="question_population_density">What is population density?</string>
+    <string name="question_waste">What is waste generation?</string>
 
 </resources>

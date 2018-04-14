@@ -5,5 +5,11 @@
 
     <!-- UI -->
     <string name="sample_question">Jakie jest największe państwo w UE?</string>
+    <string name="question_gdp">Jakie PKB jest w danym kraju?</string>
+    <string name="question_toilet">Jaka jest liczba gospodarstw domowych bez dostępu do toalety?</string>
+    <string name="question_unemployment">Jaka jest stopa bezrobocia?</string>
+    <string name="question_forest">Jakie jest zalesienie?</string>
+    <string name="question_population_density">Jaka jest gęstość zaludnienia?</string>
+    <string name="question_waste">Jakie duże jest wytwarzanie odpadów?</string>
 
 </resources>

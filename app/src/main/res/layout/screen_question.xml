@@ -111,6 +111,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/nextButton"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginBottom="12dp"

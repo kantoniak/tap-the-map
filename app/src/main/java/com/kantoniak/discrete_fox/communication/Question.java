@@ -1,7 +1,5 @@
 package com.kantoniak.discrete_fox.communication;
 
-import com.kantoniak.discrete_fox.communication.Level;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,13 +8,15 @@ import java.util.Map;
 
 public class Question {
     private final String mlink;
-    private HashMap<String, Level> ans;
+    private HashMap<String, Integer> ans;
     private HashMap<String, Double> ansDouble;
 
     double midThres;
     double highThres;
+    String mdesc;
 
-    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year) {
+    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc) {
+        mdesc = desc;
         mlink = link;
         ansDouble = new HashMap<>();
         ArrayList<Double> valueList = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Question {
             double val = hmval.get(year);
             valueList.add(val);
             ansDouble.put((String)pair.getKey(), val);
-            it.remove(); // avoids a ConcurrentModificationException
+            //it.remove(); // avoids a ConcurrentModificationException
         }
         createThresholds(valueList);
         createAnswers(ansDouble);
@@ -46,17 +46,21 @@ public class Question {
         setThreshold(mid, high);
     }
 
+    public String getDesc() {
+        return mdesc;
+    }
+
     void createAnswers(HashMap<String, Double> data) {
         ans = new HashMap<>();
         Iterator it = data.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             Double val = (Double)pair.getValue();
-            Level l = Level.LOW;
+            int l = 1;
             if (val > highThres) {
-                l = Level.HIGH;
+                l = 3;
             } else if (val > midThres) {
-                l = Level.MEDIUM;
+                l = 2;
             }
             ans.put((String)pair.getKey(), l);
         }
@@ -65,5 +69,9 @@ public class Question {
     void setThreshold(double mid, double high) {
         midThres = mid;
         highThres = high;
+    }
+
+    public Integer getCorrectAnswer(String country) {
+        return ans.get(country);
     }
 }
