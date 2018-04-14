@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.kantoniak.discrete_fox.ar.ARSurfaceView;
 import com.kantoniak.discrete_fox.communication.Question;
 import com.kantoniak.discrete_fox.communication.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
+import com.kantoniak.discrete_fox.scene.Map;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION = 0;
 
     private ARSurfaceView surfaceView;
+    private final Map map = new Map();
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -54,23 +57,20 @@ public class MainActivity extends AppCompatActivity {
         questions.add(q[1]);
         questions.add(q[2]);
         final Gameplay gameplay = new Gameplay(questions, 3);
-        View next = findViewById(R.id.nextButton);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        LinearLayout next = findViewById(R.id.nextButton);
+        next.setOnClickListener(view -> {
 
-                Question nextQuestion = gameplay.finishQuestion();
-                if (nextQuestion == null) {
+            Question nextQuestion = gameplay.finishQuestion();
+            if (nextQuestion == null) {
                     return;
                 }
                 Toast.makeText(getApplicationContext(), "Zakonczyles odpowiadanie", Toast.LENGTH_LONG).show();
-                TextView title = findViewById(R.id.question);
-                title.setText(nextQuestion.getDesc());
+        TextView title = findViewById(R.id.question);
+        title.setText(nextQuestion.getDesc());
 /*            } else {
-                gameplay.nextQuestion();
-                Toast.makeText(getApplicationContext(), "Nowe pytanie", Toast.LENGTH_LONG).show();
-            }*/
-            }
+            gameplay.nextQuestion();
+            Toast.makeText(getApplicationContext(), "Nowe pytanie", Toast.LENGTH_LONG).show();
+        }*/
         });
         setupAR();
         requestCameraPermission();
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("AR Box", "Initialization Failed.");
         }
 
-        surfaceView = new ARSurfaceView(this);
+        surfaceView = new ARSurfaceView(this, map);
     }
 
     private void requestCameraPermission() {

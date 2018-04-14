@@ -1,10 +1,12 @@
 package com.kantoniak.discrete_fox.ar;
 
+import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.kantoniak.discrete_fox.MainActivity;
 import com.kantoniak.discrete_fox.SceneRenderer;
+import com.kantoniak.discrete_fox.scene.Map;
 
 import org.rajawali3d.view.ISurface;
 import org.rajawali3d.view.SurfaceView;
@@ -16,10 +18,10 @@ public class ARSurfaceView extends SurfaceView implements View.OnTouchListener {
     private final ARController arController;
     private final ARSceneRenderer sceneRenderer;
 
-    public ARSurfaceView(MainActivity mainActivity) {
-        super(mainActivity);
+    public ARSurfaceView(Context context, Map map) {
+        super(context);
         arController = new ARController();
-        sceneRenderer = new SceneRenderer(mainActivity, arController);
+        sceneRenderer = new SceneRenderer(context, arController, map);
 
         this.setFrameRate(60.0);
         this.setRenderMode(ISurface.RENDERMODE_CONTINUOUSLY);

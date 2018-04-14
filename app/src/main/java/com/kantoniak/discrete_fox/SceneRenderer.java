@@ -1,34 +1,28 @@
 package com.kantoniak.discrete_fox;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.kantoniak.discrete_fox.ar.ARController;
 import com.kantoniak.discrete_fox.ar.ARSceneRenderer;
 import com.kantoniak.discrete_fox.scene.Country;
+import com.kantoniak.discrete_fox.scene.Map;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.lights.DirectionalLight;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 public class SceneRenderer extends ARSceneRenderer {
 
-    private final MainActivity mainActivity;
+    private final Context context;
 
     // Scene elements
     private DirectionalLight directionalLight;
-    List<String> countryCodes = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "ne", "pl", "pt", "ro", "se", "si", "sk");
-    List<Country> countries = new LinkedList<>();
+    private final Map map;
 
-    public List<Country> getCountries() {
-        return countries;
-    }
-
-    public SceneRenderer(MainActivity mainActivity, ARController arController) {
-        super(mainActivity, arController);
-        this.mainActivity = mainActivity;
+    public SceneRenderer(Context context, ARController arController, Map map) {
+        super(context, arController);
+        this.context = context;
+        this.map = map;
     }
 
     @Override
@@ -43,11 +37,11 @@ public class SceneRenderer extends ARSceneRenderer {
         //getCurrentScene().addLight(directionalLight);
 
         // Countries
-        for (String code : countryCodes) {
+        for (String code : Map.COUNTRY_CODES) {
             Country country = new Country(code, 3, 0x81C784, 0x388E3C);
-            country.loadObject(mainActivity, mTextureManager);
+            country.loadObject(context, mTextureManager);
             country.registerObject(getCurrentScene(), objectPicker);
-            countries.add(country);
+            map.addCountry(country);
         }
     }
 
@@ -59,7 +53,7 @@ public class SceneRenderer extends ARSceneRenderer {
 
     @Override
     public void onObjectPicked(@NonNull Object3D object) {
-        countries.forEach((Country country) -> {
+        map.getCountries().forEach((Country country) -> {
             if (country.containsObject(object)) {
                 country.onPicked();
             }
