@@ -6,6 +6,11 @@
     <!-- Main screen -->
     <string name="button_start">Start!</string>
 
+    <!-- Score screen -->
+    <string name="score_great_job">Great job!</string>
+    <string name="your_score">Your score:</string>
+    <string name="play_again">Play again</string>
+
     <!-- Sample data -->
     <string name="sample_question">What is the largest country in the UE?</string>
     <string name="question_gdp">What is GDP in the given country?</string>
@@ -14,8 +19,5 @@
     <string name="question_forest">What is forest cover?</string>
     <string name="question_population_density">What is population density?</string>
     <string name="question_waste">What is waste generation?</string>
-    <string name="sample_last_title">Great Job!</string>
-    <string name="your_score">Your Score</string>
-    <string name="sample_score">15/25</string>
 
 </resources>

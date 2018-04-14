@@ -32,13 +32,11 @@
 
             <View
                 android:id="@+id/legend_high_color"
-                style="@style/LegendColor"
-                android:background="#33691E" />
+                style="@style/LegendColor" />
 
             <TextView
                 android:id="@+id/legend_high_text"
-                style="@style/LegendText"
-                android:text="High" />
+                style="@style/LegendText" />
 
         </LinearLayout>
 
@@ -46,13 +44,11 @@
 
             <View
                 android:id="@+id/legend_mid_color"
-                style="@style/LegendColor"
-                android:background="#7CB342" />
+                style="@style/LegendColor" />
 
             <TextView
                 android:id="@+id/legend_mid_text"
-                style="@style/LegendText"
-                android:text="Mid" />
+                style="@style/LegendText" />
 
         </LinearLayout>
 
@@ -61,13 +57,11 @@
 
             <View
                 android:id="@+id/legend_low_color"
-                style="@style/LegendColor"
-                android:background="#AED581" />
+                style="@style/LegendColor" />
 
             <TextView
                 android:id="@+id/legend_low_text"
-                style="@style/LegendText"
-                android:text="Low" />
+                style="@style/LegendText" />
 
         </LinearLayout>
     </LinearLayout>

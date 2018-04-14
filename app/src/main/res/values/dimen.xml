@@ -3,6 +3,7 @@
     <!-- Paddings -->
     <dimen name="standardPadding">8dp</dimen>
     <dimen name="biggerPadding">12dp</dimen>
+    <dimen name="hugePadding">24dp</dimen>
 
     <!-- Text sizing -->
     <dimen name="questionTextSize">16sp</dimen>

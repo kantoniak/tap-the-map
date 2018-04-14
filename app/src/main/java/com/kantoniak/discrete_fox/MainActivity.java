@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.legend_mid_color) View mMidColorView;
     @BindView(R.id.legend_low_color) View mLowColorView;
 
+    // screen_score
+    @BindView(R.id.score_points) TextView mScoreTextView;
+    @BindView(R.id.score_play_again) TextView mPlayAgainButton;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -121,12 +125,18 @@ public class MainActivity extends AppCompatActivity {
         next.setOnClickListener(btn -> {
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
+                showScreen(R.id.screen_score);
                 return;
             }
             showQuestion(nextQuestion);
         });
 
         showScreen(R.id.screen_question);
+    }
+
+    @OnClick(R.id.score_play_again)
+    public void restartGame(View view) {
+        startGame(view);
     }
 
     private void showQuestion(Question question) {

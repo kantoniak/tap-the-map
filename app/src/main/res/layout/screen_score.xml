@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/ElevatedContainer"
+        android:background="@color/colorPrimary"
+        android:layout_margin="60dp"
+        android:paddingTop="@dimen/biggerPadding"
+        android:paddingLeft="@dimen/hugePadding"
+        android:paddingRight="@dimen/hugePadding"
+        android:paddingBottom="@dimen/hugePadding">
+
+        <TextView
+            android:id="@+id/great_job_tv"
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/score_great_job"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/your_score_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_score"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintTop_toBottomOf="@id/great_job_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/score_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="15/25"
+            android:textColor="@color/textColorOnPrimary"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/score_layout_buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/your_score_tv" />
+
+        <LinearLayout
+            android:id="@+id/score_layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/score_play_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/play_again" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -6,6 +6,11 @@
     <!-- Main screen -->
     <string name="button_start">Start!</string>
 
+    <!-- Score screen -->
+    <string name="score_great_job">Dobra robota!</string>
+    <string name="your_score">Twój wynik:</string>
+    <string name="play_again">Zagraj ponownie</string>
+
     <!-- Sample data -->
     <string name="sample_question">Jakie jest największe państwo w UE?</string>
     <string name="question_gdp">Jakie PKB jest w danym kraju?</string>

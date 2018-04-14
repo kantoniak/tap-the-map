@@ -21,6 +21,7 @@
 
         <include layout="@layout/screen_menu" android:id="@+id/screen_menu" />
         <include layout="@layout/screen_question" android:id="@+id/screen_question" />
+        <include layout="@layout/screen_score" android:id="@+id/screen_score" />
 
     </FrameLayout>
 
