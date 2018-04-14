@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
         map.disableAllCountries();
         //TODO Call generateQuestions on application start.
         final Gameplay gameplay = new Gameplay(generateQuestions(), 3);
-        showQuestion(gameplay.getCurrentQuestion());
+        Question question = gameplay.getCurrentQuestion();
+        showQuestion(question);
         LinearLayout next = findViewById(R.id.nextButton);
         next.setOnClickListener(btn -> {
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
@@ -129,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showQuestion(Question question) {
+        map.disableAllCountries();
+        for (String code: question.getCountries()) {
+            map.enableCountry(code);
+        }
         mQuestionTextView.setText(question.getDesc());
 
         mHighTextView.setText(question.getHighLabel());

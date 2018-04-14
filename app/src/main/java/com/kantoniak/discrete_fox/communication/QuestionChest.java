@@ -24,6 +24,7 @@ public class QuestionChest {
     private static final int[] YEAR = {2016, 2016, 2016, 2016, 2016, 2016};
     private static final int[] MINCOLOR = {0xFF110000, 0xFF000011, 0xFFAED581, 0xFFAED581, 0xFFAED581, 0xFFAED581};
     private static final int[] MAXCOLOR = {0xFFFF001E, 0xFF3300FF, 0xFF33691E, 0xFF33691E, 0xFF33691E, 0xFF33691E};
+    private static final String[][] COUNTRYCODES = {{"pl", "ge", "de"}, {"es", "ee", "uk"}, {"lv", "it", "fr"}};
 
     public QuestionChest(Resources res) {
         description = new String[OFFSET.length];
@@ -40,7 +41,7 @@ public class QuestionChest {
             AsyncTaskParams atp = new AsyncTaskParams(QUERY[i], OFFSET[i], description[i]);
             try {
                 APIResponse response = dp.execute(atp).get();
-                Question q = new Question(QUERY[i], response.getContent().getHashMap(), YEAR[i], description[i], MINCOLOR[i], MAXCOLOR[i]);
+                Question q = new Question(QUERY[i], response.getContent().getHashMap(), YEAR[i], description[i], MINCOLOR[i], MAXCOLOR[i], COUNTRYCODES[i]);
                 questionsArrayList.add(q);
             } catch (Exception e) {
 

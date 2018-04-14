@@ -1,5 +1,7 @@
 package com.kantoniak.discrete_fox.communication;
 
+import com.kantoniak.discrete_fox.scene.Country;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,14 +12,17 @@ public class Question {
     private final String mlink;
     private HashMap<String, Integer> ans;
     private HashMap<String, Double> ansDouble;
+    public static final int NUMBEROFCOUNTRIES = 5;
 
     double midThres;
     double highThres;
     String mdesc;
     int mminColor;
     int mmaxColor;
+    String[] mcountries;
 
-    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc, int minColor, int maxColor) {
+    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc, int minColor, int maxColor, String[] countries) {
+        mcountries = countries;
         mdesc = desc;
         mlink = link;
         mminColor = minColor;
@@ -97,5 +102,9 @@ public class Question {
 
     public int getMmaxColor() {
         return mmaxColor;
+    }
+
+    public String[] getCountries() {
+        return mcountries;
     }
 }
