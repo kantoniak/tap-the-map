@@ -6,41 +6,40 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/name_app"
+        android:id="@+id/great_job"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="@string/app_name"
+        android:text="@string/sample_last_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
-        android:textSize="32dp"/>
+        android:textSize="40dp"/>
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text=""
+        android:text="@string/your_score"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/name_app"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textSize="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/great_job"
+        android:layout_marginTop="32dp"/>
 
-    <View
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <TextView
+        android:id="@+id/name_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:text="@string/sample_score"
+        android:textAlignment="center"
+        android:textSize="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorPrimary"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:layout_width="wrap_content"
