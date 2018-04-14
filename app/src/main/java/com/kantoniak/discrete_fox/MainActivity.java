@@ -1,6 +1,7 @@
 package com.kantoniak.discrete_fox;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,8 @@ import com.kantoniak.discrete_fox.communication.Question;
 import com.kantoniak.discrete_fox.communication.QuestionChest;
 
 import cn.easyar.Engine;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION = 0;
 
     private ARSurfaceView surfaceView;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

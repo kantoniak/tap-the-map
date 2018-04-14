@@ -8,7 +8,6 @@ import org.rajawali3d.Object3D;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.Material;
-import org.rajawali3d.materials.methods.DiffuseMethod;
 import org.rajawali3d.materials.textures.TextureManager;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.scene.Scene;
@@ -26,7 +25,7 @@ public class Country {
     private Object3D topObject;
     private Material topMaterial;
 
-    private static int DEFAULT_COLOR = 0xF5F5F5;
+    private static int DEFAULT_COLOR = 0xE0E0E0;
     private final int minColor;
     private final int maxColor;
 
