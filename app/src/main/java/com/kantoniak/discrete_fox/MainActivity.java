@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.kantoniak.discrete_fox.scene.Map;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.easyar.Engine;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -35,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
     private ARSurfaceView surfaceView;
     private final Map map = new Map();
 
+    @BindView(R.id.question) TextView mQuestionTextView;
+    @BindView(R.id.legend_high_text) TextView mHighTextView;
+    @BindView(R.id.legend_mid_text) TextView mMidTextView;
+    @BindView(R.id.legend_low_text) TextView mLowTextView;
+    @BindView(R.id.legend_high_color) View mHighColorView;
+    @BindView(R.id.legend_mid_color) View mMidColorView;
+    @BindView(R.id.legend_low_color) View mLowColorView;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -44,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         QuestionChest qc = new QuestionChest(getResources());
         int n = qc.numberOfQuestions();
@@ -59,18 +71,11 @@ public class MainActivity extends AppCompatActivity {
         final Gameplay gameplay = new Gameplay(questions, 3);
         LinearLayout next = findViewById(R.id.nextButton);
         next.setOnClickListener(view -> {
-
             Question nextQuestion = gameplay.finishQuestion();
             if (nextQuestion == null) {
-                    return;
-                }
-                Toast.makeText(getApplicationContext(), "Zakonczyles odpowiadanie", Toast.LENGTH_LONG).show();
-        TextView title = findViewById(R.id.question);
-        title.setText(nextQuestion.getDesc());
-/*            } else {
-            gameplay.nextQuestion();
-            Toast.makeText(getApplicationContext(), "Nowe pytanie", Toast.LENGTH_LONG).show();
-        }*/
+                return;
+            }
+            showQuestion(nextQuestion);
         });
         setupAR();
         requestCameraPermission();
@@ -84,6 +89,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         surfaceView = new ARSurfaceView(this, map);
+    }
+
+    private void showQuestion(Question question) {
+        mQuestionTextView.setText(question.getDesc());
+
+        //TODO(kedzior): Add labels in question
+        //mHighTextView.setText(question.getHighLabel());
+        //mMidTextView.setText(question.getMidLabel());
+        //mLowTextView.setText(question.getLowLabel());
+
+        //TODO(kedzior): Colors in question, alpha goes in first two chars (FF)
+        int maxColor = 0xFF33691E;
+        int minColor = 0xFFAED581;
+        int midColor = ColorUtils.blendARGB(minColor, maxColor, 0.5f);
+
+        mHighColorView.setBackgroundColor(maxColor);
+        mMidColorView.setBackgroundColor(midColor);
+        mLowColorView.setBackgroundColor(minColor);
     }
 
     private void requestCameraPermission() {
@@ -112,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onCameraRequestSuccess() {
         ((ViewGroup) findViewById(R.id.preview)).addView(surfaceView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-    }
+}
 
     private void onCameraRequestFailure() {
         Log.e("ARBOX", "CameraRequestFailure");
