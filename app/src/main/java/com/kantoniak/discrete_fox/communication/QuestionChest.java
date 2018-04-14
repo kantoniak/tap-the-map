@@ -24,7 +24,7 @@ public class QuestionChest {
     private static final int[] YEAR = {2016, 2016, 2016, 2016, 2016, 2016};
     private static final int[] MINCOLOR = {0xFF110000, 0xFF000011, 0xFFAED581, 0xFFAED581, 0xFFAED581, 0xFFAED581};
     private static final int[] MAXCOLOR = {0xFFFF001E, 0xFF3300FF, 0xFF33691E, 0xFF33691E, 0xFF33691E, 0xFF33691E};
-    private static final String[][] COUNTRYCODES = {{"pl", "ge", "de"}, {"es", "ee", "uk"}, {"lv", "it", "fr"}};
+    private static final String[][] COUNTRYCODES = {{"fr", "se", "ie", "lv"}, {"de", "cz", "si", "hu"}, {"pt", "bg", "fi", "dk"}};
 
     public QuestionChest(Resources res) {
         description = new String[OFFSET.length];
