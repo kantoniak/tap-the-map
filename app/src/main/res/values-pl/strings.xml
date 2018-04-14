@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Globals -->
+    <string name="app_name">discrete-fox</string>
+
+    <!-- UI -->
+    <string name="sample_question">Jakie jest największe państwo w UE?</string>
+
+</resources>
