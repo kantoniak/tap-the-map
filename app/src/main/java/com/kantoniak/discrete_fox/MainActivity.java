@@ -51,12 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
+    private ArrayList<Question> generateQuestions() {
         QuestionChest qc = new QuestionChest(getResources());
         int n = qc.numberOfQuestions();
         Question[] q = new Question[n];
@@ -68,10 +63,21 @@ public class MainActivity extends AppCompatActivity {
         questions.add(q[0]);
         questions.add(q[1]);
         questions.add(q[2]);
-        final Gameplay gameplay = new Gameplay(questions, 3);
+        return questions;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        final Gameplay gameplay = new Gameplay(generateQuestions(), 3);
+        TextView title = findViewById(R.id.question);
+        title.setText(gameplay.getCurrentDesc());
         LinearLayout next = findViewById(R.id.nextButton);
         next.setOnClickListener(view -> {
-            Question nextQuestion = gameplay.finishQuestion();
+            Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
                 return;
             }

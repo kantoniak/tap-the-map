@@ -53,11 +53,11 @@ public class SceneRenderer extends ARSceneRenderer {
 
     @Override
     public void onObjectPicked(@NonNull Object3D object) {
-        map.getCountries().forEach((Country country) -> {
-            if (country.containsObject(object)) {
-                country.onPicked();
+        for (java.util.Map.Entry<String, Country> entry: map.getCountries().entrySet()) {
+            if (entry.getValue().containsObject(object)) {
+                entry.getValue().onPicked();
             }
-        });
+        }
     }
 
     @Override

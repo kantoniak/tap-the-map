@@ -113,4 +113,8 @@ public class Country {
     public int getHeight() {
         return height;
     }
+
+    public String getCode() {
+        return code;
+    }
 }
