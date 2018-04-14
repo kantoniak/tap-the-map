@@ -54,10 +54,6 @@ public class Gameplay {
         return nextQuestion(context);
     }
 
-    public String getCurrentDesc() {
-        return mquestions.get(currentQuestion).getDesc();
-    }
-
     private Question nextQuestion(Context context) {
         currentQuestion++;
         if (mquestions.size() == currentQuestion) {
@@ -65,7 +61,7 @@ public class Gameplay {
             // We probably should delete this gameplay, and create a new one, otherwise, we should
             // clean this one.
             Toast.makeText(context, String.valueOf(scoreTotal), Toast.LENGTH_LONG).show();
-
+            currentQuestion--;
             return null;
         }
         score = 0;
@@ -81,5 +77,9 @@ public class Gameplay {
             }
         }
         return score;
+    }
+
+    public Question getCurrentQuestion() {
+        return mquestions.get(currentQuestion);
     }
 }

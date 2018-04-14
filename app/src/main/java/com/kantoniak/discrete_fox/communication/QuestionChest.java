@@ -21,6 +21,9 @@ public class QuestionChest {
     private String[] description;
 
     private static final int[] OFFSET = {1, 6, 2, 1, 1, 1};
+    private static final int[] YEAR = {2016, 2016, 2016, 2016, 2016, 2016};
+    private static final int[] MINCOLOR = {0xFF110000, 0xFF000011, 0xFFAED581, 0xFFAED581, 0xFFAED581, 0xFFAED581};
+    private static final int[] MAXCOLOR = {0xFFFF001E, 0xFF3300FF, 0xFF33691E, 0xFF33691E, 0xFF33691E, 0xFF33691E};
 
     public QuestionChest(Resources res) {
         description = new String[OFFSET.length];
@@ -33,12 +36,11 @@ public class QuestionChest {
         questionsArrayList = new ArrayList<>();
         int n = QUERY.length;
         for (int i = 0; i < n; i++) {
-
             DataProvider dp = new DataProvider();
-            AsyncTaskParams atp = new AsyncTaskParams(QUERY[i], OFFSET[i]);
+            AsyncTaskParams atp = new AsyncTaskParams(QUERY[i], OFFSET[i], description[i]);
             try {
                 APIResponse response = dp.execute(atp).get();
-                Question q = new Question(QUERY[i], response.getContent().getHashMap(), 2016, description[i]);
+                Question q = new Question(QUERY[i], response.getContent().getHashMap(), YEAR[i], description[i], MINCOLOR[i], MAXCOLOR[i]);
                 questionsArrayList.add(q);
             } catch (Exception e) {
 

@@ -14,10 +14,14 @@ public class Question {
     double midThres;
     double highThres;
     String mdesc;
+    int mminColor;
+    int mmaxColor;
 
-    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc) {
+    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc, int minColor, int maxColor) {
         mdesc = desc;
         mlink = link;
+        mminColor = minColor;
+        mmaxColor = maxColor;
         ansDouble = new HashMap<>();
         ArrayList<Double> valueList = new ArrayList<>();
         Iterator it = data.entrySet().iterator();
@@ -73,5 +77,25 @@ public class Question {
 
     public Integer getCorrectAnswer(String country) {
         return ans.get(country);
+    }
+
+    public String getHighLabel() {
+        return String.format("%.2f", highThres) + " <";
+    }
+
+    public String getMidLabel() {
+        return String.format("%.2f", midThres) + " - " + String.format("%.2f", highThres);
+    }
+
+    public String getLowLabel() {
+        return "< " + String.format("%.2f", midThres);
+    }
+
+    public int getMminColor() {
+        return mminColor;
+    }
+
+    public int getMmaxColor() {
+        return mmaxColor;
     }
 }

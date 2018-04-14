@@ -1,5 +1,6 @@
 package com.kantoniak.discrete_fox.communication;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,8 +26,9 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
     private static final String MAINURL ="http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/";
     private static final String TAG = "[DATAPROVIDER]";
 
-    //private WeakReference<Context> mContext;
+    //private WeakReference<ArrayList<Question>> mquestions;
     private String mquery;
+    private String mdesc;
 
     /**
      * Constructor that takes context to the application in order to update the UI in the
@@ -33,7 +36,8 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      *
      * @param context context of the current application
      */
-    public DataProvider() {
+    public DataProvider() {//ArrayList<Question> questions) {
+    //    mquestions = new WeakReference<>(questions);
     }
 
     /**
@@ -45,6 +49,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      */
     public APIResponse doInBackground(AsyncTaskParams... params){
         mquery = params[0].getQuery();
+        mdesc = params[0].getDesc();
         String buffer = retrieveObject(mquery);
         return parseObject(buffer, params[0].getOffset());
     }
@@ -56,8 +61,8 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      * @param res an APIResponse object, that was retireved and parsed
      */
     protected void onPostExecute(APIResponse res) {
-        //Question q = new Question(mquery, res.getContent().getHashMap(), 2016);
-        //ArrayList<Question> questionArrayList = mquestionArrayList.get();
+        //Question q = new Question(mquery, res.getContent().getHashMap(), 2016, mdesc);
+        //ArrayList<Question> questionArrayList = mquestions.get();
         //questionArrayList.add(q);
         Log.e("pleb", "pleb");
 

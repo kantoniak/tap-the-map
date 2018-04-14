@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
     public void startGame(View view) {
 
         map.disableAllCountries();
+        //TODO Call generateQuestions on application start.
         final Gameplay gameplay = new Gameplay(generateQuestions(), 3);
-        TextView title = findViewById(R.id.question);
-        title.setText(gameplay.getCurrentDesc());
+        showQuestion(gameplay.getCurrentQuestion());
         LinearLayout next = findViewById(R.id.nextButton);
         next.setOnClickListener(btn -> {
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
@@ -131,14 +131,13 @@ public class MainActivity extends AppCompatActivity {
     private void showQuestion(Question question) {
         mQuestionTextView.setText(question.getDesc());
 
-        //TODO(kedzior): Add labels in question
-        //mHighTextView.setText(question.getHighLabel());
-        //mMidTextView.setText(question.getMidLabel());
-        //mLowTextView.setText(question.getLowLabel());
+        mHighTextView.setText(question.getHighLabel());
+        mMidTextView.setText(question.getMidLabel());
+        mLowTextView.setText(question.getLowLabel());
 
         //TODO(kedzior): Colors in question, alpha goes in first two chars (FF)
-        int maxColor = 0xFF33691E;
-        int minColor = 0xFFAED581;
+        int maxColor = question.getMmaxColor();
+        int minColor = question.getMminColor();
         int midColor = ColorUtils.blendARGB(minColor, maxColor, 0.5f);
 
         mHighColorView.setBackgroundColor(maxColor);
