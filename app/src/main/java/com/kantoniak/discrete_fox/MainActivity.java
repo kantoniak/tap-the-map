@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.kantoniak.discrete_fox.ar.ARSurfaceView;
 

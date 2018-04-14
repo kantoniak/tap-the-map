@@ -4,22 +4,21 @@ import android.support.annotation.NonNull;
 
 import com.kantoniak.discrete_fox.ar.ARController;
 import com.kantoniak.discrete_fox.ar.ARSceneRenderer;
+import com.kantoniak.discrete_fox.scene.Country;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.lights.DirectionalLight;
-import org.rajawali3d.materials.Material;
-import org.rajawali3d.materials.methods.DiffuseMethod;
-import org.rajawali3d.materials.methods.SpecularMethod;
-import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.primitives.Cube;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SceneRenderer extends ARSceneRenderer {
 
     private final MainActivity mainActivity;
 
     // Scene elements
-    private Cube cube;
     private DirectionalLight directionalLight;
+    List<Country> countries = new LinkedList<>();
 
     public SceneRenderer(MainActivity mainActivity, ARController arController) {
         super(mainActivity, arController);
@@ -31,45 +30,32 @@ public class SceneRenderer extends ARSceneRenderer {
         super.initScene();
 
         // Lighting
-        directionalLight = new DirectionalLight(1f, .2f, -1.0f);
+        directionalLight = new DirectionalLight(-1.5f, 1.5f, 2.5f);
         directionalLight.setColor(1.0f, 1.0f, 1.0f);
-        directionalLight.setPower(2);
+        directionalLight.setPower(1);
         directionalLight.shouldUseObjectTransform(false);
         getCurrentScene().addLight(directionalLight);
 
-        cube = new Cube(0.5f);
-        Material cubeMaterial = new Material();
-        cubeMaterial.setColor(0xff0000);
-        cubeMaterial.enableLighting(true);
-        cubeMaterial.setDiffuseMethod(new DiffuseMethod.Lambert());
-        cubeMaterial.setSpecularMethod(new SpecularMethod.Phong());
-        cube.setMaterial(cubeMaterial);
-        cube.setPosition(new Vector3());
-        cube.setRotation(new Vector3());
-        cube.setPosition(0,0,0.25f);
-        cube.setDoubleSided(true);
-        getCurrentScene().addChild(cube);
-        objectPicker.registerObject(cube);
-
+        // Countries
+        Country country = new Country("pl", 3, 0x81C784, 0x388E3C);
+        country.loadObject(mainActivity, mTextureManager);
+        country.registerObject(getCurrentScene(), objectPicker);
+        countries.add(country);
     }
 
     @Override
     protected void onRender(long elapsedRealtime, double deltaTime) {
         super.onRender(elapsedRealtime, deltaTime);
         updateCameraMatrices();
-
-        cube.rotate(Vector3.Axis.Z, 1.0);
     }
 
     @Override
     public void onObjectPicked(@NonNull Object3D object) {
-        if (object == cube) {
-            if (cube.getScaleZ() > 1) {
-                cube.setScale(1.f);
-            } else {
-                cube.setScale(2.f);
+        countries.forEach((country) -> {
+            if (object == country.getObject()) {
+                country.onPicked();
             }
-        }
+        });
     }
 
     @Override
