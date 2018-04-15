@@ -5,17 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/question"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/question_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/biggerPadding"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAlignment="center"
-        android:textColor="@color/textColorOnPrimary"
-        android:textSize="@dimen/questionTextSize"
         android:background="@color/colorPrimary"
-        style="@style/ElevatedContainer" />
+        style="@style/ElevatedContainer"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/halfPadding">
+
+        <ImageView
+            android:id="@+id/button_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_close_24dp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QUESTION"
+            android:textAlignment="center"
+            android:textColor="@color/textColorOnPrimary"
+            android:textSize="@dimen/questionTextSize"
+            app:layout_constraintEnd_toStartOf="@id/round_progress"
+            app:layout_constraintStart_toEndOf="@id/button_close" />
+
+        <TextView
+            android:id="@+id/round_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3/15"
+            android:textAlignment="center"
+            android:textColor="@color/textColorOnPrimary"
+            android:textSize="@dimen/questionTextSize"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
 
     <LinearLayout
         android:id="@+id/list_view_linear_layout"
@@ -24,7 +55,7 @@
         android:layout_margin="@dimen/standardPadding"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question"
+        app:layout_constraintTop_toBottomOf="@+id/question_topbar"
         app:layout_constraintBottom_toTopOf="@id/legend"
         style="@style/ElevatedContainer"
         android:background="@color/cardview_light_background">
@@ -41,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question"
+        app:layout_constraintTop_toBottomOf="@id/question_topbar"
         android:orientation="vertical">
 
         <ImageView

@@ -60,9 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @BindView(R.id.start_button) Button mStartButton;
 
     // screen_question
+    @BindView(R.id.button_close) View mCloseView;
     @BindView(R.id.question) TextView mQuestionTextView;
+    @BindView(R.id.round_progress) TextView mRoundProgress;
     @BindView(R.id.button_zoom_in) View mZoomIn;
     @BindView(R.id.button_zoom_out) View mZoomOut;
+
     @BindView(R.id.legend_high_text) TextView mHighTextView;
     @BindView(R.id.legend_mid_text) TextView mMidTextView;
     @BindView(R.id.legend_low_text) TextView mLowTextView;
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @BindView(R.id.legend_mid_color) View mMidColorView;
     @BindView(R.id.legend_low_color) View mLowColorView;
     @BindView(R.id.next_button_icon) ImageView mNextIcon;
+
     @BindView(R.id.list_view_answers) ListView mListView;
     @BindView(R.id.list_view_linear_layout) LinearLayout mListViewLinearLayout;
 
