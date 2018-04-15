@@ -4,6 +4,7 @@
     <dimen name="halfPadding">4dp</dimen>
     <dimen name="standardPadding">8dp</dimen>
     <dimen name="biggerPadding">12dp</dimen>
+    <dimen name="doublePadding">16dp</dimen>
     <dimen name="hugePadding">24dp</dimen>
 
     <!-- Text sizing -->

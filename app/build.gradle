@@ -29,6 +29,8 @@ dependencies {
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.facebook.android:facebook-share:[4,5)'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.rajawali3d:rajawali:1.1.970'
     implementation files('libs/EasyAR.jar')

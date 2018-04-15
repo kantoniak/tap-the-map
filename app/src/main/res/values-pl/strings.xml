@@ -2,6 +2,7 @@
 
     <!-- Globals -->
     <string name="app_name">Tap The Map</string>
+    <string name="app_desc">Klikaj państwa żeby wygrać</string>
 
     <!-- Main screen -->
     <string name="button_start">Start!</string>

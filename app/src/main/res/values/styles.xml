@@ -10,12 +10,26 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+
+        <!-- Widgets -->
+        <item name="buttonStyle">@style/BaseButton</item>
     </style>
 
 
     <style name="ElevatedContainer" parent="TextAppearance.AppCompat">
         <item name="android:elevation">3dp</item>
         <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="BaseButton" parent="ElevatedContainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/standardPadding</item>
+        <item name="android:paddingLeft">@dimen/biggerPadding</item>
+        <item name="android:paddingRight">@dimen/biggerPadding</item>
+        <item name="android:paddingBottom">@dimen/biggerPadding</item>
+        <item name="android:background">@color/colorBackgroundLight</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
 

@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.kantoniak.discrete_fox.ar.ARSurfaceView;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.screen_question) ViewGroup mScreenQuestion;
 
     // screen_menu
+    @BindView(R.id.animation_main) ImageView mAnimationMain;
     @BindView(R.id.start_button) Button mStartButton;
 
     // screen_question
@@ -104,8 +106,15 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupAR();
-        showScreen(R.id.screen_menu);
+        setupMenu();
         requestCameraPermission();
+    }
+
+    public void setupMenu() {
+        Glide.with(this)
+                .load(R.raw.tap)
+                .into(mAnimationMain);
+        showScreen(R.id.screen_menu);
     }
 
     public void setupAR() {
