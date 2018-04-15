@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -155,9 +154,9 @@ public class MainActivity extends AppCompatActivity {
         }
         mQuestionTextView.setText(question.getDesc());
 
-        mHighTextView.setText(question.getHighLabel());
-        mMidTextView.setText(question.getMidLabel());
-        mLowTextView.setText(question.getLowLabel());
+        mHighTextView.setText(question.getMmaxLabel());
+        mMidTextView.setText(question.getMmidLabel());
+        mLowTextView.setText(question.getMminLabel());
 
         int maxColor = question.getMmaxColor();
         int minColor = question.getMminColor();

@@ -20,13 +20,19 @@ public class Question {
     int mminColor;
     int mmaxColor;
     String[] mcountries;
+    String mminLabel;
+    String mmidLabel;
+    String mmaxLabel;
 
-    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc, int minColor, int maxColor, String[] countries) {
+    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc, int minColor, int maxColor, String[] countries, String minLabel, String midLabel, String maxLabel) {
         mcountries = countries;
         mdesc = desc;
         mlink = link;
         mminColor = minColor;
         mmaxColor = maxColor;
+        mminLabel = minLabel;
+        mmidLabel = midLabel;
+        mmaxLabel = maxLabel;
         ansDouble = new HashMap<>();
         ArrayList<Double> valueList = new ArrayList<>();
         Iterator it = data.entrySet().iterator();
@@ -84,17 +90,17 @@ public class Question {
         return ans.get(country);
     }
 
-    public String getHighLabel() {
-        return String.format("%.2f", highThres) + " <";
-    }
+    //public String getHighLabel() {
+    //    return String.format("%.2f", highThres) + " <";
+    //}
 
-    public String getMidLabel() {
-        return String.format("%.2f", midThres) + " - " + String.format("%.2f", highThres);
-    }
+    //public String getMidLabel() {
+    //    return String.format("%.2f", midThres) + " - " + String.format("%.2f", highThres);
+    //}
 
-    public String getLowLabel() {
-        return "< " + String.format("%.2f", midThres);
-    }
+    //public String getLowLabel() {
+    //    return "< " + String.format("%.2f", midThres);
+    //}
 
     public int getMminColor() {
         return mminColor;
@@ -107,4 +113,8 @@ public class Question {
     public String[] getCountries() {
         return mcountries;
     }
+
+    public String getMminLabel() { return mminLabel; }
+    public String getMmidLabel() { return mmidLabel; }
+    public String getMmaxLabel() { return mmaxLabel; }
 }
