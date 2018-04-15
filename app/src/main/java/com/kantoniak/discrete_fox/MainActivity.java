@@ -192,7 +192,11 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     res = getResources().getString(R.string.result_high);
                 }
-                forList[i] = cu.convert(countries[i]) + " - " + res;
+                if (countries[i].equals("de")) {
+                    forList[i] = "Germany - " + res;
+                } else {
+                    forList[i] = cu.convert(countries[i]) + " - " + res;
+                }
             }
             ArrayAdapter<String> test = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, forList);
             mListView.setAdapter(test);
