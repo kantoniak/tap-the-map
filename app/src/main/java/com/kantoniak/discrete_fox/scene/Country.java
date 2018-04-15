@@ -32,7 +32,7 @@ public class Country {
     private int minColor;
     private int maxColor;
 
-    private static float TOP_HEIGHT = 0.01f;
+    private static float TOP_HEIGHT = 0.2f;
     private static float NEAR_ZERO_HEIGHT = 0.001f;
 
     public Country(String code, int maxHeight, int minColor, int maxColor) {
