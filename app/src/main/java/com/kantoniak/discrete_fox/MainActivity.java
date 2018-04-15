@@ -42,6 +42,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class MainActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION = 0;
+    private static final String SCORE_PREFS = "score";
 
     private ARSurfaceView surfaceView;
     private final Map map = new Map();
@@ -125,20 +126,23 @@ public class MainActivity extends AppCompatActivity {
         mOverlayView.findViewById(screenId).setVisibility(View.VISIBLE);
     }
 
-    private void updateHighScore(int newScore) {
+    private int updateHighScore(int newScore) {
         SharedPreferences prefs = getSharedPreferences("highscore", Context.MODE_PRIVATE);
-        int res = prefs.getInt("score", 0);
+        int res = prefs.getInt(SCORE_PREFS, 0);
         if (res < newScore) {
-            Toast.makeText(getApplicationContext(), "New high score!", Toast.LENGTH_LONG).show();
-            prefs.edit().putInt("score", newScore).apply();
+            prefs.edit().putInt(SCORE_PREFS, newScore).apply();
+            return 1;
         }
+        return 0;
     }
 
     private void presentFinalScreen(Gameplay gameplay) {
-        updateHighScore(gameplay.getResult());
+        int hs = updateHighScore(gameplay.getResult());
 
         showScreen(R.id.screen_score);
-        if ((gameplay.getResult()*1.0) / gameplay.getMaxResult() < 0.2) {
+        if (hs == 1) {
+            mGreatJobTv.setText(getResources().getString(R.string.new_high_score));
+        } else if ((gameplay.getResult()*1.0) / gameplay.getMaxResult() < 0.2) {
             mGreatJobTv.setText(getResources().getString(R.string.score_needs_improvement));
         } else {
             mGreatJobTv.setText(getResources().getString(R.string.score_great_job));

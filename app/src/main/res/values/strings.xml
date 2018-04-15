@@ -12,6 +12,7 @@
     <string name="result_high">HIGH</string>
 
     <!-- Score screen -->
+    <string name="new_high_score">New high score!</string>
     <string name="score_great_job">Great job!</string>
     <string name="score_needs_improvement">Needs improvement!</string>
     <string name="your_score">Your score:</string>
