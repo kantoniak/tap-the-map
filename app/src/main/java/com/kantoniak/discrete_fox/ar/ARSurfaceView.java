@@ -24,7 +24,7 @@ public class ARSurfaceView extends SurfaceView implements View.OnTouchListener {
         sceneRenderer = new SceneRenderer(context, arController, map);
 
         this.setFrameRate(60.0);
-        this.setRenderMode(ISurface.RENDERMODE_CONTINUOUSLY);
+        this.setRenderMode(ISurface.RENDERMODE_WHEN_DIRTY);
         this.setZOrderMediaOverlay(true);
         this.setSurfaceRenderer(sceneRenderer);
     }

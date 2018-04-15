@@ -3,6 +3,7 @@ package com.kantoniak.discrete_fox;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
@@ -12,9 +13,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareButton;
 import com.kantoniak.discrete_fox.ar.ARSurfaceView;
 import com.kantoniak.discrete_fox.communication.Question;
 import com.kantoniak.discrete_fox.communication.QuestionChest;
@@ -54,11 +58,16 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.legend_high_color) View mHighColorView;
     @BindView(R.id.legend_mid_color) View mMidColorView;
     @BindView(R.id.legend_low_color) View mLowColorView;
+    @BindView(R.id.next_button_icon) ImageView mNextIcon;
+
+    private Gameplay gameplay;
+    boolean showingAnswers = false;
 
     // screen_score
     @BindView(R.id.score_points) TextView mScoreTextView;
     @BindView(R.id.great_job_tv) TextView mGreatJobTv;
     @BindView(R.id.score_play_again) TextView mPlayAgainButton;
+    @BindView(R.id.facebook_share_button) ShareButton mShareButton;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -119,6 +128,12 @@ public class MainActivity extends AppCompatActivity {
             mGreatJobTv.setText(getResources().getString(R.string.score_great_job));
         }
         mScoreTextView.setText(String.valueOf(gameplay.getResult()) + "/" + String.valueOf((gameplay.getMaxResult())));
+
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setQuote("Whatever")
+                .setContentUrl(Uri.parse("https://stat.gov.pl/"))
+                .build();
+        mShareButton.setShareContent(content);
     }
 
     @OnClick(R.id.start_button)
@@ -126,20 +141,31 @@ public class MainActivity extends AppCompatActivity {
 
         map.disableAllCountries();
         //TODO Call generateQuestions on application start.
-        final Gameplay gameplay = new Gameplay(generateQuestions(), 5);
+        gameplay = new Gameplay(generateQuestions(), 5);
         Question question = gameplay.getCurrentQuestion();
         showQuestion(question);
-        LinearLayout next = findViewById(R.id.nextButton);
-        next.setOnClickListener(btn -> {
+
+        showingAnswers = false;
+        showScreen(R.id.screen_question);
+    }
+
+    @OnClick(R.id.next_button)
+    public void onNextButtonClick(View view) {
+        if (showingAnswers) {
+            mNextIcon.setImageResource(R.drawable.ic_done_24dp);
+            showingAnswers = false;
+
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
                 presentFinalScreen(gameplay);
                 return;
             }
             showQuestion(nextQuestion);
-        });
 
-        showScreen(R.id.screen_question);
+        } else {
+            mNextIcon.setImageResource(R.drawable.ic_trending_flat_24dp);
+            showingAnswers = true;
+        }
     }
 
     @OnClick(R.id.score_play_again)

@@ -62,10 +62,10 @@ public abstract class ARSceneRenderer extends Renderer implements OnObjectPicked
 
     @Override
     public void onRenderSurfaceSizeChanged(GL10 gl, int width, int height) {
-        super.onRenderSurfaceSizeChanged(gl, width, height);
         synchronized (arController) {
             arController.resizeGL(width, height);
         }
+        super.onRenderSurfaceSizeChanged(gl, width, height);
     }
 
     @Override

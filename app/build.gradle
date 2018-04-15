@@ -28,6 +28,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.facebook.android:facebook-share:[4,5)'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.rajawali3d:rajawali:1.1.970'
     implementation files('libs/EasyAR.jar')
