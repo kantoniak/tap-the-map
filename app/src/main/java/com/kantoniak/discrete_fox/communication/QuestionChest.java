@@ -16,18 +16,27 @@ public class QuestionChest {
             "lan_lcv_fao?landcover=LCC1&precision=1&unit=PC&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
             "demo_r_d3dens?unit=HAB_KM2&precision=1&lastTimePeriod=3&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
             "env_wasmun?precision=1&lastTimePeriod=3&wst_oper=GEN&unit=KG_HAB&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
+            "tin00134?geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK&precision=1&lastTimePeriod=3&unit=PC_HH",
     };
 
     private String[] description;
 
-    private static final int[] OFFSET = {1, 6, 2, 1, 2, 3};
-    private static final int[] YEAR = {2016, 2016, 2016, 2015, 2016, 2016};
-    private static final int[] MINCOLOR = {0xFFF06292, 0xFFFFD54F, 0xFF4DD0E1, 0xFFAED581, 0xFF7986CB, 0xFFDCE775};
-    private static final int[] MAXCOLOR = {0xFFAD1457, 0xFFFF8F00, 0xFF00838F, 0xFF558B2F, 0xFF283593, 0xFF9E9D24};
-    private static final String[][] COUNTRYCODES = {{"pl", "fr", "se", "ie", "lv"}, {"pl", "de", "cz", "si", "hu"}, {"pl", "pt", "bg", "fi", "dk"}, {"pl", "at", "be", "cy", "gr"}, {"pl", "hr", "ie", "ne", "ro"}, {"pl", "fr", "se", "ie", "lv"}};
-    private static final String[] MINLABEL = {"<1.05T€", "<10%", "<6.2%", "<18.1%", "<457/km2", ""};
-    private static final String[] MIDLABEL = {"1.05T€ - 2.09T€", "10% - 20%", "6.2% - 10.5%", "18.1% - 37.2%", "457/km2 - 916/km2", ""};
-    private static final String[] MAXLABEL = {">2.09T€", ">20%", ">10.5%", ">37.2%", ">916/km2", ""};
+    private static final int[] OFFSET = {1, 6, 2, 1, 2, 3, 1};
+    private static final int[] YEAR = {2016, 2016, 2016, 2015, 2016, 2016, 2016};
+    private static final int[] MINCOLOR = {0xFFF06292, 0xFFFFD54F, 0xFF4DD0E1, 0xFFAED581, 0xFF7986CB, 0xFFDCE775, 0xFFF06292};
+    private static final int[] MAXCOLOR = {0xFFAD1457, 0xFFFF8F00, 0xFF00838F, 0xFF558B2F, 0xFF283593, 0xFF9E9D24, 0xFFAD1457};
+    private static final String[][] COUNTRYCODES = {
+            {"pl", "fr", "se", "ie", "lv"},
+            {"pl", "de", "cz", "si", "hu"},
+            {"pl", "pt", "bg", "fi", "dk"},
+            {"pl", "at", "be", "cy", "gr"},
+            {"pl", "hr", "ie", "ne", "ro"},
+            {"pl", "fr", "se", "gb", "lv"},
+            {"pl", "es", "it", "gr", "gb"}};
+            //{"pl", "fr", "ee", "se", "si"}};
+    private static final String[] MINLABEL = {"<1.05T€", "<10%", "<6.2%", "<18.1%", "<457/km2", "<258.3kt", "<71.7%"};
+    private static final String[] MIDLABEL = {"1.05T€ - 2.09T€", "10% - 20%", "6.2% - 10.5%", "18.1% - 37.2%", "457/km2 - 916/km2", "258.3kt - 517.7kt", "71.7% - 84.3%"};
+    private static final String[] MAXLABEL = {">2.09T€", ">20%", ">10.5%", ">37.2%", ">916/km2", ">517.7kt", ">84.3%"};
 
     public QuestionChest(Resources res) {
         description = new String[OFFSET.length];
@@ -37,6 +46,7 @@ public class QuestionChest {
         description[3] = res.getString(R.string.question_forest);
         description[4] = res.getString(R.string.question_population_density);
         description[5] = res.getString(R.string.question_waste);
+        description[6] = res.getString(R.string.question_internet_access);
 
         questionsArrayList = new ArrayList<>();
         int n = QUERY.length;
@@ -48,7 +58,7 @@ public class QuestionChest {
                 Question q = new Question(QUERY[i], response.getContent().getHashMap(), YEAR[i], description[i], MINCOLOR[i], MAXCOLOR[i], COUNTRYCODES[i], MINLABEL[i], MIDLABEL[i], MAXLABEL[i]);
                 questionsArrayList.add(q);
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }

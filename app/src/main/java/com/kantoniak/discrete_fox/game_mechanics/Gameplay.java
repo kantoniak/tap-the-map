@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Gameplay {
-    public final static int NUMBEROFQUESTIONS = 5;
+    public final int NUMBEROFQUESTIONS;
     int step;
     int currentQuestion;
     int mnumberOfCountries;
@@ -26,6 +26,7 @@ public class Gameplay {
     ArrayList<Question> mquestions;
 
     public Gameplay(ArrayList<Question> questions, int numberOfCountries) {
+        NUMBEROFQUESTIONS = questions.size();
         step = 0;
         score = 0;
         mnumberOfCountries = numberOfCountries;
@@ -89,5 +90,9 @@ public class Gameplay {
 
     public int getMaxResult() {
         return maxScore;
+    }
+
+    public int getCurrentQuestionInt() {
+        return currentQuestion;
     }
 }

@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             q[i] = qc.getQuestion(i);
         }
         ArrayList<Question> questions = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < qc.numberOfQuestions(); i++) {
             questions.add(q[i]);
         }
         return questions;
@@ -178,6 +178,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @OnClick(R.id.start_button)
     public void startGame(View view) {
+        showingAnswers = false;
+        mListViewLinearLayout.setVisibility(View.INVISIBLE);
         map.disableAllCountries();
         //TODO Call generateQuestions on application start.
         gameplay = new Gameplay(generateQuestions(), 5);
@@ -187,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         showingAnswers = false;
         showScreen(R.id.screen_question);
     }
+
+    @OnClick(R.id.button_close)
+    public void buttonClose() { showScreen(R.id.screen_menu); }
 
     @OnClick(R.id.button_zoom_in)
     public void zoomIn() {
@@ -259,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             map.enableCountry(code);
         }
         mQuestionTextView.setText(question.getDesc());
+        mRoundProgress.setText(String.valueOf(gameplay.getCurrentQuestionInt() + 1) + "/" + String.valueOf(gameplay.NUMBEROFQUESTIONS));
 
         mHighTextView.setText(question.getMmaxLabel());
         mMidTextView.setText(question.getMmidLabel());
