@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/standardPadding">
+
+    <ImageView
+        android:id="@+id/answer_item_color"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#000000"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/answer_item_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COUNTRY"
+        android:layout_marginLeft="@dimen/standardPadding"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

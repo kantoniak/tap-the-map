@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,10 @@ import com.kantoniak.discrete_fox.scene.Country;
 import com.kantoniak.discrete_fox.scene.Map;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,10 +82,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @BindView(R.id.next_button_icon) ImageView mNextIcon;
 
     @BindView(R.id.list_view_answers) ListView mListView;
+    @BindView(R.id.answers_recycler) RecyclerView mAnswersRecycler;
     @BindView(R.id.list_view_linear_layout) LinearLayout mListViewLinearLayout;
 
     private Gameplay gameplay;
     boolean showingAnswers = false;
+    private AnswersAdapter answersAdapter;
 
     // screen_score
     @BindView(R.id.score_points) TextView mScoreTextView;
@@ -114,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         setupAR();
         setupMenu();
+        setupAnswersRecycler();
         requestCameraPermission();
     }
 
@@ -133,6 +142,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         surfaceView = new ARSurfaceView(this, map);
         surfaceView.setOnTouchListener(this);
+    }
+
+    public void setupAnswersRecycler() {
+        mAnswersRecycler.setHasFixedSize(true);
+        mAnswersRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        List<AnswersAdapter.Answer> answers = Arrays.asList(
+                //new AnswersAdapter.Answer("Polska", "300", 0xFF990000),
+                //new AnswersAdapter.Answer("Niemcy", "500", 0xFFCC0000),
+                //new AnswersAdapter.Answer("Hiszpania", "400", 0xFFFF0000)
+        );
+
+        answersAdapter = new AnswersAdapter(answers);
+        mAnswersRecycler.setAdapter(answersAdapter);
     }
 
     private void hideAllScreens() {
@@ -222,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             String[] countries = currentQuestion.getCountries();
             String[] forList = new String[countries.length];
             CountryUtil cu = new CountryUtil();
+            List<AnswersAdapter.Answer> answers = new LinkedList<>();
             for (int i = 0; i < countries.length; i++) {
                 int r = currentQuestion.getCorrectAnswer(cu.convert(countries[i]));
                 double res = currentQuestion.getAnsDouble().get(cu.convert(countries[i]));
@@ -240,7 +264,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 } else {
                     forList[i] = cu.convert(countries[i]) + " - " + ress;
                 }
+
+                String countryName = cu.convert(countries[i]);
+                if (countries[i].equals("de")) {
+                    countryName = "Germany";
+                }
+                int height = currentQuestion.getCorrectAnswer(cu.convert(countries[i]));
+                int color = ColorUtils.blendARGB(currentQuestion.getMminColor(), currentQuestion.getMmaxColor(), (height-1)*0.5f);
+                answers.add(new AnswersAdapter.Answer(countryName, ress, res, color));
             }
+            //currentQuestion.getMmaxColor();
+            answers.sort(Comparator.comparing(AnswersAdapter.Answer::getValueRaw).reversed());
+            answersAdapter.updateAnswers(answers);
+
             ArrayAdapter<String> test = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, forList);
             mListView.setAdapter(test);
             mListViewLinearLayout.setVisibility(View.VISIBLE);
