@@ -13,7 +13,7 @@ import org.rajawali3d.view.SurfaceView;
 
 import cn.easyar.Engine;
 
-public class ARSurfaceView extends SurfaceView implements View.OnTouchListener {
+public class ARSurfaceView extends SurfaceView {
 
     private final ARController arController;
     private final ARSceneRenderer sceneRenderer;
@@ -32,7 +32,6 @@ public class ARSurfaceView extends SurfaceView implements View.OnTouchListener {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        this.setOnTouchListener(this);
         synchronized (arController) {
             if (arController.initialize()) {
                 arController.start();
@@ -59,12 +58,6 @@ public class ARSurfaceView extends SurfaceView implements View.OnTouchListener {
     public void onPause() {
         Engine.onPause();
         super.onPause();
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        sceneRenderer.onTouchEvent(event);
-        return super.onTouchEvent(event);
     }
 
     public ARSceneRenderer getSceneRenderer() {

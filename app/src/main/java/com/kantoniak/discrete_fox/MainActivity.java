@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -35,12 +36,13 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTouch;
 import cn.easyar.Engine;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private static final int CAMERA_PERMISSION = 0;
     private static final String SCORE_PREFS = "score";
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         surfaceView = new ARSurfaceView(this, map);
+        surfaceView.setOnTouchListener(this);
     }
 
     private void hideAllScreens() {
@@ -199,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
+                showingAnswers = false;
                 presentFinalScreen(gameplay);
                 return;
             }
@@ -308,5 +312,12 @@ public class MainActivity extends AppCompatActivity {
             surfaceView.onPause();
         }
         super.onPause();
+    }
+
+    public boolean onTouch(View v, MotionEvent event) {
+        if (!showingAnswers) {
+            surfaceView.getSceneRenderer().onTouchEvent(event);
+        }
+        return super.onTouchEvent(event);
     }
 }
