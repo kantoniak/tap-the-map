@@ -16,6 +16,7 @@ import java.util.List;
 
 public class Gameplay {
     public HashMap<String, String> country_codes;
+    public final static int NUMBEROFQUESTIONS = 5;
     int step;
     int currentQuestion;
     int mnumberOfCountries;
@@ -23,29 +24,24 @@ public class Gameplay {
     int score;
     Integer[] decisions;
     ArrayList<Question> mquestions;
-    String[] country;
 
-    public Gameplay(ArrayList<Question> questions, int numberOfCountries) {
+    public Gameplay(ArrayList<Question> questions) {
         step = 0;
         score = 0;
         currentQuestion = 0;
-        decisions = new Integer[numberOfCountries];
-        decisions[0] = 0;
-        decisions[1] = 0;
-        decisions[2] = 0;
-        country = new String[numberOfCountries];
-        country[0] = "pl";
-        country[1] = "es";
-        country[2] = "se";
-        mnumberOfCountries = numberOfCountries;
+        decisions = new Integer[NUMBEROFQUESTIONS];
+        for (int i = 0; i < NUMBEROFQUESTIONS; i++) {
+            decisions[i] = 0;
+        }
         mquestions = questions;
     }
 
     public Question finishQuestion(Context context, Map map) {
         // Gather decisions
         HashMap<String, Country> mapCountries = map.getCountries();
+        String[] countries = mquestions.get(currentQuestion).getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            decisions[i] = mapCountries.get(country[i]).getHeight();
+            decisions[i] = mapCountries.get(countries[i]).getHeight();
         }
         // Calculate score
         score = calculateScore(map);
@@ -71,8 +67,11 @@ public class Gameplay {
     private Integer calculateScore(Map map) {
         int score = 0;
         CountryUtil cu = new CountryUtil();
+        HashMap<String, Country> mapCountries = map.getCountries();
+        Question question = getCurrentQuestion();
+        String[] countries = question.getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            if (Math.abs(decisions[i] - mquestions.get(i).getCorrectAnswer(cu.convert(map.getCountries().get(country[i]).getCode()))) == 0) {
+            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(cu.convert(mapCountries.get(countries[i]).getCode()))) == 0) {
                 score += 1;
             }
         }

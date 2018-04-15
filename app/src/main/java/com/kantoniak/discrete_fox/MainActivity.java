@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         QuestionChest qc = new QuestionChest(getResources());
         int n = qc.numberOfQuestions();
         Question[] q = new Question[n];
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             q[i] = qc.getQuestion(i);
         }
         ArrayList<Question> questions = new ArrayList<>();
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         map.disableAllCountries();
         //TODO Call generateQuestions on application start.
-        final Gameplay gameplay = new Gameplay(generateQuestions(), 3);
+        final Gameplay gameplay = new Gameplay(generateQuestions());
         Question question = gameplay.getCurrentQuestion();
         showQuestion(question);
         LinearLayout next = findViewById(R.id.nextButton);
