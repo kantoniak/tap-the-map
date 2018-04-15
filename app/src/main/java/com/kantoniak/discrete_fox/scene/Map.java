@@ -23,7 +23,6 @@ public class Map {
             Country country = entry.getValue();
             country.setDisabled(true);
         }
-        enableCountry("pl");
     }
 
     public void enableCountry(String code) {
@@ -32,5 +31,12 @@ public class Map {
             return;
         }
         country.setDisabled(false);
+    }
+
+    public void setColors(int minColor, int maxColor) {
+        for (java.util.Map.Entry<String, Country> entry: getCountries().entrySet()) {
+            Country country = entry.getValue();
+            country.setColors(minColor, maxColor);
+        }
     }
 }

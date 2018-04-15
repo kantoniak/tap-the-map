@@ -149,10 +149,11 @@ public class MainActivity extends AppCompatActivity {
         mMidTextView.setText(question.getMidLabel());
         mLowTextView.setText(question.getLowLabel());
 
-        //TODO(kedzior): Colors in question, alpha goes in first two chars (FF)
         int maxColor = question.getMmaxColor();
         int minColor = question.getMminColor();
         int midColor = ColorUtils.blendARGB(minColor, maxColor, 0.5f);
+
+        map.setColors(minColor, maxColor);
 
         mHighColorView.setBackgroundColor(maxColor);
         mMidColorView.setBackgroundColor(midColor);

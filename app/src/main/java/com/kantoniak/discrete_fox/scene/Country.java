@@ -29,8 +29,8 @@ public class Country {
     private static int DEFAULT_COLOR = 0xE0E0E0;
     private static int DISABLED_COLOR = 0x9E9E9E;
     private static int BLACK_COLOR = 0x000000;
-    private final int minColor;
-    private final int maxColor;
+    private int minColor;
+    private int maxColor;
 
     private static float TOP_HEIGHT = 0.01f;
     private static float NEAR_ZERO_HEIGHT = 0.001f;
@@ -137,5 +137,10 @@ public class Country {
             baseMaterial.setColor(DEFAULT_COLOR);
             topMaterial.setColor(DEFAULT_COLOR);
         }
+    }
+
+    public void setColors(int minColor, int maxColor) {
+        this.minColor = minColor;
+        this.maxColor = maxColor;
     }
 }
