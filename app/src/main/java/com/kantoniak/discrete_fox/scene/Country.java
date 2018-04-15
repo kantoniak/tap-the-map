@@ -16,6 +16,7 @@ import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.materials.textures.Texture;
 import org.rajawali3d.materials.textures.TextureManager;
+import org.rajawali3d.math.vector.Vector2;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.primitives.Plane;
 import org.rajawali3d.scene.Scene;
@@ -34,9 +35,10 @@ public class Country {
     private Object3D topObject;
     private Material topMaterial;
 
-    private static float NAME_PLANE_SCALE = 0.6f;
-    private static float NAME_PLANE_Z = 2f;
+    private static float NAME_PLANE_SCALE = 0.5f;
+    private static float NAME_PLANE_Z = 0.8f;
     private Object3D namePlane;
+    private Vector3 namePlanePos;
 
     private static int DEFAULT_COLOR = 0xE0E0E0;
     private static int DISABLED_COLOR = 0x9E9E9E;
@@ -47,12 +49,13 @@ public class Country {
     private static float TOP_HEIGHT = 0.2f;
     private static float NEAR_ZERO_HEIGHT = 0.001f;
 
-    public Country(String code, int maxHeight, int minColor, int maxColor) {
+    public Country(String code, int maxHeight, int minColor, int maxColor, Vector2 middlePos) {
         this.code = code;
         this.maxHeight = maxHeight;
         this.minColor = minColor;
         this.maxColor = maxColor;
         this.disabled = true;
+        this.namePlanePos = new Vector3(-middlePos.getX(), middlePos.getY(), NAME_PLANE_Z);
     }
 
     public void loadObject(Context context, TextureManager textureManager) {
@@ -79,7 +82,7 @@ public class Country {
         topObject.setScaleZ(TOP_HEIGHT);
 
         namePlane = new Plane();
-        namePlane.setPosition(0, 0 , NAME_PLANE_Z);
+        namePlane.setPosition(namePlanePos);
         namePlane.setDoubleSided(true);
         namePlane.setScaleX(-NAME_PLANE_SCALE);
         namePlane.setScaleZ(NAME_PLANE_SCALE);
@@ -90,7 +93,7 @@ public class Country {
 
         try {
             Bitmap planeTexture = createLabelTexture();
-            planeMaterial.addTexture(textureManager.addTexture(new Texture("whatever", planeTexture)));
+            planeMaterial.addTexture(textureManager.addTexture(new Texture("country_"+getCode(), planeTexture)));
         } catch (ATexture.TextureException e) {
             e.printStackTrace();
         }

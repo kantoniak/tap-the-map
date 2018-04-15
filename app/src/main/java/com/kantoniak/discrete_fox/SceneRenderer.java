@@ -38,7 +38,7 @@ public class SceneRenderer extends ARSceneRenderer {
 
         // Countries
         for (String code : Map.COUNTRY_CODES) {
-            Country country = new Country(code, 3, 0x81C784, 0x388E3C);
+            Country country = new Country(code, 3, 0x81C784, 0x388E3C, map.getCountryMiddle(code));
             country.loadObject(context, mTextureManager);
             country.registerObject(getCurrentScene(), objectPicker);
             map.addCountry(country);
