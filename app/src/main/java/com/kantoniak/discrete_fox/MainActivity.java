@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.legend_low_color) View mLowColorView;
     @BindView(R.id.next_button_icon) ImageView mNextIcon;
     @BindView(R.id.list_view_answers) ListView mListView;
+    @BindView(R.id.list_view_linear_layout) LinearLayout mListViewLinearLayout;
 
     private Gameplay gameplay;
     boolean showingAnswers = false;
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         if (showingAnswers) {
             mNextIcon.setImageResource(R.drawable.ic_done_24dp);
             showingAnswers = false;
-            mListView.setVisibility(View.INVISIBLE);
+            mListViewLinearLayout.setVisibility(View.INVISIBLE);
 
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
@@ -207,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
             }
             ArrayAdapter<String> test = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, forList);
             mListView.setAdapter(test);
-            mListView.setVisibility(View.VISIBLE);
+            mListViewLinearLayout.setVisibility(View.VISIBLE);
             mNextIcon.setImageResource(R.drawable.ic_trending_flat_24dp);
             showingAnswers = true;
         }
