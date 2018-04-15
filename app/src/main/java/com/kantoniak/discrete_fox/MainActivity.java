@@ -29,6 +29,7 @@ import com.kantoniak.discrete_fox.ar.ARSurfaceView;
 import com.kantoniak.discrete_fox.communication.Question;
 import com.kantoniak.discrete_fox.communication.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
+import com.kantoniak.discrete_fox.scene.Country;
 import com.kantoniak.discrete_fox.scene.Map;
 
 import java.util.ArrayList;
@@ -240,6 +241,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             mListViewLinearLayout.setVisibility(View.VISIBLE);
             mNextIcon.setImageResource(R.drawable.ic_trending_flat_24dp);
             showingAnswers = true;
+            for (String code : countries) {
+                map.getCountry(code).setHeight(
+                        currentQuestion.getCorrectAnswer(cu.convert(code)));
+            }
         }
     }
 

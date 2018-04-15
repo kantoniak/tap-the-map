@@ -122,9 +122,10 @@ public class Country {
         if (disabled) {
             return;
         }
+        setHeight(++height);
+    }
 
-        height++;
-
+    public void setHeight(int height) {
         if (height > maxHeight) {
             zeroChoice();
             return;
@@ -203,4 +204,5 @@ public class Country {
 
         return bitmap;
     }
+
 }

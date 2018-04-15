@@ -1,5 +1,7 @@
 package com.kantoniak.discrete_fox.scene;
 
+import android.support.annotation.Nullable;
+
 import org.rajawali3d.math.vector.Vector2;
 
 import java.util.Arrays;
@@ -60,6 +62,10 @@ public class Map {
             Country country = entry.getValue();
             country.setDisabled(true);
         }
+    }
+
+    public @Nullable Country getCountry(String code) {
+        return getCountries().get(code);
     }
 
     public void enableCountry(String code) {
