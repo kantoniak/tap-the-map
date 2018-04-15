@@ -2,6 +2,7 @@ package com.kantoniak.discrete_fox;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
@@ -120,7 +122,18 @@ public class MainActivity extends AppCompatActivity {
         mOverlayView.findViewById(screenId).setVisibility(View.VISIBLE);
     }
 
+    private void updateHighScore(int newScore) {
+        SharedPreferences prefs = getSharedPreferences("highscore", Context.MODE_PRIVATE);
+        int res = prefs.getInt("score", 0);
+        if (res < newScore) {
+            Toast.makeText(getApplicationContext(), "New high score!", Toast.LENGTH_LONG).show();
+            prefs.edit().putInt("score", newScore).apply();
+        }
+    }
+
     private void presentFinalScreen(Gameplay gameplay) {
+        updateHighScore(gameplay.getResult());
+
         showScreen(R.id.screen_score);
         if ((gameplay.getResult()*1.0) / gameplay.getMaxResult() < 0.2) {
             mGreatJobTv.setText(getResources().getString(R.string.score_needs_improvement));
@@ -138,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.start_button)
     public void startGame(View view) {
-
         map.disableAllCountries();
         //TODO Call generateQuestions on application start.
         gameplay = new Gameplay(generateQuestions(), 5);
