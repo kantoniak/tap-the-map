@@ -1,6 +1,11 @@
 package com.kantoniak.discrete_fox.scene;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v4.graphics.ColorUtils;
 import android.util.Log;
 
@@ -8,8 +13,11 @@ import org.rajawali3d.Object3D;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.Material;
+import org.rajawali3d.materials.textures.ATexture;
+import org.rajawali3d.materials.textures.Texture;
 import org.rajawali3d.materials.textures.TextureManager;
 import org.rajawali3d.math.vector.Vector3;
+import org.rajawali3d.primitives.Plane;
 import org.rajawali3d.scene.Scene;
 import org.rajawali3d.util.ObjectColorPicker;
 
@@ -25,6 +33,10 @@ public class Country {
 
     private Object3D topObject;
     private Material topMaterial;
+
+    private static float NAME_PLANE_SCALE = 0.6f;
+    private static float NAME_PLANE_Z = 2f;
+    private Object3D namePlane;
 
     private static int DEFAULT_COLOR = 0xE0E0E0;
     private static int DISABLED_COLOR = 0x9E9E9E;
@@ -66,6 +78,23 @@ public class Country {
         topObject.setMaterial(topMaterial);
         topObject.setScaleZ(TOP_HEIGHT);
 
+        namePlane = new Plane();
+        namePlane.setPosition(0, 0 , NAME_PLANE_Z);
+        namePlane.setDoubleSided(true);
+        namePlane.setScaleX(-NAME_PLANE_SCALE);
+        namePlane.setScaleZ(NAME_PLANE_SCALE);
+        namePlane.rotate(Vector3.Axis.X, -90);
+        Material planeMaterial = new Material();
+        planeMaterial.setColor(0x333333);
+        namePlane.setMaterial(planeMaterial);
+
+        try {
+            Bitmap planeTexture = createLabelTexture();
+            planeMaterial.addTexture(textureManager.addTexture(new Texture("whatever", planeTexture)));
+        } catch (ATexture.TextureException e) {
+            e.printStackTrace();
+        }
+
         zeroChoice();
     }
 
@@ -77,6 +106,7 @@ public class Country {
     public void registerObject(Scene scene, ObjectColorPicker objectPicker) {
         scene.addChild(baseObject);
         scene.addChild(topObject);
+        scene.addChild(namePlane);
         objectPicker.registerObject(baseObject);
         objectPicker.registerObject(topObject);
     }
@@ -142,5 +172,26 @@ public class Country {
     public void setColors(int minColor, int maxColor) {
         this.minColor = minColor;
         this.maxColor = maxColor;
+    }
+
+    public Bitmap createLabelTexture() {
+        int width = 64;
+        int height = 64;
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawPaint(paint);
+
+        paint.setColor(Color.WHITE);
+        paint.setAntiAlias(true);
+        paint.setTextSize(42.f);
+        paint.setFakeBoldText(true);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(getCode().toUpperCase(), (width / 2.f) , 47, paint);
+
+        return bitmap;
     }
 }
