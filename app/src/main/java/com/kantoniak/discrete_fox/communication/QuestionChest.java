@@ -20,11 +20,11 @@ public class QuestionChest {
 
     private String[] description;
 
-    private static final int[] OFFSET = {1, 6, 2, 1, 1, 1};
-    private static final int[] YEAR = {2016, 2016, 2016, 2016, 2016, 2016};
+    private static final int[] OFFSET = {1, 6, 2, 1, 1, 3};
+    private static final int[] YEAR = {2016, 2016, 2016, 2015, 2016, 2016};
     private static final int[] MINCOLOR = {0xFF110000, 0xFF000011, 0xFFAED581, 0xFFAED581, 0xFFAED581, 0xFFAED581};
     private static final int[] MAXCOLOR = {0xFFFF001E, 0xFF3300FF, 0xFF33691E, 0xFF33691E, 0xFF33691E, 0xFF33691E};
-    private static final String[][] COUNTRYCODES = {{"fr", "se", "ie", "lv"}, {"de", "cz", "si", "hu"}, {"pt", "bg", "fi", "dk"}, {"at", "be", "cy", "gr"}, {"hr", "ie", "ne", "ro"}};
+    private static final String[][] COUNTRYCODES = {{"pl", "fr", "se", "ie", "lv"}, {"pl", "de", "cz", "si", "hu"}, {"pl", "pt", "bg", "fi", "dk"}, {"pl", "at", "be", "cy", "gr"}, {"pl", "hr", "ie", "ne", "ro"}, {"pl", "fr", "se", "ie", "lv"}};
 
     public QuestionChest(Resources res) {
         description = new String[OFFSET.length];

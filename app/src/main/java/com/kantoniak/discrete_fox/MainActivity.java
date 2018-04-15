@@ -15,7 +15,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kantoniak.discrete_fox.ar.ARSurfaceView;
 import com.kantoniak.discrete_fox.communication.Question;
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     // screen_score
     @BindView(R.id.score_points) TextView mScoreTextView;
+    @BindView(R.id.great_job_tv) TextView mGreatJobTv;
     @BindView(R.id.score_play_again) TextView mPlayAgainButton;
 
     @Override
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
             q[i] = qc.getQuestion(i);
         }
         ArrayList<Question> questions = new ArrayList<>();
-        questions.add(q[0]);
-        questions.add(q[1]);
-        questions.add(q[2]);
+        for (int i = 0; i < 5; i++) {
+            questions.add(q[i]);
+        }
         return questions;
     }
 
@@ -112,19 +112,29 @@ public class MainActivity extends AppCompatActivity {
         mOverlayView.findViewById(screenId).setVisibility(View.VISIBLE);
     }
 
+    private void presentFinalScreen(Gameplay gameplay) {
+        showScreen(R.id.screen_score);
+        if ((gameplay.getResult()*1.0) / gameplay.getMaxResult() < 0.2) {
+            mGreatJobTv.setText(getResources().getString(R.string.score_needs_improvement));
+        } else {
+            mGreatJobTv.setText(getResources().getString(R.string.score_great_job));
+        }
+        mScoreTextView.setText(String.valueOf(gameplay.getResult()) + "/" + String.valueOf((gameplay.getMaxResult())));
+    }
+
     @OnClick(R.id.start_button)
     public void startGame(View view) {
 
         map.disableAllCountries();
         //TODO Call generateQuestions on application start.
-        final Gameplay gameplay = new Gameplay(generateQuestions());
+        final Gameplay gameplay = new Gameplay(generateQuestions(), 5);
         Question question = gameplay.getCurrentQuestion();
         showQuestion(question);
         LinearLayout next = findViewById(R.id.nextButton);
         next.setOnClickListener(btn -> {
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
-                showScreen(R.id.screen_score);
+                presentFinalScreen(gameplay);
                 return;
             }
             showQuestion(nextQuestion);

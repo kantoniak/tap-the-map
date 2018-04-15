@@ -8,6 +8,7 @@
 
     <!-- Score screen -->
     <string name="score_great_job">Great job!</string>
+    <string name="score_needs_improvement">Needs improvement!</string>
     <string name="your_score">Your score:</string>
     <string name="play_again">Play again</string>
 

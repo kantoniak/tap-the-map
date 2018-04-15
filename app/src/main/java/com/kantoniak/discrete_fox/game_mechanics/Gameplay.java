@@ -15,19 +15,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Gameplay {
-    public HashMap<String, String> country_codes;
     public final static int NUMBEROFQUESTIONS = 5;
     int step;
     int currentQuestion;
     int mnumberOfCountries;
     int scoreTotal;
     int score;
+    int maxScore;
     Integer[] decisions;
     ArrayList<Question> mquestions;
 
-    public Gameplay(ArrayList<Question> questions) {
+    public Gameplay(ArrayList<Question> questions, int numberOfCountries) {
         step = 0;
         score = 0;
+        mnumberOfCountries = numberOfCountries;
+        maxScore = mnumberOfCountries * NUMBEROFQUESTIONS;
         currentQuestion = 0;
         decisions = new Integer[NUMBEROFQUESTIONS];
         for (int i = 0; i < NUMBEROFQUESTIONS; i++) {
@@ -56,12 +58,15 @@ public class Gameplay {
             // TODO Present superb view of the final result!
             // We probably should delete this gameplay, and create a new one, otherwise, we should
             // clean this one.
-            Toast.makeText(context, String.valueOf(scoreTotal), Toast.LENGTH_LONG).show();
             currentQuestion--;
             return null;
         }
         score = 0;
         return mquestions.get(currentQuestion);
+    }
+
+    public int getResult() {
+        return scoreTotal;
     }
 
     private Integer calculateScore(Map map) {
@@ -80,5 +85,9 @@ public class Gameplay {
 
     public Question getCurrentQuestion() {
         return mquestions.get(currentQuestion);
+    }
+
+    public int getMaxResult() {
+        return maxScore;
     }
 }

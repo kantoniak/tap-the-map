@@ -8,6 +8,7 @@
 
     <!-- Score screen -->
     <string name="score_great_job">Dobra robota!</string>
+    <string name="score_needs_improvement">Postaraj się lepiej!</string>
     <string name="your_score">Twój wynik:</string>
     <string name="play_again">Zagraj ponownie</string>
 
