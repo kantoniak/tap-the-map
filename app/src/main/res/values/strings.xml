@@ -6,6 +6,11 @@
     <!-- Main screen -->
     <string name="button_start">Start!</string>
 
+    <!-- Answer listview -->
+    <string name="result_low">LOW</string>
+    <string name="result_mid">MID</string>
+    <string name="result_high">HIGH</string>
+
     <!-- Score screen -->
     <string name="score_great_job">Great job!</string>
     <string name="score_needs_improvement">Needs improvement!</string>

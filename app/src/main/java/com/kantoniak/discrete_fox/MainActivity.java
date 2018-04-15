@@ -13,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.legend_mid_color) View mMidColorView;
     @BindView(R.id.legend_low_color) View mLowColorView;
     @BindView(R.id.next_button_icon) ImageView mNextIcon;
+    @BindView(R.id.list_view_answers) ListView mListView;
 
     private Gameplay gameplay;
     boolean showingAnswers = false;
@@ -166,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
         if (showingAnswers) {
             mNextIcon.setImageResource(R.drawable.ic_done_24dp);
             showingAnswers = false;
+            mListView.setVisibility(View.INVISIBLE);
 
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
@@ -173,8 +177,26 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             showQuestion(nextQuestion);
-
         } else {
+            Question currentQuestion = gameplay.getCurrentQuestion();
+            String[] countries = currentQuestion.getCountries();
+            String[] forList = new String[countries.length];
+            CountryUtil cu = new CountryUtil();
+            for (int i = 0; i < countries.length; i++) {
+                String res = null;
+                int r = currentQuestion.getCorrectAnswer(cu.convert(countries[i]));
+                if (r == 1) {
+                    res = getResources().getString(R.string.result_low);
+                } else if (r == 2) {
+                    res = getResources().getString(R.string.result_mid);
+                } else {
+                    res = getResources().getString(R.string.result_high);
+                }
+                forList[i] = cu.convert(countries[i]) + " - " + res;
+            }
+            ArrayAdapter<String> test = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, forList);
+            mListView.setAdapter(test);
+            mListView.setVisibility(View.VISIBLE);
             mNextIcon.setImageResource(R.drawable.ic_trending_flat_24dp);
             showingAnswers = true;
         }

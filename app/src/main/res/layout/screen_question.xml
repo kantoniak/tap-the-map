@@ -89,4 +89,20 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="322dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        tools:layout_editor_absoluteX="8dp">
+
+        <ListView
+            android:id="@+id/list_view_answers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_light_background"
+            android:visibility="invisible" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
