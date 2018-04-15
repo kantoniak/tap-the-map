@@ -18,6 +18,7 @@
         style="@style/ElevatedContainer" />
 
     <LinearLayout
+        android:id="@+id/list_view_linear_layout"
         android:layout_height="wrap_content"
         android:layout_width="180dp"
         android:layout_margin="@dimen/standardPadding"
@@ -32,7 +33,7 @@
             android:id="@+id/list_view_answers"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:visibility="invisible" />
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout
