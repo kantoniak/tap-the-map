@@ -20,11 +20,14 @@
 
     <!-- Sample data -->
     <string name="sample_question">What is the largest country in the UE?</string>
-    <string name="question_gdp">What is GDP in the given country?</string>
-    <string name="question_toilet">What is no toilet rate?</string>
+    <string name="question_gdp">What is GDP?</string>
+    <string name="question_toilet">What is the level of no toilet rate?</string>
     <string name="question_unemployment">What is the unemployment rate?</string>
-    <string name="question_forest">What is forest cover?</string>
-    <string name="question_population_density">What is population density?</string>
-    <string name="question_waste">What is waste generation?</string>
+    <string name="question_forest">What is the afforestation rate?</string>
+    <string name="question_population_density">What is the population density?</string>
+    <string name="question_waste">What is the waste generation rate?</string>
+    <string name="sample_last_title">Great Job!</string>
+    <string name="your_score">Your Score</string>
+    <string name="sample_score">15/25</string>
 
 </resources>
