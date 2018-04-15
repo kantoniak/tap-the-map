@@ -66,4 +66,8 @@ public class ARSurfaceView extends SurfaceView implements View.OnTouchListener {
         sceneRenderer.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
+
+    public ARSceneRenderer getSceneRenderer() {
+        return sceneRenderer;
+    }
 }

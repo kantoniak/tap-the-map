@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     // screen_question
     @BindView(R.id.question) TextView mQuestionTextView;
+    @BindView(R.id.button_zoom_in) View mZoomIn;
+    @BindView(R.id.button_zoom_out) View mZoomOut;
     @BindView(R.id.legend_high_text) TextView mHighTextView;
     @BindView(R.id.legend_mid_text) TextView mMidTextView;
     @BindView(R.id.legend_low_text) TextView mLowTextView;
@@ -167,6 +169,16 @@ public class MainActivity extends AppCompatActivity {
 
         showingAnswers = false;
         showScreen(R.id.screen_question);
+    }
+
+    @OnClick(R.id.button_zoom_in)
+    public void zoomIn() {
+        surfaceView.getSceneRenderer().zoomIn();
+    }
+
+    @OnClick(R.id.button_zoom_out)
+    public void zoomOut() {
+        surfaceView.getSceneRenderer().zoomOut();
     }
 
     @OnClick(R.id.next_button)

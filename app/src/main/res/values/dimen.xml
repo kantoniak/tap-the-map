@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Paddings -->
+    <dimen name="halfPadding">4dp</dimen>
     <dimen name="standardPadding">8dp</dimen>
     <dimen name="biggerPadding">12dp</dimen>
     <dimen name="hugePadding">24dp</dimen>

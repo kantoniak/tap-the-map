@@ -25,6 +25,11 @@ public abstract class ARSceneRenderer extends Renderer implements OnObjectPicked
     protected ARCamera arCamera;
     protected ObjectColorPicker objectPicker;
 
+    private static final float MAX_ZOOM = 4.f;
+    private static final float MIN_ZOOM = 0.75f;
+    private static final float ZOOM_STEP = 0.25f;
+    private float currentZoom = 1.f;
+
     public ARSceneRenderer(Context context, ARController arController) {
         super(context);
         setFrameRate(60);
@@ -89,6 +94,7 @@ public abstract class ARSceneRenderer extends Renderer implements OnObjectPicked
 
             Matrix4 projectionMatrix = new Matrix4(arController.getProjectionMatrix().data);
             Matrix4 viewMatrix = new Matrix4(arController.getViewMatrix().data);
+            viewMatrix.multiply(new Matrix4().scale(currentZoom));
 
             Vector3 cameraPosition = new Vector3(
                     viewMatrix.getDoubleValues()[12],
@@ -99,6 +105,20 @@ public abstract class ARSceneRenderer extends Renderer implements OnObjectPicked
             arCamera.setPosition(cameraPosition);
             arCamera.setRotation(viewMatrix);
             arCamera.setViewMatrixOverride(viewMatrix);
+        }
+    }
+
+    public void zoomIn() {
+        currentZoom += ZOOM_STEP;
+        if (currentZoom > MAX_ZOOM) {
+            currentZoom = MAX_ZOOM;
+        }
+    }
+
+    public void zoomOut() {
+        currentZoom -= ZOOM_STEP;
+        if (currentZoom < MIN_ZOOM) {
+            currentZoom = MIN_ZOOM;
         }
     }
 }
