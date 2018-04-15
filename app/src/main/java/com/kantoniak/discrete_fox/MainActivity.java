@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -197,6 +198,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 .setContentUrl(Uri.parse("https://stat.gov.pl/"))
                 .build();
         mShareButton.setShareContent(content);
+        // TODO mp3 final
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
+        mp.start();
+        int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(gameplay.getResult()) + "pkt", "raw", getApplicationContext().getPackageName());
+        MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
+        mp2.start();
     }
 
     @OnClick(R.id.start_button)
@@ -315,6 +322,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mHighColorView.setBackgroundColor(maxColor);
         mMidColorView.setBackgroundColor(midColor);
         mLowColorView.setBackgroundColor(minColor);
+        // TODO mp3 question
+        int objFileId = getApplicationContext().getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt()+1), "raw", getApplicationContext().getPackageName());
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), objFileId);
+        mp.start();
     }
 
     private void requestCameraPermission() {

@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.support.v4.graphics.ColorUtils;
 import android.util.Log;
 
@@ -123,6 +125,10 @@ public class Country {
             return;
         }
         setHeight(++height);
+        //TODO mp3 play height
+
+        //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.);
+        //mp.start();
     }
 
     public void setHeight(int height) {
