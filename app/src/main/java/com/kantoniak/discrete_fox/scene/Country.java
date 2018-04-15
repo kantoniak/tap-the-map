@@ -36,7 +36,7 @@ public class Country {
     private Material topMaterial;
 
     private static float NAME_PLANE_SCALE = 0.5f;
-    private static float NAME_PLANE_Z = 0.8f;
+    private static float NAME_PLANE_Z = 0.4f;
     private Object3D namePlane;
     private Vector3 namePlanePos;
 
@@ -132,6 +132,8 @@ public class Country {
 
         baseObject.setScaleZ(0.5f * height);
         topObject.setZ(0.5f * baseObject.getScaleZ());
+        namePlane.setZ(0.5f * baseObject.getScaleZ() + NAME_PLANE_Z);
+
         float colorRatio = (height - 1) / (float)(maxHeight - 1);
         baseMaterial.setColor(getBaseColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio)));
         topMaterial.setColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio));
@@ -141,12 +143,15 @@ public class Country {
         height = 0;
         baseObject.setScaleZ(NEAR_ZERO_HEIGHT);
         topObject.setZ(NEAR_ZERO_HEIGHT);
+        namePlane.setZ(NAME_PLANE_Z);
         if (disabled) {
             baseMaterial.setColor(DISABLED_COLOR);
             topMaterial.setColor(DISABLED_COLOR);
+            namePlane.setVisible(false);
         } else {
             baseMaterial.setColor(DEFAULT_COLOR);
             topMaterial.setColor(DEFAULT_COLOR);
+            namePlane.setVisible(true);
         }
     }
 
@@ -169,6 +174,7 @@ public class Country {
         } else {
             baseMaterial.setColor(DEFAULT_COLOR);
             topMaterial.setColor(DEFAULT_COLOR);
+            namePlane.setVisible(true);
         }
     }
 
