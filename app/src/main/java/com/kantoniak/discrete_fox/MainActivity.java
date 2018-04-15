@@ -187,19 +187,22 @@ public class MainActivity extends AppCompatActivity {
             String[] forList = new String[countries.length];
             CountryUtil cu = new CountryUtil();
             for (int i = 0; i < countries.length; i++) {
-                String res = null;
                 int r = currentQuestion.getCorrectAnswer(cu.convert(countries[i]));
-                if (r == 1) {
-                    res = getResources().getString(R.string.result_low);
-                } else if (r == 2) {
-                    res = getResources().getString(R.string.result_mid);
-                } else {
-                    res = getResources().getString(R.string.result_high);
+                double res = currentQuestion.getAnsDouble().get(cu.convert(countries[i]));
+                String ress = String.format("%.2f%%", res);
+                if (currentQuestion.getDesc() == getResources().getString(R.string.question_gdp)) {
+                    if (i == 1) {
+                        ress = String.format("%.2fT€", res/1000000);
+                    } else {
+                        ress = String.format("%.2fG€", res/1000);
+                    }
+                } else if (currentQuestion.getDesc() == getResources().getString(R.string.question_population_density)) {
+                    ress = String.format("%.2f/km2", res);
                 }
                 if (countries[i].equals("de")) {
-                    forList[i] = "Germany - " + res;
+                    forList[i] = "Germany - " + ress;
                 } else {
-                    forList[i] = cu.convert(countries[i]) + " - " + res;
+                    forList[i] = cu.convert(countries[i]) + " - " + ress;
                 }
             }
             ArrayAdapter<String> test = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, forList);

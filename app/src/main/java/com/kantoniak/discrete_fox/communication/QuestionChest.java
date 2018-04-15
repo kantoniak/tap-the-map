@@ -20,14 +20,14 @@ public class QuestionChest {
 
     private String[] description;
 
-    private static final int[] OFFSET = {1, 6, 2, 1, 1, 3};
+    private static final int[] OFFSET = {1, 6, 2, 1, 2, 3};
     private static final int[] YEAR = {2016, 2016, 2016, 2015, 2016, 2016};
     private static final int[] MINCOLOR = {0xFFF06292, 0xFFFFD54F, 0xFF4DD0E1, 0xFFAED581, 0xFF7986CB, 0xFFDCE775};
     private static final int[] MAXCOLOR = {0xFFAD1457, 0xFFFF8F00, 0xFF00838F, 0xFF558B2F, 0xFF283593, 0xFF9E9D24};
     private static final String[][] COUNTRYCODES = {{"pl", "fr", "se", "ie", "lv"}, {"pl", "de", "cz", "si", "hu"}, {"pl", "pt", "bg", "fi", "dk"}, {"pl", "at", "be", "cy", "gr"}, {"pl", "hr", "ie", "ne", "ro"}, {"pl", "fr", "se", "ie", "lv"}};
-    private static final String[] MINLABEL = {"<1.05M€", "<10%", "<6.2%", "<18.1%", "<457/km2", ""};
-    private static final String[] MIDLABEL = {"1.05M€ - 2.09M€", "10% - 20%", "6.2% - 10.5%", "18.1% - 37.2%", "457/km2 - 916/km2", ""};
-    private static final String[] MAXLABEL = {">2.09M€", ">20%", ">10.5%", ">37.2%", ">916/km2", ""};
+    private static final String[] MINLABEL = {"<1.05T€", "<10%", "<6.2%", "<18.1%", "<457/km2", ""};
+    private static final String[] MIDLABEL = {"1.05T€ - 2.09T€", "10% - 20%", "6.2% - 10.5%", "18.1% - 37.2%", "457/km2 - 916/km2", ""};
+    private static final String[] MAXLABEL = {">2.09T€", ">20%", ">10.5%", ">37.2%", ">916/km2", ""};
 
     public QuestionChest(Resources res) {
         description = new String[OFFSET.length];

@@ -117,4 +117,7 @@ public class Question {
     public String getMminLabel() { return mminLabel; }
     public String getMmidLabel() { return mmidLabel; }
     public String getMmaxLabel() { return mmaxLabel; }
+    public HashMap<String, Double> getAnsDouble() {
+        return ansDouble;
+    }
 }
