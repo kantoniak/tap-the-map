@@ -17,40 +17,64 @@
         android:paddingRight="@dimen/hugePadding"
         android:paddingBottom="@dimen/hugePadding">
 
-        <TextView
-            android:id="@+id/great_job_tv"
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="@string/score_great_job"
-            android:textColor="@color/textColorOnPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/trophy"
+            app:layout_constraintBottom_toTopOf="@+id/score_layout_buttons"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/your_score_tv"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/your_score"
-            android:textColor="@color/textColorOnPrimary"
-            app:layout_constraintTop_toBottomOf="@id/great_job_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/score_points"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="15/25"
-            android:textColor="@color/textColorOnPrimary"
-            android:textSize="36sp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/score_layout_buttons"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/your_score_tv" />
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/great_job_tv"
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/score_great_job"
+                android:textColor="@color/textColorOnPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/your_score_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_score"
+                android:textColor="@color/textColorOnPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/great_job_tv" />
+
+            <TextView
+                android:id="@+id/score_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="15/25"
+                android:textColor="@color/textColorOnPrimary"
+                android:textSize="36sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/your_score_tv" />
+
+        </android.support.constraint.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/score_layout_buttons"
