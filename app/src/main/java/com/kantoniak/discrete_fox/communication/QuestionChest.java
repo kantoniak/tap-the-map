@@ -22,8 +22,8 @@ public class QuestionChest {
 
     private static final int[] OFFSET = {1, 6, 2, 1, 1, 3};
     private static final int[] YEAR = {2016, 2016, 2016, 2015, 2016, 2016};
-    private static final int[] MINCOLOR = {0xFF110000, 0xFF000011, 0xFFAED581, 0xFFAED581, 0xFFAED581, 0xFFAED581};
-    private static final int[] MAXCOLOR = {0xFFFF001E, 0xFF3300FF, 0xFF33691E, 0xFF33691E, 0xFF33691E, 0xFF33691E};
+    private static final int[] MINCOLOR = {0xFFAD1457, 0xFFFFD54F, 0xFF4DD0E1, 0xFFAED581, 0xFF7986CB, 0xFDCE7755};
+    private static final int[] MAXCOLOR = {0xFF062922, 0xFFFF8F00, 0xFF00838F, 0xFF558B2F, 0xFF283593, 0xFF9E9DF4};
     private static final String[][] COUNTRYCODES = {{"pl", "fr", "se", "ie", "lv"}, {"pl", "de", "cz", "si", "hu"}, {"pl", "pt", "bg", "fi", "dk"}, {"pl", "at", "be", "cy", "gr"}, {"pl", "hr", "ie", "ne", "ro"}, {"pl", "fr", "se", "ie", "lv"}};
     private static final String[] MINLABEL = {"<1.05M€", "<10%", "<6.2%", "<18.1%", "<457/km2", ""};
     private static final String[] MIDLABEL = {"1.05M€ - 2.09M€", "10% - 20%", "6.2% - 10.5%", "18.1% - 37.2%", "457/km2 - 916/km2", ""};
