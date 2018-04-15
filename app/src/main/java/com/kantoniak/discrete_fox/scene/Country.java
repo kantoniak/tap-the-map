@@ -28,8 +28,12 @@ public class Country {
 
     private static int DEFAULT_COLOR = 0xE0E0E0;
     private static int DISABLED_COLOR = 0x9E9E9E;
+    private static int BLACK_COLOR = 0x000000;
     private final int minColor;
     private final int maxColor;
+
+    private static float TOP_HEIGHT = 0.01f;
+    private static float NEAR_ZERO_HEIGHT = 0.001f;
 
     public Country(String code, int maxHeight, int minColor, int maxColor) {
         this.code = code;
@@ -57,11 +61,10 @@ public class Country {
         setupMaterials();
 
         baseObject.setMaterial(baseMaterial);
-        baseObject.setScaleZ(0.001f);
 
         topObject = baseObject.clone();
         topObject.setMaterial(topMaterial);
-        topObject.setScaleZ(0.001f);
+        topObject.setScaleZ(TOP_HEIGHT);
 
         zeroChoice();
     }
@@ -103,8 +106,8 @@ public class Country {
 
     private void zeroChoice() {
         height = 0;
-        baseObject.setScaleZ(0.001f);
-        topObject.setZ(0.001f);
+        baseObject.setScaleZ(NEAR_ZERO_HEIGHT);
+        topObject.setZ(NEAR_ZERO_HEIGHT);
         if (disabled) {
             baseMaterial.setColor(DISABLED_COLOR);
             topMaterial.setColor(DISABLED_COLOR);
@@ -115,7 +118,7 @@ public class Country {
     }
 
     private int getBaseColor(int topColor) {
-        return ColorUtils.blendARGB(0x000000, topColor, 0.5f);
+        return ColorUtils.blendARGB(BLACK_COLOR, topColor, 0.5f);
     }
 
     public int getHeight() {
@@ -129,8 +132,7 @@ public class Country {
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
         if (disabled) {
-            baseMaterial.setColor(DISABLED_COLOR);
-            topMaterial.setColor(DISABLED_COLOR);
+            zeroChoice();
         } else {
             baseMaterial.setColor(DEFAULT_COLOR);
             topMaterial.setColor(DEFAULT_COLOR);
