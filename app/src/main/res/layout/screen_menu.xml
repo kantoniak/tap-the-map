@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[PROTOTYP]"
+        android:padding="@dimen/standardPadding"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"/>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,19 +26,25 @@
 
         <ImageView
             android:id="@+id/animation_main"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            app:layout_constraintHeight_max="512px"
+            app:layout_constraintWidth_max="512px"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginLeft="@dimen/biggerPadding"
+            android:layout_marginRight="@dimen/doublePadding"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/title_block"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/title_block"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/animation_main"
+            app:layout_constraintStart_toEndOf="@id/animation_main"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
