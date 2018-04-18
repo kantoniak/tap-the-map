@@ -114,10 +114,11 @@ public class Country {
         scene.addChild(namePlane);
         objectPicker.registerObject(baseObject);
         objectPicker.registerObject(topObject);
+        objectPicker.registerObject(namePlane);
     }
 
     public boolean containsObject(final Object3D object) {
-        return baseObject == object || topObject == object;
+        return baseObject == object || topObject == object || namePlane == object;
     }
 
     public void onPicked() {
