@@ -199,8 +199,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 .build();
         mShareButton.setShareContent(content);
         // TODO mp3 final
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
-        mp.start();
+        //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
+        //mp.start();
         int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(gameplay.getResult()) + "pkt", "raw", getApplicationContext().getPackageName());
         MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
         mp2.start();
@@ -265,6 +265,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     }
                 } else if (currentQuestion.getDesc() == getResources().getString(R.string.question_population_density)) {
                     ress = String.format("%.2f/km2", res);
+                } else if (currentQuestion.getDesc() == getResources().getString(R.string.question_waste)) {
+                    ress = String.format("%.2fkt", res);
                 }
                 if (countries[i].equals("de")) {
                     forList[i] = "Germany - " + ress;
