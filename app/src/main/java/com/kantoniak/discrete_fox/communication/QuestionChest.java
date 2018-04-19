@@ -38,7 +38,8 @@ public class QuestionChest {
             QuestionCategory.ECONOMY,
     };
 
-    private String[] unit = {"M€", "%", "%", "%", "/km2", "kt", "%", "€"};
+    private int[] multiplier = {1000000, 1, 1, 1, 1, 1000, 1, 1};
+    private String[] baseUnit = {"€", "%", "%", "%", "/km2", "t", "%", "€"};
 
     private String[] description;
     private static List<String> ACOUNTRY_CODES = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "ne", "pl", "pt", "ro", "se", "si", "sk");
@@ -47,7 +48,7 @@ public class QuestionChest {
     private boolean isShuffleLegit() {
         boolean legit = true;
         for (int j = 0; j < 5; j++) {
-            if (ACOUNTRY_CODES.get(j) == null){
+            if (ACOUNTRY_CODES.get(j) == null) {
                 legit = false;
             }
         }
@@ -86,7 +87,7 @@ public class QuestionChest {
             AsyncTaskParams atp = new AsyncTaskParams(fullQuery, description[i]);
             try {
                 APIResponse response = dp.execute(atp).get();
-                Question q = new Question(fullQuery, response.getContent().getHashMap(), description[i], COUNTRYCODES.get(i), unit[i], CATEGORY[i]);
+                Question q = new Question(fullQuery, response.getContent().getHashMap(), description[i], COUNTRYCODES.get(i), baseUnit[i], CATEGORY[i], multiplier[i]);
                 questionsArrayList.add(q);
             } catch (Exception e) {
                 e.printStackTrace();

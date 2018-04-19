@@ -1,6 +1,8 @@
 package com.kantoniak.discrete_fox.communication;
 
 import com.kantoniak.discrete_fox.scene.Country;
+import com.trivago.triava.util.UnitFormatter;
+import com.trivago.triava.util.UnitSystem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +24,7 @@ public class Question {
     String munit;
     QuestionCategory mcategory;
 
-    Question(String link, HashMap<String, Double> data, String desc, List<String> countries, String unit, QuestionCategory category) {
+    Question(String link, HashMap<String, Double> data, String desc, List<String> countries, String unit, QuestionCategory category, int multiplier) {
         mcategory = category;
         mcountries = countries;
         mdesc = desc;
@@ -33,12 +35,17 @@ public class Question {
         Iterator it = data.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            Double val = (Double)pair.getValue();
+            Double val = ((Double)pair.getValue()) * multiplier;
             valueList.add(val);
             ansDouble.put((String)pair.getKey(), val);
         }
         createThresholds(valueList);
         createAnswers(ansDouble);
+        reduceUnit();
+    }
+
+    private void reduceUnit() {
+
     }
 
     void createThresholds(ArrayList<Double> valueList) {
@@ -95,9 +102,30 @@ public class Question {
         return mcountries;
     }
 
-    public String getMminLabel() { return "<" + midThres + munit; }
-    public String getMmidLabel() { return midThres + munit + " - " + highThres + munit; }
-    public String getMmaxLabel() { return ">" + highThres + munit; }
+    public String getMinLabel() {
+        if (munit.equals("%")) {
+            return "<" + midThres + munit;
+        } else {
+            return "<" + UnitFormatter.formatAsUnit((long)midThres, UnitSystem.SI, munit);
+        }
+    }
+
+    public String getMidLabel() {
+        if (munit.equals("%")) {
+            return midThres + munit + " - " + highThres + munit;
+        } else {
+            return UnitFormatter.formatAsUnit((long)midThres, UnitSystem.SI, munit) + " - " + UnitFormatter.formatAsUnit((long)highThres, UnitSystem.SI, munit);
+        }
+    }
+
+    public String getMaxLabel() {
+        if (munit.equals("%")) {
+            return ">" + highThres + munit;
+        } else {
+            return ">" + UnitFormatter.formatAsUnit((long)highThres, UnitSystem.SI, munit);
+        }
+    }
+
     public HashMap<String, Double> getAnsDouble() {
         return ansDouble;
     }

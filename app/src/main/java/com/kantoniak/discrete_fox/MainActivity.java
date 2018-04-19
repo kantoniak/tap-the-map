@@ -307,9 +307,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mQuestionTextView.setText(question.getDesc());
         mRoundProgress.setText(String.valueOf(gameplay.getCurrentQuestionInt() + 1) + "/" + String.valueOf(gameplay.NUMBEROFQUESTIONS));
 
-        mHighTextView.setText(question.getMmaxLabel());
-        mMidTextView.setText(question.getMmidLabel());
-        mLowTextView.setText(question.getMminLabel());
+        mHighTextView.setText(question.getMaxLabel());
+        mMidTextView.setText(question.getMidLabel());
+        mLowTextView.setText(question.getMinLabel());
 
         int maxColor = question.getMmaxColor();
         int minColor = question.getMminColor();
