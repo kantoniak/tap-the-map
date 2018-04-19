@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.kantoniak.discrete_fox.new_ar.ARUtils;
+import com.kantoniak.discrete_fox.new_ar.CameraFrameView;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
+import com.kantoniak.discrete_fox.scene.UpdateMatricesCallback;
 
 import org.rajawali3d.view.SurfaceView;
 
@@ -23,7 +25,7 @@ public class SplitTestActivity extends AppCompatActivity {
     private static final String TAG = SplitTestActivity.class.getSimpleName();
     private static final int CAMERA_PERMISSION = 0;
 
-    @BindView(R.id.camera_preview) GLSurfaceView cameraFrameView;
+    @BindView(R.id.camera_preview) CameraFrameView cameraFrameView;
     @BindView(R.id.game_map_preview) SurfaceView gameMapPreview;
 
     @Override
@@ -42,7 +44,10 @@ public class SplitTestActivity extends AppCompatActivity {
         // FIXME: Camera will not show up the first time because device is opened earlier.
         requestCameraPermission();
 
-        gameMapPreview.setSurfaceRenderer(new MapRenderer(this));
+        MapRenderer renderer = new MapRenderer(this);
+        gameMapPreview.setSurfaceRenderer(renderer);
+        UpdateMatricesCallback updateMatricesCallback = new UpdateMatricesCallback(cameraFrameView.getARCameraController(), renderer.getCamera());
+        renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
     }
 
     private void requestCameraPermission() {

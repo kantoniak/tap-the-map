@@ -10,6 +10,8 @@ import org.rajawali3d.renderer.Renderer;
 
 public class MapRenderer extends Renderer {
 
+    private final ViewMatrixOverrideCamera camera = new ViewMatrixOverrideCamera();
+
     private Cube cube;
 
     public MapRenderer(Context context) {
@@ -24,12 +26,16 @@ public class MapRenderer extends Renderer {
         material.setColor(0xffff0000);
         cube.setMaterial(material);
         cube.setPosition(0,0,0.25f);
-        cube.rotate(Vector3.Axis.X, 45);
-        cube.rotate(Vector3.Axis.Y, 45);
         getCurrentScene().addChild(cube);
 
-        getCurrentCamera().setZ(5f);
+        setupCamera();
+    }
 
+    protected void setupCamera() {
+        camera.setNearPlane(0.2f);
+        camera.setFarPlane(500.f);
+
+        getCurrentScene().addAndSwitchCamera(camera);
     }
 
     @Override
@@ -46,5 +52,9 @@ public class MapRenderer extends Renderer {
     @Override
     public void onTouchEvent(MotionEvent event) {
 
+    }
+
+    public ViewMatrixOverrideCamera getCamera() {
+        return camera;
     }
 }

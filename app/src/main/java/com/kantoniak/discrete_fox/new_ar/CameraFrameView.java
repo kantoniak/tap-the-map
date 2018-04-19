@@ -134,4 +134,8 @@ public class CameraFrameView extends GLSurfaceView {
             return configs[0];
         }
     }
+
+    public ARCameraController getARCameraController() {
+        return arCameraController;
+    }
 }
