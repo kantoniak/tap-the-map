@@ -149,7 +149,6 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
             JSONArray id = obj.getJSONArray("id");
             JSONArray size = obj.getJSONArray("size");
 
-            Log.e("tag", "win-win");
             res = new APIResponse(version, label, href, source, updated, status, extension, value, dimension, id, size, offset);
         } catch (Exception e) {
             e.printStackTrace();

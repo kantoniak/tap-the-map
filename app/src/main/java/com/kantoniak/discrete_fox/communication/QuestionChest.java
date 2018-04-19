@@ -5,41 +5,70 @@ import android.content.res.Resources;
 import com.kantoniak.discrete_fox.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class QuestionChest {
     ArrayList<Question> questionsArrayList;
     // GDP, No toilet, Unemployment, forest cover, population density, waste
+    private static final String COUNTRIES = "&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK&filterNonGeo=1";
+    private static final int LASTTIMEPERIODINT = 3;
+    private static final String LASTTIMEPERIOD = "&lastTimePeriod=" + String.valueOf(LASTTIMEPERIODINT);
+    private static final int PRECISIONINT = 1;
+    private static final String PRECISION = "&precision=" + String.valueOf(PRECISIONINT);
     private static final String[] QUERY = {
-            "nama_10_gdp?precision=1&na_item=B1GQ&unit=CP_MEUR&time=2016&filterNonGeo=1",
-            "ilc_mdho05?sex=T&precision=1&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=UK&lastTimePeriod=3&incgrp=TOTAL&unit=PC&age=TOTAL&hhtyp=TOTAL",
-            "une_rt_a?sex=T&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DK&geo=EE&geo=EL&geo=ES&geo=FI&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK&geo=DE&geo=FR&geo=PT&geo=EU28&precision=1&lastTimePeriod=3&unit=PC_POP&age=TOTAL",
-            "lan_lcv_fao?landcover=LCC1&precision=1&unit=PC&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
-            "demo_r_d3dens?unit=HAB_KM2&precision=1&lastTimePeriod=3&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
-            "env_wasmun?precision=1&lastTimePeriod=3&wst_oper=GEN&unit=KG_HAB&geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK",
-            "tin00134?geo=AT&geo=BE&geo=BG&geo=CY&geo=CZ&geo=DE&geo=DK&geo=EE&geo=EL&geo=ES&geo=EU28&geo=FI&geo=FR&geo=HR&geo=HU&geo=IE&geo=IT&geo=LT&geo=LU&geo=LV&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SE&geo=SI&geo=SK&geo=UK&precision=1&lastTimePeriod=3&unit=PC_HH",
+            "nama_10_gdp?na_item=B1GQ&unit=CP_MEUR",
+            "ilc_mdho05?incgrp=TOTAL&unit=PC&hhtyp=TOTAL",
+            "une_rt_a?unit=PC_POP&age=TOTAL&sex=T",
+            "lan_lcv_fao?landcover=LCC1&unit=PC",
+            "demo_r_d3dens?unit=HAB_KM2",
+            "env_wasmun?wst_oper=GEN&unit=KG_HAB",
+            "tin00134?unit=PC_HH",
+            "nama_10_pc?na_item=B1GQ&unit=CP_EUR_HAB",
+    };
+    private static final QuestionCategory[] CATEGORY = {
+            QuestionCategory.ECONOMY,
+            QuestionCategory.POPULATION,
+            QuestionCategory.POPULATION,
+            QuestionCategory.GENERAL,
+            QuestionCategory.POPULATION,
+            QuestionCategory.ENVIRONMENT,
+            QuestionCategory.SCIENCE,
+            QuestionCategory.ECONOMY,
     };
 
-    private String[] description;
+    private String[] unit = {"M€", "%", "%", "%", "/km2", "kt", "%", "€"};
 
-    private static final int[] OFFSET = {1, 6, 2, 1, 2, 3, 1};
-    private static final int[] YEAR = {2016, 2016, 2016, 2015, 2016, 2016, 2016};
-    private static final int[] MINCOLOR = {0xFFF06292, 0xFFFFD54F, 0xFF4DD0E1, 0xFFAED581, 0xFF7986CB, 0xFFDCE775, 0xFFF06292};
-    private static final int[] MAXCOLOR = {0xFFAD1457, 0xFFFF8F00, 0xFF00838F, 0xFF558B2F, 0xFF283593, 0xFF9E9D24, 0xFFAD1457};
-    private static final String[][] COUNTRYCODES = {
-            {"pl", "fr", "se", "ie", "lv"},
-            {"pl", "de", "cz", "si", "hu"},
-            {"pl", "pt", "bg", "fi", "dk"},
-            {"pl", "at", "be", "cy", "gr"},
-            {"pl", "hr", "ie", "ne", "ro"},
-            {"pl", "fr", "se", "gb", "lv"},
-            {"pl", "es", "it", "gr", "gb"}};
-            //{"pl", "fr", "ee", "se", "si"}};
-    private static final String[] MINLABEL = {"<1.05T€", "<10%", "<6.2%", "<18.1%", "<457/km2", "<258.3kt", "<71.7%"};
-    private static final String[] MIDLABEL = {"1.05T€ - 2.09T€", "10% - 20%", "6.2% - 10.5%", "18.1% - 37.2%", "457/km2 - 916/km2", "258.3kt - 517.7kt", "71.7% - 84.3%"};
-    private static final String[] MAXLABEL = {">2.09T€", ">20%", ">10.5%", ">37.2%", ">916/km2", ">517.7kt", ">84.3%"};
+    private String[] description;
+    private static List<String> ACOUNTRY_CODES = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "ne", "pl", "pt", "ro", "se", "si", "sk");
+    private List<List<String>> COUNTRYCODES;
+
+    private boolean isShuffleLegit() {
+        boolean legit = true;
+        for (int j = 0; j < 5; j++) {
+            if (ACOUNTRY_CODES.get(j) == null){
+                legit = false;
+            }
+        }
+        return legit;
+    }
 
     public QuestionChest(Resources res) {
-        description = new String[OFFSET.length];
+        COUNTRYCODES = new ArrayList<>();
+        for (int i = 0; i < QUERY.length; i++) {
+            do {
+                // TODO create sentinel if not possible to find 5 non null values
+                Collections.shuffle(ACOUNTRY_CODES);
+            } while(!isShuffleLegit());
+
+            List<String> questionCodes = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {
+                questionCodes.add(ACOUNTRY_CODES.get(j));
+            }
+            COUNTRYCODES.add(questionCodes);
+        }
+        description = new String[QUERY.length];
         description[0] = res.getString(R.string.question_gdp);
         description[1] = res.getString(R.string.question_toilet);
         description[2] = res.getString(R.string.question_unemployment);
@@ -47,15 +76,17 @@ public class QuestionChest {
         description[4] = res.getString(R.string.question_population_density);
         description[5] = res.getString(R.string.question_waste);
         description[6] = res.getString(R.string.question_internet_access);
+        //countryCodes = new String
 
         questionsArrayList = new ArrayList<>();
         int n = QUERY.length;
         for (int i = 0; i < n; i++) {
+            String fullQuery = QUERY[i] + COUNTRIES + LASTTIMEPERIOD + PRECISION;
             DataProvider dp = new DataProvider();
-            AsyncTaskParams atp = new AsyncTaskParams(QUERY[i], OFFSET[i], description[i]);
+            AsyncTaskParams atp = new AsyncTaskParams(fullQuery, description[i]);
             try {
                 APIResponse response = dp.execute(atp).get();
-                Question q = new Question(QUERY[i], response.getContent().getHashMap(), YEAR[i], description[i], MINCOLOR[i], MAXCOLOR[i], COUNTRYCODES[i], MINLABEL[i], MIDLABEL[i], MAXLABEL[i]);
+                Question q = new Question(fullQuery, response.getContent().getHashMap(), description[i], COUNTRYCODES.get(i), unit[i], CATEGORY[i]);
                 questionsArrayList.add(q);
             } catch (Exception e) {
                 e.printStackTrace();

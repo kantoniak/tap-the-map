@@ -42,9 +42,9 @@ public class Gameplay {
     public Question finishQuestion(Context context, Map map) {
         // Gather decisions
         HashMap<String, Country> mapCountries = map.getCountries();
-        String[] countries = mquestions.get(currentQuestion).getCountries();
+        List<String> countries = mquestions.get(currentQuestion).getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            decisions[i] = mapCountries.get(countries[i]).getHeight();
+            decisions[i] = mapCountries.get(countries.get(i)).getHeight();
         }
         // Calculate score
         score = calculateScore(map);
@@ -75,9 +75,9 @@ public class Gameplay {
         CountryUtil cu = new CountryUtil();
         HashMap<String, Country> mapCountries = map.getCountries();
         Question question = getCurrentQuestion();
-        String[] countries = question.getCountries();
+        List<String> countries = question.getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(cu.convert(mapCountries.get(countries[i]).getCode()))) == 0) {
+            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(cu.convert(mapCountries.get(countries.get(i)).getCode()))) == 0) {
                 score += 1;
             }
         }

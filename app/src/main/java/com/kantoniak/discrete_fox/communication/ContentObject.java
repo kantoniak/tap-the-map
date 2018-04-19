@@ -29,55 +29,45 @@ public class ContentObject {
             while (tempCountry.hasNext()) {
                 String key1 = tempCountry.next();
                 int idx1 = indexCountry.getInt(key1);
-                // foreach year
-                Iterator<String> tempYear = indexYear.keys();
-                while (tempYear.hasNext()) {
-                    String key2 = tempYear.next();
-                    int idx2 = indexYear.getInt(key2);
-
-                    int key = (idx1 * size.getInt(moffset) + idx2);
-
-                    double value;
+                Double value = null;
+                int backup = 2;
+                while (value == null && backup > -1) {
                     try {
-                        value = values.getDouble(String.valueOf(key));
+                        value = values.getDouble(String.valueOf(idx1 * 3 + backup));
                     } catch (Exception e) {
-                        value = -1;
+                        value = null;
                     }
+                    backup--;
+                }
+                if (value != null) {
                     String label = labelCountry.getString(key1);
-
-                    // Place data into hashmap
-                    HashMap<Integer, Double> country = data.get(label);
-                    if (country == null) {
-                        country = new HashMap<>();
-                    }
-                    country.put(Integer.valueOf(key2), value);
-                    data.put(label, country);
+                    data.put(label, value);
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private HashMap<String, HashMap<Integer, Double>> data;
+    private HashMap<String, Double> data;
 
     /**
      * Retrieve data from hashmap in convenient way.
      *
      * @param country which country we need data for
-     * @param year which year we need data for
      * @return data for given country and year
      */
-    public String getValueForCountry(String country, int year) {
-        Double value = data.get(country).get(year);
+    public String getValueForCountry(String country) {
+        Double value = data.get(country);
         String res = "No Data";
         if (value != -1.0) {
             res = value.toString() + "%";
         }
-        return country + " " + String.valueOf(year) + ": " + res;
+        return country + ": " + res;
     }
 
-    public HashMap<String, HashMap<Integer, Double>> getHashMap() {
+    public HashMap<String, Double> getHashMap() {
         return data;
     }
 }

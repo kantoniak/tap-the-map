@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Question {
@@ -17,32 +18,24 @@ public class Question {
     double midThres;
     double highThres;
     String mdesc;
-    int mminColor;
-    int mmaxColor;
-    String[] mcountries;
-    String mminLabel;
-    String mmidLabel;
-    String mmaxLabel;
+    List<String> mcountries;
+    String munit;
+    QuestionCategory mcategory;
 
-    Question(String link, HashMap<String, HashMap<Integer, Double>> data, int year, String desc, int minColor, int maxColor, String[] countries, String minLabel, String midLabel, String maxLabel) {
+    Question(String link, HashMap<String, Double> data, String desc, List<String> countries, String unit, QuestionCategory category) {
+        mcategory = category;
         mcountries = countries;
         mdesc = desc;
         mlink = link;
-        mminColor = minColor;
-        mmaxColor = maxColor;
-        mminLabel = minLabel;
-        mmidLabel = midLabel;
-        mmaxLabel = maxLabel;
+        munit = unit;
         ansDouble = new HashMap<>();
         ArrayList<Double> valueList = new ArrayList<>();
         Iterator it = data.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            HashMap<Integer, Double> hmval = (HashMap<Integer, Double>)pair.getValue();
-            double val = hmval.get(year);
+            Double val = (Double)pair.getValue();
             valueList.add(val);
             ansDouble.put((String)pair.getKey(), val);
-            //it.remove(); // avoids a ConcurrentModificationException
         }
         createThresholds(valueList);
         createAnswers(ansDouble);
@@ -82,42 +75,34 @@ public class Question {
     }
 
     void setThreshold(double mid, double high) {
-        midThres = mid;
-        highThres = high;
+        midThres = Math.round(mid * 100.0) / 100.0;
+        highThres = Math.round(high * 100.0) / 100.0;
     }
 
     public Integer getCorrectAnswer(String country) {
         return ans.get(country);
     }
 
-    //public String getHighLabel() {
-    //    return String.format("%.2f", highThres) + " <";
-    //}
-
-    //public String getMidLabel() {
-    //    return String.format("%.2f", midThres) + " - " + String.format("%.2f", highThres);
-    //}
-
-    //public String getLowLabel() {
-    //    return "< " + String.format("%.2f", midThres);
-    //}
-
     public int getMminColor() {
-        return mminColor;
+        return mcategory.getMinColor();
     }
 
     public int getMmaxColor() {
-        return mmaxColor;
+        return mcategory.getMaxColor();
     }
 
-    public String[] getCountries() {
+    public List<String> getCountries() {
         return mcountries;
     }
 
-    public String getMminLabel() { return mminLabel; }
-    public String getMmidLabel() { return mmidLabel; }
-    public String getMmaxLabel() { return mmaxLabel; }
+    public String getMminLabel() { return "<" + midThres + munit; }
+    public String getMmidLabel() { return midThres + munit + " - " + highThres + munit; }
+    public String getMmaxLabel() { return ">" + highThres + munit; }
     public HashMap<String, Double> getAnsDouble() {
         return ansDouble;
+    }
+
+    public String getUnit() {
+        return munit;
     }
 }

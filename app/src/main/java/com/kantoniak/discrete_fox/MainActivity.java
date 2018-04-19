@@ -34,6 +34,8 @@ import com.kantoniak.discrete_fox.communication.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
 import com.kantoniak.discrete_fox.scene.Country;
 import com.kantoniak.discrete_fox.scene.Map;
+import com.trivago.triava.util.UnitFormatter;
+import com.trivago.triava.util.UnitSystem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -249,36 +251,30 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             showQuestion(nextQuestion);
         } else {
             Question currentQuestion = gameplay.getCurrentQuestion();
-            String[] countries = currentQuestion.getCountries();
-            String[] forList = new String[countries.length];
+            List<String> countries = currentQuestion.getCountries();
+            String[] forList = new String[countries.size()];
             CountryUtil cu = new CountryUtil();
             List<AnswersAdapter.Answer> answers = new LinkedList<>();
-            for (int i = 0; i < countries.length; i++) {
-                int r = currentQuestion.getCorrectAnswer(cu.convert(countries[i]));
-                double res = currentQuestion.getAnsDouble().get(cu.convert(countries[i]));
-                String ress = String.format("%.2f%%", res);
-                if (currentQuestion.getDesc() == getResources().getString(R.string.question_gdp)) {
-                    if (i == 1) {
-                        ress = String.format("%.2fT€", res/1000000);
-                    } else {
-                        ress = String.format("%.2fG€", res/1000);
-                    }
-                } else if (currentQuestion.getDesc() == getResources().getString(R.string.question_population_density)) {
-                    ress = String.format("%.2f/km2", res);
-                } else if (currentQuestion.getDesc() == getResources().getString(R.string.question_waste)) {
-                    ress = String.format("%.2fkt", res);
+            for (int i = 0; i < countries.size(); i++) {
+                int r = currentQuestion.getCorrectAnswer(cu.convert(countries.get(i)));
+                double res = currentQuestion.getAnsDouble().get(cu.convert(countries.get(i)));
+                String ress = "";
+                if (currentQuestion.getUnit().equals("%")) {
+                    ress = String.format("%.2f", res) + currentQuestion.getUnit();
+                } else {
+                    ress = UnitFormatter.formatAsUnit((long) res, UnitSystem.SI, currentQuestion.getUnit());
                 }
-                if (countries[i].equals("de")) {
+                if (countries.get(i).equals("de")) {
                     forList[i] = "Germany - " + ress;
                 } else {
-                    forList[i] = cu.convert(countries[i]) + " - " + ress;
+                    forList[i] = cu.convert(countries.get(i)) + " - " + ress;
                 }
 
-                String countryName = cu.convert(countries[i]);
-                if (countries[i].equals("de")) {
+                String countryName = cu.convert(countries.get(i));
+                if (countries.get(i).equals("de")) {
                     countryName = "Germany";
                 }
-                int height = currentQuestion.getCorrectAnswer(cu.convert(countries[i]));
+                int height = currentQuestion.getCorrectAnswer(cu.convert(countries.get(i)));
                 int color = ColorUtils.blendARGB(currentQuestion.getMminColor(), currentQuestion.getMmaxColor(), (height-1)*0.5f);
                 answers.add(new AnswersAdapter.Answer(countryName, ress, res, color));
             }
@@ -325,9 +321,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mMidColorView.setBackgroundColor(midColor);
         mLowColorView.setBackgroundColor(minColor);
         // TODO mp3 question
-        int objFileId = getApplicationContext().getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt()+1), "raw", getApplicationContext().getPackageName());
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), objFileId);
-        mp.start();
+        try {
+            int objFileId = getApplicationContext().getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt() + 1), "raw", getApplicationContext().getPackageName());
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), objFileId);
+            mp.start();
+        } catch (Exception e) {
+
+        }
     }
 
     private void requestCameraPermission() {

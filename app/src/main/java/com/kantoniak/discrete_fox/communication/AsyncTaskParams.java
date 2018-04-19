@@ -12,9 +12,8 @@ public class AsyncTaskParams {
     String mquery;
     String mdesc;
 
-    AsyncTaskParams(String query, int offset, String desc) {
+    AsyncTaskParams(String query, String desc) {
         mquery = query;
-        moffset = offset;
         mdesc = desc;
     }
 
