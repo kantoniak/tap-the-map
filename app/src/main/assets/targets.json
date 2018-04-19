@@ -3,7 +3,8 @@
   [
     {
       "image" : "tracker.png",
-      "uid" : "qr-tracker",
+      "uid" : "debug-qr-tracker",
+      "name" : "debug-qr-tracker",
       "size" : [2.5, 2.5]
     }
   ]
