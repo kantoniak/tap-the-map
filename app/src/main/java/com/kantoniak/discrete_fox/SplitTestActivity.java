@@ -3,11 +3,12 @@ package com.kantoniak.discrete_fox;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.kantoniak.discrete_fox.new_ar.ARUtils;
 import com.kantoniak.discrete_fox.new_ar.CameraFrameView;
@@ -18,6 +19,7 @@ import org.rajawali3d.view.SurfaceView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnTouch;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SplitTestActivity extends AppCompatActivity {
@@ -27,6 +29,8 @@ public class SplitTestActivity extends AppCompatActivity {
 
     @BindView(R.id.camera_preview) CameraFrameView cameraFrameView;
     @BindView(R.id.game_map_preview) SurfaceView gameMapPreview;
+
+    private MapRenderer renderer;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -44,7 +48,11 @@ public class SplitTestActivity extends AppCompatActivity {
         // FIXME: Camera will not show up the first time because device is opened earlier.
         requestCameraPermission();
 
-        MapRenderer renderer = new MapRenderer(this);
+        setupGameSurfaceView();
+    }
+
+    private void setupGameSurfaceView() {
+        renderer = new MapRenderer(this);
         gameMapPreview.setSurfaceRenderer(renderer);
         UpdateMatricesCallback updateMatricesCallback = new UpdateMatricesCallback(cameraFrameView.getARCameraController(), renderer.getCamera());
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
@@ -97,5 +105,11 @@ public class SplitTestActivity extends AppCompatActivity {
             cameraFrameView.onPause();
         }
         super.onPause();
+    }
+
+    @OnTouch(R.id.game_map_preview)
+    public boolean onTouch(View view, MotionEvent event) {
+        renderer.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 }
