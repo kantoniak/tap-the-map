@@ -13,9 +13,9 @@
         android:background="@color/colorPrimary"
         android:layout_margin="60dp"
         android:paddingTop="@dimen/biggerPadding"
-        android:paddingLeft="@dimen/hugePadding"
-        android:paddingRight="@dimen/hugePadding"
-        android:paddingBottom="@dimen/hugePadding">
+        android:paddingLeft="@dimen/triplePadding"
+        android:paddingRight="@dimen/triplePadding"
+        android:paddingBottom="@dimen/triplePadding">
 
         <ImageView
             android:id="@+id/imageView"

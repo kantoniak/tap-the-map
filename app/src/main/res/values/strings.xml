@@ -30,5 +30,6 @@
     <string name="question_internet_access">What is the level of internet access by households?</string>
     <string name="sample_last_title">Great Job!</string>
     <string name="sample_score">15/25</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
 
 </resources>

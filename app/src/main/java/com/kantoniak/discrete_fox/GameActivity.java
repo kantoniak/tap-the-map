@@ -59,12 +59,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     // Screens
     @BindView(R.id.overlay) ViewGroup mOverlayView;
-    @BindView(R.id.screen_menu) ViewGroup mScreenMenu;
     @BindView(R.id.screen_question) ViewGroup mScreenQuestion;
-
-    // screen_menu
-    @BindView(R.id.animation_main) ImageView mAnimationMain;
-    @BindView(R.id.start_button) Button mStartButton;
 
     // screen_question
     @BindView(R.id.button_close) View mCloseView;
@@ -97,7 +92,6 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     // Gameplay part
     private static final String TAG = GameActivity.class.getSimpleName();
-    private static final int CAMERA_PERMISSION = 0;
     private static final String SCORE_PREFS = "score";
 
     @BindView(R.id.game_map_preview) GameSurfaceView gameMapPreview;
@@ -129,27 +123,15 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
         ButterKnife.bind(this);
 
         // FIXME: Look at this
-        setupMenu();
         setupAnswersRecycler();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        EasyARUtils.initializeEngine(this);
-        // FIXME: This should be called earlier, from some other Activity.
-        // FIXME: Camera will not show up the first time because device is opened earlier.
-        requestCameraPermission();
-
         setupGameSurfaceView();
-    }
-
-    public void setupMenu() {
-        Glide.with(this)
-                .load(R.raw.tap)
-                .into(mAnimationMain);
-        showScreen(R.id.screen_menu);
+        startGame();
     }
 
     public void setupAnswersRecycler() {
@@ -226,8 +208,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         mp2.start();
     }
 
-    @OnClick(R.id.start_button)
-    public void startGame(View view) {
+    public void startGame() {
         showingAnswers = false;
         mListViewLinearLayout.setVisibility(View.INVISIBLE);
         map.disableAllCountries();
@@ -241,7 +222,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     @OnClick(R.id.button_close)
-    public void buttonClose() { showScreen(R.id.screen_menu); }
+    public void buttonClose() {
+        // FIXME(kantoniak): back to menu
+    }
 
     @OnClick(R.id.button_zoom_in)
     public void zoomIn() {
@@ -314,7 +297,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     @OnClick(R.id.score_play_again)
     public void restartGame(View view) {
-        startGame(view);
+        startGame();
     }
 
     private void showQuestion(Question question) {
@@ -346,39 +329,6 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         } catch (Exception e) {
 
         }
-    }
-
-    private void requestCameraPermission() {
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
-        } else {
-            onCameraRequestSuccess();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSION) {
-            boolean executed = false;
-            for (int result : grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    onCameraRequestFailure();
-                }
-            }
-            if (!executed) {
-                onCameraRequestSuccess();
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private void onCameraRequestSuccess() {
-        // Do nothing
-    }
-
-    private void onCameraRequestFailure() {
-        // FIXME: Show error on camera request failure
-        Log.e(TAG, "Camera request failed");
     }
 
     @Override
