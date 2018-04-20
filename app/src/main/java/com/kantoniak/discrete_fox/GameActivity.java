@@ -55,7 +55,7 @@ import butterknife.OnTouch;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class GameActivity extends AppCompatActivity implements View.OnTouchListener {
 
     // Screens
     @BindView(R.id.overlay) ViewGroup mOverlayView;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @BindView(R.id.facebook_share_button) ShareButton mShareButton;
 
     // Gameplay part
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = GameActivity.class.getSimpleName();
     private static final int CAMERA_PERMISSION = 0;
     private static final String SCORE_PREFS = "score";
 
