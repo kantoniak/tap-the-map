@@ -32,10 +32,17 @@ import com.kantoniak.discrete_fox.ar.ARSurfaceView;
 import com.kantoniak.discrete_fox.communication.Question;
 import com.kantoniak.discrete_fox.communication.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
+import com.kantoniak.discrete_fox.new_ar.ARUtils;
+import com.kantoniak.discrete_fox.new_ar.CameraFrameView;
 import com.kantoniak.discrete_fox.scene.Country;
 import com.kantoniak.discrete_fox.scene.Map;
+import com.kantoniak.discrete_fox.scene.MapRenderer;
+import com.kantoniak.discrete_fox.scene.UpdateMatricesCallback;
+import com.kantoniak.discrete_fox.scene.ViewMatrixOverrideCamera;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
+
+import org.rajawali3d.view.SurfaceView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,12 +60,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
-
-    private static final int CAMERA_PERMISSION = 0;
-    private static final String SCORE_PREFS = "score";
-
-    private ARSurfaceView surfaceView;
-    private final Map map = new Map();
 
     // Screens
     @BindView(R.id.overlay) ViewGroup mOverlayView;
@@ -98,6 +99,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @BindView(R.id.score_play_again) TextView mPlayAgainButton;
     @BindView(R.id.facebook_share_button) ShareButton mShareButton;
 
+    // Gameplay part
+    private static final String TAG = SplitTestActivity.class.getSimpleName();
+    private static final int CAMERA_PERMISSION = 0;
+    private static final String SCORE_PREFS = "score";
+
+    @BindView(R.id.camera_preview) CameraFrameView cameraFrameView;
+    @BindView(R.id.game_map_preview) SurfaceView gameMapPreview;
+
+    private final Map map = new Map();
+    private MapRenderer renderer;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -123,10 +135,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setupAR();
+        // FIXME: Look at this
         setupMenu();
         setupAnswersRecycler();
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        ARUtils.initializeEngine(this);
+        // FIXME: This should be called earlier, from some other Activity.
+        // FIXME: Camera will not show up the first time because device is opened earlier.
         requestCameraPermission();
+
+        setupGameSurfaceView();
     }
 
     public void setupMenu() {
@@ -134,17 +153,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 .load(R.raw.tap)
                 .into(mAnimationMain);
         showScreen(R.id.screen_menu);
-    }
-
-    public void setupAR() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        if (!Engine.initialize(this, getString(R.string.easy_ar_key))) {
-            Log.e("AR Box", "Initialization Failed.");
-        }
-
-        surfaceView = new ARSurfaceView(this, map);
-        surfaceView.setOnTouchListener(this);
     }
 
     public void setupAnswersRecycler() {
@@ -159,6 +167,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         answersAdapter = new AnswersAdapter(answers);
         mAnswersRecycler.setAdapter(answersAdapter);
+    }
+
+    private void setupGameSurfaceView() {
+        renderer = new MapRenderer(this, map);
+        gameMapPreview.setSurfaceRenderer(renderer);
+        UpdateMatricesCallback updateMatricesCallback = new UpdateMatricesCallback(cameraFrameView.getARCameraController(), renderer.getCamera());
+        renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
     }
 
     private void hideAllScreens() {
@@ -227,12 +242,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @OnClick(R.id.button_zoom_in)
     public void zoomIn() {
-        surfaceView.getSceneRenderer().zoomIn();
+        renderer.getCamera().zoomIn();
     }
 
     @OnClick(R.id.button_zoom_out)
     public void zoomOut() {
-        surfaceView.getSceneRenderer().zoomOut();
+        renderer.getCamera().zoomOut();
     }
 
     @OnClick(R.id.next_button)
@@ -355,32 +370,34 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void onCameraRequestSuccess() {
-        ((ViewGroup) findViewById(R.id.preview)).addView(surfaceView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-}
+        // Do nothing
+    }
 
     private void onCameraRequestFailure() {
-        Log.e("ARBOX", "CameraRequestFailure");
+        // FIXME: Show error on camera request failure
+        Log.e(TAG, "Camera request failed");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (surfaceView != null) {
-            surfaceView.onResume();
+        if (cameraFrameView != null) {
+            cameraFrameView.onResume();
         }
     }
 
     @Override
     protected void onPause() {
-        if (surfaceView != null) {
-            surfaceView.onPause();
+        if (cameraFrameView != null) {
+            cameraFrameView.onPause();
         }
         super.onPause();
     }
 
-    public boolean onTouch(View v, MotionEvent event) {
+    @OnTouch(R.id.game_map_preview)
+    public boolean onTouch(View view, MotionEvent event) {
         if (!showingAnswers) {
-            surfaceView.getSceneRenderer().onTouchEvent(event);
+            renderer.onTouchEvent(event);
         }
         return super.onTouchEvent(event);
     }

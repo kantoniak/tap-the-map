@@ -42,9 +42,9 @@ public class Country {
     private Object3D namePlane;
     private Vector3 namePlanePos;
 
-    private static int DEFAULT_COLOR = 0xE0E0E0;
-    private static int DISABLED_COLOR = 0x9E9E9E;
-    private static int BLACK_COLOR = 0x000000;
+    private static int DEFAULT_COLOR = 0xFFE0E0E0;
+    private static int DISABLED_COLOR = 0xFF9E9E9E;
+    private static int BLACK_COLOR = 0xFF000000;
     private int minColor;
     private int maxColor;
 

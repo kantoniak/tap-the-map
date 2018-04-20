@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.kantoniak.discrete_fox.new_ar.ARUtils;
 import com.kantoniak.discrete_fox.new_ar.CameraFrameView;
+import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
 import com.kantoniak.discrete_fox.scene.UpdateMatricesCallback;
 
@@ -52,7 +53,7 @@ public class SplitTestActivity extends AppCompatActivity {
     }
 
     private void setupGameSurfaceView() {
-        renderer = new MapRenderer(this);
+        renderer = new MapRenderer(this, new Map());
         gameMapPreview.setSurfaceRenderer(renderer);
         UpdateMatricesCallback updateMatricesCallback = new UpdateMatricesCallback(cameraFrameView.getARCameraController(), renderer.getCamera());
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
