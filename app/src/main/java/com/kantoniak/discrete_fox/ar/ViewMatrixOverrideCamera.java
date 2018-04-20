@@ -1,4 +1,4 @@
-package com.kantoniak.discrete_fox.scene;
+package com.kantoniak.discrete_fox.ar;
 
 import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.math.Matrix4;

@@ -34,12 +34,6 @@
             android:authorities="com.facebook.app.FacebookContentProvider179411062707198"
             android:exported="true" />
 
-        <activity
-            android:name=".SplitTestActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape">
-        </activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.kantoniak.discrete_fox.new_ar;
+package com.kantoniak.discrete_fox.ar;
 
 import android.app.Activity;
 import android.util.Log;
@@ -7,7 +7,7 @@ import com.kantoniak.discrete_fox.R;
 
 import cn.easyar.Engine;
 
-public class ARUtils {
+public class EasyARUtils {
 
     public static final String TAG_AR = "AR";
 

@@ -12,37 +12,35 @@ import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
-import com.kantoniak.discrete_fox.ar.ARSurfaceView;
+import com.kantoniak.discrete_fox.ar.EasyARController;
+import com.kantoniak.discrete_fox.ar.EasyARUtils;
+import com.kantoniak.discrete_fox.ar.EasyARRenderingDelegate;
+import com.kantoniak.discrete_fox.ar.UpdateBackgroundAndMatricesCallback;
+import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
 import com.kantoniak.discrete_fox.communication.Question;
 import com.kantoniak.discrete_fox.communication.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
-import com.kantoniak.discrete_fox.new_ar.ARUtils;
-import com.kantoniak.discrete_fox.new_ar.CameraFrameView;
-import com.kantoniak.discrete_fox.scene.Country;
+import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
+import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
-import com.kantoniak.discrete_fox.scene.UpdateMatricesCallback;
-import com.kantoniak.discrete_fox.scene.ViewMatrixOverrideCamera;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
-
-import org.rajawali3d.view.SurfaceView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,8 +52,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
-import cn.easyar.Engine;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
@@ -100,13 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @BindView(R.id.facebook_share_button) ShareButton mShareButton;
 
     // Gameplay part
-    private static final String TAG = SplitTestActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final int CAMERA_PERMISSION = 0;
     private static final String SCORE_PREFS = "score";
 
-    @BindView(R.id.camera_preview) CameraFrameView cameraFrameView;
-    @BindView(R.id.game_map_preview) SurfaceView gameMapPreview;
+    @BindView(R.id.game_map_preview) GameSurfaceView gameMapPreview;
 
+    private final EasyARController arController = new EasyARController();
+    private final ViewMatrixOverrideCamera camera = new ViewMatrixOverrideCamera();
     private final Map map = new Map();
     private MapRenderer renderer;
 
@@ -140,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setupAnswersRecycler();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        ARUtils.initializeEngine(this);
+        EasyARUtils.initializeEngine(this);
         // FIXME: This should be called earlier, from some other Activity.
         // FIXME: Camera will not show up the first time because device is opened earlier.
         requestCameraPermission();
@@ -170,9 +167,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void setupGameSurfaceView() {
-        renderer = new MapRenderer(this, map);
+
+        renderer = new MapRenderer(this, map, camera);
         gameMapPreview.setSurfaceRenderer(renderer);
-        UpdateMatricesCallback updateMatricesCallback = new UpdateMatricesCallback(cameraFrameView.getARCameraController(), renderer.getCamera());
+
+        ARRenderingDelegate arDelegate = new EasyARRenderingDelegate(arController, camera);
+        renderer.setArRenderingDelegate(arDelegate);
+        gameMapPreview.setArRenderingDelegate(arDelegate);
+
+        UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, camera);
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
     }
 
@@ -242,12 +245,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @OnClick(R.id.button_zoom_in)
     public void zoomIn() {
-        renderer.getCamera().zoomIn();
+        camera.zoomIn();
     }
 
     @OnClick(R.id.button_zoom_out)
     public void zoomOut() {
-        renderer.getCamera().zoomOut();
+        camera.zoomOut();
     }
 
     @OnClick(R.id.next_button)
@@ -381,15 +384,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onResume() {
         super.onResume();
-        if (cameraFrameView != null) {
-            cameraFrameView.onResume();
+        if (gameMapPreview != null) {
+            gameMapPreview.onResume();
         }
     }
 
     @Override
     protected void onPause() {
-        if (cameraFrameView != null) {
-            cameraFrameView.onPause();
+        if (gameMapPreview != null) {
+            gameMapPreview.onPause();
         }
         super.onPause();
     }

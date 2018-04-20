@@ -5,38 +5,54 @@ import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
 import org.rajawali3d.Object3D;
-import org.rajawali3d.materials.Material;
-import org.rajawali3d.primitives.Cube;
+import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.renderer.Renderer;
 import org.rajawali3d.util.ObjectColorPicker;
 import org.rajawali3d.util.OnObjectPickedListener;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
 public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     private final Context context;
     private final Map map;
-    private final ViewMatrixOverrideCamera camera;
+    private final Camera camera;
+    private ARRenderingDelegate arRenderingDelegate;
     private ObjectColorPicker objectPicker;
 
-    public MapRenderer(Context context, Map map) {
+    public MapRenderer(Context context, Map map, Camera camera) {
         super(context);
         this.context = context;
-        this.camera = new ViewMatrixOverrideCamera();
+        this.camera = camera;
         this.map = map;
+    }
+
+    public void setArRenderingDelegate(ARRenderingDelegate arRenderingDelegate) {
+        this.arRenderingDelegate = arRenderingDelegate;
+    }
+
+    @Override
+    public void onRenderSurfaceCreated(EGLConfig config, GL10 gl, int width, int height) {
+        super.onRenderSurfaceCreated(config, gl, width, height);
+        if (arRenderingDelegate != null) {
+            arRenderingDelegate.onSurfaceCreated();
+        }
+    }
+
+    @Override
+    public void onRenderSurfaceSizeChanged(GL10 gl, int width, int height) {
+        super.onRenderSurfaceSizeChanged(gl, width, height);
+        if (arRenderingDelegate != null) {
+            arRenderingDelegate.onSurfaceChanged(width, height);
+        }
     }
 
     @Override
     protected void initScene() {
 
-        setupCamera();
+        getCurrentScene().addAndSwitchCamera(camera);
         setupObjectPicker();
-
-        Cube cube = new Cube(0.5f);
-        Material material = new Material();
-        material.setColor(0xffff0000);
-        cube.setMaterial(material);
-        cube.setPosition(0,0,0.25f);
-        getCurrentScene().addChild(cube);
 
         //TODO(kantoniak): Move country loading out of Country and renderer?
         // Countries
@@ -46,16 +62,6 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
             country.registerObject(getCurrentScene(), objectPicker);
             map.addCountry(country);
         }
-    }
-
-    protected void setupCamera() {
-        camera.setNearPlane(0.2f);
-        camera.setFarPlane(500.f);
-        getCurrentScene().addAndSwitchCamera(camera);
-    }
-
-    public ViewMatrixOverrideCamera getCamera() {
-        return camera;
     }
 
     private void setupObjectPicker() {

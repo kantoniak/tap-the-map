@@ -4,16 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.kantoniak.discrete_fox.new_ar.CameraFrameView
-        android:id="@+id/camera_preview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <org.rajawali3d.view.SurfaceView
+    <com.kantoniak.discrete_fox.scene.GameSurfaceView
         android:id="@+id/game_map_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:frameRate="60.0"
         app:renderMode="RENDER_CONTINUOUS"
-        app:isTransparent="true" />
+        app:isTransparent="false" />
 
     <FrameLayout
         android:id="@+id/overlay"

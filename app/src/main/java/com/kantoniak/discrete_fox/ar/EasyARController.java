@@ -1,9 +1,9 @@
-package com.kantoniak.discrete_fox.new_ar;
-
-import java.util.ArrayList;
+package com.kantoniak.discrete_fox.ar;
 
 import android.opengl.GLES20;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 import cn.easyar.CameraCalibration;
 import cn.easyar.CameraDevice;
@@ -11,10 +11,8 @@ import cn.easyar.CameraDeviceFocusMode;
 import cn.easyar.CameraDeviceType;
 import cn.easyar.CameraFrameStreamer;
 import cn.easyar.Frame;
-import cn.easyar.FunctorOfVoidFromPointerOfTargetAndBool;
 import cn.easyar.ImageTarget;
 import cn.easyar.ImageTracker;
-import cn.easyar.Matrix34F;
 import cn.easyar.Matrix44F;
 import cn.easyar.Renderer;
 import cn.easyar.StorageType;
@@ -24,9 +22,9 @@ import cn.easyar.TargetStatus;
 import cn.easyar.Vec2I;
 import cn.easyar.Vec4I;
 
-import static com.kantoniak.discrete_fox.new_ar.ARUtils.TAG_AR;
+import static com.kantoniak.discrete_fox.ar.EasyARUtils.TAG_AR;
 
-public class ARCameraController {
+public class EasyARController {
     private CameraDevice camera;
     private CameraFrameStreamer streamer;
     private ArrayList<ImageTracker> trackers;
@@ -40,7 +38,7 @@ public class ARCameraController {
     private Matrix44F viewMatrix;
     private Matrix44F projectionMatrix;
 
-    public ARCameraController() {
+    public EasyARController() {
         trackers = new ArrayList<>();
     }
 
@@ -155,8 +153,6 @@ public class ARCameraController {
     }
 
     public void render() {
-        GLES20.glClearColor(1.f, 1.f, 1.f, 1.f);
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         if (videobg_renderer != null) {
             Vec4I default_viewport = new Vec4I(0, 0, view_size.data[0], view_size.data[1]);
