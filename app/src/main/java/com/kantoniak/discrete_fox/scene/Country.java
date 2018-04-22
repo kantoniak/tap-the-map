@@ -11,6 +11,8 @@ import android.provider.MediaStore;
 import android.support.v4.graphics.ColorUtils;
 import android.util.Log;
 
+import com.kantoniak.discrete_fox.R;
+
 import org.rajawali3d.Object3D;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
@@ -94,8 +96,9 @@ public class Country {
         namePlane.setMaterial(planeMaterial);
 
         try {
-            Bitmap planeTexture = createLabelTexture();
-            planeMaterial.addTexture(textureManager.addTexture(new Texture("country_"+getCode(), planeTexture)));
+            final String texDrawableName = "country_" + code + "_plate";
+            int texDrawableId = context.getResources().getIdentifier(texDrawableName, "drawable", context.getPackageName());
+            planeMaterial.addTexture(textureManager.addTexture(new Texture(texDrawableName, texDrawableId)));
         } catch (ATexture.TextureException e) {
             e.printStackTrace();
         }
@@ -189,27 +192,6 @@ public class Country {
     public void setColors(int minColor, int maxColor) {
         this.minColor = minColor;
         this.maxColor = maxColor;
-    }
-
-    public Bitmap createLabelTexture() {
-        int width = 64;
-        int height = 64;
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-
-        Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawPaint(paint);
-
-        paint.setColor(Color.WHITE);
-        paint.setAntiAlias(true);
-        paint.setTextSize(42.f);
-        paint.setFakeBoldText(true);
-        paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(getCode().toUpperCase(), (width / 2.f) , 47, paint);
-
-        return bitmap;
     }
 
 }
