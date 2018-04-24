@@ -28,5 +28,6 @@
     <string name="question_population_density">Jaka jest gęstość zaludnienia w danym kraju?</string>
     <string name="question_waste">Jaki jest poziom wytwarzania odpadów w danym kraju?</string>
     <string name="question_internet_access">Jaka jest liczba gospodarstw domowych z dostępem do internetu?</string>
+    <string name="question_pkb_per_capita">Jakie PKB per capita jest w danym kraju?</string>
 
 </resources>

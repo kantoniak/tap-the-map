@@ -51,7 +51,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
         mquery = params[0].getQuery();
         mdesc = params[0].getDesc();
         String buffer = retrieveObject(mquery);
-        return parseObject(buffer, params[0].getOffset());
+        return parseObject(buffer);
     }
 
     /**
@@ -130,7 +130,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      * @param response json object in String format
      * @return response parsed into APIResponse object
      */
-    private APIResponse parseObject(String response, int offset) {
+    private APIResponse parseObject(String response) {
         APIResponse res = null;
         try {
             JSONObject obj;
@@ -149,7 +149,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
             JSONArray id = obj.getJSONArray("id");
             JSONArray size = obj.getJSONArray("size");
 
-            res = new APIResponse(version, label, href, source, updated, status, extension, value, dimension, id, size, offset);
+            res = new APIResponse(version, label, href, source, updated, status, extension, value, dimension, id, size);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -28,6 +28,7 @@
     <string name="question_population_density">What is the population density?</string>
     <string name="question_waste">What is the waste generation rate?</string>
     <string name="question_internet_access">What is the level of internet access by households?</string>
+    <string name="question_pkb_per_capita">What is GDP per capita?</string>
     <string name="sample_last_title">Great Job!</string>
     <string name="sample_score">15/25</string>
     <string name="title_activity_main_menu">MainMenuActivity</string>

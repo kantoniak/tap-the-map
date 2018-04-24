@@ -93,6 +93,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     // Gameplay part
     private static final String TAG = GameActivity.class.getSimpleName();
     private static final String SCORE_PREFS = "score";
+    private static final int NUMBEROFCOUNTRIES = 5;
 
     @BindView(R.id.game_map_preview) GameSurfaceView gameMapPreview;
 
@@ -107,15 +108,10 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private ArrayList<Question> generateQuestions() {
-        QuestionChest qc = new QuestionChest(getResources());
-        int n = qc.numberOfQuestions();
-        Question[] q = new Question[n];
-        for (int i = 0; i < n; i++) {
-            q[i] = qc.getQuestion(i);
-        }
+        QuestionChest qc = new QuestionChest(getResources(), getApplicationContext(), NUMBEROFCOUNTRIES);
         ArrayList<Question> questions = new ArrayList<>();
         for (int i = 0; i < qc.numberOfQuestions(); i++) {
-            questions.add(q[i]);
+            questions.add(qc.getQuestion(i));
         }
         return questions;
     }
@@ -213,7 +209,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         mListViewLinearLayout.setVisibility(View.INVISIBLE);
         map.disableAllCountries();
         //TODO Call generateQuestions on application start.
-        gameplay = new Gameplay(generateQuestions(), 5);
+        gameplay = new Gameplay(generateQuestions(), NUMBEROFCOUNTRIES);
         Question question = gameplay.getCurrentQuestion();
         showQuestion(question);
 

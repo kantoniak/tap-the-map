@@ -5,10 +5,8 @@ public class AsyncTaskParams {
     public String getQuery() {
         return mquery;
     }
-    public int getOffset() { return moffset; }
     public String getDesc() { return mdesc; }
 
-    int moffset;
     String mquery;
     String mdesc;
 

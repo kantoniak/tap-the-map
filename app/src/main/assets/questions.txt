@@ -1,0 +1,8 @@
+nama_10_gdp?na_item=B1GQ&unit=CP_MEUR,1000000,€,ECONOMY
+ilc_mdho05?incgrp=TOTAL&unit=PC&hhtyp=TOTAL,1,%,POPULATION
+une_rt_a?unit=PC_POP&age=TOTAL&sex=T,1,%,POPULATION
+lan_lcv_fao?landcover=LCC1&unit=PC,1,%,GENERAL
+demo_r_d3dens?unit=HAB_KM2,1,/km2,POPULATION
+env_wasmun?wst_oper=GEN&unit=KG_HAB,1000,t,ENVIRONMENT
+tin00134?unit=PC_HH,1,%,SCIENCE
+nama_10_pc?na_item=B1GQ&unit=CP_EUR_HAB,1,€,ECONOMY

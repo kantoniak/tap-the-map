@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class ContentObject {
-    private int moffset;
-
     /**
      * Setup PupulationWithNoToilet object and populate the hashmap in proper way.
      *
@@ -17,8 +15,7 @@ public class ContentObject {
      * @param id list of dimension ids
      * @param size list of dimensions sizes
      */
-    ContentObject(JSONObject dimensions, JSONObject values, JSONArray id, JSONArray size, int offset) {
-        moffset = offset;
+    ContentObject(JSONObject dimensions, JSONObject values, JSONArray id, JSONArray size) {
         data = new HashMap<>();
         try {
             JSONObject indexCountry = dimensions.getJSONObject("geo").getJSONObject("category").getJSONObject("index");
