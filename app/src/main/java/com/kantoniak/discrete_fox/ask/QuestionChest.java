@@ -1,9 +1,13 @@
-package com.kantoniak.discrete_fox.communication;
+package com.kantoniak.discrete_fox.ask;
 
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.kantoniak.discrete_fox.CountryUtil;
 import com.kantoniak.discrete_fox.R;
+import com.kantoniak.discrete_fox.communication.APIResponse;
+import com.kantoniak.discrete_fox.communication.AsyncTaskParams;
+import com.kantoniak.discrete_fox.communication.DataProvider;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,7 +24,7 @@ public class QuestionChest {
     /**
      * Number of time periods to consider in presented data.
      */
-    private static final int LASTTIMEPERIODINT = 3;
+    public static final int LASTTIMEPERIODINT = 3;
     /**
      * Number of decimal places in data.
      */
@@ -70,7 +74,10 @@ public class QuestionChest {
     /**
      * List of the country codes.
      */
-    private static List<String> ACOUNTRY_CODES = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "ne", "pl", "pt", "ro", "se", "si", "sk");
+    private static List<String> ACOUNTRY_CODES = Arrays.asList("at", "be", "bg", "cy", "cz", "de",
+            "dk", "ee", "es", "fi", "fr", "gb", "gr",
+            "hr", "hu", "ie", "it", "lt", "lu", "lv", "nl",
+            "pl", "pt", "ro", "se", "si", "sk");
 
     /**
      * Creates QuestionChest object.

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Map {
 
-    public static List<String> COUNTRY_CODES = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "ne", "pl", "pt", "ro", "se", "si", "sk");
+    public static List<String> COUNTRY_CODES = Arrays.asList("at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "gb", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "nl", "pl", "pt", "ro", "se", "si", "sk");
     HashMap<String, Country> countries = new HashMap<>();
 
     private static final java.util.Map<String, Vector2> countryMiddles;
@@ -39,7 +39,7 @@ public class Map {
         middles.put("lt", new Vector2(+1.00, +1.16));
         middles.put("lu", new Vector2(-3.18, -0.90));
         middles.put("lv", new Vector2(+1.07, +1.85));
-        middles.put("ne", new Vector2(-3.17, +0.04));
+        middles.put("nl", new Vector2(-3.17, +0.04));
         middles.put("pl", new Vector2(+0.06, -0.25));
         middles.put("pt", new Vector2(-8.33, -3.78));
         middles.put("ro", new Vector2(+1.86, -2.65));
