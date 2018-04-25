@@ -139,7 +139,7 @@ public class Question {
                 valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, munit);
             }
             int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(fullName)-1)*0.5f);
-            Answer answer = new Answer(fullName, valuePresented, ans.get(fullName), color);
+            Answer answer = new Answer(fullName, valuePresented, value, color);
             list.add(answer);
         }
         return list;
