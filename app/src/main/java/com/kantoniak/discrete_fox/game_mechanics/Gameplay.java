@@ -1,17 +1,14 @@
 package com.kantoniak.discrete_fox.game_mechanics;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.kantoniak.discrete_fox.CountryUtil;
-import com.kantoniak.discrete_fox.communication.Question;
+import com.kantoniak.discrete_fox.ask.Question;
 import com.kantoniak.discrete_fox.scene.Country;
 import com.kantoniak.discrete_fox.scene.Map;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Gameplay {

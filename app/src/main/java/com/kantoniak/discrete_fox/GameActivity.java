@@ -1,39 +1,34 @@
 package com.kantoniak.discrete_fox;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.kantoniak.discrete_fox.ar.EasyARController;
-import com.kantoniak.discrete_fox.ar.EasyARUtils;
 import com.kantoniak.discrete_fox.ar.EasyARRenderingDelegate;
 import com.kantoniak.discrete_fox.ar.UpdateBackgroundAndMatricesCallback;
 import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
-import com.kantoniak.discrete_fox.communication.Question;
-import com.kantoniak.discrete_fox.communication.QuestionChest;
+import com.kantoniak.discrete_fox.ask.Answer;
+import com.kantoniak.discrete_fox.ask.AnswersAdapter;
+import com.kantoniak.discrete_fox.ask.Question;
+import com.kantoniak.discrete_fox.ask.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
 import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
@@ -134,7 +129,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         mAnswersRecycler.setHasFixedSize(true);
         mAnswersRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        List<AnswersAdapter.Answer> answers = Arrays.asList(
+        List<Answer> answers = Arrays.asList(
                 //new AnswersAdapter.Answer("Polska", "300", 0xFF990000),
                 //new AnswersAdapter.Answer("Niemcy", "500", 0xFFCC0000),
                 //new AnswersAdapter.Answer("Hiszpania", "400", 0xFFFF0000)
@@ -251,32 +246,8 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             List<String> countries = currentQuestion.getCountries();
             String[] forList = new String[countries.size()];
             CountryUtil cu = new CountryUtil();
-            List<AnswersAdapter.Answer> answers = new LinkedList<>();
-            for (int i = 0; i < countries.size(); i++) {
-                int r = currentQuestion.getCorrectAnswer(cu.convert(countries.get(i)));
-                double res = currentQuestion.getAnsDouble().get(cu.convert(countries.get(i)));
-                String ress = "";
-                if (currentQuestion.getUnit().equals("%")) {
-                    ress = String.format("%.2f", res) + currentQuestion.getUnit();
-                } else {
-                    ress = UnitFormatter.formatAsUnit((long) res, UnitSystem.SI, currentQuestion.getUnit());
-                }
-                if (countries.get(i).equals("de")) {
-                    forList[i] = "Germany - " + ress;
-                } else {
-                    forList[i] = cu.convert(countries.get(i)) + " - " + ress;
-                }
-
-                String countryName = cu.convert(countries.get(i));
-                if (countries.get(i).equals("de")) {
-                    countryName = "Germany";
-                }
-                int height = currentQuestion.getCorrectAnswer(cu.convert(countries.get(i)));
-                int color = ColorUtils.blendARGB(currentQuestion.getMminColor(), currentQuestion.getMmaxColor(), (height-1)*0.5f);
-                answers.add(new AnswersAdapter.Answer(countryName, ress, res, color));
-            }
-            //currentQuestion.getMmaxColor();
-            answers.sort(Comparator.comparing(AnswersAdapter.Answer::getValueRaw).reversed());
+            List<Answer> answers = currentQuestion.getAnswers();
+            answers.sort(Comparator.comparing(Answer::getValueRaw).reversed());
             answersAdapter.updateAnswers(answers);
 
             ArrayAdapter<String> test = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, forList);
@@ -308,8 +279,8 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         mMidTextView.setText(question.getMidLabel());
         mLowTextView.setText(question.getMinLabel());
 
-        int maxColor = question.getMmaxColor();
-        int minColor = question.getMminColor();
+        int maxColor = question.getCategory().getMaxColor();
+        int minColor = question.getCategory().getMinColor();
         int midColor = ColorUtils.blendARGB(minColor, maxColor, 0.5f);
 
         map.setColors(minColor, maxColor);
