@@ -69,12 +69,11 @@ public class Gameplay {
 
     private Integer calculateScore(Map map) {
         int score = 0;
-        CountryUtil cu = new CountryUtil();
         HashMap<String, Country> mapCountries = map.getCountries();
         Question question = getCurrentQuestion();
         List<String> countries = question.getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(cu.convert(mapCountries.get(countries.get(i)).getCode()))) == 0) {
+            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(CountryUtil.isoToName(mapCountries.get(countries.get(i)).getCode()))) == 0) {
                 score += 1;
             }
         }

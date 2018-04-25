@@ -74,10 +74,7 @@ public class QuestionChest {
     /**
      * List of the country codes.
      */
-    private static List<String> ACOUNTRY_CODES = Arrays.asList("at", "be", "bg", "cy", "cz", "de",
-            "dk", "ee", "es", "fi", "fr", "gb", "gr",
-            "hr", "hu", "ie", "it", "lt", "lu", "lv", "nl",
-            "pl", "pt", "ro", "se", "si", "sk");
+    private static List<String> ACOUNTRY_CODES = CountryUtil.getIsoCodes();
 
     /**
      * Creates QuestionChest object.

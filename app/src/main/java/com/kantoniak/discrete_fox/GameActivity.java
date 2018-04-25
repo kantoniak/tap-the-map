@@ -245,7 +245,6 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             Question currentQuestion = gameplay.getCurrentQuestion();
             List<String> countries = currentQuestion.getCountries();
             String[] forList = new String[countries.size()];
-            CountryUtil cu = new CountryUtil();
             List<Answer> answers = currentQuestion.getAnswers();
             answers.sort(Comparator.comparing(Answer::getValueRaw).reversed());
             answersAdapter.updateAnswers(answers);
@@ -257,7 +256,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             showingAnswers = true;
             for (String code : countries) {
                 map.getCountry(code).setHeight(
-                        currentQuestion.getCorrectAnswer(cu.convert(code)));
+                        currentQuestion.getCorrectAnswer(CountryUtil.isoToName(code)));
             }
         }
     }

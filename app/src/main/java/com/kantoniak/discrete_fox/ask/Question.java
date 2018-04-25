@@ -128,10 +128,9 @@ public class Question {
     }
 
     public List<Answer> getAnswers() {
-        List<Answer> lista = new ArrayList<>();
-        CountryUtil cu = new CountryUtil();
+        List<Answer> list = new ArrayList<>();
         for (String code: mcountries) {
-            String fullName = cu.convert(code);
+            String fullName = CountryUtil.isoToName(code);
             double value = ansDouble.get(fullName);
             String valuePresented;
             if (munit.equals("%")) {
@@ -141,8 +140,8 @@ public class Question {
             }
             int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(fullName)-1)*0.5f);
             Answer answer = new Answer(fullName, valuePresented, ans.get(fullName), color);
-            lista.add(answer);
+            list.add(answer);
         }
-        return lista;
+        return list;
     }
 }
