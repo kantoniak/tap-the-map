@@ -1,6 +1,8 @@
-package com.kantoniak.discrete_fox.communication;
+package com.kantoniak.discrete_fox.ask;
 
-import com.kantoniak.discrete_fox.scene.Country;
+import android.support.v4.graphics.ColorUtils;
+
+import com.kantoniak.discrete_fox.CountryUtil;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
 
@@ -41,11 +43,6 @@ public class Question {
         }
         createThresholds(valueList);
         createAnswers(ansDouble);
-        reduceUnit();
-    }
-
-    private void reduceUnit() {
-
     }
 
     void createThresholds(ArrayList<Double> valueList) {
@@ -63,6 +60,10 @@ public class Question {
 
     public String getDesc() {
         return mdesc;
+    }
+
+    public QuestionCategory getCategory() {
+        return mcategory;
     }
 
     void createAnswers(HashMap<String, Double> data) {
@@ -88,14 +89,6 @@ public class Question {
 
     public Integer getCorrectAnswer(String country) {
         return ans.get(country);
-    }
-
-    public int getMminColor() {
-        return mcategory.getMinColor();
-    }
-
-    public int getMmaxColor() {
-        return mcategory.getMaxColor();
     }
 
     public List<String> getCountries() {
@@ -132,5 +125,24 @@ public class Question {
 
     public String getUnit() {
         return munit;
+    }
+
+    public List<Answer> getAnswers() {
+        List<Answer> lista = new ArrayList<>();
+        CountryUtil cu = new CountryUtil();
+        for (String code: mcountries) {
+            String fullName = cu.convert(code);
+            double value = ansDouble.get(fullName);
+            String valuePresented;
+            if (munit.equals("%")) {
+                valuePresented = String.format("%.2f", value) + munit;
+            } else {
+                valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, munit);
+            }
+            int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(fullName)-1)*0.5f);
+            Answer answer = new Answer(fullName, valuePresented, ans.get(fullName), color);
+            lista.add(answer);
+        }
+        return lista;
     }
 }
