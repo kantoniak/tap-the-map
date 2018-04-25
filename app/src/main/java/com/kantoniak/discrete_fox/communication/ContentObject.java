@@ -1,5 +1,7 @@
 package com.kantoniak.discrete_fox.communication;
 
+import com.kantoniak.discrete_fox.ask.QuestionChest;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,18 +10,29 @@ import java.util.Iterator;
 
 public class ContentObject {
     /**
+     * Long name for Germany as in the Eurostat API.
+     */
+    static private final String GERMANYLONG = "Germany (until 1990 former territory of the FRG)";
+    /**
+     * More pleasant way of displaying Germany.
+     */
+    static private final String GERMANYSHORT = "Germany";
+
+    /**
+     * Maps country name to some value.
+     */
+    private HashMap<String, Double> data;
+
+    /**
      * Setup PupulationWithNoToilet object and populate the hashmap in proper way.
      *
      * @param dimensions dimensions retrieved from Eurostat
      * @param values exact values retrieved from Eurostat
-     * @param id list of dimension ids
-     * @param size list of dimensions sizes
      */
-    ContentObject(JSONObject dimensions, JSONObject values, JSONArray id, JSONArray size) {
+    ContentObject(JSONObject dimensions, JSONObject values) {
         data = new HashMap<>();
         try {
             JSONObject indexCountry = dimensions.getJSONObject("geo").getJSONObject("category").getJSONObject("index");
-            JSONObject indexYear = dimensions.getJSONObject("time").getJSONObject("category").getJSONObject("index");
             JSONObject labelCountry = dimensions.getJSONObject("geo").getJSONObject("category").getJSONObject("label");
             // foreach country
             Iterator<String> tempCountry = indexCountry.keys();
@@ -27,17 +40,22 @@ public class ContentObject {
                 String key1 = tempCountry.next();
                 int idx1 = indexCountry.getInt(key1);
                 Double value = null;
-                int backup = 2;
+
+                int backup = QuestionChest.LASTTIMEPERIODINT - 1;
                 while (value == null && backup > -1) {
                     try {
-                        value = values.getDouble(String.valueOf(idx1 * 3 + backup));
+                        value = values.getDouble(String.valueOf(idx1 * QuestionChest.LASTTIMEPERIODINT + backup));
                     } catch (Exception e) {
                         value = null;
                     }
                     backup--;
                 }
+
                 if (value != null) {
                     String label = labelCountry.getString(key1);
+                    if (label.equals(GERMANYLONG)) {
+                        label = GERMANYSHORT;
+                    }
                     data.put(label, value);
                 }
             }
@@ -47,23 +65,10 @@ public class ContentObject {
         }
     }
 
-    private HashMap<String, Double> data;
-
     /**
-     * Retrieve data from hashmap in convenient way.
-     *
-     * @param country which country we need data for
-     * @return data for given country and year
+     * Returns the map with values for each country
+     * @return map Country -> Value
      */
-    public String getValueForCountry(String country) {
-        Double value = data.get(country);
-        String res = "No Data";
-        if (value != -1.0) {
-            res = value.toString() + "%";
-        }
-        return country + ": " + res;
-    }
-
     public HashMap<String, Double> getHashMap() {
         return data;
     }

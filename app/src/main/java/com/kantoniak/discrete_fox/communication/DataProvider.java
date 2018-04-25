@@ -28,13 +28,11 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
 
     //private WeakReference<ArrayList<Question>> mquestions;
     private String mquery;
-    private String mdesc;
+    //private String mdesc;
 
     /**
      * Constructor that takes context to the application in order to update the UI in the
      * onPostExecute method.
-     *
-     * @param context context of the current application
      */
     public DataProvider() {//ArrayList<Question> questions) {
     //    mquestions = new WeakReference<>(questions);
@@ -44,12 +42,12 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      * Method used to asynchronously retrieve the data from the Eurostat, as well, as parse it
      * into the APIResponse object.
      *
-     * @param params N/A
-     * @return APIResponse object for given QUERY
+     * @param params pass query
+     * @return APIResponse object for given query in params
      */
     public APIResponse doInBackground(AsyncTaskParams... params){
         mquery = params[0].getQuery();
-        mdesc = params[0].getDesc();
+        //mdesc = params[0].getDesc();
         String buffer = retrieveObject(mquery);
         return parseObject(buffer);
     }
@@ -64,7 +62,6 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
         //Question q = new Question(mquery, res.getContent().getHashMap(), 2016, mdesc);
         //ArrayList<Question> questionArrayList = mquestions.get();
         //questionArrayList.add(q);
-        Log.e("pleb", "pleb");
 
         //Context context = mContext.get();
 

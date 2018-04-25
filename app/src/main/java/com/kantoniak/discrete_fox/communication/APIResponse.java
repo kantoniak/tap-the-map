@@ -7,20 +7,26 @@ import org.json.JSONObject;
  * Class that represents parsed json retrieved from Eurostat API.
  */
 public class APIResponse {
-    private static final String LINK = "http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=";
+
+    /**
+     * Fields for general data.
+     */
+    private String mVersion;
+    private String mLabel;
+    private String mSource;
+    private String mUpdated;
+    /**
+     * Object that keeps the specific data.
+     */
+    private ContentObject mcontent;
 
     APIResponse(String version, String label, String href, String source, String updated, String status, JSONObject extension, JSONObject value, JSONObject dimension, JSONArray id, JSONArray size) {
         mVersion = version;
         mLabel = label;
-        try {
-            mLink = LINK + extension.getString("datasetId");
-        } catch (Exception e) {
-            mLink = "";
-        }
         mSource = source;
         mUpdated = updated;
 
-        mcontent = new ContentObject(dimension, value, id, size);
+        mcontent = new ContentObject(dimension, value);
     }
 
     public String getVersion() {
@@ -29,10 +35,6 @@ public class APIResponse {
 
     public String getLabel() {
         return mLabel;
-    }
-
-    public String getLink() {
-        return mLink;
     }
 
     public String getSource() {
@@ -46,20 +48,4 @@ public class APIResponse {
     public ContentObject getContent() {
         return mcontent;
     }
-
-    /**
-     * Fields for general data.
-     */
-    private String mVersion;
-    private String mLabel;
-    private String mSource;
-    private String mUpdated;
-    /**
-     * Link to the data presented on the website.
-     */
-    private String mLink;
-    /**
-     * Object that keeps the specific data.
-     */
-    private ContentObject mcontent;
 }
