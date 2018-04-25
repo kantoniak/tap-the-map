@@ -1,11 +1,11 @@
 # Tap The Map
 
-Plik *.apk można pobrać z folderu apk, w środku znajduje się również marker.
+APK file and AR marker are available in the folder ```apk```.
 
 ### To whom it may concern
 
-Uwaga na kody państw uzyskiwane z API Eurostatu.  
+Please be aware, that country codes received from Eurostat API are as in this link.  
 http://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Country_codes
 
-Różnią się one, np. Grecja -> EL, od dwuliterowych kodów ISO Grecja -> GR.
-Wszędzie w kodzie korzystamy z dwuliterowych kodów ISO.
+These are different than 2-letter ISO codes. I.E. Greece -> EL vs Greece -> GR.
+We use 2-letter ISO codes in our code.
