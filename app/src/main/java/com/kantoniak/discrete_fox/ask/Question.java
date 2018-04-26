@@ -130,7 +130,7 @@ public class Question {
     public List<Answer> getAnswers() {
         List<Answer> list = new ArrayList<>();
         for (String code: mcountries) {
-            String fullName = CountryUtil.isoToName(code);
+            String fullName = CountryUtil.eurostatToName(code);
             double value = ansDouble.get(fullName);
             String valuePresented;
             if (munit.equals("%")) {

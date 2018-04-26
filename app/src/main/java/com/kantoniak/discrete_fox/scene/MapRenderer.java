@@ -18,6 +18,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     private final Context context;
     private final Map map;
     private final Camera camera;
+    private final AssetLoader loader;
     private ARRenderingDelegate arRenderingDelegate;
     private ObjectColorPicker objectPicker;
 
@@ -26,6 +27,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         this.context = context;
         this.camera = camera;
         this.map = map;
+        this.loader = new AssetLoader(context, mTextureManager);
     }
 
     public void setArRenderingDelegate(ARRenderingDelegate arRenderingDelegate) {
@@ -57,8 +59,8 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         //TODO(kantoniak): Move country loading out of Country and renderer?
         // Countries
         for (String code : Map.COUNTRY_CODES) {
-            Country country = new Country(code, 3, 0xFF81C784, 0xFF388E3C, map.getCountryMiddle(code));
-            country.loadObject(context, mTextureManager);
+            Country country = new Country(code, map.getCountryMiddle(code));
+            country.createObject(loader);
             country.registerObject(getCurrentScene(), objectPicker);
             map.addCountry(country);
         }

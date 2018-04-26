@@ -1,24 +1,11 @@
 package com.kantoniak.discrete_fox.scene;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.media.MediaPlayer;
-import android.provider.MediaStore;
 import android.support.v4.graphics.ColorUtils;
-import android.util.Log;
-
-import com.kantoniak.discrete_fox.R;
 
 import org.rajawali3d.Object3D;
-import org.rajawali3d.loader.LoaderOBJ;
-import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.textures.ATexture;
-import org.rajawali3d.materials.textures.Texture;
 import org.rajawali3d.materials.textures.TextureManager;
 import org.rajawali3d.math.vector.Vector2;
 import org.rajawali3d.math.vector.Vector3;
@@ -26,102 +13,106 @@ import org.rajawali3d.primitives.Plane;
 import org.rajawali3d.scene.Scene;
 import org.rajawali3d.util.ObjectColorPicker;
 
+/**
+ * Represents a single country on the map.
+ *
+ * About 3D rendering: world map exists in a plane where X is to the right and Z is to top of the
+ * map. Y axis is perpendicular to the map.
+ */
 public class Country {
 
+    private static int COLOR_DEFAULT = 0xFFE0E0E0;
+    private static int COLOR_DISABLED = 0xFF9E9E9E;
+    private static int COLOR_BLACK = 0xFF000000;
+
+    /** Height ob the imported OBJ model */
+    private static float BASE_HEIGHT = 0.1f;
+
+    private static float Y_SCALE_MULTIPLIER = 0.5f;
+    private static float NAME_Y_TRANSLATION = 0.1f;
+    private static float NAME_SCALE = 0.1f;
+
+    // State
     private final String code;
     private final int maxHeight;
     private int height = 0;
     private boolean disabled;
 
-    private Object3D baseObject;
-    private Material baseMaterial;
+    // Colors
+    private int minColor = COLOR_DEFAULT;
+    private int maxColor = COLOR_DEFAULT;
 
-    private Object3D topObject;
-    private Material topMaterial;
+    // 3D
+    private Object3D countryBase;
+    private Object3D countryTop;
+    private Plane countryName;
+    private Material countryBaseMaterial = new Material();
+    private Material countryTopMaterial = new Material();
+    private final Vector2 countryMiddle;
 
-    private static float NAME_PLANE_SCALE = 0.5f;
-    private static float NAME_PLANE_Z = 0.4f;
-    private Object3D namePlane;
-    private Vector3 namePlanePos;
-
-    private static int DEFAULT_COLOR = 0xFFE0E0E0;
-    private static int DISABLED_COLOR = 0xFF9E9E9E;
-    private static int BLACK_COLOR = 0xFF000000;
-    private int minColor;
-    private int maxColor;
-
-    private static float TOP_HEIGHT = 0.2f;
-    private static float NEAR_ZERO_HEIGHT = 0.001f;
-
-    public Country(String code, int maxHeight, int minColor, int maxColor, Vector2 middlePos) {
+    public Country(String code, Vector2 countryMiddle) {
         this.code = code;
-        this.maxHeight = maxHeight;
-        this.minColor = minColor;
-        this.maxColor = maxColor;
+        this.maxHeight = 3;
         this.disabled = true;
-        this.namePlanePos = new Vector3(-middlePos.getX(), middlePos.getY(), NAME_PLANE_Z);
+        this.countryMiddle = countryMiddle;
     }
 
-    public void loadObject(Context context, TextureManager textureManager) {
-        int objFileId = context.getResources().getIdentifier("country_" + code + "_obj", "raw", context.getPackageName());
-        LoaderOBJ loader = new LoaderOBJ(context.getResources(), textureManager, objFileId);
+    public void createObject(AssetLoader loader) {
+        countryBase = loader.loadObj("country_base_" + code + "_obj");
+        countryTop = loader.loadObj("country_top_" + code + "_obj");
+
+        countryBase.setDoubleSided(true);
+        countryBaseMaterial.setColor(getBaseColor(COLOR_DEFAULT));
+        countryBase.setMaterial(countryBaseMaterial);
+
+        countryTop.setDoubleSided(true);
+        countryTopMaterial.setColor(COLOR_DEFAULT);
+        countryTop.setMaterial(countryTopMaterial);
+
+        countryName = new Plane();
+        countryName.setDoubleSided(true);
+        countryName.setScale(NAME_SCALE);
+        countryName.setX(countryMiddle.getX());
+        countryName.setZ(-countryMiddle.getY());
 
         try {
-            loader.parse();
-        } catch (ParsingException e) {
-            Log.e("GAME", "OBJ load failed", e);
-        }
-
-        baseObject = loader.getParsedObject();
-        baseObject.rotate(Vector3.Axis.X, -90);
-        baseObject.setScaleX(-1.f);
-        baseObject.setDoubleSided(true);
-
-        setupMaterials();
-
-        baseObject.setMaterial(baseMaterial);
-
-        topObject = baseObject.clone();
-        topObject.setMaterial(topMaterial);
-        topObject.setScaleZ(TOP_HEIGHT);
-
-        namePlane = new Plane();
-        namePlane.setPosition(namePlanePos);
-        namePlane.setDoubleSided(true);
-        namePlane.setScaleX(-NAME_PLANE_SCALE);
-        namePlane.setScaleZ(NAME_PLANE_SCALE);
-        namePlane.rotate(Vector3.Axis.X, -90);
-        Material planeMaterial = new Material();
-        planeMaterial.setColor(0x333333);
-        namePlane.setMaterial(planeMaterial);
-
-        try {
-            final String texDrawableName = "country_" + code + "_plate";
-            int texDrawableId = context.getResources().getIdentifier(texDrawableName, "drawable", context.getPackageName());
-            planeMaterial.addTexture(textureManager.addTexture(new Texture(texDrawableName, texDrawableId)));
+            Material countryNameMaterial = new Material();
+            countryNameMaterial.setColor(0x333333);
+            countryNameMaterial.addTexture(loader.loadTexture("country_" + code + "_plate"));
+            countryName.setMaterial(countryNameMaterial);
         } catch (ATexture.TextureException e) {
             e.printStackTrace();
         }
 
-        zeroChoice();
+        resetState();
     }
 
-    private void setupMaterials() {
-        baseMaterial = new Material();
-        topMaterial = new Material();
+    public void resetState() {
+        height = 0;
+        disabled = true;
+        updateVisuals();
     }
 
     public void registerObject(Scene scene, ObjectColorPicker objectPicker) {
-        scene.addChild(baseObject);
-        scene.addChild(topObject);
-        scene.addChild(namePlane);
-        objectPicker.registerObject(baseObject);
-        objectPicker.registerObject(topObject);
-        objectPicker.registerObject(namePlane);
+        scene.addChild(countryBase);
+        scene.addChild(countryTop);
+        scene.addChild(countryName);
+
+        objectPicker.registerObject(countryBase);
+        objectPicker.registerObject(countryTop);
+        objectPicker.registerObject(countryName);
     }
 
     public boolean containsObject(final Object3D object) {
-        return baseObject == object || topObject == object || namePlane == object;
+        return countryBase == object || countryTop == object || countryName == object;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+        if (this.height > maxHeight) {
+            this.height = 0;
+        }
+        updateVisuals();
     }
 
     public void onPicked() {
@@ -129,45 +120,41 @@ public class Country {
             return;
         }
         setHeight(++height);
-        //TODO mp3 play height
+        updateVisuals();
 
+        // TODO(kedzior) mp3 play height
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.);
         //mp.start();
     }
 
-    public void setHeight(int height) {
-        if (height > maxHeight) {
-            zeroChoice();
-            return;
-        }
+    public void updateVisuals() {
 
-        baseObject.setScaleZ(0.5f * height);
-        topObject.setZ(0.5f * baseObject.getScaleZ());
-        namePlane.setZ(0.5f * baseObject.getScaleZ() + NAME_PLANE_Z);
+        countryBase.setVisible(this.height > 0);
+        countryName.setVisible(!this.disabled);
 
-        float colorRatio = (height - 1) / (float)(maxHeight - 1);
-        baseMaterial.setColor(getBaseColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio)));
-        topMaterial.setColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio));
-    }
-
-    private void zeroChoice() {
-        height = 0;
-        baseObject.setScaleZ(NEAR_ZERO_HEIGHT);
-        topObject.setZ(NEAR_ZERO_HEIGHT);
-        namePlane.setZ(NAME_PLANE_Z);
-        if (disabled) {
-            baseMaterial.setColor(DISABLED_COLOR);
-            topMaterial.setColor(DISABLED_COLOR);
-            namePlane.setVisible(false);
+        if (height == 0) {
+            countryTop.setPosition(new Vector3(0, 0, 0));
+            countryTopMaterial.setColor(COLOR_DEFAULT);
+            countryName.setY(NAME_Y_TRANSLATION);
         } else {
-            baseMaterial.setColor(DEFAULT_COLOR);
-            topMaterial.setColor(DEFAULT_COLOR);
-            namePlane.setVisible(true);
+            countryBase.setScaleY(height * Y_SCALE_MULTIPLIER);
+            countryTop.setPosition(new Vector3(0, BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER, 0));
+            countryName.setY(BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER + NAME_Y_TRANSLATION);
+
+            float colorRatio = (height - 1) / (float)(maxHeight - 1);
+            countryBaseMaterial.setColor(getBaseColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio)));
+            countryTopMaterial.setColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio));
         }
+
+        if (disabled) {
+            countryBaseMaterial.setColor(getBaseColor(COLOR_DISABLED));
+            countryTopMaterial.setColor(COLOR_DISABLED);
+        }
+
     }
 
     private int getBaseColor(int topColor) {
-        return ColorUtils.blendARGB(BLACK_COLOR, topColor, 0.5f);
+        return ColorUtils.blendARGB(COLOR_BLACK, topColor, 0.5f);
     }
 
     public int getHeight() {
@@ -180,18 +167,13 @@ public class Country {
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
-        if (disabled) {
-            zeroChoice();
-        } else {
-            baseMaterial.setColor(DEFAULT_COLOR);
-            topMaterial.setColor(DEFAULT_COLOR);
-            namePlane.setVisible(true);
-        }
+        updateVisuals();
     }
 
     public void setColors(int minColor, int maxColor) {
         this.minColor = minColor;
         this.maxColor = maxColor;
+        updateVisuals();
     }
 
 }

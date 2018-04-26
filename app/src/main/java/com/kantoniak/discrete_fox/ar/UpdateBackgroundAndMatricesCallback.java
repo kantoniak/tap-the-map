@@ -29,7 +29,9 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
             }
 
             Matrix4 projectionMatrix = new Matrix4(arController.getProjectionMatrix().data);
-            Matrix4 viewMatrix = new Matrix4(arController.getViewMatrix().data);
+            Matrix4 viewMatrix = new Matrix4(arController.getViewMatrix().data)
+                    .scale(-1.f, 1.f, 1.f)
+                    .rotate(Vector3.Axis.X, -90);
 
             Vector3 cameraPosition = new Vector3(
                     viewMatrix.getDoubleValues()[12],

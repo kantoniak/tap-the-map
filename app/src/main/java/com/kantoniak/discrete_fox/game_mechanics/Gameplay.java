@@ -54,8 +54,7 @@ public class Gameplay {
         currentQuestion++;
         if (mquestions.size() == currentQuestion) {
             // TODO Present superb view of the final result!
-            // We probably should delete this gameplay, and create a new one, otherwise, we should
-            // clean this one.
+            // TODO: We probably should delete this gameplay, and create a new one, otherwise, we should clean this one.
             currentQuestion--;
             return null;
         }
@@ -73,7 +72,7 @@ public class Gameplay {
         Question question = getCurrentQuestion();
         List<String> countries = question.getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(CountryUtil.isoToName(mapCountries.get(countries.get(i)).getCode()))) == 0) {
+            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(CountryUtil.eurostatToName(mapCountries.get(countries.get(i)).getCode()))) == 0) {
                 score += 1;
             }
         }

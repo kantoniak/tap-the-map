@@ -74,7 +74,7 @@ public class QuestionChest {
     /**
      * List of the country codes.
      */
-    private static List<String> ACOUNTRY_CODES = CountryUtil.getIsoCodes();
+    private static List<String> ACOUNTRY_CODES = CountryUtil.getEurostatCodes();
 
     /**
      * Creates QuestionChest object.

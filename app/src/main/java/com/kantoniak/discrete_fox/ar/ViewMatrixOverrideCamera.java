@@ -19,7 +19,7 @@ public class ViewMatrixOverrideCamera extends Camera {
 
     public void setViewMatrixOverride(Matrix4 viewMatrixOverride) {
         this.viewMatrixOverride = viewMatrixOverride;
-        this.viewMatrixOverrideScaled = viewMatrixOverride.scale(currentZoom);
+        this.viewMatrixOverrideScaled = viewMatrixOverride.scale(5.f * currentZoom);
     }
 
     @Override

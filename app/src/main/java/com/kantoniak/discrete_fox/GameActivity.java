@@ -194,15 +194,16 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         // TODO mp3 final
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
         //mp.start();
-        int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(gameplay.getResult()) + "pkt", "raw", getApplicationContext().getPackageName());
-        MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
-        mp2.start();
+        // FIXME(kedzior): obFileId sometimes tries to find "a40pkt"
+        //int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(gameplay.getResult()) + "pkt", "raw", getApplicationContext().getPackageName());
+        //MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
+        //mp2.start();
     }
 
     public void startGame() {
         showingAnswers = false;
         mListViewLinearLayout.setVisibility(View.INVISIBLE);
-        map.disableAllCountries();
+        map.reset();
         //TODO Call generateQuestions on application start.
         gameplay = new Gameplay(generateQuestions(), NUMBEROFCOUNTRIES);
         Question question = gameplay.getCurrentQuestion();
@@ -256,7 +257,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             showingAnswers = true;
             for (String code : countries) {
                 map.getCountry(code).setHeight(
-                        currentQuestion.getCorrectAnswer(CountryUtil.isoToName(code)));
+                        currentQuestion.getCorrectAnswer(CountryUtil.eurostatToName(code)));
             }
         }
     }
@@ -267,10 +268,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void showQuestion(Question question) {
-        map.disableAllCountries();
-        for (String code: question.getCountries()) {
-            map.enableCountry(code);
-        }
+        map.reset();
+        question.getCountries().forEach((code) -> map.enableCountry(code));
+
         mQuestionTextView.setText(question.getDesc());
         mRoundProgress.setText(String.valueOf(gameplay.getCurrentQuestionInt() + 1) + "/" + String.valueOf(gameplay.NUMBEROFQUESTIONS));
 

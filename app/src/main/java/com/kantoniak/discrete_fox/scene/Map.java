@@ -14,40 +14,54 @@ import java.util.List;
 
 public class Map {
 
-    public static List<String> COUNTRY_CODES = CountryUtil.getIsoCodes();
+    public static List<String> COUNTRY_CODES = CountryUtil.getEurostatCodes();
     HashMap<String, Country> countries = new HashMap<>();
 
     private static final java.util.Map<String, Vector2> countryMiddles;
 
     static {
         java.util.Map<String, Vector2> middles = new HashMap<>();
-        middles.put(COUNTRY_CODES.get(0), new Vector2(-1.34, -1.92));
-        middles.put(COUNTRY_CODES.get(1), new Vector2(-3.44, -0.56));
-        middles.put(COUNTRY_CODES.get(2), new Vector2(+2.14, -3.57));
-        middles.put(COUNTRY_CODES.get(3), new Vector2(+5.58, -6.10));
-        middles.put(COUNTRY_CODES.get(4), new Vector2(-0.64, -1.09));
-        middles.put(COUNTRY_CODES.get(5), new Vector2(-2.00, -0.73));
-        middles.put(COUNTRY_CODES.get(6), new Vector2(-2.06, +1.50));
-        middles.put(COUNTRY_CODES.get(7), new Vector2(+0.98, +2.45));
-        middles.put(COUNTRY_CODES.get(8), new Vector2(-6.65, -3.85));
-        middles.put(COUNTRY_CODES.get(9), new Vector2(+0.71, +5.20));
-        middles.put(COUNTRY_CODES.get(10), new Vector2(-4.15, -1.89));
-        middles.put(COUNTRY_CODES.get(11), new Vector2(-4.88, +1.23));
-        middles.put(COUNTRY_CODES.get(12), new Vector2(+1.79, -5.16));
-        middles.put(COUNTRY_CODES.get(13), new Vector2(-0.50, -2.95));
-        middles.put(COUNTRY_CODES.get(14), new Vector2(+0.15, -2.02));
-        middles.put(COUNTRY_CODES.get(15), new Vector2(-6.08, +1.54));
-        middles.put(COUNTRY_CODES.get(16), new Vector2(-1.44, -4.27));
-        middles.put(COUNTRY_CODES.get(17), new Vector2(+1.00, +1.16));
-        middles.put(COUNTRY_CODES.get(18), new Vector2(-3.18, -0.90));
-        middles.put(COUNTRY_CODES.get(19), new Vector2(+1.07, +1.85));
-        middles.put(COUNTRY_CODES.get(20), new Vector2(-3.17, +0.04));
-        middles.put(COUNTRY_CODES.get(21), new Vector2(+0.06, -0.25));
-        middles.put(COUNTRY_CODES.get(22), new Vector2(-8.33, -3.78));
-        middles.put(COUNTRY_CODES.get(23), new Vector2(+1.86, -2.65));
-        middles.put(COUNTRY_CODES.get(24), new Vector2(-0.75, +3.84));
-        middles.put(COUNTRY_CODES.get(25), new Vector2(-1.00, -2.56));
-        middles.put(COUNTRY_CODES.get(26), new Vector2(+0.18, -1.43));
+        middles.put("fi", new Vector2(1.591, 2.102));
+        middles.put("ee", new Vector2(1.563, 1.565));
+        middles.put("no", new Vector2(1.121, 2.14));
+        middles.put("se", new Vector2(1.211, 1.968));
+        middles.put("dk", new Vector2(0.923, 1.362));
+        middles.put("lv", new Vector2(1.536, 1.426));
+        middles.put("lt", new Vector2(1.493, 1.316));
+        middles.put("ru", new Vector2(1.394, 1.27));
+        middles.put("sk", new Vector2(1.311, 0.874));
+        middles.put("by", new Vector2(1.663, 1.192));
+        middles.put("ua", new Vector2(1.798, 0.899));
+        middles.put("md", new Vector2(1.679, 0.783));
+        middles.put("cy", new Vector2(1.871, 0.119));
+        middles.put("ro", new Vector2(1.536, 0.704));
+        middles.put("tr", new Vector2(1.956, 0.327));
+        middles.put("el", new Vector2(1.447, 0.33));
+        middles.put("bg", new Vector2(1.548, 0.526));
+        middles.put("mk", new Vector2(1.404, 0.461));
+        middles.put("al", new Vector2(1.336, 0.435));
+        middles.put("hu", new Vector2(1.311, 0.779));
+        middles.put("rs", new Vector2(1.366, 0.61));
+        middles.put("xk", new Vector2(1.369, 0.515));
+        middles.put("me", new Vector2(1.303, 0.527));
+        middles.put("ba", new Vector2(1.243, 0.605));
+        middles.put("hr", new Vector2(1.186, 0.655));
+        middles.put("si", new Vector2(1.122, 0.716));
+        middles.put("mt", new Vector2(1.105, 0.164));
+        middles.put("cz", new Vector2(1.141, 0.938));
+        middles.put("at", new Vector2(1.098, 0.805));
+        middles.put("it", new Vector2(1.007, 0.539));
+        middles.put("fr", new Vector2(0.621, 0.751));
+        middles.put("ie", new Vector2(0.186, 1.164));
+        middles.put("uk", new Vector2(0.398, 1.237));
+        middles.put("pt", new Vector2(0.192, 0.361));
+        middles.put("es", new Vector2(0.375, 0.4));
+        middles.put("lu", new Vector2(0.767, 0.94));
+        middles.put("be", new Vector2(0.703, 0.998));
+        middles.put("nl", new Vector2(0.747, 1.099));
+        middles.put("de", new Vector2(0.943, 1.031));
+        middles.put("pl", new Vector2(1.309, 1.096));
+        middles.put("ch", new Vector2(0.852, 0.758));
         countryMiddles = Collections.unmodifiableMap(middles);
     }
 
@@ -59,10 +73,10 @@ public class Map {
         return countries;
     }
 
-    public void disableAllCountries() {
+    public void reset() {
         for (java.util.Map.Entry<String, Country> entry: getCountries().entrySet()) {
             Country country = entry.getValue();
-            country.setDisabled(true);
+            country.resetState();
         }
     }
 

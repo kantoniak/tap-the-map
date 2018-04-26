@@ -70,4 +70,8 @@ public class CountryUtil {
     public static List<String> getIsoCodes() {
         return iso;
     }
+
+    public static List<String> getEurostatCodes() {
+        return eurostatCodes;
+    }
 }
