@@ -103,16 +103,7 @@ public class QuestionChest {
             }
             COUNTRYCODES.add(questionCodes);
         }
-        List<String> description = new ArrayList<>();
-        description.add(res.getString(R.string.question_gdp));
-        description.add(res.getString(R.string.question_toilet));
-        description.add(res.getString(R.string.question_unemployment));
-        description.add(res.getString(R.string.question_forest));
-        description.add(res.getString(R.string.question_population_density));
-        description.add(res.getString(R.string.question_waste));
-        description.add(res.getString(R.string.question_internet_access));
-        description.add(res.getString(R.string.question_pkb_per_capita));
-        //countryCodes = new String
+        List<String> description = Arrays.asList(res.getStringArray(R.array.questions));
 
         questionsArrayList = new ArrayList<>();
         int n = QUERY.size();

@@ -20,15 +20,17 @@
     <string name="play_again">Play again</string>
 
     <!-- Sample data -->
-    <string name="sample_question">What is the largest country in the UE?</string>
-    <string name="question_gdp">What is GDP?</string>
-    <string name="question_toilet">What is the level of no toilet rate?</string>
-    <string name="question_unemployment">What is the unemployment rate in the country?</string>
-    <string name="question_forest">What is the afforestation rate?</string>
-    <string name="question_population_density">What is the population density?</string>
-    <string name="question_waste">What is the waste generation rate?</string>
-    <string name="question_internet_access">What is the level of internet access by households?</string>
-    <string name="question_pkb_per_capita">What is GDP per capita?</string>
+    <string-array name="questions">
+        <item>What is the largest country in the UE?</item>
+        <item>What is GDP?</item>
+        <item>What is the level of no toilet rate?</item>
+        <item>What is the unemployment rate in the country?</item>
+        <item>What is the afforestation rate?</item>
+        <item>What is the population density?</item>
+        <item>What is the waste generation rate?</item>
+        <item>What is the level of internet access by households?</item>
+        <item>What is GDP per capita?</item>
+    </string-array>
     <string name="sample_last_title">Great Job!</string>
     <string name="sample_score">15/25</string>
     <string name="title_activity_main_menu">MainMenuActivity</string>

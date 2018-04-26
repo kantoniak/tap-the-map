@@ -20,14 +20,16 @@
     <string name="play_again">Zagraj ponownie</string>
 
     <!-- Sample data -->
-    <string name="sample_question">Jakie jest największe państwo w UE?</string>
-    <string name="question_gdp">Jakie PKB jest w danym kraju?</string>
-    <string name="question_toilet">Jaka jest liczba gospodarstw domowych bez dostępu do toalety w danym kraju?</string>
-    <string name="question_unemployment">Jaki jest wskaźnik stopy bezrobocia w danym kraju?</string>
-    <string name="question_forest">Jaki jest poziom zalesienia w danym kraju?</string>
-    <string name="question_population_density">Jaka jest gęstość zaludnienia w danym kraju?</string>
-    <string name="question_waste">Jaki jest poziom wytwarzania odpadów w danym kraju?</string>
-    <string name="question_internet_access">Jaka jest liczba gospodarstw domowych z dostępem do internetu?</string>
-    <string name="question_pkb_per_capita">Jakie PKB per capita jest w danym kraju?</string>
+    <string-array name="questions">
+        <item>Jakie jest największe państwo w UE?</item>
+        <item>Jakie PKB jest w danym kraju?</item>
+        <item>Jaka jest liczba gospodarstw domowych bez dostępu do toalety w danym kraju?</item>
+        <item>Jaki jest wskaźnik stopy bezrobocia w danym kraju?</item>
+        <item>Jaki jest poziom zalesienia w danym kraju?</item>
+        <item>Jaka jest gęstość zaludnienia w danym kraju?</item>
+        <item>Jaki jest poziom wytwarzania odpadów w danym kraju?</item>
+        <item>Jaka jest liczba gospodarstw domowych z dostępem do internetu?</item>
+        <item>Jakie PKB per capita jest w danym kraju?</item>
+    </string-array>
 
 </resources>
