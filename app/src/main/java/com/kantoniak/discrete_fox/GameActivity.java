@@ -1,6 +1,7 @@
 package com.kantoniak.discrete_fox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -31,6 +32,7 @@ import com.kantoniak.discrete_fox.ask.Question;
 import com.kantoniak.discrete_fox.ask.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
 import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
+import com.kantoniak.discrete_fox.scene.Country;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
@@ -52,6 +54,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class GameActivity extends AppCompatActivity implements View.OnTouchListener {
 
+    public static final String MESSAGE_SCORE = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE";
+    public static final String MESSAGE_SCORE_OUT_OF = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE_OUT_OF";
+    public static final String MESSAGE_IS_HIGHSCORE = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_IS_HIGHSCORE";
+
     // Screens
     @BindView(R.id.overlay) ViewGroup mOverlayView;
     @BindView(R.id.screen_question) ViewGroup mScreenQuestion;
@@ -71,19 +77,12 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     @BindView(R.id.legend_low_color) View mLowColorView;
     @BindView(R.id.next_button_icon) ImageView mNextIcon;
 
-    @BindView(R.id.list_view_answers) ListView mListView;
     @BindView(R.id.answers_recycler) RecyclerView mAnswersRecycler;
-    @BindView(R.id.list_view_linear_layout) LinearLayout mListViewLinearLayout;
+    @BindView(R.id.answers_container) LinearLayout mAnswersContainer;
 
     private Gameplay gameplay;
     boolean showingAnswers = false;
     private AnswersAdapter answersAdapter;
-
-    // screen_score
-    @BindView(R.id.score_points) TextView mScoreTextView;
-    @BindView(R.id.great_job_tv) TextView mGreatJobTv;
-    @BindView(R.id.score_play_again) TextView mPlayAgainButton;
-    @BindView(R.id.facebook_share_button) ShareButton mShareButton;
 
     // Gameplay part
     private static final String TAG = GameActivity.class.getSimpleName();
@@ -117,7 +116,6 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(R.layout.activity_game);
         ButterKnife.bind(this);
 
-        // FIXME: Look at this
         setupAnswersRecycler();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -129,13 +127,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         mAnswersRecycler.setHasFixedSize(true);
         mAnswersRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Answer> answers = Arrays.asList(
-                //new AnswersAdapter.Answer("Polska", "300", 0xFF990000),
-                //new AnswersAdapter.Answer("Niemcy", "500", 0xFFCC0000),
-                //new AnswersAdapter.Answer("Hiszpania", "400", 0xFFFF0000)
-        );
-
-        answersAdapter = new AnswersAdapter(answers);
+        answersAdapter = new AnswersAdapter();
         mAnswersRecycler.setAdapter(answersAdapter);
     }
 
@@ -163,46 +155,29 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         mOverlayView.findViewById(screenId).setVisibility(View.VISIBLE);
     }
 
-    private int updateHighScore(int newScore) {
+    private boolean updateHighScore(int newScore) {
         SharedPreferences prefs = getSharedPreferences("highscore", Context.MODE_PRIVATE);
         int res = prefs.getInt(SCORE_PREFS, 0);
-        if (res < newScore) {
-            prefs.edit().putInt(SCORE_PREFS, newScore).apply();
-            return 1;
+        if (res >= newScore) {
+            return false;
         }
-        return 0;
+        prefs.edit().putInt(SCORE_PREFS, newScore).apply();
+        return true;
     }
 
     private void presentFinalScreen(Gameplay gameplay) {
-        int hs = updateHighScore(gameplay.getResult());
+        boolean hs = updateHighScore(gameplay.getResult());
 
-        showScreen(R.id.screen_score);
-        if (hs == 1) {
-            mGreatJobTv.setText(getResources().getString(R.string.new_high_score));
-        } else if ((gameplay.getResult()*1.0) / gameplay.getMaxResult() < 0.2) {
-            mGreatJobTv.setText(getResources().getString(R.string.score_needs_improvement));
-        } else {
-            mGreatJobTv.setText(getResources().getString(R.string.score_great_job));
-        }
-        mScoreTextView.setText(String.valueOf(gameplay.getResult()) + "/" + String.valueOf((gameplay.getMaxResult())));
-
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setQuote("Whatever")
-                .setContentUrl(Uri.parse("https://stat.gov.pl/"))
-                .build();
-        mShareButton.setShareContent(content);
-        // TODO mp3 final
-        //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
-        //mp.start();
-        // FIXME(kedzior): obFileId sometimes tries to find "a40pkt"
-        //int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(gameplay.getResult()) + "pkt", "raw", getApplicationContext().getPackageName());
-        //MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
-        //mp2.start();
+        Intent intent = new Intent(this, ScoreActivity.class);
+        intent.putExtra(MESSAGE_SCORE, gameplay.getResult());
+        intent.putExtra(MESSAGE_SCORE_OUT_OF, gameplay.getMaxResult());
+        intent.putExtra(MESSAGE_IS_HIGHSCORE, hs);
+        startActivity(intent);
     }
 
     public void startGame() {
         showingAnswers = false;
-        mListViewLinearLayout.setVisibility(View.INVISIBLE);
+        mAnswersContainer.setVisibility(View.INVISIBLE);
         map.reset();
         //TODO Call generateQuestions on application start.
         gameplay = new Gameplay(generateQuestions(), NUMBEROFCOUNTRIES);
@@ -215,7 +190,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     @OnClick(R.id.button_close)
     public void buttonClose() {
-        // FIXME(kantoniak): back to menu
+        startActivity(new Intent(this, MainMenuActivity.class));
     }
 
     @OnClick(R.id.button_zoom_in)
@@ -233,7 +208,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         if (showingAnswers) {
             mNextIcon.setImageResource(R.drawable.ic_done_24dp);
             showingAnswers = false;
-            mListViewLinearLayout.setVisibility(View.INVISIBLE);
+            mAnswersContainer.setVisibility(View.INVISIBLE);
 
             Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
             if (nextQuestion == null) {
@@ -245,34 +220,27 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         } else {
             Question currentQuestion = gameplay.getCurrentQuestion();
             List<String> countries = currentQuestion.getCountries();
-            String[] forList = new String[countries.size()];
             List<Answer> answers = currentQuestion.getAnswers();
             answers.sort(Comparator.comparing(Answer::getValueRaw).reversed());
             answersAdapter.updateAnswers(answers);
 
-            ArrayAdapter<String> test = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, forList);
-            mListView.setAdapter(test);
-            mListViewLinearLayout.setVisibility(View.VISIBLE);
+            mAnswersContainer.setVisibility(View.VISIBLE);
             mNextIcon.setImageResource(R.drawable.ic_trending_flat_24dp);
             showingAnswers = true;
             for (String code : countries) {
-                map.getCountry(code).setHeight(
-                        currentQuestion.getCorrectAnswer(CountryUtil.eurostatToName(code)));
+                Country country = map.getCountry(code);
+                int targetHeight = currentQuestion.getCorrectAnswer(CountryUtil.eurostatToName(code));
+                country.setHeight(targetHeight);
             }
         }
     }
 
-    @OnClick(R.id.score_play_again)
-    public void restartGame(View view) {
-        startGame();
-    }
-
     private void showQuestion(Question question) {
         map.reset();
-        question.getCountries().forEach((code) -> map.enableCountry(code));
+        question.getCountries().forEach(map::enableCountry);
 
         mQuestionTextView.setText(question.getDesc());
-        mRoundProgress.setText(String.valueOf(gameplay.getCurrentQuestionInt() + 1) + "/" + String.valueOf(gameplay.NUMBEROFQUESTIONS));
+        mRoundProgress.setText("" + (gameplay.getCurrentQuestionInt() + 1) + "/" + gameplay.NUMBEROFQUESTIONS);
 
         mHighTextView.setText(question.getMaxLabel());
         mMidTextView.setText(question.getMidLabel());

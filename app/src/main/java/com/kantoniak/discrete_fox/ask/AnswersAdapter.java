@@ -26,10 +26,6 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
         }
     }
 
-    public AnswersAdapter(List<Answer> dataset) {
-        this.dataset.addAll(dataset);
-    }
-
     @Override
     public AnswersAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.answer_item_row, parent, false);
