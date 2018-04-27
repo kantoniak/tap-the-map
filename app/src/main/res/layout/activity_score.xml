@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/score_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/triplePadding"
+        android:src="@drawable/ic_trophy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/right_text_container"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="spread" />
+
+    <LinearLayout
+        android:id="@+id/right_text_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/triplePlusPadding"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/score_image"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/score_title"
+            style="@style/HeaderText"
+            tools:text="@string/new_high_score" />
+
+        <TextView
+            style="@style/SubHeaderText"
+            android:text="@string/your_score"
+            android:textSize="@dimen/subsubheaderTextSize" />
+
+        <TextView
+            android:id="@+id/score_points"
+            style="@style/SubHeaderText"
+            tools:text="15 / 25" />
+
+        <LinearLayout
+            android:id="@+id/bottom_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/triplePadding">
+
+            <Button
+                android:id="@+id/button_play_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/play_again" />
+
+            <com.facebook.share.widget.ShareButton
+                android:id="@+id/button_facebook_share"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/triplePadding"
+                android:background="#3B5998"
+                android:paddingLeft="@dimen/doublePadding"
+                android:paddingRight="@dimen/doublePadding"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

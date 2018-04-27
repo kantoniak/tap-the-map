@@ -173,6 +173,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         intent.putExtra(MESSAGE_SCORE_OUT_OF, gameplay.getMaxResult());
         intent.putExtra(MESSAGE_IS_HIGHSCORE, hs);
         startActivity(intent);
+        finish();
     }
 
     public void startGame() {
@@ -191,6 +192,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     @OnClick(R.id.button_close)
     public void buttonClose() {
         startActivity(new Intent(this, MainMenuActivity.class));
+        finish();
     }
 
     @OnClick(R.id.button_zoom_in)

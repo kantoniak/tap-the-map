@@ -6,7 +6,11 @@
     <dimen name="biggerPadding">12dp</dimen>
     <dimen name="doublePadding">16dp</dimen>
     <dimen name="triplePadding">24dp</dimen>
+    <dimen name="triplePlusPadding">36dp</dimen>
 
     <!-- Text sizing -->
+    <dimen name="headerTextSize">40sp</dimen>
+    <dimen name="subheaderTextSize">36sp</dimen>
+    <dimen name="subsubheaderTextSize">20sp</dimen>
     <dimen name="questionTextSize">16sp</dimen>
 </resources>
