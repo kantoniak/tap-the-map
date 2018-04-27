@@ -6,6 +6,11 @@ import android.view.MotionEvent;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.cameras.Camera;
+import org.rajawali3d.materials.Material;
+import org.rajawali3d.materials.textures.ATexture;
+import org.rajawali3d.math.vector.Vector2;
+import org.rajawali3d.math.vector.Vector3;
+import org.rajawali3d.primitives.Plane;
 import org.rajawali3d.renderer.Renderer;
 import org.rajawali3d.util.ObjectColorPicker;
 import org.rajawali3d.util.OnObjectPickedListener;
@@ -14,6 +19,9 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class MapRenderer extends Renderer implements OnObjectPickedListener {
+
+    private static final Vector2 MAP_SIZE = new Vector2(2.438f, 2.889f);
+    private static final Vector2 MAP_CORRECTION = new Vector2(-0.01f, -0.01f);
 
     private final Context context;
     private final Map map;
@@ -56,11 +64,28 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         getCurrentScene().addAndSwitchCamera(camera);
         setupObjectPicker();
 
-        //TODO(kantoniak): Move country loading out of Country and renderer?
+        Plane mapBase = new Plane();
+        mapBase.setDoubleSided(true);
+        mapBase.setScale(MAP_SIZE.getX(), 1, MAP_SIZE.getY());
+        mapBase.setPosition(MAP_CORRECTION.getX() * 0.5f, 0, -MAP_CORRECTION.getY() * 0.5f);
+        mapBase.rotate(Vector3.Axis.X, +90);
+        mapBase.setTransparent(true);
+        getCurrentScene().addChild(mapBase);
+
+        try {
+            Material mapBaseMaterial = new Material();
+            mapBaseMaterial.setColor(0x00000000);
+            mapBaseMaterial.addTexture(loader.loadTexture("map_background"));
+            mapBase.setMaterial(mapBaseMaterial);
+        } catch (ATexture.TextureException e) {
+            e.printStackTrace();
+        }
+
         // Countries
+        Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
         for (String code : Map.COUNTRY_CODES) {
             Country country = new Country(code, map.getCountryMiddle(code));
-            country.createObject(loader);
+            country.createObject(loader, worldOffset);
             country.registerObject(getCurrentScene(), objectPicker);
             map.addCountry(country);
         }

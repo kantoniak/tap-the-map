@@ -21,8 +21,8 @@ import org.rajawali3d.util.ObjectColorPicker;
  */
 public class Country {
 
-    private static int COLOR_DEFAULT = 0xFFE0E0E0;
-    private static int COLOR_DISABLED = 0xFF9E9E9E;
+    private static int COLOR_DEFAULT = 0xFFFAFAFA;
+    private static int COLOR_DISABLED = 0xFFF5F5F5;
     private static int COLOR_BLACK = 0xFF000000;
 
     /** Height ob the imported OBJ model */
@@ -57,23 +57,25 @@ public class Country {
         this.countryMiddle = countryMiddle;
     }
 
-    public void createObject(AssetLoader loader) {
+    public void createObject(AssetLoader loader, Vector3 worldOffset) {
         countryBase = loader.loadObj("country_base_" + code + "_obj");
         countryTop = loader.loadObj("country_top_" + code + "_obj");
 
         countryBase.setDoubleSided(true);
         countryBaseMaterial.setColor(getBaseColor(COLOR_DEFAULT));
         countryBase.setMaterial(countryBaseMaterial);
+        countryBase.setPosition(worldOffset);
 
         countryTop.setDoubleSided(true);
         countryTopMaterial.setColor(COLOR_DEFAULT);
         countryTop.setMaterial(countryTopMaterial);
+        countryTop.setPosition(worldOffset);
 
         countryName = new Plane();
         countryName.setDoubleSided(true);
         countryName.setScale(NAME_SCALE);
-        countryName.setX(countryMiddle.getX());
-        countryName.setZ(-countryMiddle.getY());
+        countryName.setX(countryMiddle.getX() + worldOffset.x);
+        countryName.setZ(-countryMiddle.getY() + worldOffset.z);
 
         try {
             Material countryNameMaterial = new Material();
@@ -133,12 +135,12 @@ public class Country {
         countryName.setVisible(!this.disabled);
 
         if (height == 0) {
-            countryTop.setPosition(new Vector3(0, 0, 0));
+            countryTop.setY(0);
             countryTopMaterial.setColor(COLOR_DEFAULT);
             countryName.setY(NAME_Y_TRANSLATION);
         } else {
             countryBase.setScaleY(height * Y_SCALE_MULTIPLIER);
-            countryTop.setPosition(new Vector3(0, BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER, 0));
+            countryTop.setY(BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER);
             countryName.setY(BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER + NAME_Y_TRANSLATION);
 
             float colorRatio = (height - 1) / (float)(maxHeight - 1);
