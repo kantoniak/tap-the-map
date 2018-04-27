@@ -22,8 +22,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION = 0;
 
-    @BindView(R.id.animation_main) ImageView mAnimationMain;
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -35,7 +33,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         ButterKnife.bind(this);
 
-        Glide.with(this).load(R.raw.tap).into(mAnimationMain);
+        //Glide.with(this).load(R.raw.tap).into(mAnimationMain);
         EasyARUtils.initializeEngine(this);
     }
 

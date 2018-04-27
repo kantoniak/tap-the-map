@@ -1,11 +1,12 @@
 <resources>
 
     <!-- Globals -->
-    <string name="app_name">Tap The Map</string>
+    <string name="app_name">TapTheMap</string>
     <string name="app_desc">Tap the countries to complete tasks</string>
 
     <!-- Main screen -->
-    <string name="button_start">Start!</string>
+    <string name="button_start">Start game</string>
+    <string name="button_about">About</string>
 
     <!-- Answer listview -->
     <string name="result_low">LOW</string>

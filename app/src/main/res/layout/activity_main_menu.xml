@@ -7,59 +7,72 @@
     android:background="@color/colorPrimary"
     android:padding="@dimen/triplePadding">
 
-    <ImageView
-        android:id="@+id/animation_main"
-        app:layout_constraintHeight_max="512px"
-        app:layout_constraintWidth_max="512px"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/biggerPadding"
-        android:layout_marginRight="@dimen/doublePadding"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/title_block"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/textColorOnPrimary"/>
-
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/title_block"
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/animation_main"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/buttons">
+
+        <ImageView
+            android:id="@+id/image_hand"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_hand"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/name_app"
+            app:layout_constraintHeight_default="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="spread" />
 
         <TextView
             android:id="@+id/name_app"
             style="@style/HeaderText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:textSize="64sp"
             android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textColor="@color/textColorOnPrimary" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_hand"
+            android:layout_marginLeft="@dimen/triplePadding"
+            android:layout_marginRight="@dimen/triplePadding"/>
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
-            android:text="@string/app_desc"
-            android:textColor="@color/textColorOnPrimary"
-            app:layout_constraintTop_toBottomOf="@id/name_app" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <Button
             android:id="@+id/start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/doublePadding"
-            android:text="@string/button_start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            android:layout_margin="@dimen/triplePadding"
+            android:paddingTop="@dimen/doublePadding"
+            android:paddingBottom="@dimen/triplePadding"
+            android:paddingLeft="@dimen/triplePadding"
+            android:paddingRight="@dimen/triplePadding"
+            android:textSize="30sp"
+            android:text="@string/button_start" />
 
-    </android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/about_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_about" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
