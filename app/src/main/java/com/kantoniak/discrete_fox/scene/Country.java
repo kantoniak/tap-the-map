@@ -58,8 +58,8 @@ public class Country {
     }
 
     public void createObject(AssetLoader loader, Vector3 worldOffset) {
-        countryBase = loader.loadObj("country_base_" + code + "_obj");
-        countryTop = loader.loadObj("country_top_" + code + "_obj");
+        countryBase = loader.loadCountryBase(code);
+        countryTop = loader.loadCountryTop(code);
 
         countryBase.setDoubleSided(true);
         countryBaseMaterial.setColor(getBaseColor(COLOR_DEFAULT));
@@ -80,7 +80,7 @@ public class Country {
         try {
             Material countryNameMaterial = new Material();
             countryNameMaterial.setColor(0x333333);
-            countryNameMaterial.addTexture(loader.loadTexture("country_" + code + "_plate"));
+            countryNameMaterial.addTexture(loader.loadCountryNameTexture(code));
             countryName.setMaterial(countryNameMaterial);
         } catch (ATexture.TextureException e) {
             e.printStackTrace();
