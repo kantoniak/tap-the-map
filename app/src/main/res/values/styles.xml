@@ -8,6 +8,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <!-- Fonts -->
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="fontFamily">@font/nunito</item>
+
         <!-- Default activity behaviour -->
         <item name="android:windowBackground">@color/colorPrimary</item>
 
@@ -29,7 +33,8 @@
     </style>
 
     <style name="HeaderText" parent="OnPrimaryText">
-        <item name="fontPath">fonts/Nunito-ExtraBold.ttf</item>
+        <item name="fontWeight">800</item>
+        <item name="android:fontWeight" tools:ignore="NewApi">800</item>
         <item name="android:textSize">@dimen/headerTextSize</item>
     </style>
 

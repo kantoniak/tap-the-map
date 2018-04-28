@@ -15,20 +15,13 @@ import com.facebook.share.widget.ShareButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ScoreActivity extends AppCompatActivity {
 
     @BindView(R.id.score_image) ImageView mScoreImage;
     @BindView(R.id.score_points) TextView mScorePointsTextView;
     @BindView(R.id.score_title) TextView mScoreTitleTextView;
-    @BindView(R.id.button_play_again) TextView mPlayAgainButton;
     @BindView(R.id.button_facebook_share) ShareButton mShareButton;
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

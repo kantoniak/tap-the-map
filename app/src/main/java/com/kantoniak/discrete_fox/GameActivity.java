@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -14,14 +13,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareButton;
 import com.kantoniak.discrete_fox.ar.EasyARController;
 import com.kantoniak.discrete_fox.ar.EasyARRenderingDelegate;
 import com.kantoniak.discrete_fox.ar.UpdateBackgroundAndMatricesCallback;
@@ -36,20 +31,15 @@ import com.kantoniak.discrete_fox.scene.Country;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
-import com.trivago.triava.util.UnitFormatter;
-import com.trivago.triava.util.UnitSystem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class GameActivity extends AppCompatActivity implements View.OnTouchListener {
@@ -95,11 +85,6 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     private final ViewMatrixOverrideCamera camera = new ViewMatrixOverrideCamera();
     private final Map map = new Map();
     private MapRenderer renderer;
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 
     private ArrayList<Question> generateQuestions() {
         QuestionChest qc = new QuestionChest(getResources(), getApplicationContext(), NUMBEROFCOUNTRIES);
