@@ -22,14 +22,17 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         ButterKnife.bind(this);
-
-        //Glide.with(this).load(R.raw.tap).into(mAnimationMain);
         EasyARUtils.initializeEngine(this);
     }
 
     @OnClick(R.id.start_button)
     public void onClickStart(View view) {
         requestCameraPermission();
+    }
+
+    @OnClick(R.id.about_button)
+    public void onClickAbout(View view) {
+        startActivity(new Intent(this, AboutActivity.class));
     }
 
     private void onCameraRequestSuccess() {

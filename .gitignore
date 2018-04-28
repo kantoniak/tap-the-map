@@ -1,6 +1,9 @@
 # Secrets
 **/*/res/values/secrets.xml
 
+# LICENSE.txt copy in raw resources
+app/src/main/res/raw/license.txt
+
 # Built application files
 *.apk
 *.ap_

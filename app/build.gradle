@@ -22,6 +22,21 @@ android {
     }
 }
 
+task copyLicenseToRaw(type: Copy) {
+    from("../LICENSE.txt")
+    rename { String fileName ->
+        fileName.toLowerCase()
+    }
+    into("src/main/res/raw")
+}
+
+project.afterEvaluate {
+    preBuild.dependsOn copyLicenseToRaw
+}
+
+clean.dependsOn copyLicenseToRaw
+clean.mustRunAfter copyLicenseToRaw
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.0.1'

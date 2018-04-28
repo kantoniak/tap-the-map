@@ -3,15 +3,16 @@
     <!-- Globals -->
     <string name="app_name">TapTheMap</string>
     <string name="app_desc">Tap the countries to complete tasks</string>
+    <string name="app_about">This application is a winning project created\nduring the hackathon organized by Central\nStatistical Office of Poland. Original idea by\nthe team EmojiNotSupportedException:\n\n• Krzysztof Antoniak\n• Łukasz Kędziorski\n• Marta Mazurkiewicz</string>
 
     <!-- Main screen -->
     <string name="button_start">Start game</string>
     <string name="button_about">About</string>
 
-    <!-- Answer listview -->
-    <string name="result_low">LOW</string>
-    <string name="result_mid">MID</string>
-    <string name="result_high">HIGH</string>
+    <!-- About screen -->
+    <string name="button_licenses">Licenses</string>
+    <string name="button_go_back">Go back</string>
+    <string name="error_loading_licenses">Error loading licenses...</string>
 
     <!-- Score screen -->
     <string name="new_high_score">New high score!</string>
@@ -32,8 +33,5 @@
         <item>What is the level of internet access by households?</item>
         <item>What is GDP per capita?</item>
     </string-array>
-    <string name="sample_last_title">Great Job!</string>
-    <string name="sample_score">15/25</string>
-    <string name="title_activity_main_menu">MainMenuActivity</string>
 
 </resources>
