@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.kantoniak.discrete_fox.ar.EasyARUtils;
@@ -26,6 +27,8 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         ButterKnife.bind(this);
         EasyARUtils.initializeEngine(this);
+
+        mScreenPermission.setOnTouchListener((view, event) -> true);
     }
 
     @OnClick(R.id.start_button)
