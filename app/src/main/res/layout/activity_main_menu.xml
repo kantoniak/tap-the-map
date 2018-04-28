@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
-    android:padding="@dimen/triplePadding">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/triplePadding"
+        app:layout_constraintBottom_toTopOf="@id/buttons"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttons">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/image_hand"
@@ -32,14 +32,14 @@
         <TextView
             android:id="@+id/name_app"
             style="@style/HeaderText"
-            android:textSize="64sp"
+            android:layout_marginLeft="@dimen/triplePadding"
+            android:layout_marginRight="@dimen/triplePadding"
             android:text="@string/app_name"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_hand"
-            android:layout_marginLeft="@dimen/triplePadding"
-            android:layout_marginRight="@dimen/triplePadding"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -48,24 +48,25 @@
         android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/triplePadding"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        android:orientation="vertical"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@id/header">
 
         <Button
             android:id="@+id/start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/triplePadding"
-            android:paddingTop="@dimen/doublePadding"
             android:paddingBottom="@dimen/triplePadding"
             android:paddingLeft="@dimen/triplePadding"
             android:paddingRight="@dimen/triplePadding"
-            android:textSize="30sp"
-            android:text="@string/button_start" />
+            android:paddingTop="@dimen/doublePadding"
+            android:text="@string/button_start"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/about_button"
@@ -74,5 +75,10 @@
             android:text="@string/button_about" />
 
     </LinearLayout>
+
+    <include
+        android:id="@+id/screen_permission"
+        layout="@layout/screen_missing_permission"
+        android:visibility="gone" />
 
 </android.support.constraint.ConstraintLayout>

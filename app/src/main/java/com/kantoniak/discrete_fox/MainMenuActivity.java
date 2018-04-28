@@ -10,12 +10,15 @@ import android.view.View;
 
 import com.kantoniak.discrete_fox.ar.EasyARUtils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainMenuActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION = 0;
+
+    @BindView(R.id.screen_permission) View mScreenPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +40,15 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void onCameraRequestSuccess() {
         startActivity(new Intent(this, GameActivity.class));
+        mScreenPermission.setVisibility(View.GONE);
     }
 
     private void onCameraRequestFailure() {
+        mScreenPermission.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.button_try_camera_again)
+    public void onRetryCamera(View view) {
         requestCameraPermission();
     }
 
@@ -66,5 +75,14 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mScreenPermission.getVisibility() == View.VISIBLE) {
+            mScreenPermission.setVisibility(View.GONE);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

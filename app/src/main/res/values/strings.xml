@@ -8,6 +8,8 @@
     <!-- Main screen -->
     <string name="button_start">Start game</string>
     <string name="button_about">About</string>
+    <string name="we_need_camera_permission">We need camera\npermission to track\nthe marker.</string>
+    <string name="button_try_again">Try again</string>
 
     <!-- About screen -->
     <string name="button_licenses">Licenses</string>
