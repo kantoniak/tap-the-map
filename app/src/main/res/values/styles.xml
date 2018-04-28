@@ -9,8 +9,8 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- Fonts -->
-        <item name="android:fontFamily">@font/nunito</item>
-        <item name="fontFamily">@font/nunito</item>
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="fontFamily">@font/nunito_regular</item>
 
         <!-- Default activity behaviour -->
         <item name="android:windowBackground">@color/colorPrimary</item>
@@ -33,8 +33,8 @@
     </style>
 
     <style name="HeaderText" parent="OnPrimaryText">
-        <item name="fontWeight">800</item>
-        <item name="android:fontWeight" tools:ignore="NewApi">800</item>
+        <item name="android:fontFamily">@font/nunito_extrabold</item>
+        <item name="fontFamily">@font/nunito_extrabold</item>
         <item name="android:textSize">@dimen/headerTextSize</item>
     </style>
 
