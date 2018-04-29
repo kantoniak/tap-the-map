@@ -84,10 +84,10 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         // Countries
         Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
         for (String code : Map.COUNTRY_CODES) {
-            Country country = new Country(code, map.getCountryMiddle(code));
-            country.createObject(loader, worldOffset);
-            country.registerObject(getCurrentScene(), objectPicker);
-            map.addCountry(country);
+            CountryInstance countryInstance = new CountryInstance(code, map.getCountryMiddle(code));
+            countryInstance.createObject(loader, worldOffset);
+            countryInstance.registerObject(getCurrentScene(), objectPicker);
+            map.addCountry(countryInstance);
         }
     }
 
@@ -110,7 +110,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     @Override
     public void onObjectPicked(@NonNull Object3D object) {
-        for (java.util.Map.Entry<String, Country> entry: map.getCountries().entrySet()) {
+        for (java.util.Map.Entry<String, CountryInstance> entry: map.getCountries().entrySet()) {
             if (entry.getValue().containsObject(object)) {
                 entry.getValue().onPicked();
             }

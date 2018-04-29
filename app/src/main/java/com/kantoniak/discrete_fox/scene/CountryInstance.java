@@ -19,7 +19,7 @@ import org.rajawali3d.util.ObjectColorPicker;
  * About 3D rendering: world map exists in a plane where X is to the right and Z is to top of the
  * map. Y axis is perpendicular to the map.
  */
-public class Country {
+public class CountryInstance {
 
     private static int COLOR_DEFAULT = 0xFFFAFAFA;
     private static int COLOR_DISABLED = 0xFFF5F5F5;
@@ -50,7 +50,7 @@ public class Country {
     private Material countryTopMaterial = new Material();
     private final Vector2 countryMiddle;
 
-    public Country(String code, Vector2 countryMiddle) {
+    public CountryInstance(String code, Vector2 countryMiddle) {
         this.code = code;
         this.maxHeight = 3;
         this.disabled = true;

@@ -27,7 +27,7 @@ import com.kantoniak.discrete_fox.ask.Question;
 import com.kantoniak.discrete_fox.ask.QuestionChest;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
 import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
-import com.kantoniak.discrete_fox.scene.Country;
+import com.kantoniak.discrete_fox.scene.CountryInstance;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
@@ -215,9 +215,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             mNextIcon.setImageResource(R.drawable.ic_trending_flat_24dp);
             showingAnswers = true;
             for (String code : countries) {
-                Country country = map.getCountry(code);
+                CountryInstance countryInstance = map.getCountry(code);
                 int targetHeight = currentQuestion.getCorrectAnswer(CountryUtil.eurostatToName(code));
-                country.setHeight(targetHeight);
+                countryInstance.setHeight(targetHeight);
             }
         }
     }

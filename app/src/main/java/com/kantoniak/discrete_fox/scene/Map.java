@@ -6,16 +6,14 @@ import com.kantoniak.discrete_fox.CountryUtil;
 
 import org.rajawali3d.math.vector.Vector2;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Map {
 
     public static List<String> COUNTRY_CODES = CountryUtil.getEurostatCodes();
-    HashMap<String, Country> countries = new HashMap<>();
+    HashMap<String, CountryInstance> countries = new HashMap<>();
 
     private static final java.util.Map<String, Vector2> countryMiddles;
 
@@ -65,37 +63,38 @@ public class Map {
         countryMiddles = Collections.unmodifiableMap(middles);
     }
 
-    public void addCountry(Country country) {
-        countries.put(country.getCode(), country);
+    public void addCountry(CountryInstance countryInstance) {
+        countries.put(countryInstance.getCode(), countryInstance);
     }
 
-    public HashMap<String, Country> getCountries() {
+    public HashMap<String, CountryInstance> getCountries() {
         return countries;
     }
 
     public void reset() {
-        for (java.util.Map.Entry<String, Country> entry: getCountries().entrySet()) {
-            Country country = entry.getValue();
-            country.resetState();
+        for (java.util.Map.Entry<String, CountryInstance> entry: getCountries().entrySet()) {
+            CountryInstance countryInstance = entry.getValue();
+            countryInstance.resetState();
         }
     }
 
-    public @Nullable Country getCountry(String code) {
+    public @Nullable
+    CountryInstance getCountry(String code) {
         return getCountries().get(code);
     }
 
     public void enableCountry(String code) {
-        Country country = getCountries().get(code);
-        if (country == null) {
+        CountryInstance countryInstance = getCountries().get(code);
+        if (countryInstance == null) {
             return;
         }
-        country.setDisabled(false);
+        countryInstance.setDisabled(false);
     }
 
     public void setColors(int minColor, int maxColor) {
-        for (java.util.Map.Entry<String, Country> entry: getCountries().entrySet()) {
-            Country country = entry.getValue();
-            country.setColors(minColor, maxColor);
+        for (java.util.Map.Entry<String, CountryInstance> entry: getCountries().entrySet()) {
+            CountryInstance countryInstance = entry.getValue();
+            countryInstance.setColors(minColor, maxColor);
         }
     }
 

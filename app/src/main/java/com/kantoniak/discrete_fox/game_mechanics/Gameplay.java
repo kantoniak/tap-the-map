@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.kantoniak.discrete_fox.CountryUtil;
 import com.kantoniak.discrete_fox.ask.Question;
-import com.kantoniak.discrete_fox.scene.Country;
+import com.kantoniak.discrete_fox.scene.CountryInstance;
 import com.kantoniak.discrete_fox.scene.Map;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class Gameplay {
 
     public Question finishQuestion(Context context, Map map) {
         // Gather decisions
-        HashMap<String, Country> mapCountries = map.getCountries();
+        HashMap<String, CountryInstance> mapCountries = map.getCountries();
         List<String> countries = mquestions.get(currentQuestion).getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
             decisions[i] = mapCountries.get(countries.get(i)).getHeight();
@@ -68,7 +68,7 @@ public class Gameplay {
 
     private Integer calculateScore(Map map) {
         int score = 0;
-        HashMap<String, Country> mapCountries = map.getCountries();
+        HashMap<String, CountryInstance> mapCountries = map.getCountries();
         Question question = getCurrentQuestion();
         List<String> countries = question.getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
