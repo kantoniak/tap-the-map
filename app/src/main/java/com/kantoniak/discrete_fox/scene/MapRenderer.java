@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
+import com.kantoniak.discrete_fox.country.Country;
+import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
+
 import org.rajawali3d.Object3D;
 import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.materials.Material;
@@ -83,11 +86,11 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
         // Countries
         Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
-        for (String code : Map.COUNTRY_CODES) {
-            CountryInstance countryInstance = new CountryInstance(code, map.getCountryMiddle(code));
+        for (Country country : Gameplay.getEnabledCountries()) {
+            CountryInstance countryInstance = new CountryInstance(country, map.getCountryMiddle(country));
             countryInstance.createObject(loader, worldOffset);
             countryInstance.registerObject(getCurrentScene(), objectPicker);
-            map.addCountry(countryInstance);
+            map.addCountryInstance(countryInstance);
         }
     }
 
@@ -110,7 +113,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     @Override
     public void onObjectPicked(@NonNull Object3D object) {
-        for (java.util.Map.Entry<String, CountryInstance> entry: map.getCountries().entrySet()) {
+        for (java.util.Map.Entry<Country, CountryInstance> entry: map.getCountries().entrySet()) {
             if (entry.getValue().containsObject(object)) {
                 entry.getValue().onPicked();
             }

@@ -1,4 +1,4 @@
-package com.kantoniak.discrete_fox;
+package com.kantoniak.discrete_fox.country;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,14 +31,6 @@ public class CountryUtil {
             "Denmark", "Estonia", "Spain", "Finland", "France", "United Kingdom", "Greece",
             "Croatia", "Hungary", "Ireland", "Italy", "Lithuania", "Luxembourg", "Latvia", "Netherlands",
             "Poland", "Portugal", "Romania", "Sweden", "Slovenia", "Slovakia");
-
-    // @formatter:off
-    // TODO(kedzior): Lists should contain all of these countries, but not all of them are enabled for game.
-    public static List<String> allCountriesEurostatThenIso = Arrays.asList(
-            "al", "at", "ba", "be", "bg", "by", "ch", "cy", "cz", "de", "dk", "ee", "el", "es",
-            "fi", "fr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "md", "me", "mk", "mt", "nl",
-            "no", "pl", "pt", "ro", "rs", "ru", "se", "si", "sk", "tr", "ua", "uk", "xk");
-    // @formatter:on
 
     static {
         assert (iso.size() == COUNTRYCOUNT);

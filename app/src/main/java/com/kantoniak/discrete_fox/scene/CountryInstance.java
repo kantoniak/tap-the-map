@@ -3,6 +3,8 @@ package com.kantoniak.discrete_fox.scene;
 import android.content.Context;
 import android.support.v4.graphics.ColorUtils;
 
+import com.kantoniak.discrete_fox.country.Country;
+
 import org.rajawali3d.Object3D;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.textures.ATexture;
@@ -33,7 +35,7 @@ public class CountryInstance {
     private static float NAME_SCALE = 0.1f;
 
     // State
-    private final String code;
+    private final Country country;
     private final int maxHeight;
     private int height = 0;
     private boolean disabled;
@@ -50,16 +52,16 @@ public class CountryInstance {
     private Material countryTopMaterial = new Material();
     private final Vector2 countryMiddle;
 
-    public CountryInstance(String code, Vector2 countryMiddle) {
-        this.code = code;
+    public CountryInstance(Country country, Vector2 countryMiddle) {
+        this.country = country;
         this.maxHeight = 3;
         this.disabled = true;
         this.countryMiddle = countryMiddle;
     }
 
     public void createObject(AssetLoader loader, Vector3 worldOffset) {
-        countryBase = loader.loadCountryBase(code);
-        countryTop = loader.loadCountryTop(code);
+        countryBase = loader.loadCountryBase(country);
+        countryTop = loader.loadCountryTop(country);
 
         countryBase.setDoubleSided(true);
         countryBaseMaterial.setColor(getBaseColor(COLOR_DEFAULT));
@@ -80,7 +82,7 @@ public class CountryInstance {
         try {
             Material countryNameMaterial = new Material();
             countryNameMaterial.setColor(0x333333);
-            countryNameMaterial.addTexture(loader.loadCountryNameTexture(code));
+            countryNameMaterial.addTexture(loader.loadCountryNameTexture(country));
             countryName.setMaterial(countryNameMaterial);
         } catch (ATexture.TextureException e) {
             e.printStackTrace();
@@ -163,8 +165,8 @@ public class CountryInstance {
         return height;
     }
 
-    public String getCode() {
-        return code;
+    public Country getCountry() {
+        return country;
     }
 
     public void setDisabled(boolean disabled) {

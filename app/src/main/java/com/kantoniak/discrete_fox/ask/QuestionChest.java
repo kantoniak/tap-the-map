@@ -3,7 +3,7 @@ package com.kantoniak.discrete_fox.ask;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.kantoniak.discrete_fox.CountryUtil;
+import com.kantoniak.discrete_fox.country.CountryUtil;
 import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.communication.APIResponse;
 import com.kantoniak.discrete_fox.communication.AsyncTaskParams;

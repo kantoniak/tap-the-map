@@ -5,6 +5,9 @@ import android.content.res.Resources;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.kantoniak.discrete_fox.country.Country;
+import com.kantoniak.discrete_fox.country.CountryUtil;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -21,10 +24,11 @@ public class AssetExistenceTest {
         Resources resources = context.getResources();
         String packageName = context.getPackageName();
 
-        CountryUtil.allCountriesEurostatThenIso.forEach((String code) -> {
-            assertNotEquals(getCountryBaseObjName(code) + " missing", 0, resources.getIdentifier(getCountryBaseObjName(code), "raw", packageName));
-            assertNotEquals(getCountryTopObjName(code) + " missing", 0, resources.getIdentifier(getCountryTopObjName(code), "raw", packageName));
-            assertNotEquals(getCountryNameDrawableName(code) + " missing", 0, resources.getIdentifier(getCountryNameDrawableName(code), "drawable", packageName));
+        Country.EU_CODES.forEach((String code) -> {
+            final Country country = Country.Builder.fromEuCode(code);
+            assertNotEquals(getCountryBaseObjName(country) + " missing", 0, resources.getIdentifier(getCountryBaseObjName(country), "raw", packageName));
+            assertNotEquals(getCountryTopObjName(country) + " missing", 0, resources.getIdentifier(getCountryTopObjName(country), "raw", packageName));
+            assertNotEquals(getCountryNameDrawableName(country) + " missing", 0, resources.getIdentifier(getCountryNameDrawableName(country), "drawable", packageName));
         });
     }
 }

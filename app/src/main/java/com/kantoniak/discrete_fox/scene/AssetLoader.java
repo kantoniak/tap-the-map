@@ -4,6 +4,8 @@ import android.content.Context;
 import android.opengl.Visibility;
 import android.support.annotation.VisibleForTesting;
 
+import com.kantoniak.discrete_fox.country.Country;
+
 import org.rajawali3d.Object3D;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
@@ -40,30 +42,30 @@ public class AssetLoader {
         return textureManager.addTexture(new Texture(drawableName, texDrawableId));
     }
 
-    public Object3D loadCountryBase(String code) {
-        return loadObj(getCountryBaseObjName(code));
+    public Object3D loadCountryBase(Country country) {
+        return loadObj(getCountryBaseObjName(country));
     }
 
-    public Object3D loadCountryTop(String code) {
-        return loadObj(getCountryTopObjName(code));
+    public Object3D loadCountryTop(Country country) {
+        return loadObj(getCountryTopObjName(country));
     }
 
-    public ATexture loadCountryNameTexture(String code) {
-        return loadTexture(getCountryNameDrawableName(code));
-    }
-
-    @VisibleForTesting
-    public static String getCountryBaseObjName(String code) {
-        return "country_base_" + code + "_obj";
+    public ATexture loadCountryNameTexture(Country country) {
+        return loadTexture(getCountryNameDrawableName(country));
     }
 
     @VisibleForTesting
-    public static String getCountryTopObjName(String code) {
-        return "country_top_" + code + "_obj";
+    public static String getCountryBaseObjName(Country country) {
+        return "country_base_" + country.getEuCode() + "_obj";
     }
 
     @VisibleForTesting
-    public static String getCountryNameDrawableName(String code) {
-        return "country_" + code + "_plate";
+    public static String getCountryTopObjName(Country country) {
+        return "country_top_" + country.getEuCode() + "_obj";
+    }
+
+    @VisibleForTesting
+    public static String getCountryNameDrawableName(Country country) {
+        return "country_" + country.getEuCode() + "_plate";
     }
 }

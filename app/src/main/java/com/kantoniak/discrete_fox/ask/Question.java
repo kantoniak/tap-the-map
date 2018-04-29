@@ -2,7 +2,7 @@ package com.kantoniak.discrete_fox.ask;
 
 import android.support.v4.graphics.ColorUtils;
 
-import com.kantoniak.discrete_fox.CountryUtil;
+import com.kantoniak.discrete_fox.country.CountryUtil;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
 
@@ -22,7 +22,7 @@ public class Question {
     double midThres;
     double highThres;
     String mdesc;
-    List<String> mcountries;
+    List<String> mcountries; // FIXME(kedzior): Should not use ISO code
     String munit;
     QuestionCategory mcategory;
 
