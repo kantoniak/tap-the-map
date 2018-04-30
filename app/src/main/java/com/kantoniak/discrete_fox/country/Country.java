@@ -4,6 +4,7 @@ import android.support.annotation.VisibleForTesting;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,16 +30,8 @@ public class Country {
         return euCode;
     }
 
-    public String getIsoCode() {
-        throw new UnsupportedOperationException("Not implemented");
-    }
-
-    public String getEurostatName() {
-        throw new UnsupportedOperationException("Not implemented");
-    }
-
     public String getShortName() {
-        throw new UnsupportedOperationException("Not implemented");
+        return CountryUtil.codeToName(euCode);
     }
 
     @Override
@@ -62,8 +55,5 @@ public class Country {
             }
             return new Country(code);
         }
-
-        //TODO(kedzior): fromIsoCode if needed
-
     }
 }

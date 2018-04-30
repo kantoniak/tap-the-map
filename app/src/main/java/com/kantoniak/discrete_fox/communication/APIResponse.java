@@ -20,7 +20,7 @@ public class APIResponse {
      */
     private ContentObject mcontent;
 
-    APIResponse(String version, String label, String href, String source, String updated, String status, JSONObject extension, JSONObject value, JSONObject dimension, JSONArray id, JSONArray size) {
+    APIResponse(String version, String label, String href, String source, String updated, JSONObject extension, JSONObject value, JSONObject dimension, JSONArray id, JSONArray size) {
         mVersion = version;
         mLabel = label;
         mSource = source;

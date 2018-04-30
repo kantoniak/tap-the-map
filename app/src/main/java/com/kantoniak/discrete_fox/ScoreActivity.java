@@ -64,7 +64,6 @@ public class ScoreActivity extends AppCompatActivity {
         // TODO(kedzior) mp3 final
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
         //mp.start();
-        // FIXME(kedzior): obFileId sometimes tries to find "a40pkt"
         try {
             int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(GameActivity.MESSAGE_SCORE) + "pkt", "raw", getApplicationContext().getPackageName());
             MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);

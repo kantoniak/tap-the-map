@@ -1,12 +1,14 @@
 package com.kantoniak.discrete_fox.ask;
 
+import com.kantoniak.discrete_fox.country.Country;
+
 public class Answer {
-    private String country;
+    private Country country;
     private String value;
     private double valueRaw;
     private int color;
 
-    public Answer(String country, String value, double valueRaw, int color) {
+    public Answer(Country country, String value, double valueRaw, int color) {
         this.country = country;
         this.value = value;
         this.valueRaw = valueRaw;
@@ -18,7 +20,7 @@ public class Answer {
     }
 
     public String getCountry() {
-        return country;
+        return country.getShortName();
     }
 
     public String getValue() {

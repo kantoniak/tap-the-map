@@ -2,6 +2,7 @@ package com.kantoniak.discrete_fox.ask;
 
 import android.support.v4.graphics.ColorUtils;
 
+import com.kantoniak.discrete_fox.country.Country;
 import com.kantoniak.discrete_fox.country.CountryUtil;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
@@ -15,20 +16,23 @@ import java.util.Map;
 
 public class Question {
     private final String mlink;
-    private HashMap<String, Integer> ans;
-    private HashMap<String, Double> ansDouble;
+    private HashMap<Country, Integer> ans;
+    private HashMap<Country, Double> ansDouble;
     public static final int NUMBEROFCOUNTRIES = 5;
+    /**
+     * List of the country codes.
+     */
+    private static final List<String> COUNTRY_CODES = CountryUtil.getEurostatCodes();
 
     double midThres;
     double highThres;
     String mdesc;
-    List<String> mcountries; // FIXME(kedzior): Should not use ISO code
+    List<Country> mcountries;
     String munit;
     QuestionCategory mcategory;
 
-    Question(String link, HashMap<String, Double> data, String desc, List<String> countries, String unit, QuestionCategory category, int multiplier) {
+    Question(String link, HashMap<String, Double> data, String desc, String unit, QuestionCategory category, int multiplier) {
         mcategory = category;
-        mcountries = countries;
         mdesc = desc;
         mlink = link;
         munit = unit;
@@ -39,10 +43,35 @@ public class Question {
             Map.Entry pair = (Map.Entry)it.next();
             Double val = ((Double)pair.getValue()) * multiplier;
             valueList.add(val);
-            ansDouble.put((String)pair.getKey(), val);
+            Country country = Country.Builder.fromEuCode((String)pair.getKey());
+            ansDouble.put(country, val);
         }
+        setCountries();
         createThresholds(valueList);
         createAnswers(ansDouble);
+    }
+
+    /**
+     * Checks whether we can use this particular permutation.
+     * @return whether we can use given permutation
+     */
+    private boolean isShuffleLegit() {
+        boolean legit = true;
+        for (int j = 0; j < NUMBEROFCOUNTRIES; j++) {
+
+            if (COUNTRY_CODES.get(j) == null) {
+                legit = false;
+            }
+        }
+        return legit;
+    }
+
+    private void setCountries() {
+        List<Country> availableCountries = new ArrayList<>(ansDouble.keySet());
+        assert(availableCountries.size() > NUMBEROFCOUNTRIES);
+        Collections.shuffle(availableCountries);
+
+        mcountries = availableCountries.subList(0, NUMBEROFCOUNTRIES);
     }
 
     void createThresholds(ArrayList<Double> valueList) {
@@ -66,7 +95,7 @@ public class Question {
         return mcategory;
     }
 
-    void createAnswers(HashMap<String, Double> data) {
+    void createAnswers(HashMap<Country, Double> data) {
         ans = new HashMap<>();
         Iterator it = data.entrySet().iterator();
         while (it.hasNext()) {
@@ -78,7 +107,7 @@ public class Question {
             } else if (val > midThres) {
                 l = 2;
             }
-            ans.put((String)pair.getKey(), l);
+            ans.put((Country)pair.getKey(), l);
         }
     }
 
@@ -87,17 +116,19 @@ public class Question {
         highThres = Math.round(high * 100.0) / 100.0;
     }
 
-    public Integer getCorrectAnswer(String country) {
+    public Integer getCorrectAnswer(Country country) {
         return ans.get(country);
     }
 
-    public List<String> getCountries() {
+    public List<Country> getCountries() {
         return mcountries;
     }
 
     public String getMinLabel() {
         if (munit.equals("%")) {
             return "<" + midThres + munit;
+        } else if (munit.equals("D")) {
+            return "<" + midThres;
         } else {
             return "<" + UnitFormatter.formatAsUnit((long)midThres, UnitSystem.SI, munit);
         }
@@ -106,6 +137,8 @@ public class Question {
     public String getMidLabel() {
         if (munit.equals("%")) {
             return midThres + munit + " - " + highThres + munit;
+        } else if (munit.equals("D")) {
+            return midThres + " - " + highThres;
         } else {
             return UnitFormatter.formatAsUnit((long)midThres, UnitSystem.SI, munit) + " - " + UnitFormatter.formatAsUnit((long)highThres, UnitSystem.SI, munit);
         }
@@ -114,12 +147,14 @@ public class Question {
     public String getMaxLabel() {
         if (munit.equals("%")) {
             return ">" + highThres + munit;
+        } else if (munit.equals("D")) {
+            return ">" + highThres;
         } else {
             return ">" + UnitFormatter.formatAsUnit((long)highThres, UnitSystem.SI, munit);
         }
     }
 
-    public HashMap<String, Double> getAnsDouble() {
+    public HashMap<Country, Double> getAnsDouble() {
         return ansDouble;
     }
 
@@ -129,17 +164,23 @@ public class Question {
 
     public List<Answer> getAnswers() {
         List<Answer> list = new ArrayList<>();
-        for (String code: mcountries) {
-            String fullName = CountryUtil.eurostatToName(code);
-            double value = ansDouble.get(fullName);
+        for (Country country: mcountries) {
+            double value = 0.0;
+            try {
+                value = ansDouble.get(country);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             String valuePresented;
             if (munit.equals("%")) {
                 valuePresented = String.format("%.2f", value) + munit;
+            } else if (munit.equals("D")) {
+                valuePresented = String.format("%.2f", value);
             } else {
                 valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, munit);
             }
-            int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(fullName)-1)*0.5f);
-            Answer answer = new Answer(fullName, valuePresented, value, color);
+            int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(country)-1)*0.5f);
+            Answer answer = new Answer(country, valuePresented, value, color);
             list.add(answer);
         }
         return list;

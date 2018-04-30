@@ -26,7 +26,6 @@ import com.kantoniak.discrete_fox.ask.AnswersAdapter;
 import com.kantoniak.discrete_fox.ask.Question;
 import com.kantoniak.discrete_fox.ask.QuestionChest;
 import com.kantoniak.discrete_fox.country.Country;
-import com.kantoniak.discrete_fox.country.CountryUtil;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
 import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
@@ -81,6 +80,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     private static final String TAG = GameActivity.class.getSimpleName();
     private static final String SCORE_PREFS = "score";
     private static final int NUMBEROFCOUNTRIES = 5;
+    private static final int NUMBEROFQUESTIONS = 15;
 
     @BindView(R.id.game_map_preview) GameSurfaceView gameMapPreview;
 
@@ -90,7 +90,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     private MapRenderer renderer;
 
     private ArrayList<Question> generateQuestions() {
-        QuestionChest qc = new QuestionChest(getResources(), getApplicationContext(), NUMBEROFCOUNTRIES);
+        QuestionChest qc = new QuestionChest(getResources(), getApplicationContext(), NUMBEROFCOUNTRIES, NUMBEROFQUESTIONS);
         ArrayList<Question> questions = new ArrayList<>();
         for (int i = 0; i < qc.numberOfQuestions(); i++) {
             questions.add(qc.getQuestion(i));
@@ -210,7 +210,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         } else {
             gameplay.updateScore(map);
             Question currentQuestion = gameplay.getCurrentQuestion();
-            List<Country> countries = currentQuestion.getCountries().stream().map(Country.Builder::fromEuCode).collect(Collectors.toList()); // TODO(kedzior): Switch to Country
+            List<Country> countries = currentQuestion.getCountries();
             List<Answer> answers = currentQuestion.getAnswers();
             answers.sort(Comparator.comparing(Answer::getValueRaw).reversed());
             answersAdapter.updateAnswers(answers);
@@ -220,8 +220,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             showingAnswers = true;
             for (Country country : countries) {
                 CountryInstance countryInstance = map.getCountry(country);
-                String eurostatName = CountryUtil.eurostatToName(country.getEuCode()); // TODO: country.getEurostatName()
-                int targetHeight = currentQuestion.getCorrectAnswer(eurostatName);
+                int targetHeight = currentQuestion.getCorrectAnswer(country);
                 countryInstance.setHeight(targetHeight);
             }
         }
@@ -229,7 +228,6 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     private void showQuestion(Question question) {
         map.reset();
-        question.getCountries().stream().map(Country.Builder::fromEuCode).forEach(map::enableCountry); // TODO(kedzior): Country
 
         mQuestionTextView.setText(question.getDesc());
         mRoundProgress.setText("" + (gameplay.getCurrentQuestionInt() + 1) + "/" + gameplay.NUMBEROFQUESTIONS);

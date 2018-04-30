@@ -3,6 +3,7 @@ package com.kantoniak.discrete_fox.ask;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.kantoniak.discrete_fox.country.Country;
 import com.kantoniak.discrete_fox.country.CountryUtil;
 import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.communication.APIResponse;
@@ -57,24 +58,19 @@ public class QuestionChest {
     /**
      * Queries needed to acquire the data from Eurostat API. Read from asset file.
      */
-    private List<String> QUERY;
+    private List<String> queries;
     /**
      * Categories of the questions. Read from asset file.
      */
-    private List<QuestionCategory> CATEGORY;
+    private List<QuestionCategory> categories;
     /**
      * Multipier of the unit in the question. Read from asset file.
      */
-    private List<Integer> multiplier;
+    private List<Integer> multipliers;
     /**
      * Base unit of the questions. Read from asset file.
      */
-    private List<String> baseUnit;
-
-    /**
-     * List of the country codes.
-     */
-    private static List<String> ACOUNTRY_CODES = CountryUtil.getEurostatCodes();
+    private List<String> baseUnits;
 
     /**
      * Creates QuestionChest object.
@@ -82,42 +78,32 @@ public class QuestionChest {
      * @param context context of the application
      * @param numberOfCountries number of countries user can interact with
      */
-    public QuestionChest(Resources res, Context context, int numberOfCountries) {
+    public QuestionChest(Resources res, Context context, int numberOfCountries, int numberOfQuestions) {
         mNumberOfCountries = numberOfCountries;
-        QUERY = new ArrayList<>();
-        multiplier = new ArrayList<>();
-        baseUnit = new ArrayList<>();
-        CATEGORY = new ArrayList<>();
+        queries = new ArrayList<>();
+        multipliers = new ArrayList<>();
+        baseUnits = new ArrayList<>();
+        categories = new ArrayList<>();
         importQuestions(context);
-
-        List<List<String>> COUNTRYCODES = new ArrayList<>();
-        for (int i = 0; i < QUERY.size(); i++) {
-            do {
-                // TODO create sentinel if not possible to find 5 non null values
-                Collections.shuffle(ACOUNTRY_CODES);
-            } while(!isShuffleLegit());
-
-            List<String> questionCodes = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
-                questionCodes.add(ACOUNTRY_CODES.get(j));
-            }
-            COUNTRYCODES.add(questionCodes);
-        }
         List<String> description = Arrays.asList(res.getStringArray(R.array.questions));
 
         questionsArrayList = new ArrayList<>();
-        int n = QUERY.size();
+        int n = queries.size();
         for (int i = 0; i < n; i++) {
-            String fullQuery = QUERY.get(i) + COUNTRIES + LASTTIMEPERIOD + PRECISION;
+            String fullQuery = queries.get(i) + COUNTRIES + LASTTIMEPERIOD + PRECISION;
             DataProvider dp = new DataProvider();
             AsyncTaskParams atp = new AsyncTaskParams(fullQuery, description.get(i));
             try {
                 APIResponse response = dp.execute(atp).get();
-                Question q = new Question(fullQuery, response.getContent().getHashMap(), description.get(i), COUNTRYCODES.get(i), baseUnit.get(i), CATEGORY.get(i), multiplier.get(i));
+                Question q = new Question(fullQuery, response.getContent().getHashMap(), description.get(i), baseUnits.get(i), categories.get(i), multipliers.get(i));
                 questionsArrayList.add(q);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        Collections.shuffle(questionsArrayList);
+        while (questionsArrayList.size() > numberOfQuestions) {
+            questionsArrayList.remove(questionsArrayList.size() - 1);
         }
     }
 
@@ -144,20 +130,6 @@ public class QuestionChest {
     }
 
     /**
-     * Checks whether we can use this particular permutation.
-     * @return whether we can use given permutation
-     */
-    private boolean isShuffleLegit() {
-        boolean legit = true;
-        for (int j = 0; j < mNumberOfCountries; j++) {
-            if (ACOUNTRY_CODES.get(j) == null) {
-                legit = false;
-            }
-        }
-        return legit;
-    }
-
-    /**
      * Reads questions and metainfo about them. Fills query, category, multiplier and baseUnit array lists.
      * @param context application context
      */
@@ -171,10 +143,10 @@ public class QuestionChest {
                 String[] elements = line.split(",");
                 //String fullQuery = elements[0] + COUNTRIES + LASTTIMEPERIOD + PRECISION;
                 //Question q = new Question(fullQuery, response.getContent().get)
-                QUERY.add(elements[0]);
-                multiplier.add(Integer.parseInt(elements[1]));
-                baseUnit.add(elements[2]);
-                CATEGORY.add(QuestionCategory.valueOf(elements[3]));
+                queries.add(elements[0]);
+                multipliers.add(Integer.parseInt(elements[1]));
+                baseUnits.add(elements[2]);
+                categories.add(QuestionCategory.valueOf(elements[3]));
             }
 
         } catch (Exception e) {

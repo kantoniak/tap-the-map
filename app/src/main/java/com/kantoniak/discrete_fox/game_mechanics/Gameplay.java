@@ -47,9 +47,9 @@ public class Gameplay {
     public void updateScore(Map map) {
         // Gather decisions
         HashMap<Country, CountryInstance> mapCountries = map.getCountries();
-        List<String> countries = mquestions.get(currentQuestion).getCountries();
+        List<Country> countries = mquestions.get(currentQuestion).getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            Country country = Country.Builder.fromEuCode(countries.get(i));
+            Country country = countries.get(i);
             decisions[i] = mapCountries.get(country).getHeight();
         }
         // Calculate score
@@ -74,16 +74,22 @@ public class Gameplay {
     }
 
     private Integer calculateScore(Map map) {
-        // FIXME: This loop is duplicating code from finishQuestion, can we extract that?
         int score = 0;
         HashMap<Country, CountryInstance> mapCountries = map.getCountries();
         Question question = getCurrentQuestion();
-        List<String> countries = question.getCountries();
+        List<Country> countries = question.getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
-            Country country = Country.Builder.fromEuCode(countries.get(i));
-            String eurostatName = CountryUtil.eurostatToName(country.getEuCode()); // TODO(kedzior): country.getEurostatName()
-            if (Math.abs(decisions[i] - mquestions.get(currentQuestion).getCorrectAnswer(eurostatName)) == 0) {
-                score += 1;
+            Country country = countries.get(i);
+            int dec = decisions[i];
+            Question q = mquestions.get(currentQuestion);
+            try {
+                int qq = q.getCorrectAnswer(country);
+                if (Math.abs(dec - qq) == 0) {
+                    score += 1;
+                }
+            } catch (Exception e) {
+                int qq = q.getCorrectAnswer(country);
+                e.printStackTrace();
             }
         }
         return score;
@@ -101,14 +107,8 @@ public class Gameplay {
         return currentQuestion;
     }
 
-    // TODO(kedzior): Decide what to do with this part. I put it in here, maybe it should be moved
-    // to the new implementation that you mentioned earlier. I would move all things like that to
-    // Gameplay.
     public static Set<Country> getEnabledCountries() {
-        final List<String> enabledEuCodes = Arrays.asList(
-                "at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "uk", "el",
-                "hr", "hu", "ie", "it", "lt", "lu", "lv", "nl", "pl", "pt", "ro", "se", "si", "sk");
-
+        final List<String> enabledEuCodes = CountryUtil.getEurostatCodes();
         return enabledEuCodes.stream().map(Country.Builder::fromEuCode).collect(Collectors.toSet());
     }
 }

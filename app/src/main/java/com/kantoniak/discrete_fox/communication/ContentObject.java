@@ -33,7 +33,6 @@ public class ContentObject {
         data = new HashMap<>();
         try {
             JSONObject indexCountry = dimensions.getJSONObject("geo").getJSONObject("category").getJSONObject("index");
-            JSONObject labelCountry = dimensions.getJSONObject("geo").getJSONObject("category").getJSONObject("label");
             // foreach country
             Iterator<String> tempCountry = indexCountry.keys();
             while (tempCountry.hasNext()) {
@@ -52,11 +51,7 @@ public class ContentObject {
                 }
 
                 if (value != null) {
-                    String label = labelCountry.getString(key1);
-                    if (label.equals(GERMANYLONG)) {
-                        label = GERMANYSHORT;
-                    }
-                    data.put(label, value);
+                    data.put(key1.toLowerCase(), value);
                 }
             }
         }

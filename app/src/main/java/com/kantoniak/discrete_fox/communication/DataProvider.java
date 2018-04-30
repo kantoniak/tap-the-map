@@ -139,14 +139,14 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
             String updated = obj.getString("updated");
             String className = obj.getString("class");
             assertEquals(className, "dataset");
-            String status = obj.getString("status");
+            // String status = obj.getString("status");
             JSONObject extension = obj.getJSONObject("extension");
             JSONObject value = obj.getJSONObject("value");
             JSONObject dimension = obj.getJSONObject("dimension");
             JSONArray id = obj.getJSONArray("id");
             JSONArray size = obj.getJSONArray("size");
 
-            res = new APIResponse(version, label, href, source, updated, status, extension, value, dimension, id, size);
+            res = new APIResponse(version, label, href, source, updated, extension, value, dimension, id, size);
         } catch (Exception e) {
             e.printStackTrace();
         }
