@@ -2,6 +2,7 @@ package com.kantoniak.discrete_fox;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -64,9 +65,12 @@ public class ScoreActivity extends AppCompatActivity {
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
         //mp.start();
         // FIXME(kedzior): obFileId sometimes tries to find "a40pkt"
-        //int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(gameplay.getResult()) + "pkt", "raw", getApplicationContext().getPackageName());
-        //MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
-        //mp2.start();
+        try {
+            int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(GameActivity.MESSAGE_SCORE) + "pkt", "raw", getApplicationContext().getPackageName());
+            MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
+            mp2.start();
+        } catch (Exception e) {
+        }
     }
 
     @OnClick(R.id.button_play_again)
