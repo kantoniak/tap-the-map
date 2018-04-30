@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.facebook.android:facebook-share:[4,5)'
     implementation 'com.android.support:recyclerview-v7:26.0.1'
+    implementation 'com.android.support:support-v4:26.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.rajawali3d:rajawali:1.1.970'
     implementation files('libs/EasyAR.jar')

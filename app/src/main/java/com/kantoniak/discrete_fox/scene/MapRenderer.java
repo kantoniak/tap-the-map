@@ -28,15 +28,13 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     private final Context context;
     private final Map map;
-    private final Camera camera;
     private final AssetLoader loader;
     private ARRenderingDelegate arRenderingDelegate;
     private ObjectColorPicker objectPicker;
 
-    public MapRenderer(Context context, Map map, Camera camera) {
+    public MapRenderer(Context context, Map map) {
         super(context);
         this.context = context;
-        this.camera = camera;
         this.map = map;
         this.loader = new AssetLoader(context, mTextureManager);
     }
@@ -63,8 +61,6 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     @Override
     protected void initScene() {
-
-        getCurrentScene().addAndSwitchCamera(camera);
         setupObjectPicker();
 
         Plane mapBase = new Plane();
@@ -123,5 +119,13 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     @Override
     public void onNoObjectPicked() {
         // Do nothing
+    }
+
+    public void setCamera(Camera camera) {
+        getCurrentScene().addAndSwitchCamera(camera);
+    }
+
+    public Map getMap() {
+        return map;
     }
 }

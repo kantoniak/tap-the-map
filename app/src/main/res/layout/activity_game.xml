@@ -17,12 +17,10 @@
         app:isTransparent="false" />
 
     <FrameLayout
-        android:id="@+id/overlay"
+        android:id="@+id/main_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include layout="@layout/screen_question" android:id="@+id/screen_question" />
-
-    </FrameLayout>
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
