@@ -33,14 +33,18 @@ public class Gameplay {
         mnumberOfCountries = numberOfCountries;
         maxScore = mnumberOfCountries * NUMBEROFQUESTIONS;
         currentQuestion = 0;
-        decisions = new Integer[NUMBEROFQUESTIONS];
-        for (int i = 0; i < NUMBEROFQUESTIONS; i++) {
+        decisions = new Integer[mnumberOfCountries];
+        for (int i = 0; i < mnumberOfCountries; i++) {
             decisions[i] = 0;
         }
         mquestions = questions;
     }
 
-    public Question finishQuestion(Context context, Map map) {
+    public Question finishQuestion(Context context) {
+        return nextQuestion(context);
+    }
+
+    public void updateScore(Map map) {
         // Gather decisions
         HashMap<Country, CountryInstance> mapCountries = map.getCountries();
         List<String> countries = mquestions.get(currentQuestion).getCountries();
@@ -51,8 +55,6 @@ public class Gameplay {
         // Calculate score
         score = calculateScore(map);
         scoreTotal += score;
-        // zwroc odpowiedzi do wyswietlenia
-        return nextQuestion(context);
     }
 
     private Question nextQuestion(Context context) {

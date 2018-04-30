@@ -200,7 +200,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             showingAnswers = false;
             mAnswersContainer.setVisibility(View.INVISIBLE);
 
-            Question nextQuestion = gameplay.finishQuestion(getApplicationContext(), map);
+            Question nextQuestion = gameplay.finishQuestion(getApplicationContext());
             if (nextQuestion == null) {
                 showingAnswers = false;
                 presentFinalScreen(gameplay);
@@ -208,6 +208,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             }
             showQuestion(nextQuestion);
         } else {
+            gameplay.updateScore(map);
             Question currentQuestion = gameplay.getCurrentQuestion();
             List<Country> countries = currentQuestion.getCountries().stream().map(Country.Builder::fromEuCode).collect(Collectors.toList()); // TODO(kedzior): Switch to Country
             List<Answer> answers = currentQuestion.getAnswers();
