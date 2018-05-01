@@ -100,13 +100,11 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     public void startGame() {
         showingAnswers = false;
         mAnswersContainer.setVisibility(View.INVISIBLE);
-        map.reset();
+
         //TODO Call generateQuestions on application start.
         gameplay = new Gameplay(generateQuestions(), Gameplay.Settings.COUNTRIES_PER_QUESTION);
         Question question = gameplay.getCurrentQuestion();
         showQuestion(question);
-
-        showingAnswers = false;
     }
 
     private ArrayList<Question> generateQuestions() {
@@ -119,7 +117,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     }
 
     private void showQuestion(Question question) {
+        showingAnswers = false;
         map.reset();
+        question.getCountries().forEach(map::enableCountry);
 
         mQuestionTextView.setText(question.getDesc());
         mRoundProgress.setText("" + (gameplay.getCurrentQuestionInt() + 1) + "/" + gameplay.NUMBEROFQUESTIONS);
@@ -171,7 +171,6 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
 
             Question nextQuestion = gameplay.finishQuestion(getActivity());
             if (nextQuestion == null) {
-                showingAnswers = false;
                 mListener.onSeriesDone(gameplay.getResult(), gameplay.getMaxResult());
                 return;
             }
