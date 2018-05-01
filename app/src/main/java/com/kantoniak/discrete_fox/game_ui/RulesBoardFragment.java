@@ -20,7 +20,7 @@ public class RulesBoardFragment extends Fragment {
 
     private InteractionListener mListener;
 
-    @BindView(R.id.left_image) ImageView mLeftImage;
+    @BindView(R.id.image) ImageView mLeftImage;
     @BindView(R.id.checkbox_dont_show_again) CheckBox mDontShowAgainCheckbox;
 
     public RulesBoardFragment() {

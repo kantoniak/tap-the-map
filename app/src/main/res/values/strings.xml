@@ -3,13 +3,13 @@
     <!-- Globals -->
     <string name="app_name">TapTheMap</string>
     <string name="app_desc">Tap the countries to complete tasks</string>
-    <string name="app_about">This application is a winning project created\nduring the hackathon organized by Central\nStatistical Office of Poland. Original idea by\nthe team EmojiNotSupportedException:\n\n• Krzysztof Antoniak\n• Łukasz Kędziorski\n• Marta Mazurkiewicz</string>
+    <string name="app_about">This application is a winning project created during the hackathon organized by Central Statistical Office of Poland. Original idea by the team EmojiNotSupportedException:\n\n• Krzysztof Antoniak\n• Łukasz Kędziorski\n• Marta Mazurkiewicz</string>
 
     <!-- Main screen -->
-    <string name="button_start">Start game</string>
+    <string name="new_game">New game</string>
     <string name="button_about">About</string>
     <string name="oops">Oops!</string>
-    <string name="we_need_camera_permission">We need camera\npermission to track\nthe marker.</string>
+    <string name="we_need_camera_permission">We need camera permission to track the marker.</string>
     <string name="button_try_again">Try again</string>
 
     <!-- About screen -->

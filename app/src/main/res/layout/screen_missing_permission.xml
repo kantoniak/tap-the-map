@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary">
 
     <ImageView
-        android:id="@+id/left_image"
+        android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/triplePlusPadding"
@@ -26,7 +26,7 @@
         android:padding="@dimen/triplePlusPadding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/left_image"
+        app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView

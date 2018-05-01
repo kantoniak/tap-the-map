@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="#FF9900"
     tools:context=".game_ui.QuestionSeriesFragment">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/question_topbar"
+        style="@style/ElevatedContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/biggerPadding"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimary"
-        style="@style/ElevatedContainer"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/halfPadding">
+        android:padding="@dimen/biggerPadding"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/button_close"
@@ -32,7 +32,8 @@
             android:textColor="@color/textColorOnPrimary"
             android:textSize="@dimen/questionTextSize"
             app:layout_constraintEnd_toStartOf="@id/round_progress"
-            app:layout_constraintStart_toEndOf="@id/button_close" />
+            app:layout_constraintStart_toEndOf="@id/button_close"
+            tools:text="Is this a sample question text?" />
 
         <TextView
             android:id="@+id/round_progress"
@@ -41,46 +42,47 @@
             android:textAlignment="center"
             android:textColor="@color/textColorOnPrimary"
             android:textSize="@dimen/questionTextSize"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="3/5" />
 
     </android.support.constraint.ConstraintLayout>
 
 
     <LinearLayout
         android:id="@+id/answers_container"
-        android:layout_height="wrap_content"
-        android:layout_width="200dp"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_topbar"
-        app:layout_constraintBottom_toTopOf="@id/legend"
         style="@style/ElevatedContainer"
-        android:background="@color/cardview_light_background">
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/legend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_topbar">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/answers_recycler"
-            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/zoom_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_topbar"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/question_topbar">
 
         <ImageView
-            android:src="@drawable/ic_zoom_in_24dp"
             android:id="@+id/button_zoom_in"
-            style="@style/ZoomButton" />
+            style="@style/ZoomButton"
+            android:src="@drawable/ic_zoom_in_24dp" />
 
         <ImageView
-            android:src="@drawable/ic_zoom_out_24dp"
             android:id="@+id/button_zoom_out"
-            style="@style/ZoomButton" />
+            style="@style/ZoomButton"
+            android:src="@drawable/ic_zoom_out_24dp" />
 
     </LinearLayout>
 
@@ -94,16 +96,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            style="@style/LegendEntry">
+        <LinearLayout style="@style/LegendEntry">
 
             <View
                 android:id="@+id/legend_low_color"
-                style="@style/LegendColor" />
+                style="@style/LegendColor"
+                tools:background="#FF0000" />
 
             <TextView
                 android:id="@+id/legend_low_text"
-                style="@style/LegendText" />
+                style="@style/LegendText"
+                tools:text="Low" />
 
         </LinearLayout>
 
@@ -111,50 +114,52 @@
 
             <View
                 android:id="@+id/legend_mid_color"
-                style="@style/LegendColor" />
+                style="@style/LegendColor"
+                tools:background="#FF0000" />
 
             <TextView
                 android:id="@+id/legend_mid_text"
-                style="@style/LegendText" />
+                style="@style/LegendText"
+                tools:text="Medium" />
 
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/LegendEntry">
+        <LinearLayout style="@style/LegendEntry">
 
             <View
                 android:id="@+id/legend_high_color"
-                style="@style/LegendColor" />
+                style="@style/LegendColor"
+                tools:background="#FF0000" />
 
             <TextView
                 android:id="@+id/legend_high_text"
-                style="@style/LegendText" />
+                style="@style/LegendText"
+                tools:text="High" />
 
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/next_button"
+        style="@style/ElevatedContainer"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginBottom="@dimen/biggerPadding"
-        android:layout_marginRight="@dimen/biggerPadding"
+        android:layout_marginEnd="@dimen/biggerPadding"
         android:background="@drawable/round_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         android:gravity="center"
-        style="@style/ElevatedContainer">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <ImageView
             android:id="@+id/next_button_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_done_24dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

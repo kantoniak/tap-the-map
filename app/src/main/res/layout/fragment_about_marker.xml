@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/triplePlusPadding"
     android:background="@color/colorPrimary"
-    android:paddingEnd="@dimen/triplePlusPadding"
-    android:paddingStart="@dimen/doublePadding"
+    android:paddingEnd="@dimen/triplePadding"
+    android:paddingStart="@dimen/standardPadding"
     tools:context=".game_ui.RulesBoardFragment">
 
     <ImageView
-        android:id="@+id/left_image"
+        android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/triplePlusPadding"
@@ -32,22 +32,19 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/left_image"
+        app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            style="@style/SubHeaderText"
+            style="@style/SubSubHeaderText"
             android:layout_width="wrap_content"
             android:layout_marginBottom="@dimen/doublePadding"
-            android:text="@string/about_using_markers"
-            android:lineSpacingMultiplier="1.6"
-            android:textSize="18sp" />
+            android:text="@string/about_using_markers" />
 
         <Button
             android:id="@+id/button_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/doublePadding"
             android:text="@string/ok"
             android:textAlignment="center" />
 

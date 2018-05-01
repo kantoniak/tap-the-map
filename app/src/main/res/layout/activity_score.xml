@@ -37,14 +37,13 @@
             tools:text="@string/new_high_score" />
 
         <TextView
-            style="@style/SubHeaderText"
-            android:text="@string/your_score"
-            android:textSize="@dimen/subsubheaderTextSize" />
+            style="@style/SubSubHeaderText"
+            android:text="@string/your_score" />
 
         <TextView
             android:id="@+id/score_points"
             style="@style/SubHeaderText"
-            tools:text="15 / 25" />
+            tools:text="15/25" />
 
         <LinearLayout
             android:id="@+id/bottom_buttons"
@@ -62,10 +61,10 @@
                 android:id="@+id/button_facebook_share"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/triplePadding"
+                android:layout_marginStart="@dimen/triplePadding"
                 android:background="#3B5998"
-                android:paddingLeft="@dimen/doublePadding"
-                android:paddingRight="@dimen/doublePadding"
+                android:paddingStart="@dimen/doublePadding"
+                android:paddingEnd="@dimen/doublePadding"
                 android:visibility="gone" />
 
         </LinearLayout>

@@ -6,7 +6,7 @@
     <string name="app_about">Aplikacja jest zwycięskim projektem stworzonym podczas hackathonu organizowanego przez Główny Urząd Statystyczny. Pomysł zespołu EmojiNotSupportedException w składzie:\n\n• Krzysztof Antoniak\n• Łukasz Kędziorski\n• Marta Mazurkiewicz</string>
 
     <!-- Main screen -->
-    <string name="button_start">Start!</string>
+    <string name="new_game">Nowa gra</string>
     <string name="button_about">O grze</string>
     <string name="oops">Ups!</string>
     <string name="we_need_camera_permission">Potrzebujemy dostępu do aparatu żeby śledzić marker.</string>
@@ -20,7 +20,7 @@
     <!-- Score screen -->
     <string name="new_high_score">Najlepszy wynik!</string>
     <string name="score_great_job">Dobra robota!</string>
-    <string name="score_needs_improvement">Postaraj się lepiej!</string>
+    <string name="score_needs_improvement">Postaraj się bardziej!</string>
     <string name="your_score">Twój wynik:</string>
     <string name="play_again">Zagraj ponownie</string>
 

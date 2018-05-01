@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            style="@style/SubHeaderText"
+            style="@style/SubSubHeaderText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/standardPadding"
@@ -37,14 +37,13 @@
             android:paddingStart="@dimen/biggerPadding"
             android:paddingTop="@dimen/halfPadding"
             android:text="@string/scan_marker_to_start"
-            android:textSize="@dimen/subsubheaderTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/button_help"
-            style="@style/SubHeaderText"
+            style="@style/SubSubHeaderText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
@@ -54,7 +53,6 @@
             android:paddingTop="@dimen/halfPadding"
             android:text="@string/help"
             android:textColor="#000000"
-            android:textSize="@dimen/subsubheaderTextSize"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </android.support.constraint.ConstraintLayout>

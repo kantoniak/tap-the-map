@@ -8,11 +8,11 @@
 
     <LinearLayout
         android:id="@+id/about_block"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/triplePadding"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,11 +22,10 @@
 
         <TextView
             android:id="@+id/text_about"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/doublePadding"
             android:layout_marginTop="@dimen/doublePadding"
-            android:lineSpacingMultiplier="1.6"
             android:text="@string/app_about" />
 
     </LinearLayout>
@@ -35,14 +34,14 @@
         android:id="@+id/hackathon_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/triplePlusPadding"
+        android:layout_marginStart="@dimen/triplePadding"
         android:src="@drawable/hackathon"
         app:layout_constraintDimensionRatio="15:10"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="spread"
-        app:layout_constraintStart_toEndOf="@id/about_block"
+        app:layout_constraintWidth_default="spread"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="spread" />
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/button_licenses"
@@ -60,5 +59,12 @@
         android:text="@string/button_go_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55" />
 
 </android.support.constraint.ConstraintLayout>

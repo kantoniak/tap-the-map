@@ -32,8 +32,8 @@
         <TextView
             android:id="@+id/name_app"
             style="@style/HeaderText"
-            android:layout_marginLeft="@dimen/triplePadding"
-            android:layout_marginRight="@dimen/triplePadding"
+            android:layout_marginStart="@dimen/triplePadding"
+            android:layout_marginEnd="@dimen/triplePadding"
             android:text="@string/app_name"
             android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -61,11 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/triplePadding"
-            android:paddingBottom="@dimen/triplePadding"
-            android:paddingLeft="@dimen/triplePadding"
-            android:paddingRight="@dimen/triplePadding"
-            android:paddingTop="@dimen/doublePadding"
-            android:text="@string/button_start"
+            android:padding="@dimen/triplePadding"
+            android:text="@string/new_game"
             android:textSize="30sp" />
 
         <Button
