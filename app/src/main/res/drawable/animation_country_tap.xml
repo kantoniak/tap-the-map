@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:duration="1000"
+        android:drawable="@drawable/ic_tap_phase_1"/>
+
+    <item android:duration="400">
+        <layer-list>
+            <item android:drawable="@drawable/ic_tap_phase_1" />
+            <item android:drawable="@drawable/ic_tap_hand" />
+        </layer-list>
+    </item>
+
+    <item
+        android:duration="1000"
+        android:drawable="@drawable/ic_tap_phase_2"/>
+
+    <item android:duration="400">
+        <layer-list>
+            <item android:drawable="@drawable/ic_tap_phase_2" />
+            <item android:drawable="@drawable/ic_tap_hand" />
+        </layer-list>
+    </item>
+
+    <item
+        android:duration="1000"
+        android:drawable="@drawable/ic_tap_phase_3"/>
+
+    <item android:duration="400">
+        <layer-list>
+            <item android:drawable="@drawable/ic_tap_phase_3" />
+            <item android:drawable="@drawable/ic_tap_hand" />
+        </layer-list>
+    </item>
+
+    <item
+        android:duration="2000"
+        android:drawable="@drawable/ic_tap_phase_4"/>
+
+</animation-list>

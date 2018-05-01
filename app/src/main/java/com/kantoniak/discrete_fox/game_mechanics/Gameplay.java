@@ -32,6 +32,7 @@ public class Gameplay {
     Integer[] decisions;
     ArrayList<Question> mquestions;
 
+
     public Gameplay(ArrayList<Question> questions, int numberOfCountries) {
         NUMBEROFQUESTIONS = questions.size();
         step = 0;

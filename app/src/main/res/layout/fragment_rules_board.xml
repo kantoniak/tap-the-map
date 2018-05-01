@@ -17,7 +17,7 @@
         android:layout_marginBottom="@dimen/triplePlusPadding"
         android:layout_marginStart="@dimen/doublePadding"
         android:layout_marginTop="@dimen/triplePlusPadding"
-        android:src="@drawable/ic_tap_phase4"
+        android:src="@drawable/animation_country_tap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintHeight_default="spread"

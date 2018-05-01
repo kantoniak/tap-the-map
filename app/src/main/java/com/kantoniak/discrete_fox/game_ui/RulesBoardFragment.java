@@ -1,12 +1,14 @@
 package com.kantoniak.discrete_fox.game_ui;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import com.kantoniak.discrete_fox.R;
 
@@ -18,6 +20,7 @@ public class RulesBoardFragment extends Fragment {
 
     private InteractionListener mListener;
 
+    @BindView(R.id.left_image) ImageView mLeftImage;
     @BindView(R.id.checkbox_dont_show_again) CheckBox mDontShowAgainCheckbox;
 
     public RulesBoardFragment() {
@@ -29,6 +32,10 @@ public class RulesBoardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rules_board, container, false);
         ButterKnife.bind(this, view);
+
+        // Start tap animation
+        ((AnimationDrawable) mLeftImage.getDrawable()).start();
+
         return view;
     }
 
