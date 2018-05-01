@@ -38,9 +38,9 @@ public class AssetLoader {
         return loader.getParsedObject();
     }
 
-    public ATexture loadTexture(String drawableName) {
+    public Texture loadTexture(String drawableName) {
         int texDrawableId = context.getResources().getIdentifier(drawableName, "drawable", BuildConfig.APPLICATION_ID);
-        return textureManager.addTexture(new Texture(drawableName, texDrawableId));
+        return new Texture(drawableName, texDrawableId);
     }
 
     public Object3D loadCountryBase(Country country) {
@@ -51,7 +51,7 @@ public class AssetLoader {
         return loadObj(getCountryTopObjName(country));
     }
 
-    public ATexture loadCountryNameTexture(Country country) {
+    public Texture loadCountryNameTexture(Country country) {
         return loadTexture(getCountryNameDrawableName(country));
     }
 

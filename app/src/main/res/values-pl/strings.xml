@@ -34,6 +34,9 @@
     <string name="scan_marker_to_start">Znajdź marker żeby rozpocząć</string>
     <string name="help">Pomoc</string>
 
+    <!-- Questions screen -->
+    <string name="loading_objects">Ładowanie obiektów...</string>
+
     <!-- Sample data -->
     <string-array name="questions">
         <item>Jakie PKB jest w danym kraju?</item>

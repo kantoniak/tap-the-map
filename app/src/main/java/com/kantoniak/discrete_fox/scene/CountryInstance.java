@@ -51,45 +51,45 @@ public class CountryInstance {
     private Plane countryName;
     private Material countryBaseMaterial = new Material();
     private Material countryTopMaterial = new Material();
-    private final Vector2 countryMiddle;
 
-    public CountryInstance(Country country, Vector2 countryMiddle) {
+    public CountryInstance(Country country) {
         this.country = country;
         this.maxHeight = 3;
         this.disabled = true;
-        this.countryMiddle = countryMiddle;
     }
 
-    public void createObject(AssetLoader loader, Vector3 worldOffset) {
-        countryBase = loader.loadCountryBase(country);
-        countryTop = loader.loadCountryTop(country);
+    public void initMeshes(Object3D countryBase, Object3D countryTop, ATexture countryNameTexture) {
+        this.countryBase = countryBase;
+        this.countryTop = countryTop;
 
         countryBase.setDoubleSided(true);
         countryBaseMaterial.setColor(getBaseColor(COLOR_DEFAULT));
         countryBase.setMaterial(countryBaseMaterial);
-        countryBase.setPosition(worldOffset);
 
         countryTop.setDoubleSided(true);
         countryTopMaterial.setColor(COLOR_DEFAULT);
         countryTop.setMaterial(countryTopMaterial);
-        countryTop.setPosition(worldOffset);
 
         countryName = new Plane();
         countryName.setDoubleSided(true);
         countryName.setScale(NAME_SCALE);
-        countryName.setX(countryMiddle.getX() + worldOffset.x);
-        countryName.setZ(-countryMiddle.getY() + worldOffset.z);
 
         try {
             Material countryNameMaterial = new Material();
             countryNameMaterial.setColor(0x333333);
-            countryNameMaterial.addTexture(loader.loadCountryNameTexture(country));
+            countryNameMaterial.addTexture(TextureManager.getInstance().addTexture(countryNameTexture));
             countryName.setMaterial(countryNameMaterial);
         } catch (ATexture.TextureException e) {
             e.printStackTrace();
         }
+    }
 
-        resetState();
+    public void initPositions(Vector3 worldOffset, Vector2 countryMiddle) {
+        countryBase.setPosition(worldOffset);
+        countryTop.setPosition(worldOffset);
+
+        countryName.setX(countryMiddle.getX() + worldOffset.x);
+        countryName.setZ(-countryMiddle.getY() + worldOffset.z);
     }
 
     public void resetState() {

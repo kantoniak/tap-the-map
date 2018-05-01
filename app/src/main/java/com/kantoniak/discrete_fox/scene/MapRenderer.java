@@ -78,22 +78,21 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         try {
             Material mapBaseMaterial = new Material();
             mapBaseMaterial.setColor(0x00000000);
-            mapBaseMaterial.addTexture(loader.loadTexture("map_background"));
+            mapBaseMaterial.addTexture(mTextureManager.addTexture(loader.loadTexture("map_background")));
             mapBase.setMaterial(mapBaseMaterial);
         } catch (ATexture.TextureException e) {
             e.printStackTrace();
         }
 
-        // Countries
-        Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
-        for (Country country : Gameplay.Settings.ENABLED_COUNTRIES) {
-            CountryInstance countryInstance = new CountryInstance(country, map.getCountryMiddle(country));
-            countryInstance.createObject(loader, worldOffset);
-            countryInstance.registerObject(getCurrentScene(), objectPicker);
-            map.addCountryInstance(countryInstance);
-        }
-
         showMap(false);
+    }
+
+    public void addCountryInstance(CountryInstance countryInstance) {
+        Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
+
+        countryInstance.initPositions(worldOffset, map.getCountryMiddle(countryInstance.getCountry()));
+        countryInstance.resetState();
+        map.addCountryInstance(countryInstance);
     }
 
     private void updateVisibility() {
@@ -136,6 +135,10 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     public void setCamera(Camera camera) {
         getCurrentScene().addAndSwitchCamera(camera);
+    }
+
+    public AssetLoader getLoader() {
+        return loader;
     }
 
     public Map getMap() {

@@ -12,6 +12,7 @@ import com.kantoniak.discrete_fox.ar.EasyARRenderingDelegate;
 import com.kantoniak.discrete_fox.ar.UpdateBackgroundAndMatricesCallback;
 import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
 import com.kantoniak.discrete_fox.game_ui.AboutMarkerFragment;
+import com.kantoniak.discrete_fox.game_ui.LoadingFragment;
 import com.kantoniak.discrete_fox.game_ui.QuestionSeriesFragment;
 import com.kantoniak.discrete_fox.game_ui.RulesBoardFragment;
 import com.kantoniak.discrete_fox.game_ui.ScanToStartFragment;
@@ -26,7 +27,7 @@ import butterknife.OnTouch;
 
 
 public class GameActivity extends AppCompatActivity
-        implements RulesBoardFragment.InteractionListener, AboutMarkerFragment.InteractionListener, ScanToStartFragment.InteractionListener, QuestionSeriesFragment.InteractionListener {
+        implements LoadingFragment.InteractionListener, RulesBoardFragment.InteractionListener, AboutMarkerFragment.InteractionListener, ScanToStartFragment.InteractionListener, QuestionSeriesFragment.InteractionListener {
 
     public static final String MESSAGE_SCORE = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE";
     public static final String MESSAGE_SCORE_OUT_OF = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE_OUT_OF";
@@ -48,12 +49,12 @@ public class GameActivity extends AppCompatActivity
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setupGameSurfaceView();
+    }
 
-        if (SharedPrefsUtil.shouldShowRules(this)) {
-            switchToRules();
-        } else {
-            switchToScanner();
-        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        switchToLoader();
     }
 
     private void setupGameSurfaceView() {
@@ -67,6 +68,13 @@ public class GameActivity extends AppCompatActivity
 
         UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, camera);
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
+    }
+
+    public void switchToLoader() {
+        LoadingFragment loadingFragment = new LoadingFragment();
+        loadingFragment.init(renderer);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, loadingFragment).commit();
+        this.currentTouchListener = null;
     }
 
     public void switchToRules() {
@@ -102,6 +110,15 @@ public class GameActivity extends AppCompatActivity
             return currentTouchListener.onTouch(view, event);
         }
         return false;
+    }
+
+    @Override
+    public void onLoaded() {
+        if (SharedPrefsUtil.shouldShowRules(this)) {
+            switchToRules();
+        } else {
+            switchToScanner();
+        }
     }
 
     @Override
