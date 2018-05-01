@@ -3,14 +3,19 @@
     <!-- Globals -->
     <string name="app_name">Tap The Map</string>
     <string name="app_desc">Klikaj państwa żeby wygrać</string>
+    <string name="app_about">Aplikacja jest zwycięskim projektem stworzonym podczas hackathonu organizowanego przez Główny Urząd Statystyczny. Pomysł zespołu EmojiNotSupportedException w składzie:\n\n• Krzysztof Antoniak\n• Łukasz Kędziorski\n• Marta Mazurkiewicz</string>
 
     <!-- Main screen -->
     <string name="button_start">Start!</string>
+    <string name="button_about">O grze</string>
+    <string name="oops">Ups!</string>
+    <string name="we_need_camera_permission">Potrzebujemy dostępu do aparatu żeby śledzić marker.</string>
+    <string name="button_try_again">Spróbuj ponownie</string>
 
-    <!-- Answer listview -->
-    <string name="result_low">MAŁO</string>
-    <string name="result_mid">ŚREDNIO</string>
-    <string name="result_high">DUŻO</string>
+    <!-- About screen -->
+    <string name="button_licenses">Licencje</string>
+    <string name="button_go_back">Powrót</string>
+    <string name="error_loading_licenses">Wystąpił błąd podczas ładowania licencji...</string>
 
     <!-- Score screen -->
     <string name="new_high_score">Najlepszy wynik!</string>
@@ -18,6 +23,16 @@
     <string name="score_needs_improvement">Postaraj się lepiej!</string>
     <string name="your_score">Twój wynik:</string>
     <string name="play_again">Zagraj ponownie</string>
+
+    <!-- Rules board -->
+    <string name="rules_description">Oszacuj skalę danego zjawiska klikając na poszczególne kraje.</string>
+    <string name="dont_show_again">Nie pokazuj ponownie</string>
+    <string name="ok">OK</string>
+    <string name="about_using_markers">Do gry wydrukuj obraz z markerem i połóż go na stole. Możesz też wyświetlić obraz z innego urządzenia. Pobierz marker z tapthemap.stat.gov.pl</string>
+
+    <!-- Marker scanner -->
+    <string name="scan_marker_to_start">Znajdź marker żeby rozpocząć</string>
+    <string name="help">Pomoc</string>
 
     <!-- Sample data -->
     <string-array name="questions">

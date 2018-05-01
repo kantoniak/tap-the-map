@@ -33,7 +33,7 @@
             style="@style/HeaderText"
             android:layout_width="wrap_content"
             android:layout_marginBottom="@dimen/standardPadding"
-            android:text="Oops!"/>
+            android:text="@string/oops"/>
 
         <TextView
             style="@style/SubHeaderText"
