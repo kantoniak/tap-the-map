@@ -39,6 +39,7 @@ public class CountryInstance {
     private final int maxHeight;
     private int height = 0;
     private boolean disabled;
+    private boolean visible = true;
 
     // Colors
     private int minColor = COLOR_DEFAULT;
@@ -133,6 +134,14 @@ public class CountryInstance {
 
     public void updateVisuals() {
 
+        countryTop.setVisible(visible);
+        countryBase.setVisible(visible);
+        countryName.setVisible(visible);
+
+        if (!visible) {
+            return;
+        }
+
         countryBase.setVisible(this.height > 0);
         countryName.setVisible(!this.disabled);
 
@@ -180,4 +189,8 @@ public class CountryInstance {
         updateVisuals();
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+        updateVisuals();
+    }
 }

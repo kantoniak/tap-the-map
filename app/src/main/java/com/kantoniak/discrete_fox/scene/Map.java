@@ -72,6 +72,10 @@ public class Map {
         getCountries().entrySet().forEach(entry -> entry.getValue().resetState());
     }
 
+    void setVisible(boolean visible) {
+        getCountries().entrySet().forEach(entry -> entry.getValue().setVisible(visible));
+    }
+
     public @Nullable
     CountryInstance getCountry(Country country) {
         return getCountries().get(country);

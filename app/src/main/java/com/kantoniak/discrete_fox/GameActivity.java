@@ -93,6 +93,7 @@ public class GameActivity extends AppCompatActivity
         questionFragment.init(renderer, camera);
         this.currentTouchListener = questionFragment;
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, questionFragment).commit();
+        renderer.showMap(true);
     }
 
     @OnTouch(R.id.game_map_preview)

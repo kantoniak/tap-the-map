@@ -30,7 +30,11 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     private final Map map;
     private final AssetLoader loader;
     private ARRenderingDelegate arRenderingDelegate;
+
     private ObjectColorPicker objectPicker;
+    private Plane mapBase;
+
+    boolean visible = true;
 
     public MapRenderer(Context context, Map map) {
         super(context);
@@ -63,7 +67,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     protected void initScene() {
         setupObjectPicker();
 
-        Plane mapBase = new Plane();
+        mapBase = new Plane();
         mapBase.setDoubleSided(true);
         mapBase.setScale(MAP_SIZE.getX(), 1, MAP_SIZE.getY());
         mapBase.setPosition(MAP_CORRECTION.getX() * 0.5f, 0, -MAP_CORRECTION.getY() * 0.5f);
@@ -88,6 +92,15 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
             countryInstance.registerObject(getCurrentScene(), objectPicker);
             map.addCountryInstance(countryInstance);
         }
+
+        showMap(false);
+    }
+
+    private void updateVisibility() {
+        if (mapBase != null) {
+            mapBase.setVisible(visible);
+        }
+        map.setVisible(visible);
     }
 
     private void setupObjectPicker() {
@@ -127,5 +140,10 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     public Map getMap() {
         return map;
+    }
+
+    public void showMap(boolean show) {
+        this.visible = show;
+        updateVisibility();
     }
 }
