@@ -27,6 +27,7 @@
     <string name="rules_description">Tap the countries to estimate intensity of particular phenomenon in each of them.</string>
     <string name="dont_show_again">Don\'t show again</string>
     <string name="ok">OK</string>
+    <string name="about_using_markers">To play you need to print out marker image and put it on the table. You can also display it on another device. Download marker from tapthemap.stat.gov.pl</string>
 
     <!-- Sample data -->
     <string-array name="questions">

@@ -38,6 +38,8 @@ public class EasyARController {
     private Matrix44F viewMatrix;
     private Matrix44F projectionMatrix;
 
+    private OnScanListener mListener;
+
     public EasyARController() {
         trackers = new ArrayList<>();
     }
@@ -184,6 +186,10 @@ public class EasyARController {
                     }
                     viewMatrix = targetInstance.poseGL();
                     projectionMatrix = camera.projectionGL(0.2f, 500.f);
+
+                    if (mListener != null) {
+                        mListener.onTracked(target);
+                    }
                 }
             }
         } finally {
@@ -197,6 +203,14 @@ public class EasyARController {
 
     public Matrix44F getViewMatrix() {
         return viewMatrix;
+    }
+
+    public interface OnScanListener {
+        void onTracked(Target target);
+    }
+
+    public void setOnScanListener(OnScanListener listener) {
+        this.mListener = listener;
     }
 }
 

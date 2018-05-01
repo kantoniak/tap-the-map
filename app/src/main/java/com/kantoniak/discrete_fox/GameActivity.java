@@ -11,8 +11,10 @@ import com.kantoniak.discrete_fox.ar.EasyARController;
 import com.kantoniak.discrete_fox.ar.EasyARRenderingDelegate;
 import com.kantoniak.discrete_fox.ar.UpdateBackgroundAndMatricesCallback;
 import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
+import com.kantoniak.discrete_fox.game_ui.AboutMarkerFragment;
 import com.kantoniak.discrete_fox.game_ui.QuestionSeriesFragment;
 import com.kantoniak.discrete_fox.game_ui.RulesBoardFragment;
+import com.kantoniak.discrete_fox.game_ui.ScanToStartFragment;
 import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
@@ -23,7 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.OnTouch;
 
 
-public class GameActivity extends AppCompatActivity implements RulesBoardFragment.InteractionListener, QuestionSeriesFragment.InteractionListener {
+public class GameActivity extends AppCompatActivity
+        implements RulesBoardFragment.InteractionListener, AboutMarkerFragment.InteractionListener, ScanToStartFragment.InteractionListener, QuestionSeriesFragment.InteractionListener {
 
     public static final String MESSAGE_SCORE = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE";
     public static final String MESSAGE_SCORE_OUT_OF = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE_OUT_OF";
@@ -49,7 +52,7 @@ public class GameActivity extends AppCompatActivity implements RulesBoardFragmen
         if (SharedPrefsUtil.shouldShowRules(this)) {
             switchToRules();
         } else {
-            switchToQuestions();
+            switchToScanner();
         }
     }
 
@@ -69,6 +72,19 @@ public class GameActivity extends AppCompatActivity implements RulesBoardFragmen
     public void switchToRules() {
         RulesBoardFragment rulesBoardFragment = new RulesBoardFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, rulesBoardFragment).commit();
+        this.currentTouchListener = null;
+    }
+
+    public void switchToScanner() {
+        ScanToStartFragment scanFragment = new ScanToStartFragment();
+        scanFragment.init(arController);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, scanFragment).commit();
+        this.currentTouchListener = null;
+    }
+
+    public void switchToAboutMarker() {
+        AboutMarkerFragment aboutFragment = new AboutMarkerFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, aboutFragment).commit();
         this.currentTouchListener = null;
     }
 
@@ -92,6 +108,21 @@ public class GameActivity extends AppCompatActivity implements RulesBoardFragmen
         if (!showRulesAgain) {
             SharedPrefsUtil.dontShowRulesAgain(this);
         }
+        switchToScanner();
+    }
+
+    @Override
+    public void onHelpClick() {
+        switchToAboutMarker();
+    }
+
+    @Override
+    public void onAboutRead() {
+        switchToScanner();
+    }
+
+    @Override
+    public void onScanned() {
         switchToQuestions();
     }
 

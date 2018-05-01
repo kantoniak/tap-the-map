@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/triplePlusPadding"
+    tools:context=".game_ui.RulesBoardFragment">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/triplePadding"
+        android:scaleType="fitXY"
+        android:src="@drawable/camera_pointer"
+        app:layout_constraintBottom_toTopOf="@id/info_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/info_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#66000000"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            style="@style/SubHeaderText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/standardPadding"
+            android:paddingEnd="@dimen/biggerPadding"
+            android:paddingStart="@dimen/biggerPadding"
+            android:paddingTop="@dimen/halfPadding"
+            android:text="Scan marker to start"
+            android:textSize="@dimen/subsubheaderTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/button_help"
+            style="@style/SubHeaderText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:paddingBottom="@dimen/standardPadding"
+            android:paddingEnd="@dimen/biggerPadding"
+            android:paddingStart="@dimen/biggerPadding"
+            android:paddingTop="@dimen/halfPadding"
+            android:text="Help"
+            android:textColor="#000000"
+            android:textSize="@dimen/subsubheaderTextSize"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
