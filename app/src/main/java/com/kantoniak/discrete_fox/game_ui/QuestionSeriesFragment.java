@@ -102,10 +102,13 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         showingAnswers = false;
         mAnswersContainer.setVisibility(View.INVISIBLE);
 
-        //TODO Call generateQuestions on application start.
         gameplay = new Gameplay(generateQuestions(), Gameplay.Settings.COUNTRIES_PER_QUESTION);
-        Question question = gameplay.getCurrentQuestion();
-        showQuestion(question);
+        try {
+            Question question = gameplay.getCurrentQuestion();
+            showQuestion(question);
+        } catch (Exception e) {
+            //TODO Add screen with no internet connection
+        }
     }
 
     private ArrayList<Question> generateQuestions() {
