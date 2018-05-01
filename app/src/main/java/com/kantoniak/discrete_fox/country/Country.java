@@ -33,10 +33,6 @@ public class Country {
         return euCode;
     }
 
-    public String getShortName() {
-        return CountryUtil.codeToName(euCode);
-    }
-
     public int getLocalizedStringId(Resources resources) {
         return resources.getIdentifier("country_name_" + euCode, "string", BuildConfig.APPLICATION_ID);
     }

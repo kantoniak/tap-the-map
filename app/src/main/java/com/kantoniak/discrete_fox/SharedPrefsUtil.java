@@ -12,7 +12,7 @@ public class SharedPrefsUtil {
      * @return true if newScore is indeed the new high score
      */
     public static boolean updateHighScore(Context context, int newScore) {
-        SharedPreferences prefs = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
         int currentHighscore = prefs.getInt(PREF_HIGHSCORE, 0);
         if (newScore <= currentHighscore) {
             return false;
@@ -22,12 +22,12 @@ public class SharedPrefsUtil {
     }
 
     public static boolean shouldShowRules(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
         return !prefs.getBoolean(PREF_RULES_NOT_AGAIN, false);
     }
 
     public static void dontShowRulesAgain(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
         prefs.edit().putBoolean(PREF_RULES_NOT_AGAIN, true).apply();
     }
 

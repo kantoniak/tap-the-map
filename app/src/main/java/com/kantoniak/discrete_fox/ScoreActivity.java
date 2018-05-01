@@ -65,7 +65,7 @@ public class ScoreActivity extends AppCompatActivity {
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
         //mp.start();
         try {
-            int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(GameActivity.MESSAGE_SCORE) + "pkt", "raw", getApplicationContext().getPackageName());
+            int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(GameActivity.MESSAGE_SCORE) + "pkt", "raw", BuildConfig.APPLICATION_ID);
             MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
             mp2.start();
         } catch (Exception e) {

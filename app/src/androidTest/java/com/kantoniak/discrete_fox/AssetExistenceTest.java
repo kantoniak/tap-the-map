@@ -6,7 +6,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.kantoniak.discrete_fox.country.Country;
-import com.kantoniak.discrete_fox.country.CountryUtil;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,7 @@ public class AssetExistenceTest {
     public void containCountryAssets() {
         Context context = InstrumentationRegistry.getTargetContext();
         Resources resources = context.getResources();
-        String packageName = context.getPackageName();
+        String packageName = contextBuildConfig.APPLICATION_ID;
 
         Country.EU_CODES.forEach((String code) -> {
             final Country country = Country.Builder.fromEuCode(code);

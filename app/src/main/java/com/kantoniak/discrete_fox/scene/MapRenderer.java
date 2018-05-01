@@ -82,7 +82,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
         // Countries
         Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
-        for (Country country : Gameplay.getEnabledCountries()) {
+        for (Country country : Gameplay.Settings.ENABLED_COUNTRIES) {
             CountryInstance countryInstance = new CountryInstance(country, map.getCountryMiddle(country));
             countryInstance.createObject(loader, worldOffset);
             countryInstance.registerObject(getCurrentScene(), objectPicker);

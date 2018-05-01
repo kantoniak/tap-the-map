@@ -158,4 +158,9 @@ public class GameActivity extends AppCompatActivity
         }
         super.onPause();
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

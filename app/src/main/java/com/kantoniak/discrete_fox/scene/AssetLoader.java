@@ -4,6 +4,7 @@ import android.content.Context;
 import android.opengl.Visibility;
 import android.support.annotation.VisibleForTesting;
 
+import com.kantoniak.discrete_fox.BuildConfig;
 import com.kantoniak.discrete_fox.country.Country;
 
 import org.rajawali3d.Object3D;
@@ -25,7 +26,7 @@ public class AssetLoader {
     }
 
     public Object3D loadObj(String filename) {
-        int fileId = context.getResources().getIdentifier(filename, "raw", context.getPackageName());
+        int fileId = context.getResources().getIdentifier(filename, "raw", BuildConfig.APPLICATION_ID);
         LoaderOBJ loader = new LoaderOBJ(context.getResources(), textureManager, fileId);
 
         try {
@@ -38,7 +39,7 @@ public class AssetLoader {
     }
 
     public ATexture loadTexture(String drawableName) {
-        int texDrawableId = context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
+        int texDrawableId = context.getResources().getIdentifier(drawableName, "drawable", BuildConfig.APPLICATION_ID);
         return textureManager.addTexture(new Texture(drawableName, texDrawableId));
     }
 

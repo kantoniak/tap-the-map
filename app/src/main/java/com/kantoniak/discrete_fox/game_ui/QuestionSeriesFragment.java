@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.kantoniak.discrete_fox.BuildConfig;
 import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
 import com.kantoniak.discrete_fox.ask.Answer;
@@ -122,7 +123,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         question.getCountries().forEach(map::enableCountry);
 
         mQuestionTextView.setText(question.getDesc());
-        mRoundProgress.setText("" + (gameplay.getCurrentQuestionInt() + 1) + "/" + gameplay.NUMBEROFQUESTIONS);
+        mRoundProgress.setText(getString(R.string.question_progress_counter, gameplay.getCurrentQuestionInt() + 1, Gameplay.Settings.QUESTIONS_PER_SERIES));
 
         mHighTextView.setText(question.getMaxLabel());
         mMidTextView.setText(question.getMidLabel());
@@ -139,7 +140,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mLowColorView.setBackgroundColor(minColor);
         // TODO mp3 question
         try {
-            int objFileId = getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt() + 1), "raw", getActivity().getPackageName());
+            int objFileId = getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt() + 1), "raw", BuildConfig.APPLICATION_ID);
             MediaPlayer mp = MediaPlayer.create(getActivity(), objFileId);
             mp.start();
         } catch (Exception e) {

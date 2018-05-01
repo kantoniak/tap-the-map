@@ -3,7 +3,7 @@ package com.kantoniak.discrete_fox.ask;
 import android.support.v4.graphics.ColorUtils;
 
 import com.kantoniak.discrete_fox.country.Country;
-import com.kantoniak.discrete_fox.country.CountryUtil;
+import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
 
@@ -18,11 +18,6 @@ public class Question {
     private final String mlink;
     private HashMap<Country, Integer> ans;
     private HashMap<Country, Double> ansDouble;
-    public static final int NUMBEROFCOUNTRIES = 5;
-    /**
-     * List of the country codes.
-     */
-    private static final List<String> COUNTRY_CODES = CountryUtil.getEurostatCodes();
 
     double midThres;
     double highThres;
@@ -51,27 +46,12 @@ public class Question {
         createAnswers(ansDouble);
     }
 
-    /**
-     * Checks whether we can use this particular permutation.
-     * @return whether we can use given permutation
-     */
-    private boolean isShuffleLegit() {
-        boolean legit = true;
-        for (int j = 0; j < NUMBEROFCOUNTRIES; j++) {
-
-            if (COUNTRY_CODES.get(j) == null) {
-                legit = false;
-            }
-        }
-        return legit;
-    }
-
     private void setCountries() {
         List<Country> availableCountries = new ArrayList<>(ansDouble.keySet());
-        assert(availableCountries.size() > NUMBEROFCOUNTRIES);
+        assert(availableCountries.size() > Gameplay.Settings.COUNTRIES_PER_QUESTION);
         Collections.shuffle(availableCountries);
 
-        mcountries = availableCountries.subList(0, NUMBEROFCOUNTRIES);
+        mcountries = availableCountries.subList(0, Gameplay.Settings.COUNTRIES_PER_QUESTION);
     }
 
     void createThresholds(ArrayList<Double> valueList) {
