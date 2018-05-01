@@ -3,7 +3,6 @@ package com.kantoniak.discrete_fox.game_ui;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,9 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kantoniak.discrete_fox.R;
-import com.kantoniak.discrete_fox.ar.EasyARController;
-import com.kantoniak.discrete_fox.ar.EasyARRenderingDelegate;
-import com.kantoniak.discrete_fox.ar.UpdateBackgroundAndMatricesCallback;
 import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
 import com.kantoniak.discrete_fox.ask.Answer;
 import com.kantoniak.discrete_fox.ask.AnswersAdapter;
@@ -27,9 +23,7 @@ import com.kantoniak.discrete_fox.ask.Question;
 import com.kantoniak.discrete_fox.ask.QuestionChest;
 import com.kantoniak.discrete_fox.country.Country;
 import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
-import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
-import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
 
@@ -68,10 +62,6 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     private Gameplay gameplay;
     boolean showingAnswers = false;
     private AnswersAdapter answersAdapter;
-
-    // Gameplay part
-    private static final int NUMBEROFCOUNTRIES = 5;
-    private static final int NUMBEROFQUESTIONS = 5;
 
     private ViewMatrixOverrideCamera camera;
     private Map map;
@@ -112,7 +102,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mAnswersContainer.setVisibility(View.INVISIBLE);
         map.reset();
         //TODO Call generateQuestions on application start.
-        gameplay = new Gameplay(generateQuestions(), NUMBEROFCOUNTRIES);
+        gameplay = new Gameplay(generateQuestions(), Gameplay.Settings.COUNTRIES_PER_QUESTION);
         Question question = gameplay.getCurrentQuestion();
         showQuestion(question);
 
@@ -120,7 +110,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     }
 
     private ArrayList<Question> generateQuestions() {
-        QuestionChest qc = new QuestionChest(getResources(), getActivity(), NUMBEROFCOUNTRIES, NUMBEROFQUESTIONS);
+        QuestionChest qc = new QuestionChest(getResources(), getActivity(), Gameplay.Settings.COUNTRIES_PER_QUESTION, Gameplay.Settings.QUESTIONS_PER_SERIES);
         ArrayList<Question> questions = new ArrayList<>();
         for (int i = 0; i < qc.numberOfQuestions(); i++) {
             questions.add(qc.getQuestion(i));

@@ -16,6 +16,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Gameplay {
+
+    public static class Settings {
+        public static final int COUNTRIES_PER_QUESTION = 5;
+        public static final int QUESTIONS_PER_SERIES = 5;
+    }
+
     public final int NUMBEROFQUESTIONS;
     int step;
     int currentQuestion;
