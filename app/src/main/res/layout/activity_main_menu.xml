@@ -1,75 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:scaleType="fitCenter">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/triplePadding"
-        app:layout_constraintBottom_toTopOf="@id/buttons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/image_hand"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_hand"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/name_app"
-            app:layout_constraintHeight_default="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_default="spread" />
-
-        <TextView
-            android:id="@+id/name_app"
-            style="@style/HeaderText"
-            android:layout_marginStart="@dimen/triplePadding"
-            android:layout_marginEnd="@dimen/triplePadding"
-            android:text="@string/app_name"
-            android:textSize="64sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_hand"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
-
+    <ImageView
+        android:id="@+id/main_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_main_bg_animated"/>
 
     <LinearLayout
-        android:id="@+id/buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/triplePadding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/start_button"
+        <LinearLayout
+            android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/triplePadding"
-            android:padding="@dimen/triplePadding"
-            android:text="@string/new_game"
-            android:textSize="30sp" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/about_button"
+            <ImageView
+                android:id="@+id/image_hand"
+                android:layout_width="79dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="@dimen/standardPadding"
+                android:layout_marginTop="@dimen/halfPadding"
+                android:src="@drawable/ic_hand_tapping" />
+
+            <TextView
+                android:id="@+id/name_app"
+                style="@style/HeaderText"
+                android:text="@string/app_name"
+                android:textSize="64sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_about" />
+            android:layout_marginTop="@dimen/standardPadding"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header">
+
+            <Button
+                android:id="@+id/start_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/doublePadding"
+                android:minWidth="200dp"
+                android:text="@string/new_game"
+                android:textAlignment="center"
+                android:textSize="@dimen/subsubheaderTextSize" />
+
+            <Button
+                android:id="@+id/about_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/doublePadding"
+                android:minWidth="200dp"
+                android:text="@string/button_about"
+                android:textAlignment="center"
+                android:textSize="@dimen/subsubheaderTextSize" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
