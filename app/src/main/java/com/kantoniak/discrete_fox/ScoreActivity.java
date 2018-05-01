@@ -53,7 +53,7 @@ public class ScoreActivity extends AppCompatActivity {
         }
 
         mScoreTitleTextView.setText(getResources().getString(textToShow));
-        mScorePointsTextView.setText("" + result + "/" + maxResult);
+        mScorePointsTextView.setText(getString(R.string.score_value, result, maxResult));
 
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setQuote("Whatever")

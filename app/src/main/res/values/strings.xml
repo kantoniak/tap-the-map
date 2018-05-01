@@ -22,6 +22,7 @@
     <string name="score_needs_improvement">Needs improvement!</string>
     <string name="your_score">Your score:</string>
     <string name="play_again">Play again</string>
+    <string name="score_value">%1$d/%2$d</string>
 
     <!-- Rules board -->
     <string name="rules_description">Tap the countries to estimate intensity of particular phenomenon in each of them.</string>
