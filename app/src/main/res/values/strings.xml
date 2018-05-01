@@ -23,6 +23,11 @@
     <string name="your_score">Your score:</string>
     <string name="play_again">Play again</string>
 
+    <!-- Rules board -->
+    <string name="rules_description">Tap the countries to estimate intensity of particular phenomenon in each of them.</string>
+    <string name="dont_show_again">Don\'t show again</string>
+    <string name="ok">OK</string>
+
     <!-- Sample data -->
     <string-array name="questions">
         <item>What is GDP?</item>
@@ -38,7 +43,7 @@
         <item>What is the share of the EU population is in the given country?</item>
         <item>What is fertility rate?</item>
         <item>What is the share of the renewable energy in the total power consumption?</item>
-        <item>What is the share of the young adults (18-34) living with their parents?</item>
+        <item>What is the share of the young adults (18–34) living with their parents?</item>
         <item>What is the share of people whose self-evaluated general health condition is bad?</item>
         <item>What is the share of people whose self-evaluated general health condition is good?</item>
         <item>What is the share of recycled wasted per person?</item>

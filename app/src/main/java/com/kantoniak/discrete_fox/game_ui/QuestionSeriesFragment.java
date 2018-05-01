@@ -73,10 +73,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     private static final int NUMBEROFCOUNTRIES = 5;
     private static final int NUMBEROFQUESTIONS = 5;
 
-    private GameSurfaceView gameMapPreview = null;
-
-    private final EasyARController arController = new EasyARController();
-    private final ViewMatrixOverrideCamera camera = new ViewMatrixOverrideCamera();
+    private ViewMatrixOverrideCamera camera;
     private Map map;
     private MapRenderer renderer;
 
@@ -84,9 +81,10 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         // Required empty public constructor
     }
 
-    public void init(MapRenderer renderer) {
+    public void init(MapRenderer renderer, ViewMatrixOverrideCamera camera) {
         this.renderer = renderer;
         this.map = renderer.getMap();
+        this.camera = camera;
     }
 
     @Override
@@ -94,20 +92,11 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_question_series, container, false);
         ButterKnife.bind(this, view);
+
+        setupAnswersRecycler();
+        startGame();
+
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (gameMapPreview == null) {
-            gameMapPreview = getActivity().findViewById(R.id.game_map_preview);
-
-            setupAnswersRecycler();
-            setupGameSurfaceView();
-            startGame();
-        }
     }
 
     public void setupAnswersRecycler() {
@@ -116,17 +105,6 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
 
         answersAdapter = new AnswersAdapter();
         mAnswersRecycler.setAdapter(answersAdapter);
-    }
-
-    private void setupGameSurfaceView() {
-        renderer.setCamera(camera);
-
-        ARRenderingDelegate arDelegate = new EasyARRenderingDelegate(arController, camera);
-        renderer.setArRenderingDelegate(arDelegate);
-        gameMapPreview.setArRenderingDelegate(arDelegate);
-
-        UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, camera);
-        renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
     }
 
     public void startGame() {
@@ -233,22 +211,6 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
             renderer.onTouchEvent(event);
         }
         return false;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (gameMapPreview != null) {
-            gameMapPreview.onResume();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        if (gameMapPreview != null) {
-            gameMapPreview.onPause();
-        }
-        super.onPause();
     }
 
     @Override
