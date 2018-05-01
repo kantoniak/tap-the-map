@@ -93,7 +93,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mAnswersRecycler.setHasFixedSize(true);
         mAnswersRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        answersAdapter = new AnswersAdapter();
+        answersAdapter = new AnswersAdapter(getResources());
         mAnswersRecycler.setAdapter(answersAdapter);
     }
 

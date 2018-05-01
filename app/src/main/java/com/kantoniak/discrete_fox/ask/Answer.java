@@ -19,8 +19,8 @@ public class Answer {
         return valueRaw;
     }
 
-    public String getCountry() {
-        return country.getShortName();
+    public Country getCountry() {
+        return country;
     }
 
     public String getValue() {

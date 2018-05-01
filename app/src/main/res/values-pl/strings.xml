@@ -61,4 +61,47 @@
         <item>Jaki jest współczynnik osób wykonujący cotygodniowy wysiłek fizyczny? (min. 150min)</item>
     </string-array>
 
+    <!-- Country names -->
+    <string name="country_name_al">Albania</string>
+    <string name="country_name_at">Austria</string>
+    <string name="country_name_ba">Bośnia i Hercegowina</string>
+    <string name="country_name_be">Belgia</string>
+    <string name="country_name_bg">Bułgaria</string>
+    <string name="country_name_by">Białoruś</string>
+    <string name="country_name_ch">Szwajcaria</string>
+    <string name="country_name_cy">Cypr</string>
+    <string name="country_name_cz">Czechy</string>
+    <string name="country_name_de">Niemcy</string>
+    <string name="country_name_dk">Dania</string>
+    <string name="country_name_ee">Estonia</string>
+    <string name="country_name_el">Grecja</string>
+    <string name="country_name_es">Hiszpania</string>
+    <string name="country_name_fi">Finlandia</string>
+    <string name="country_name_fr">Francja</string>
+    <string name="country_name_hr">Chorwacja</string>
+    <string name="country_name_hu">Węgry</string>
+    <string name="country_name_ie">Irlandia</string>
+    <string name="country_name_it">Włochy</string>
+    <string name="country_name_lt">Litwa</string>
+    <string name="country_name_lu">Luksemburg</string>
+    <string name="country_name_lv">Łotwa</string>
+    <string name="country_name_md">Mołdawia</string>
+    <string name="country_name_me">Czarnogóra</string>
+    <string name="country_name_mk">Macedonia</string>
+    <string name="country_name_mt">Malta</string>
+    <string name="country_name_nl">Holandia</string>
+    <string name="country_name_no">Norwegia</string>
+    <string name="country_name_pl">Polska</string>
+    <string name="country_name_pt">Portugalia</string>
+    <string name="country_name_ro">Rumunia</string>
+    <string name="country_name_rs">Serbia</string>
+    <string name="country_name_ru">Rosja</string>
+    <string name="country_name_se">Szwecja</string>
+    <string name="country_name_si">Słowenia</string>
+    <string name="country_name_sk">Słowacja</string>
+    <string name="country_name_tr">Turcja</string>
+    <string name="country_name_ua">Ukraina</string>
+    <string name="country_name_uk">Wielka Brytania</string>
+    <string name="country_name_xk">Kosowo</string>
+
 </resources>

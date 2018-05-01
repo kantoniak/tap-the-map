@@ -1,6 +1,9 @@
 package com.kantoniak.discrete_fox.country;
 
+import android.content.res.Resources;
 import android.support.annotation.VisibleForTesting;
+
+import com.kantoniak.discrete_fox.BuildConfig;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,6 +35,14 @@ public class Country {
 
     public String getShortName() {
         return CountryUtil.codeToName(euCode);
+    }
+
+    public int getLocalizedStringId(Resources resources) {
+        return resources.getIdentifier("country_name_" + euCode, "string", BuildConfig.APPLICATION_ID);
+    }
+
+    public String getLocalizedName(Resources resources) {
+        return resources.getString(getLocalizedStringId(resources));
     }
 
     @Override

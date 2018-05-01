@@ -1,5 +1,6 @@
 package com.kantoniak.discrete_fox.ask;
 
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHolder> {
-    private List<Answer> dataset = new LinkedList<>();
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -26,6 +26,13 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
         }
     }
 
+    private final Resources resources;
+    private final List<Answer> dataset = new LinkedList<>();
+
+    public AnswersAdapter(Resources resources) {
+        this.resources = resources;
+    }
+
     @Override
     public AnswersAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.answer_item_row, parent, false);
@@ -36,8 +43,9 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         Answer answer = dataset.get(position);
         holder.color.setBackgroundColor(answer.getColor());
-        holder.country.setText(answer.getCountry() + " (" + answer.getValue() + ")");
 
+        String countryName = answer.getCountry().getLocalizedName(resources);
+        holder.country.setText(resources.getString(R.string.answer_country_value, countryName, answer.getValue()));
     }
 
     @Override

@@ -35,6 +35,9 @@
     <string name="scan_marker_to_start">Scan marker to start</string>
     <string name="help">Help</string>
 
+    <!-- Questions screen -->
+    <string name="answer_country_value">%1$s (%2$s)</string>
+
     <!-- Sample data -->
     <string-array name="questions">
         <item>What is GDP?</item>
@@ -61,5 +64,48 @@
         <item>Individuals - social network activities</item>
         <item>Time spent on health-enhancing (non-work-related) aerobic physical activity</item>
     </string-array>
+
+    <!-- Country names -->
+    <string name="country_name_al">Albania</string>
+    <string name="country_name_at">Austria</string>
+    <string name="country_name_ba">Bosnia and Herzegovina</string>
+    <string name="country_name_be">Belgium</string>
+    <string name="country_name_bg">Bulgaria</string>
+    <string name="country_name_by">Belarus</string>
+    <string name="country_name_ch">Switzerland</string>
+    <string name="country_name_cy">Cyprus</string>
+    <string name="country_name_cz">Czechia</string>
+    <string name="country_name_de">Germany</string>
+    <string name="country_name_dk">Denmark</string>
+    <string name="country_name_ee">Estonia</string>
+    <string name="country_name_el">Greece</string>
+    <string name="country_name_es">Spain</string>
+    <string name="country_name_fi">Finland</string>
+    <string name="country_name_fr">France</string>
+    <string name="country_name_hr">Croatia</string>
+    <string name="country_name_hu">Hungary</string>
+    <string name="country_name_ie">Ireland</string>
+    <string name="country_name_it">Italy</string>
+    <string name="country_name_lt">Lithuania</string>
+    <string name="country_name_lu">Luxembourg</string>
+    <string name="country_name_lv">Latvia</string>
+    <string name="country_name_md">Moldavia</string>
+    <string name="country_name_me">Montenegro</string>
+    <string name="country_name_mk">Macedonia</string>
+    <string name="country_name_mt">Malta</string>
+    <string name="country_name_nl">Netherlands</string>
+    <string name="country_name_no">Norway</string>
+    <string name="country_name_pl">Poland</string>
+    <string name="country_name_pt">Portugal</string>
+    <string name="country_name_ro">Romania</string>
+    <string name="country_name_rs">Serbia</string>
+    <string name="country_name_ru">Russia</string>
+    <string name="country_name_se">Sweden</string>
+    <string name="country_name_si">Slovenia</string>
+    <string name="country_name_sk">Slovakia</string>
+    <string name="country_name_tr">Turkey</string>
+    <string name="country_name_ua">Ukraine</string>
+    <string name="country_name_uk">United Kingdom</string>
+    <string name="country_name_xk">Kosovo</string>
 
 </resources>
