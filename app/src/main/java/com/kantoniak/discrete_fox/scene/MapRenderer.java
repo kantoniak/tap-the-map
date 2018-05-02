@@ -91,6 +91,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
 
         countryInstance.initPositions(worldOffset, map.getCountryMiddle(countryInstance.getCountry()));
+        countryInstance.registerObject(getCurrentScene(), objectPicker);
         countryInstance.resetState();
         map.addCountryInstance(countryInstance);
     }

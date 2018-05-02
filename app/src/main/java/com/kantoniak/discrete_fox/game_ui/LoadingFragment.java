@@ -90,7 +90,7 @@ public class LoadingFragment extends Fragment {
             loaded.forEach(result -> {
                 CountryInstance countryInstance = new CountryInstance(result.country);
                 countryInstance.initMeshes(result.countryBase, result.countryTop, result.countryNameTexture);
-                renderer.getMap().addCountryInstance(countryInstance);
+                renderer.addCountryInstance(countryInstance);
             });
 
             mListener.onLoaded();
