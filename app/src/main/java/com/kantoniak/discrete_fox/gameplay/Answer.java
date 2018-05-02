@@ -1,6 +1,6 @@
-package com.kantoniak.discrete_fox.ask;
+package com.kantoniak.discrete_fox.gameplay;
 
-import com.kantoniak.discrete_fox.country.Country;
+import com.kantoniak.discrete_fox.Country;
 
 public class Answer {
     private Country country;

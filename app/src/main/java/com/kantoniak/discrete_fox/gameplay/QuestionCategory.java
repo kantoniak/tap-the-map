@@ -1,4 +1,4 @@
-package com.kantoniak.discrete_fox.ask;
+package com.kantoniak.discrete_fox.gameplay;
 
 /**
  * Class used to describe the category of a question.

@@ -7,28 +7,28 @@ import org.rajawali3d.view.SurfaceView;
 
 public class GameSurfaceView extends SurfaceView {
 
-    private ARRenderingDelegate arRenderingDelegate;
+    private RenderingDelegate renderingDelegate;
 
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public void setArRenderingDelegate(ARRenderingDelegate arRenderingDelegate) {
-        this.arRenderingDelegate = arRenderingDelegate;
+    public void setRenderingDelegate(RenderingDelegate renderingDelegate) {
+        this.renderingDelegate = renderingDelegate;
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (arRenderingDelegate != null) {
-            arRenderingDelegate.onAfterAttachedToWindow();
+        if (renderingDelegate != null) {
+            renderingDelegate.onAfterAttachedToWindow();
         }
     }
 
     @Override
     protected void onDetachedFromWindow() {
-        if (arRenderingDelegate != null) {
-            arRenderingDelegate.onBeforeDetachedFromWindow();
+        if (renderingDelegate != null) {
+            renderingDelegate.onBeforeDetachedFromWindow();
         }
         super.onDetachedFromWindow();
     }
@@ -36,15 +36,15 @@ public class GameSurfaceView extends SurfaceView {
     @Override
     public void onResume() {
         super.onResume();
-        if (arRenderingDelegate != null) {
-            arRenderingDelegate.onResume();
+        if (renderingDelegate != null) {
+            renderingDelegate.onResume();
         }
     }
 
     @Override
     public void onPause() {
-        if (arRenderingDelegate != null) {
-            arRenderingDelegate.onPause();
+        if (renderingDelegate != null) {
+            renderingDelegate.onPause();
         }
         super.onPause();
     }

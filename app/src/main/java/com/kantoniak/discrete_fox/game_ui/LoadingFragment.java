@@ -11,21 +11,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.kantoniak.discrete_fox.R;
-import com.kantoniak.discrete_fox.country.Country;
-import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
+import com.kantoniak.discrete_fox.Country;
+import com.kantoniak.discrete_fox.gameplay.Gameplay;
 import com.kantoniak.discrete_fox.scene.AssetLoader;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
-import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
 
 import org.rajawali3d.Object3D;
-import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.materials.textures.Texture;
-import org.rajawali3d.math.vector.Vector2;
-import org.rajawali3d.math.vector.Vector3;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;

@@ -16,7 +16,7 @@ import com.kantoniak.discrete_fox.game_ui.LoadingFragment;
 import com.kantoniak.discrete_fox.game_ui.QuestionSeriesFragment;
 import com.kantoniak.discrete_fox.game_ui.RulesBoardFragment;
 import com.kantoniak.discrete_fox.game_ui.ScanToStartFragment;
-import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
+import com.kantoniak.discrete_fox.scene.RenderingDelegate;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
@@ -62,9 +62,9 @@ public class GameActivity extends AppCompatActivity
         renderer.setCamera(camera);
         gameMapPreview.setSurfaceRenderer(renderer);
 
-        ARRenderingDelegate arDelegate = new EasyARRenderingDelegate(arController, camera);
-        renderer.setArRenderingDelegate(arDelegate);
-        gameMapPreview.setArRenderingDelegate(arDelegate);
+        RenderingDelegate arDelegate = new EasyARRenderingDelegate(arController, camera);
+        renderer.setRenderingDelegate(arDelegate);
+        gameMapPreview.setRenderingDelegate(arDelegate);
 
         UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, camera);
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);

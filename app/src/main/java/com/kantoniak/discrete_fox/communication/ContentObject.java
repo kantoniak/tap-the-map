@@ -1,8 +1,7 @@
 package com.kantoniak.discrete_fox.communication;
 
-import com.kantoniak.discrete_fox.ask.QuestionChest;
+import com.kantoniak.discrete_fox.gameplay.QuestionChest;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;

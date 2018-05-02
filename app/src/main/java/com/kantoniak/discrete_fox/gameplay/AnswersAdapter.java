@@ -1,4 +1,4 @@
-package com.kantoniak.discrete_fox.ask;
+package com.kantoniak.discrete_fox.gameplay;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.kantoniak.discrete_fox.ask;
+package com.kantoniak.discrete_fox.gameplay;
 
 import android.content.Context;
 import android.content.res.Resources;

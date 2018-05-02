@@ -1,9 +1,8 @@
-package com.kantoniak.discrete_fox.game_mechanics;
+package com.kantoniak.discrete_fox.gameplay;
 
 import android.content.Context;
 
-import com.kantoniak.discrete_fox.country.Country;
-import com.kantoniak.discrete_fox.ask.Question;
+import com.kantoniak.discrete_fox.Country;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
 import com.kantoniak.discrete_fox.scene.Map;
 
@@ -19,6 +18,7 @@ public class Gameplay {
     public static class Settings {
         public static final int COUNTRIES_PER_QUESTION = 5;
         public static final int QUESTIONS_PER_SERIES = 5;
+        public static final int MAX_COUNTRY_HEIGHT = 3;
         public static final Set<Country> ENABLED_COUNTRIES = Arrays.asList(
                 "at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fi", "fr", "uk", "el", "hr",
                 "hu", "ie", "it", "lt", "lu", "lv", "nl", "pl", "pt", "ro", "se", "si", "sk", "mt")

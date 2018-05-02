@@ -2,7 +2,7 @@ package com.kantoniak.discrete_fox.scene;
 
 import android.support.annotation.Nullable;
 
-import com.kantoniak.discrete_fox.country.Country;
+import com.kantoniak.discrete_fox.Country;
 
 import org.rajawali3d.math.vector.Vector2;
 

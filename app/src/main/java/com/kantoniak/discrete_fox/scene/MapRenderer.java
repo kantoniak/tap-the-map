@@ -4,8 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
-import com.kantoniak.discrete_fox.country.Country;
-import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
+import com.kantoniak.discrete_fox.Country;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.cameras.Camera;
@@ -29,7 +28,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     private final Context context;
     private final Map map;
     private final AssetLoader loader;
-    private ARRenderingDelegate arRenderingDelegate;
+    private RenderingDelegate renderingDelegate;
 
     private ObjectColorPicker objectPicker;
     private Plane mapBase;
@@ -43,23 +42,23 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         this.loader = new AssetLoader(context, mTextureManager);
     }
 
-    public void setArRenderingDelegate(ARRenderingDelegate arRenderingDelegate) {
-        this.arRenderingDelegate = arRenderingDelegate;
+    public void setRenderingDelegate(RenderingDelegate renderingDelegate) {
+        this.renderingDelegate = renderingDelegate;
     }
 
     @Override
     public void onRenderSurfaceCreated(EGLConfig config, GL10 gl, int width, int height) {
         super.onRenderSurfaceCreated(config, gl, width, height);
-        if (arRenderingDelegate != null) {
-            arRenderingDelegate.onSurfaceCreated();
+        if (renderingDelegate != null) {
+            renderingDelegate.onSurfaceCreated();
         }
     }
 
     @Override
     public void onRenderSurfaceSizeChanged(GL10 gl, int width, int height) {
         super.onRenderSurfaceSizeChanged(gl, width, height);
-        if (arRenderingDelegate != null) {
-            arRenderingDelegate.onSurfaceChanged(width, height);
+        if (renderingDelegate != null) {
+            renderingDelegate.onSurfaceChanged(width, height);
         }
     }
 

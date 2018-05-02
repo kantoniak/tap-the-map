@@ -5,8 +5,6 @@ import android.content.res.Resources;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kantoniak.discrete_fox.country.Country;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

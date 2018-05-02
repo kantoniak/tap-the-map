@@ -1,9 +1,8 @@
-package com.kantoniak.discrete_fox.ask;
+package com.kantoniak.discrete_fox.gameplay;
 
 import android.support.v4.graphics.ColorUtils;
 
-import com.kantoniak.discrete_fox.country.Country;
-import com.kantoniak.discrete_fox.game_mechanics.Gameplay;
+import com.kantoniak.discrete_fox.Country;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
 

@@ -1,13 +1,10 @@
-package com.kantoniak.discrete_fox.country;
+package com.kantoniak.discrete_fox;
 
 import android.content.res.Resources;
 import android.support.annotation.VisibleForTesting;
 
-import com.kantoniak.discrete_fox.BuildConfig;
-
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

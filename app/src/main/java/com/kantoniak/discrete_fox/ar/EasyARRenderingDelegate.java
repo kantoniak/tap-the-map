@@ -1,10 +1,10 @@
 package com.kantoniak.discrete_fox.ar;
 
-import com.kantoniak.discrete_fox.scene.ARRenderingDelegate;
+import com.kantoniak.discrete_fox.scene.RenderingDelegate;
 
 import cn.easyar.Engine;
 
-public class EasyARRenderingDelegate implements ARRenderingDelegate {
+public class EasyARRenderingDelegate implements RenderingDelegate {
 
     private final EasyARController easyArController;
     private final ViewMatrixOverrideCamera camera;

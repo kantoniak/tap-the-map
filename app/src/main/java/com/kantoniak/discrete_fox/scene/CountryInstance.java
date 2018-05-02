@@ -1,9 +1,9 @@
 package com.kantoniak.discrete_fox.scene;
 
-import android.content.Context;
 import android.support.v4.graphics.ColorUtils;
 
-import com.kantoniak.discrete_fox.country.Country;
+import com.kantoniak.discrete_fox.Country;
+import com.kantoniak.discrete_fox.gameplay.Gameplay;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.materials.Material;
@@ -36,7 +36,6 @@ public class CountryInstance {
 
     // State
     private final Country country;
-    private final int maxHeight;
     private int height = 0;
     private boolean disabled;
     private boolean visible = true;
@@ -54,7 +53,6 @@ public class CountryInstance {
 
     public CountryInstance(Country country) {
         this.country = country;
-        this.maxHeight = 3;
         this.disabled = true;
     }
 
@@ -114,7 +112,7 @@ public class CountryInstance {
 
     public void setHeight(int height) {
         this.height = height;
-        if (this.height > maxHeight) {
+        if (this.height > Gameplay.Settings.MAX_COUNTRY_HEIGHT) {
             this.height = 0;
         }
         updateVisuals();
@@ -154,7 +152,7 @@ public class CountryInstance {
             countryTop.setY(BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER);
             countryName.setY(BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER + NAME_Y_TRANSLATION);
 
-            float colorRatio = (height - 1) / (float)(maxHeight - 1);
+            float colorRatio = (height - 1) / (float)(Gameplay.Settings.MAX_COUNTRY_HEIGHT - 1);
             countryBaseMaterial.setColor(getBaseColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio)));
             countryTopMaterial.setColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio));
         }

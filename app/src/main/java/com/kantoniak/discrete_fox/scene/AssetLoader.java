@@ -1,16 +1,14 @@
 package com.kantoniak.discrete_fox.scene;
 
 import android.content.Context;
-import android.opengl.Visibility;
 import android.support.annotation.VisibleForTesting;
 
 import com.kantoniak.discrete_fox.BuildConfig;
-import com.kantoniak.discrete_fox.country.Country;
+import com.kantoniak.discrete_fox.Country;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
-import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.materials.textures.Texture;
 import org.rajawali3d.materials.textures.TextureManager;
 
