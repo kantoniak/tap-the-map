@@ -1,8 +1,10 @@
 package com.kantoniak.discrete_fox.game_ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.Country;
+import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.gameplay.Gameplay;
 import com.kantoniak.discrete_fox.scene.AssetLoader;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
@@ -30,6 +32,7 @@ import butterknife.ButterKnife;
 
 public class LoadingFragment extends Fragment {
 
+    @SuppressLint("StaticFieldLeak")
     private class LoadObjectsTask extends AsyncTask<Void, Integer, List<LoadObjectsTask.LoadedForCountry>> {
 
         class LoadedForCountry {
@@ -44,10 +47,10 @@ public class LoadingFragment extends Fragment {
         private final Collection<Country> countriesToLoad;
 
         /**
-         * @param renderer Map renderer
+         * @param renderer        Map renderer
          * @param countriesToLoad List of countries to load. Constructor will make a copy.
          */
-        public LoadObjectsTask(MapRenderer renderer, Collection<Country> countriesToLoad) {
+        LoadObjectsTask(MapRenderer renderer, Collection<Country> countriesToLoad) {
             this.renderer = renderer;
             this.loader = renderer.getLoader();
             this.countriesToLoad = new HashSet<>(countriesToLoad);
@@ -95,8 +98,10 @@ public class LoadingFragment extends Fragment {
     private InteractionListener mListener;
     private LoadObjectsTask loadingTask;
 
-    @BindView(R.id.progress_desc) TextView mDescTextView;
-    @BindView(R.id.progress) ProgressBar mProgressBar;
+    @BindView(R.id.progress_desc)
+    TextView mDescTextView;
+    @BindView(R.id.progress)
+    ProgressBar mProgressBar;
 
     public LoadingFragment() {
         // Required empty public constructor
@@ -107,7 +112,7 @@ public class LoadingFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loading, container, false);
         ButterKnife.bind(this, view);

@@ -17,7 +17,7 @@ import org.rajawali3d.util.ObjectColorPicker;
 
 /**
  * Represents a single country on the map.
- *
+ * <p>
  * About 3D rendering: world map exists in a plane where X is to the right and Z is to top of the
  * map. Y axis is perpendicular to the map.
  */
@@ -27,9 +27,7 @@ public class CountryInstance {
     private static int COLOR_DISABLED = 0xFFF5F5F5;
     private static int COLOR_BLACK = 0xFF000000;
 
-    /** Height ob the imported OBJ model */
     private static float BASE_HEIGHT = 0.1f;
-
     private static float Y_SCALE_MULTIPLIER = 0.5f;
     private static float NAME_Y_TRANSLATION = 0.1f;
     private static float NAME_SCALE = 0.1f;
@@ -130,7 +128,7 @@ public class CountryInstance {
         //mp.start();
     }
 
-    public void updateVisuals() {
+    private void updateVisuals() {
 
         countryTop.setVisible(visible);
         countryBase.setVisible(visible);
@@ -152,7 +150,7 @@ public class CountryInstance {
             countryTop.setY(BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER);
             countryName.setY(BASE_HEIGHT * (float) height * Y_SCALE_MULTIPLIER + NAME_Y_TRANSLATION);
 
-            float colorRatio = (height - 1) / (float)(Gameplay.Settings.MAX_COUNTRY_HEIGHT - 1);
+            float colorRatio = (height - 1) / (float) (Gameplay.Settings.MAX_COUNTRY_HEIGHT - 1);
             countryBaseMaterial.setColor(getBaseColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio)));
             countryTopMaterial.setColor(ColorUtils.blendARGB(minColor, maxColor, colorRatio));
         }

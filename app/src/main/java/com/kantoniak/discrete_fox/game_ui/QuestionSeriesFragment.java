@@ -1,8 +1,10 @@
 package com.kantoniak.discrete_fox.game_ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,14 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kantoniak.discrete_fox.BuildConfig;
+import com.kantoniak.discrete_fox.Country;
 import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
 import com.kantoniak.discrete_fox.gameplay.Answer;
 import com.kantoniak.discrete_fox.gameplay.AnswersAdapter;
+import com.kantoniak.discrete_fox.gameplay.Gameplay;
 import com.kantoniak.discrete_fox.gameplay.Question;
 import com.kantoniak.discrete_fox.gameplay.QuestionChest;
-import com.kantoniak.discrete_fox.Country;
-import com.kantoniak.discrete_fox.gameplay.Gameplay;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
@@ -55,10 +57,8 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     @BindView(R.id.legend_low_color) View mLowColorView;
     @BindView(R.id.next_button_icon) ImageView mNextIcon;
 
-    @BindView(R.id.answers_recycler)
-    RecyclerView mAnswersRecycler;
-    @BindView(R.id.answers_container)
-    LinearLayout mAnswersContainer;
+    @BindView(R.id.answers_recycler) RecyclerView mAnswersRecycler;
+    @BindView(R.id.answers_container) LinearLayout mAnswersContainer;
 
     private Gameplay gameplay;
     boolean showingAnswers = false;
@@ -79,7 +79,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_question_series, container, false);
         ButterKnife.bind(this, view);
@@ -141,13 +141,14 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mHighColorView.setBackgroundColor(maxColor);
         mMidColorView.setBackgroundColor(midColor);
         mLowColorView.setBackgroundColor(minColor);
+
         // TODO mp3 question
         try {
             int objFileId = getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt() + 1), "raw", BuildConfig.APPLICATION_ID);
             MediaPlayer mp = MediaPlayer.create(getActivity(), objFileId);
             mp.start();
         } catch (Exception e) {
-
+            // TODO: Empty catch block
         }
     }
 
@@ -193,12 +194,15 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
             for (Country country : countries) {
                 map.enableCountry(country);
                 CountryInstance countryInstance = map.getCountry(country);
-                int targetHeight = currentQuestion.getCorrectAnswer(country);
-                countryInstance.setHeight(targetHeight);
+                if (countryInstance != null) {
+                    int targetHeight = currentQuestion.getCorrectAnswer(country);
+                    countryInstance.setHeight(targetHeight);
+                }
             }
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouch(View view, MotionEvent event) {
         if (!showingAnswers) {
             renderer.onTouchEvent(event);

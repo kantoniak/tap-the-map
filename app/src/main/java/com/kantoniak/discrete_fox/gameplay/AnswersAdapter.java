@@ -12,17 +12,19 @@ import com.kantoniak.discrete_fox.R;
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public View color;
-        public TextView country;
+        @BindView(R.id.answer_item_color) public View color;
+        @BindView(R.id.answer_item_country) public TextView country;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            color = itemView.findViewById(R.id.answer_item_color);
-            country = itemView.findViewById(R.id.answer_item_country);
+            ButterKnife.bind(this, itemView);
         }
     }
 

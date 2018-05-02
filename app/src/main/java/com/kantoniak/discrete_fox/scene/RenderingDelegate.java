@@ -1,7 +1,6 @@
 package com.kantoniak.discrete_fox.scene;
 
 public interface RenderingDelegate {
-
     void onSurfaceCreated();
     void onSurfaceChanged(int width, int height);
 
@@ -10,5 +9,4 @@ public interface RenderingDelegate {
 
     void onResume();
     void onPause();
-
 }

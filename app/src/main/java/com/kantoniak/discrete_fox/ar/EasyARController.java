@@ -1,5 +1,6 @@
 package com.kantoniak.discrete_fox.ar;
 
+import android.annotation.SuppressLint;
 import android.opengl.GLES20;
 import android.util.Log;
 
@@ -25,6 +26,9 @@ import cn.easyar.Vec4I;
 import static com.kantoniak.discrete_fox.ar.EasyARUtils.TAG_AR;
 
 public class EasyARController {
+
+    private final static String TARGETS_FILE = "targets.json";
+
     private CameraDevice camera;
     private CameraFrameStreamer streamer;
     private ArrayList<ImageTracker> trackers;
@@ -44,8 +48,9 @@ public class EasyARController {
         trackers = new ArrayList<>();
     }
 
-    private void loadAllFromJsonFile(ImageTracker tracker, String path) {
-        for (ImageTarget target : ImageTarget.setupAll(path, StorageType.Assets)) {
+    @SuppressLint("DefaultLocale")
+    private void loadAllFromJsonFile(ImageTracker tracker) {
+        for (ImageTarget target : ImageTarget.setupAll(TARGETS_FILE, StorageType.Assets)) {
             tracker.loadTarget(target, (loadedTarget, status) -> {
                 if (status) {
                     String message = String.format("Loaded target %s (#%d)", loadedTarget.name(), loadedTarget.runtimeID());
@@ -63,19 +68,18 @@ public class EasyARController {
         streamer = new CameraFrameStreamer();
         streamer.attachCamera(camera);
 
-        boolean status = true;
-        status &= camera.open(CameraDeviceType.Default);
+        boolean status = camera.open(CameraDeviceType.Default);
         camera.setSize(new Vec2I(1280, 720));
 
         if (!status) {
-            return status;
+            return false;
         }
         ImageTracker tracker = new ImageTracker();
         tracker.attachStreamer(streamer);
-        loadAllFromJsonFile(tracker, "targets.json");
+        loadAllFromJsonFile(tracker);
         trackers.add(tracker);
 
-        return status;
+        return true;
     }
 
     public void dispose() {
@@ -98,9 +102,13 @@ public class EasyARController {
     }
 
     public boolean start() {
-        boolean status = true;
-        status &= (camera != null) && camera.start();
+        boolean status = (camera != null) && camera.start();
         status &= (streamer != null) && streamer.start();
+
+        if (!status) {
+            return false;
+        }
+
         camera.setFocusMode(CameraDeviceFocusMode.Continousauto);
         for (ImageTracker tracker : trackers) {
             status &= tracker.start();
@@ -108,14 +116,16 @@ public class EasyARController {
         return status;
     }
 
-    public boolean stop() {
-        boolean status = true;
+    public void stop() {
         for (ImageTracker tracker : trackers) {
-            status &= tracker.stop();
+            tracker.stop();
         }
-        status &= (streamer != null) && streamer.stop();
-        status &= (camera != null) && camera.stop();
-        return status;
+        if (streamer != null) {
+            streamer.stop();
+        }
+        if (camera != null) {
+            camera.stop();
+        }
     }
 
     public void initGL() {

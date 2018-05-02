@@ -9,7 +9,7 @@ import cn.easyar.Engine;
 
 public class EasyARUtils {
 
-    public static final String TAG_AR = "AR";
+    static final String TAG_AR = "AR";
 
     public static void initializeEngine(Activity activity) {
         if (!Engine.initialize(activity, activity.getString(R.string.easy_ar_key))) {

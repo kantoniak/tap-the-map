@@ -16,10 +16,10 @@ import com.kantoniak.discrete_fox.game_ui.LoadingFragment;
 import com.kantoniak.discrete_fox.game_ui.QuestionSeriesFragment;
 import com.kantoniak.discrete_fox.game_ui.RulesBoardFragment;
 import com.kantoniak.discrete_fox.game_ui.ScanToStartFragment;
-import com.kantoniak.discrete_fox.scene.RenderingDelegate;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
+import com.kantoniak.discrete_fox.scene.RenderingDelegate;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +35,8 @@ public class GameActivity extends AppCompatActivity
 
     private View.OnTouchListener currentTouchListener;
 
-    @BindView(R.id.game_map_preview) GameSurfaceView gameMapPreview;
+    @BindView(R.id.game_map_preview)
+    GameSurfaceView gameMapPreview;
 
     private final EasyARController arController = new EasyARController();
     private final ViewMatrixOverrideCamera camera = new ViewMatrixOverrideCamera();
@@ -62,7 +63,7 @@ public class GameActivity extends AppCompatActivity
         renderer.setCamera(camera);
         gameMapPreview.setSurfaceRenderer(renderer);
 
-        RenderingDelegate arDelegate = new EasyARRenderingDelegate(arController, camera);
+        RenderingDelegate arDelegate = new EasyARRenderingDelegate(arController);
         renderer.setRenderingDelegate(arDelegate);
         gameMapPreview.setRenderingDelegate(arDelegate);
 
@@ -106,10 +107,7 @@ public class GameActivity extends AppCompatActivity
 
     @OnTouch(R.id.game_map_preview)
     public boolean onTouch(View view, MotionEvent event) {
-        if (currentTouchListener != null) {
-            return currentTouchListener.onTouch(view, event);
-        }
-        return false;
+        return currentTouchListener != null && currentTouchListener.onTouch(view, event);
     }
 
     @Override

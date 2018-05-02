@@ -1,8 +1,6 @@
 package com.kantoniak.discrete_fox;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +17,14 @@ import butterknife.OnClick;
 
 public class ScoreActivity extends AppCompatActivity {
 
-    @BindView(R.id.score_image) ImageView mScoreImage;
-    @BindView(R.id.score_points) TextView mScorePointsTextView;
-    @BindView(R.id.score_title) TextView mScoreTitleTextView;
-    @BindView(R.id.button_facebook_share) ShareButton mShareButton;
+    @BindView(R.id.score_image)
+    ImageView mScoreImage;
+    @BindView(R.id.score_points)
+    TextView mScorePointsTextView;
+    @BindView(R.id.score_title)
+    TextView mScoreTitleTextView;
+    @BindView(R.id.button_facebook_share)
+    ShareButton mShareButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class ScoreActivity extends AppCompatActivity {
         if (newHighscore) {
             textToShow = R.string.new_high_score;
             mScoreImage.setImageResource(R.drawable.ic_trophy);
-        } else if ((result*1.0) / maxResult < 0.2f) {
+        } else if ((result * 1.0) / maxResult < 0.2f) {
             textToShow = R.string.score_needs_improvement;
             mScoreImage.setVisibility(View.GONE);
         } else {
@@ -64,12 +66,13 @@ public class ScoreActivity extends AppCompatActivity {
         // TODO(kedzior) mp3 final
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
         //mp.start();
-        try {
-            int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(GameActivity.MESSAGE_SCORE) + "pkt", "raw", BuildConfig.APPLICATION_ID);
-            MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
-            mp2.start();
-        } catch (Exception e) {
-        }
+//        try {
+//            int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(GameActivity.MESSAGE_SCORE) + "pkt", "raw", BuildConfig.APPLICATION_ID);
+//            MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
+//            mp2.start();
+//        } catch (Exception e) {
+        // Warning: empty catch block
+//        }
     }
 
     @OnClick(R.id.button_play_again)

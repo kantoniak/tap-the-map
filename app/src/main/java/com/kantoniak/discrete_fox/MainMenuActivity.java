@@ -1,15 +1,14 @@
 package com.kantoniak.discrete_fox;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.kantoniak.discrete_fox.ar.EasyARUtils;
@@ -22,9 +21,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION = 0;
 
-    @BindView(R.id.main_bg) ImageView mMainBackground;
-    @BindView(R.id.screen_permission) View mScreenPermission;
+    @BindView(R.id.main_bg)
+    ImageView mMainBackground;
+    @BindView(R.id.screen_permission)
+    View mScreenPermission;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

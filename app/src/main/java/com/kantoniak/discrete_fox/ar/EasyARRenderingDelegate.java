@@ -7,11 +7,9 @@ import cn.easyar.Engine;
 public class EasyARRenderingDelegate implements RenderingDelegate {
 
     private final EasyARController easyArController;
-    private final ViewMatrixOverrideCamera camera;
 
-    public EasyARRenderingDelegate(EasyARController easyArController, ViewMatrixOverrideCamera camera) {
+    public EasyARRenderingDelegate(EasyARController easyArController) {
         this.easyArController = easyArController;
-        this.camera = camera;
     }
 
     @Override

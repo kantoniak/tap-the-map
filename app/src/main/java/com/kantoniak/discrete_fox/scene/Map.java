@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class Map {
-    HashMap<Country, CountryInstance> countries = new HashMap<>();
+    private HashMap<Country, CountryInstance> countries = new HashMap<>();
 
     private static final java.util.Map<Country, Vector2> countryMiddles;
 
@@ -69,11 +69,11 @@ public class Map {
     }
 
     public void reset() {
-        getCountries().entrySet().forEach(entry -> entry.getValue().resetState());
+        getCountries().forEach((country, instance) -> instance.resetState());
     }
 
     void setVisible(boolean visible) {
-        getCountries().entrySet().forEach(entry -> entry.getValue().setVisible(visible));
+        getCountries().forEach((country, instance) -> instance.setVisible(visible));
     }
 
     public @Nullable
@@ -90,11 +90,10 @@ public class Map {
     }
 
     public void setColors(int minColor, int maxColor) {
-        getCountries().entrySet().forEach(entry -> entry.getValue().setColors(minColor, maxColor));
+        getCountries().forEach((country, instance) -> instance.setColors(minColor, maxColor));
     }
 
     public Vector2 getCountryMiddle(Country country) {
-        Vector2 pos = countryMiddles.get(country);
-        return pos;
+        return countryMiddles.get(country);
     }
 }

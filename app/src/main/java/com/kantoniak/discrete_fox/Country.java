@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/** Identifies single country. Can act as an identifier. */
+/**
+ * Identifies single country. Can act as an identifier.
+ */
 public class Country {
 
     // @formatter:off
@@ -19,7 +21,9 @@ public class Country {
             "no", "pl", "pt", "ro", "rs", "ru", "se", "si", "sk", "tr", "ua", "uk", "xk"));
     // @formatter:on
 
-    /** Code as given by EU, then ISO if the former not present. */
+    /**
+     * Code as given by EU, then ISO if the former not present.
+     */
     private final String euCode;
 
     private Country(String euCode) {
@@ -30,7 +34,7 @@ public class Country {
         return euCode;
     }
 
-    public int getLocalizedStringId(Resources resources) {
+    private int getLocalizedStringId(Resources resources) {
         return resources.getIdentifier("country_name_" + euCode, "string", BuildConfig.APPLICATION_ID);
     }
 

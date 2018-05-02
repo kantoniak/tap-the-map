@@ -25,7 +25,6 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     private static final Vector2 MAP_SIZE = new Vector2(2.438f, 2.889f);
     private static final Vector2 MAP_CORRECTION = new Vector2(-0.01f, -0.01f);
 
-    private final Context context;
     private final Map map;
     private final AssetLoader loader;
     private RenderingDelegate renderingDelegate;
@@ -33,11 +32,10 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     private ObjectColorPicker objectPicker;
     private Plane mapBase;
 
-    boolean visible = true;
+    private boolean visible = true;
 
     public MapRenderer(Context context, Map map) {
         super(context);
-        this.context = context;
         this.map = map;
         this.loader = new AssetLoader(context, mTextureManager);
     }
@@ -121,7 +119,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     @Override
     public void onObjectPicked(@NonNull Object3D object) {
-        for (java.util.Map.Entry<Country, CountryInstance> entry: map.getCountries().entrySet()) {
+        for (java.util.Map.Entry<Country, CountryInstance> entry : map.getCountries().entrySet()) {
             if (entry.getValue().containsObject(object)) {
                 entry.getValue().onPicked();
             }

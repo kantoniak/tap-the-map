@@ -18,12 +18,12 @@ public class AssetLoader {
     private final Context context;
     private final TextureManager textureManager;
 
-    public AssetLoader(Context context, TextureManager textureManager) {
+    AssetLoader(Context context, TextureManager textureManager) {
         this.context = context;
         this.textureManager = textureManager;
     }
 
-    public Object3D loadObj(String filename) {
+    private Object3D loadObj(String filename) {
         int fileId = context.getResources().getIdentifier(filename, "raw", BuildConfig.APPLICATION_ID);
         LoaderOBJ loader = new LoaderOBJ(context.getResources(), textureManager, fileId);
 
@@ -53,17 +53,14 @@ public class AssetLoader {
         return loadTexture(getCountryNameDrawableName(country));
     }
 
-    @VisibleForTesting
     public static String getCountryBaseObjName(Country country) {
         return "country_base_" + country.getEuCode() + "_obj";
     }
 
-    @VisibleForTesting
     public static String getCountryTopObjName(Country country) {
         return "country_top_" + country.getEuCode() + "_obj";
     }
 
-    @VisibleForTesting
     public static String getCountryNameDrawableName(Country country) {
         return "country_" + country.getEuCode() + "_plate";
     }
