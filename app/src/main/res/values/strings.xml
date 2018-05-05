@@ -40,33 +40,6 @@
     <string name="question_progress_counter">%1$d/%2$d</string>
     <string name="answer_country_value">%1$s (%2$s)</string>
 
-    <!-- Sample data -->
-    <string-array name="questions">
-        <item>What is GDP?</item>
-        <item>What is the level of no toilet rate?</item>
-        <item>What is the unemployment rate in the country?</item>
-        <item>What is the afforestation rate?</item>
-        <item>What is the population density?</item>
-        <item>What is the waste generation rate?</item>
-        <item>What is the level of internet access by households?</item>
-        <item>What is GDP per capita?</item>
-        <item>What is the area?</item>
-        <item>What is the population?</item>
-        <item>What is the share of the EU population is in the given country?</item>
-        <item>What is fertility rate?</item>
-        <item>What is the share of the renewable energy in the total power consumption?</item>
-        <item>What is the share of the young adults (18–34) living with their parents?</item>
-        <item>What is the share of people whose self-evaluated general health condition is bad?</item>
-        <item>What is the share of people whose self-evaluated general health condition is good?</item>
-        <item>What is the share of recycled wasted per person?</item>
-        <item>What is the share of the organic farming?</item>
-        <item>Frequency of participation in sport activities in the last 12 months</item>
-        <item>Frequency of participation in cultural(cinema) activities in the last 12 months</item>
-        <item>Internet purchases by individuals</item>
-        <item>Individuals - social network activities</item>
-        <item>Time spent on health-enhancing (non-work-related) aerobic physical activity</item>
-    </string-array>
-
     <!-- Country names -->
     <string name="country_name_al">Albania</string>
     <string name="country_name_at">Austria</string>

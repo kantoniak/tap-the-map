@@ -112,7 +112,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     }
 
     private ArrayList<Question> generateQuestions() {
-        QuestionChest qc = new QuestionChest(getResources(), getActivity(), Gameplay.Settings.COUNTRIES_PER_QUESTION, Gameplay.Settings.QUESTIONS_PER_SERIES);
+        QuestionChest qc = new QuestionChest(getContext(), Gameplay.Settings.COUNTRIES_PER_QUESTION, Gameplay.Settings.QUESTIONS_PER_SERIES);
         ArrayList<Question> questions = new ArrayList<>();
         for (int i = 0; i < qc.numberOfQuestions(); i++) {
             questions.add(qc.getQuestion(i));

@@ -37,33 +37,6 @@
     <!-- Questions screen -->
     <string name="loading_objects">Ładowanie obiektów...</string>
 
-    <!-- Sample data -->
-    <string-array name="questions">
-        <item>Jakie PKB jest w danym kraju?</item>
-        <item>Jaka jest liczba gospodarstw domowych bez dostępu do toalety w danym kraju?</item>
-        <item>Jaki jest wskaźnik stopy bezrobocia w danym kraju?</item>
-        <item>Jaki jest poziom zalesienia w danym kraju?</item>
-        <item>Jaka jest gęstość zaludnienia w danym kraju?</item>
-        <item>Jaki jest poziom wytwarzania odpadów w danym kraju?</item>
-        <item>Jaka jest liczba gospodarstw domowych z dostępem do internetu?</item>
-        <item>Jakie PKB per capita jest w danym kraju?</item>
-        <item>Jaka jest powierzchnia danego kraju?</item>
-        <item>Jaka jest populacja danego kraju?</item>
-        <item>Jaki jest udział populacji danego kraju w populacji Unii Europejskiej?</item>
-        <item>Jaki jest współczynnik dzietności w danym kraju?</item>
-        <item>Jaki jest udział energii odnawialnej w zużyciu energii ogółem?</item>
-        <item>Jaki jest udział młodych dorosłych (18-34) mieszkających z rodzicami?</item>
-        <item>Jaka jest samoocena stanu zdrowia? Zły stan</item>
-        <item>Jaka jest samoocena stanu zdrowia? Dobry stan</item>
-        <item>Ile jest wytworzonych odpadów poddanych recyklingowi na osobę w danym kraju?</item>
-        <item>Jaki jest udział produkcji i upraw ekologicznych w powierzchni upraw w ogóle?</item>
-        <item>Jaka jest częstotliwość uczestnictwa w zawodach sportowych w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy</item>
-        <item>Jaka jest częstotliwość uczestnictwa w zajęciach kulturalnych (KINO) - w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy</item>
-        <item>Jaki jest współczynnik osób dokonujących zakupy internetowe? W ciągu ostatnich 3 miesięcy</item>
-        <item>Jaki jest współczynnik osób korzystających z sieci społecznościowych? W ciągu ostatnich 3 miesięcy</item>
-        <item>Jaki jest współczynnik osób wykonujący cotygodniowy wysiłek fizyczny? (min. 150min)</item>
-    </string-array>
-
     <!-- Country names -->
     <string name="country_name_al">Albania</string>
     <string name="country_name_at">Austria</string>

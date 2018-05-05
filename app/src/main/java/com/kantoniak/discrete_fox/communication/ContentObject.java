@@ -39,10 +39,10 @@ public class ContentObject {
                 int idx1 = indexCountry.getInt(key1);
                 Double value = null;
 
-                int backup = QuestionChest.LASTTIMEPERIODINT - 1;
+                int backup = QuestionChest.LAST_TIME_PERIOD_INT - 1;
                 while (value == null && backup > -1) {
                     try {
-                        value = values.getDouble(String.valueOf(idx1 * QuestionChest.LASTTIMEPERIODINT + backup));
+                        value = values.getDouble(String.valueOf(idx1 * QuestionChest.LAST_TIME_PERIOD_INT + backup));
                     } catch (Exception e) {
                         value = null;
                     }

@@ -3,18 +3,22 @@ package com.kantoniak.discrete_fox.gameplay;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.kantoniak.discrete_fox.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kantoniak.discrete_fox.communication.APIResponse;
 import com.kantoniak.discrete_fox.communication.AsyncTaskParams;
 import com.kantoniak.discrete_fox.communication.DataProvider;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Class containing all the available questions.
@@ -23,15 +27,15 @@ public class QuestionChest {
     /**
      * Number of time periods to consider in presented data.
      */
-    public static final int LASTTIMEPERIODINT = 3;
+    public static final int LAST_TIME_PERIOD_INT = 3;
     /**
      * Number of decimal places in data.
      */
-    private static final int PRECISIONINT = 1;
+    private static final int PRECISION_INT = 1;
     /**
      * Name of the file containing the questions.
      */
-    private static final String QUESTIONFILENAME = "questions.txt";
+    private static final String QUESTION_FILENAME = "questions.json";
     /**
      * Query string for selected countries (EU28 countries).
      */
@@ -39,11 +43,11 @@ public class QuestionChest {
     /**
      * Query string for the time period.
      */
-    private static final String LASTTIMEPERIOD = "&lastTimePeriod=" + String.valueOf(LASTTIMEPERIODINT);
+    private static final String LAST_TIME_PERIOD = "&lastTimePeriod=" + String.valueOf(LAST_TIME_PERIOD_INT);
     /**
      * Query string for decimal precision.
      */
-    private static final String PRECISION = "&precision=" + String.valueOf(PRECISIONINT);
+    private static final String PRECISION = "&precision=" + String.valueOf(PRECISION_INT);
 
     /**
      * Number of countries user can interact with.
@@ -53,47 +57,81 @@ public class QuestionChest {
      * Array list of all the questions.
      */
     private ArrayList<Question> questionsArrayList;
-    /**
-     * Queries needed to acquire the data from Eurostat API. Read from asset file.
-     */
-    private List<String> queries;
-    /**
-     * Categories of the questions. Read from asset file.
-     */
-    private List<QuestionCategory> categories;
-    /**
-     * Multipier of the unit in the question. Read from asset file.
-     */
-    private List<Integer> multipliers;
-    /**
-     * Base unit of the questions. Read from asset file.
-     */
-    private List<String> baseUnits;
+
+    private class QuestionObject {
+        /**
+         * Queries needed to acquire the data from Eurostat API. Read from asset file.
+         */
+        private String query;
+        /**
+         * Categories of the questions. Read from asset file.
+         */
+        private QuestionCategory category;
+        /**
+         * Multipier of the unit in the question. Read from asset file.
+         */
+        private Integer multiplier;
+        /**
+         * Base unit of the questions. Read from asset file.
+         */
+        private String baseUnit;
+        private String stringEN;
+        private String stringPL;
+
+        QuestionObject() {
+            category = category;
+            query = "";
+            multiplier = 0;
+            baseUnit = "";
+            stringPL = "";
+            stringEN = "";
+        }
+
+        String getQuery() {
+            return query;
+        }
+
+        private Integer getMultiplier() {
+            return multiplier;
+        }
+
+        String getBaseUnit() {
+            return baseUnit;
+        }
+
+        QuestionCategory getCategory() {
+            return category;
+        }
+
+        public String getDescription() {
+            if (Locale.getDefault().getDisplayLanguage().equals("Polish")) {
+                return stringPL;
+            } else {
+                return stringEN;
+            }
+        }
+    }
+
+    private ArrayList<QuestionObject> questionObjects;
 
     /**
      * Creates QuestionChest object.
-     * @param res resources of the application
-     * @param context context of the application
+     *
      * @param numberOfCountries number of countries user can interact with
      */
-    public QuestionChest(Resources res, Context context, int numberOfCountries, int numberOfQuestions) {
+    public QuestionChest(Context context, int numberOfCountries, int numberOfQuestions) {
         mNumberOfCountries = numberOfCountries;
-        queries = new ArrayList<>();
-        multipliers = new ArrayList<>();
-        baseUnits = new ArrayList<>();
-        categories = new ArrayList<>();
-        importQuestions(context);
-        List<String> description = Arrays.asList(res.getStringArray(R.array.questions));
+        List<QuestionObject> questionObjects = importQuestions(context);
 
         questionsArrayList = new ArrayList<>();
-        int n = queries.size();
+        int n = questionObjects.size();
         for (int i = 0; i < n; i++) {
-            String fullQuery = queries.get(i) + COUNTRIES + LASTTIMEPERIOD + PRECISION;
+            String fullQuery = questionObjects.get(i).getQuery() + COUNTRIES + LAST_TIME_PERIOD + PRECISION;
             DataProvider dp = new DataProvider();
-            AsyncTaskParams atp = new AsyncTaskParams(fullQuery, description.get(i));
+            AsyncTaskParams atp = new AsyncTaskParams(fullQuery, questionObjects.get(i).getDescription());
             try {
                 APIResponse response = dp.execute(atp).get();
-                Question q = new Question(fullQuery, response.getContent().getHashMap(), description.get(i), baseUnits.get(i), categories.get(i), multipliers.get(i));
+                Question q = new Question(fullQuery, response.getContent().getHashMap(), questionObjects.get(i).getDescription(), questionObjects.get(i).getBaseUnit(), questionObjects.get(i).getCategory(), questionObjects.get(i).getMultiplier());
                 questionsArrayList.add(q);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -127,37 +165,32 @@ public class QuestionChest {
         return null;
     }
 
+    private String inputStreamToString(InputStream inputStream) {
+        try {
+            byte[] bytes = new byte[inputStream.available()];
+            inputStream.read(bytes, 0, bytes.length);
+            String json = new String(bytes);
+            return json;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
     /**
      * Reads questions and metainfo about them. Fills query, category, multiplier and baseUnit array lists.
-     * @param context application context
      */
-    private void importQuestions(Context context) {
-        BufferedReader bufferedReader = null;
+    private List<QuestionObject> importQuestions(Context context) {
+        List<QuestionObject> res = null;
         try {
-            InputStream inputStream = context.getAssets().open(QUESTIONFILENAME);
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] elements = line.split(",");
-                //String fullQuery = elements[0] + COUNTRIES + LASTTIMEPERIOD + PRECISION;
-                //Question q = new Question(fullQuery, response.getContent().get)
-                queries.add(elements[0]);
-                multipliers.add(Integer.parseInt(elements[1]));
-                baseUnits.add(elements[2]);
-                categories.add(QuestionCategory.valueOf(elements[3]));
-            }
+            InputStream inputStream = context.getAssets().open(QUESTION_FILENAME);
+            String buffer = inputStreamToString(inputStream);
 
-        } catch (Exception e) {
-
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (Exception e) {
-
-                }
-            }
+            Type questionObjectType = new TypeToken<List<QuestionObject>>() {}.getType();
+            Gson gson = new Gson();
+            res = gson.fromJson(buffer, questionObjectType);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
+        return res;
     }
 }
