@@ -4,183 +4,229 @@
     "multiplier": 1000000,
     "baseUnit": "€",
     "category": "ECONOMY",
-    "stringPL": "Jakie PKB jest w danym kraju?",
-    "stringEN": "What is GDP?"
+    "localized_text": {
+      "pl": "Jakie PKB jest w danym kraju?",
+      "en": "What is GDP?"
+    }
   },
   {
     "query": "ilc_mdho05?incgrp=TOTAL&unit=PC&hhtyp=TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaka jest liczba gospodarstw domowych bez dostępu do toalety w danym kraju?",
-    "stringEN": "What is the level of no toilet rate?"
+    "localized_text": {
+      "pl": "Jaka jest liczba gospodarstw domowych bez dostępu do toalety w danym kraju?",
+      "en": "What is the level of no toilet rate?"
+    }
   },
   {
     "query": "une_rt_a?unit=PC_POP",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaki jest wskaźnik stopy bezrobocia w danym kraju?",
-    "stringEN": "What is the unemployment rate in the country?"
+    "localized_text": {
+      "pl": "Jaki jest wskaźnik stopy bezrobocia w danym kraju?",
+      "en": "What is the unemployment rate in the country?"
+    }
   },
   {
     "query": "lan_lcv_fao?landcover=LCC1&unit=PC",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "GENERAL",
-    "stringPL": "Jaki jest poziom zalesienia w danym kraju?",
-    "stringEN": "What is the afforestation rate?"
+    "localized_text": {
+      "pl": "Jaki jest poziom zalesienia w danym kraju?",
+      "en": "What is the afforestation rate?"
+    }
   },
   {
     "query": "demo_r_d3dens?unit=HAB_KM2",
     "multiplier": 1,
     "baseUnit": "/km2",
     "category": "POPULATION",
-    "stringPL": "Jaka jest gęstość zaludnienia w danym kraju?",
-    "stringEN": "What is the population density?"
+    "localized_text": {
+      "pl": "Jaka jest gęstość zaludnienia w danym kraju?",
+      "en": "What is the population density?"
+    }
   },
   {
     "query": "env_wasmun?wst_oper=GEN&unit=KG_HAB",
     "multiplier": 1000,
     "baseUnit": "g",
     "category": "ENVIRONMENT",
-    "stringPL": "Jaki jest poziom wytwarzania odpadów w danym kraju?",
-    "stringEN": "What is the waste generation rate?"
+    "localized_text": {
+      "pl": "Jaki jest poziom wytwarzania odpadów w danym kraju?",
+      "en": "What is the waste generation rate?"
+    }
   },
   {
     "query": "tin00134?unit=PC_HH",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "SCIENCE",
-    "stringPL": "Jaka jest liczba gospodarstw domowych z dostępem do internetu?",
-    "stringEN": "What is the level of internet access by households?"
+    "localized_text": {
+      "pl": "Jaka jest liczba gospodarstw domowych z dostępem do internetu?",
+      "en": "What is the level of internet access by households?"
+    }
   },
   {
     "query": "nama_10_pc?na_item=B1GQ&unit=CP_EUR_HAB",
     "multiplier": 1,
     "baseUnit": "€",
     "category": "ECONOMY",
-    "stringPL": "Jakie PKB per capita jest w danym kraju?",
-    "stringEN": "What is GDP per capita?"
+    "localized_text": {
+      "pl": "Jakie PKB per capita jest w danym kraju?",
+      "en": "What is GDP per capita?"
+    }
   },
   {
     "query": "demo_r_d3area?landuse=TOTAL&unit=KM2",
     "multiplier": 1,
     "baseUnit": "km2",
     "category": "POPULATION",
-    "stringPL": "Jaka jest powierzchnia danego kraju?",
-    "stringEN": "What is the area?"
+    "localized_text": {
+      "pl": "Jaka jest powierzchnia danego kraju?",
+      "en": "What is the area?"
+    }
   },
   {
     "query": "demo_gind?indic_de=JAN",
     "multiplier": 1,
     "baseUnit": "",
     "category": "POPULATION",
-    "stringPL": "Jaka jest populacja danego kraju?",
-    "stringEN": "What is the population?"
+    "localized_text": {
+      "pl": "Jaka jest populacja danego kraju?",
+      "en": "What is the population?"
+    }
   },
   {
     "query": "demo_gind?indic_de=POPSHARE",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaki jest udział populacji danego kraju w populacji UE?",
-    "stringEN": "What is the share of the EU population is in the given country?"
+    "localized_text": {
+      "pl": "Jaki jest udział populacji danego kraju w populacji UE?",
+      "en": "What is the share of the EU population is in the given country?"
+    }
   },
   {
     "query": "demo_find?indic_de=TOTFERRT",
     "multiplier": 1,
     "baseUnit": "D",
     "category": "POPULATION",
-    "stringPL": "Jaki jest współczynnik dzietności w danym kraju?",
-    "stringEN": "What is fertility rate?"
+    "localized_text": {
+      "pl": "Jaki jest współczynnik dzietności w danym kraju?",
+      "en": "What is fertility rate?"
+    }
   },
   {
     "query": "nrg_ind_335a?unit=PC&indic_en=119800",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "ENVIRONMENT",
-    "stringPL": "Jaki jest udział energii odnawialnej w zużyciu energii ogółem?",
-    "stringEN": "What is the share of the renewable energy in the total power consumption?"
+    "localized_text": {
+      "pl": "Jaki jest udział energii odnawialnej w zużyciu energii ogółem?",
+      "en": "What is the share of the renewable energy in the total power consumption?"
+    }
   },
   {
     "query": "ilc_lvps08?sex=T&unit=PC&age=Y18-34",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaki jest udział młodych dorosłych (18-34) mieszkających z rodzicami?",
-    "stringEN": "What is the share of the young adults (18–34) living with their parents?"
+    "localized_text": {
+      "pl": "Jaki jest udział młodych dorosłych (18-34) mieszkających z rodzicami?",
+      "en": "What is the share of the young adults (18–34) living with their parents?"
+    }
   },
   {
     "query": "hlth_silc_18?sex=T&unit=PC&levels=B_VB&age=TOTAL&deg_urb=TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaka jest samoocena stanu zdrowia? Zły stan",
-    "stringEN": "What is the share of people whose self-evaluated general health condition is bad?"
+    "localized_text": {
+      "pl": "Jaka jest samoocena stanu zdrowia? Zły stan",
+      "en": "What is the share of people whose self-evaluated general health condition is bad?"
+    }
   },
   {
     "query": "hlth_silc_18?sex=T&unit=PC&levels=VG_G&age=TOTAL&deg_urb=TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaka jest samoocena stanu zdrowia? Dobry stan",
-    "stringEN": "What is the share of people whose self-evaluated general health condition is good?"
+    "localized_text": {
+      "pl": "Jaka jest samoocena stanu zdrowia? Dobry stan",
+      "en": "What is the share of people whose self-evaluated general health condition is good?"
+    }
   },
   {
     "query": "env_wasmun?wst_oper=RCY_M&unit=KG_HAB",
     "multiplier": 1000,
     "baseUnit": "g",
     "category": "ENVIRONMENT",
-    "stringPL": "Ile jest wytworzonych odpadów poddanych recyklingowi na osobę w danym kraju?",
-    "stringEN": "What is the share of recycled wasted per person?"
+    "localized_text": {
+      "pl": "Ile jest wytworzonych odpadów poddanych recyklingowi na osobę w danym kraju?",
+      "en": "What is the share of recycled wasted per person?"
+    }
   },
   {
     "query": "org_cropar?unit=PC_UAA&agprdmet=TOTAL&crops=UAAXK0000",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "AGRICULTURE",
-    "stringPL": "Jaki jest udział produkcji i upraw ekologicznych w powierzchni upraw w ogóle?",
-    "stringEN": "What is the share of the organic farming?"
+    "localized_text": {
+      "pl": "Jaki jest udział produkcji i upraw ekologicznych w powierzchni upraw w ogóle?",
+      "en": "What is the share of the organic farming?"
+    }
   },
   {
     "query": "ilc_scp04?precision=1&unit=PC&acl00=AC525&frequenc=GE4&deg_urb=TOTAL&hhtyp=TOTAL&quantile=TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaka jest częstotliwość uczestnictwa w zawodach sportowych w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy",
-    "stringEN": "Frequency of participation in sport activities in the last 12 months"
+    "localized_text": {
+      "pl": "Jaka jest częstotliwość uczestnictwa w zawodach sportowych w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy",
+      "en": "Frequency of participation in sport activities in the last 12 months"
+    }
   },
   {
     "query": "ilc_scp04?precision=1&unit=PC&acl00=AC521&frequenc=GE4&deg_urb=TOTAL&hhtyp=TOTAL&quantile=TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaka jest częstotliwość uczestnictwa w zajęciach kulturalnych (KINO) - w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy",
-    "stringEN": "Frequency of participation in cultural(cinema) activities in the last 12 months"
+    "localized_text": {
+      "pl": "Jaka jest częstotliwość uczestnictwa w zajęciach kulturalnych (KINO) - w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy",
+      "en": "Frequency of participation in cultural(cinema) activities in the last 12 months"
+    }
   },
   {
     "query": "isoc_ec_ibuy?indic_is=I_BUY3&unit=PC_IND&ind_type=IND_TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "SCIENCE",
-    "stringPL": "Jaki jest współczynnik osób dokonujących zakupy internetowe? W ciągu ostatnich 3 miesięcy",
-    "stringEN": "Internet purchases by individuals"
+    "localized_text": {
+      "pl": "Jaki jest współczynnik osób dokonujących zakupy internetowe? W ciągu ostatnich 3 miesięcy",
+      "en": "Internet purchases by individuals"
+    }
   },
   {
     "query": "isoc_ci_ac_i?indic_is=I_IUSNET&unit=PC_IND_IU3&ind_type=IND_TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "SCIENCE",
-    "stringPL": "Jaki jest współczynnik osób korzystających z sieci społecznościowych? W ciągu ostatnich 3 miesięcy",
-    "stringEN": "Individuals - social network activities"
+    "localized_text": {
+      "pl": "Jaki jest współczynnik osób korzystających z sieci społecznościowych? W ciągu ostatnich 3 miesięcy",
+      "en": "Individuals - social network activities"
+    }
   },
   {
     "query": "hlth_ehis_pe2e?sex=T&unit=PC&duration=MN_GE150&isced11=TOTAL&age=TOTAL",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "POPULATION",
-    "stringPL": "Jaki jest współczynnik osób wykonujący cotygodniowy wysiłek fizyczny? (min. 150min)",
-    "stringEN": "Time spent on health-enhancing (non-work-related) aerobic physical activity"
+    "localized_text": {
+      "pl": "Jaki jest współczynnik osób wykonujący cotygodniowy wysiłek fizyczny? (min. 150min)",
+      "en": "Time spent on health-enhancing (non-work-related) aerobic physical activity"
+    }
   }
 ]

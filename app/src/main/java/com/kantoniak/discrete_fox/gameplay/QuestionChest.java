@@ -17,8 +17,10 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Class containing all the available questions.
@@ -75,16 +77,13 @@ public class QuestionChest {
          * Base unit of the questions. Read from asset file.
          */
         private String baseUnit;
-        private String stringEN;
-        private String stringPL;
+        private Map<String, String> localized_text;
 
         QuestionObject() {
-            category = category;
             query = "";
             multiplier = 0;
             baseUnit = "";
-            stringPL = "";
-            stringEN = "";
+            localized_text = new HashMap<>();
         }
 
         String getQuery() {
@@ -104,10 +103,10 @@ public class QuestionChest {
         }
 
         public String getDescription() {
-            if (Locale.getDefault().getDisplayLanguage().equals("Polish")) {
-                return stringPL;
-            } else {
-                return stringEN;
+            try {
+                return localized_text.get(Locale.getDefault().getLanguage());
+            } catch (Exception e) {
+                return localized_text.get("en");
             }
         }
     }
