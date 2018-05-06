@@ -16,10 +16,15 @@ import com.kantoniak.discrete_fox.game_ui.LoadingFragment;
 import com.kantoniak.discrete_fox.game_ui.QuestionSeriesFragment;
 import com.kantoniak.discrete_fox.game_ui.RulesBoardFragment;
 import com.kantoniak.discrete_fox.game_ui.ScanToStartFragment;
+import com.kantoniak.discrete_fox.gameplay.Question;
+import com.kantoniak.discrete_fox.gameplay.QuestionChest;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
 import com.kantoniak.discrete_fox.scene.RenderingDelegate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +46,7 @@ public class GameActivity extends AppCompatActivity
     private final EasyARController arController = new EasyARController();
     private final ViewMatrixOverrideCamera camera = new ViewMatrixOverrideCamera();
     private MapRenderer renderer;
+    private List<Question> questionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,7 @@ public class GameActivity extends AppCompatActivity
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setupGameSurfaceView();
+        questionList = new ArrayList<>();
     }
 
     @Override
@@ -73,7 +80,7 @@ public class GameActivity extends AppCompatActivity
 
     public void switchToLoader() {
         LoadingFragment loadingFragment = new LoadingFragment();
-        loadingFragment.init(renderer);
+        loadingFragment.init(renderer, questionList);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, loadingFragment).commit();
         this.currentTouchListener = null;
     }
@@ -99,7 +106,7 @@ public class GameActivity extends AppCompatActivity
 
     public void switchToQuestions() {
         QuestionSeriesFragment questionFragment = new QuestionSeriesFragment();
-        questionFragment.init(renderer, camera);
+        questionFragment.init(renderer, camera, questionList);
         this.currentTouchListener = questionFragment;
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, questionFragment).commit();
         renderer.showMap(true);

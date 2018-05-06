@@ -37,6 +37,7 @@
 
     <!-- Questions screen -->
     <string name="loading_objects">Loading objects...</string>
+    <string name="loading_questions">Loading questions...</string>
     <string name="question_progress_counter">%1$d/%2$d</string>
     <string name="answer_country_value">%1$s (%2$s)</string>
 

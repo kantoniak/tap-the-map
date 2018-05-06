@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.kantoniak.discrete_fox.Country;
 import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.gameplay.Gameplay;
+import com.kantoniak.discrete_fox.gameplay.Question;
+import com.kantoniak.discrete_fox.gameplay.QuestionChest;
 import com.kantoniak.discrete_fox.scene.AssetLoader;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
@@ -22,6 +24,7 @@ import com.kantoniak.discrete_fox.scene.MapRenderer;
 import org.rajawali3d.Object3D;
 import org.rajawali3d.materials.textures.Texture;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -91,12 +94,45 @@ public class LoadingFragment extends Fragment {
                 renderer.addCountryInstance(countryInstance);
             });
 
+            questionsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class LoadQuestionsTask extends AsyncTask<Void, Void, List<Question>> {
+        private List<Question> mQuestionList;
+
+        /**
+         * @param questionList
+         */
+        LoadQuestionsTask(List<Question> questionList) {
+            this.mQuestionList = questionList;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mDescTextView.setText(R.string.loading_questions);
+            mProgressBar.setIndeterminate(true);
+        }
+
+        protected List<Question> doInBackground(Void... params) {
+            QuestionChest qc = new QuestionChest(getContext(), Gameplay.Settings.COUNTRIES_PER_QUESTION, Gameplay.Settings.QUESTIONS_PER_SERIES);
+            ArrayList<Question> questions = new ArrayList<>();
+            for (int i = 0; i < qc.numberOfQuestions(); i++) {
+                questions.add(qc.getQuestion(i));
+            }
+            return questions;
+        }
+
+        protected void onPostExecute(List<Question> loaded) {
+            mQuestionList.addAll(loaded);
             mListener.onLoaded();
         }
     }
 
     private InteractionListener mListener;
     private LoadObjectsTask loadingTask;
+    private LoadQuestionsTask questionsTask;
 
     @BindView(R.id.progress_desc)
     TextView mDescTextView;
@@ -107,8 +143,9 @@ public class LoadingFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public void init(MapRenderer renderer) {
+    public void init(MapRenderer renderer, List<Question> questionList) {
         this.loadingTask = new LoadObjectsTask(renderer, Gameplay.Settings.ENABLED_COUNTRIES);
+        this.questionsTask = new LoadQuestionsTask(questionList);
     }
 
     @Override

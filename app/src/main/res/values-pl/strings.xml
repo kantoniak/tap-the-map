@@ -36,6 +36,7 @@
 
     <!-- Questions screen -->
     <string name="loading_objects">Ładowanie obiektów...</string>
+    <string name="loading_questions">Ładowanie pytań...</string>
 
     <!-- Country names -->
     <string name="country_name_al">Albania</string>

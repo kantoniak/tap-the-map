@@ -25,23 +25,19 @@ public class Gameplay {
                 .stream().map(Country.Builder::fromEuCode).collect(Collectors.toSet());
     }
 
-    public final int NUMBEROFQUESTIONS;
-    int step;
-    int currentQuestion;
-    int mnumberOfCountries;
-    int scoreTotal;
-    int score;
-    int maxScore;
-    Integer[] decisions;
-    ArrayList<Question> mquestions;
+    private int currentQuestion;
+    private int mnumberOfCountries;
+    private int scoreTotal;
+    private int score;
+    private int maxScore;
+    private Integer[] decisions;
+    private List<Question> mquestions;
 
 
-    public Gameplay(ArrayList<Question> questions, int numberOfCountries) {
-        NUMBEROFQUESTIONS = questions.size();
-        step = 0;
+    public Gameplay(List<Question> questions, int numberOfCountries) {
         score = 0;
         mnumberOfCountries = numberOfCountries;
-        maxScore = mnumberOfCountries * NUMBEROFQUESTIONS;
+        maxScore = mnumberOfCountries * questions.size();
         currentQuestion = 0;
         decisions = new Integer[mnumberOfCountries];
         for (int i = 0; i < mnumberOfCountries; i++) {

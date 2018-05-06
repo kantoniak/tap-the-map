@@ -67,15 +67,17 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     private ViewMatrixOverrideCamera camera;
     private Map map;
     private MapRenderer renderer;
+    private List<Question> questionList;
 
     public QuestionSeriesFragment() {
         // Required empty public constructor
     }
 
-    public void init(MapRenderer renderer, ViewMatrixOverrideCamera camera) {
+    public void init(MapRenderer renderer, ViewMatrixOverrideCamera camera, List<Question> questionList) {
         this.renderer = renderer;
         this.map = renderer.getMap();
         this.camera = camera;
+        this.questionList = questionList;
     }
 
     @Override
@@ -102,22 +104,13 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         showingAnswers = false;
         mAnswersContainer.setVisibility(View.INVISIBLE);
 
-        gameplay = new Gameplay(generateQuestions(), Gameplay.Settings.COUNTRIES_PER_QUESTION);
+        gameplay = new Gameplay(questionList, Gameplay.Settings.COUNTRIES_PER_QUESTION);
         try {
             Question question = gameplay.getCurrentQuestion();
             showQuestion(question);
         } catch (Exception e) {
             //TODO Add screen with no internet connection
         }
-    }
-
-    private ArrayList<Question> generateQuestions() {
-        QuestionChest qc = new QuestionChest(getContext(), Gameplay.Settings.COUNTRIES_PER_QUESTION, Gameplay.Settings.QUESTIONS_PER_SERIES);
-        ArrayList<Question> questions = new ArrayList<>();
-        for (int i = 0; i < qc.numberOfQuestions(); i++) {
-            questions.add(qc.getQuestion(i));
-        }
-        return questions;
     }
 
     private void showQuestion(Question question) {
