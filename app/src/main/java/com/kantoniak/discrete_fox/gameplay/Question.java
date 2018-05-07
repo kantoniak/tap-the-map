@@ -32,12 +32,11 @@ public class Question {
         munit = unit;
         ansDouble = new HashMap<>();
         ArrayList<Double> valueList = new ArrayList<>();
-        Iterator it = data.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            Double val = ((Double)pair.getValue()) * multiplier;
+        for (Object o : data.entrySet()) {
+            Map.Entry pair = (Map.Entry) o;
+            Double val = ((Double) pair.getValue()) * multiplier;
             valueList.add(val);
-            Country country = Country.Builder.fromEuCode((String)pair.getKey());
+            Country country = Country.Builder.fromEuCode((String) pair.getKey());
             ansDouble.put(country, val);
         }
         setCountries();
@@ -53,7 +52,7 @@ public class Question {
         mcountries = availableCountries.subList(0, Gameplay.Settings.COUNTRIES_PER_QUESTION);
     }
 
-    void createThresholds(ArrayList<Double> valueList) {
+    private void createThresholds(ArrayList<Double> valueList) {
         double mid = 0;
         double high = 0;
 
@@ -74,23 +73,22 @@ public class Question {
         return mcategory;
     }
 
-    void createAnswers(HashMap<Country, Double> data) {
+    private void createAnswers(HashMap<Country, Double> data) {
         ans = new HashMap<>();
-        Iterator it = data.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            Double val = (Double)pair.getValue();
+        for (Object o : data.entrySet()) {
+            Map.Entry pair = (Map.Entry) o;
+            Double val = (Double) pair.getValue();
             int l = 1;
             if (val > highThres) {
                 l = 3;
             } else if (val > midThres) {
                 l = 2;
             }
-            ans.put((Country)pair.getKey(), l);
+            ans.put((Country) pair.getKey(), l);
         }
     }
 
-    void setThreshold(double mid, double high) {
+    private void setThreshold(double mid, double high) {
         midThres = Math.round(mid * 100.0) / 100.0;
         highThres = Math.round(high * 100.0) / 100.0;
     }
@@ -104,32 +102,35 @@ public class Question {
     }
 
     public String getMinLabel() {
-        if (munit.equals("%")) {
-            return "<" + midThres + munit;
-        } else if (munit.equals("D")) {
-            return "<" + midThres;
-        } else {
-            return "<" + UnitFormatter.formatAsUnit((long)midThres, UnitSystem.SI, munit);
+        switch (munit) {
+            case "%":
+                return "<" + midThres + munit;
+            case "D":
+                return "<" + midThres;
+            default:
+                return "<" + UnitFormatter.formatAsUnit((long) midThres, UnitSystem.SI, munit);
         }
     }
 
     public String getMidLabel() {
-        if (munit.equals("%")) {
-            return midThres + munit + " - " + highThres + munit;
-        } else if (munit.equals("D")) {
-            return midThres + " - " + highThres;
-        } else {
-            return UnitFormatter.formatAsUnit((long)midThres, UnitSystem.SI, munit) + " - " + UnitFormatter.formatAsUnit((long)highThres, UnitSystem.SI, munit);
+        switch (munit) {
+            case "%":
+                return midThres + munit + " - " + highThres + munit;
+            case "D":
+                return midThres + " - " + highThres;
+            default:
+                return UnitFormatter.formatAsUnit((long) midThres, UnitSystem.SI, munit) + " - " + UnitFormatter.formatAsUnit((long) highThres, UnitSystem.SI, munit);
         }
     }
 
     public String getMaxLabel() {
-        if (munit.equals("%")) {
-            return ">" + highThres + munit;
-        } else if (munit.equals("D")) {
-            return ">" + highThres;
-        } else {
-            return ">" + UnitFormatter.formatAsUnit((long)highThres, UnitSystem.SI, munit);
+        switch (munit) {
+            case "%":
+                return ">" + highThres + munit;
+            case "D":
+                return ">" + highThres;
+            default:
+                return ">" + UnitFormatter.formatAsUnit((long) highThres, UnitSystem.SI, munit);
         }
     }
 
@@ -151,12 +152,16 @@ public class Question {
                 e.printStackTrace();
             }
             String valuePresented;
-            if (munit.equals("%")) {
-                valuePresented = String.format("%.2f", value) + munit;
-            } else if (munit.equals("D")) {
-                valuePresented = String.format("%.2f", value);
-            } else {
-                valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, munit);
+            switch (munit) {
+                case "%":
+                    valuePresented = String.format("%.2f", value) + munit;
+                    break;
+                case "D":
+                    valuePresented = String.format("%.2f", value);
+                    break;
+                default:
+                    valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, munit);
+                    break;
             }
             int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(country)-1)*0.5f);
             Answer answer = new Answer(country, valuePresented, value, color);
