@@ -58,6 +58,8 @@
         <item name="android:paddingBottom">@dimen/biggerPadding</item>
         <item name="android:background">@color/colorBackgroundLight</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="fontFamily">@font/quicksand_medium</item>
     </style>
 
     <style name="ZoomButton" parent="ElevatedContainer">

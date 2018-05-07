@@ -53,7 +53,7 @@
         style="@style/ElevatedContainer"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_light_background"
+        android:background="@color/colorBackgroundLight"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/legend"
         app:layout_constraintStart_toStartOf="parent"

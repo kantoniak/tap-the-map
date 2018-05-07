@@ -57,16 +57,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/play_again" />
 
-            <com.facebook.share.widget.ShareButton
-                android:id="@+id/button_facebook_share"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/triplePadding"
-                android:background="#3B5998"
-                android:paddingStart="@dimen/doublePadding"
-                android:paddingEnd="@dimen/doublePadding"
-                android:visibility="gone" />
-
         </LinearLayout>
 
     </LinearLayout>

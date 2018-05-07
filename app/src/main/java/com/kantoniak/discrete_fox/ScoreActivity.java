@@ -1,15 +1,11 @@
 package com.kantoniak.discrete_fox;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,14 +13,9 @@ import butterknife.OnClick;
 
 public class ScoreActivity extends AppCompatActivity {
 
-    @BindView(R.id.score_image)
-    ImageView mScoreImage;
-    @BindView(R.id.score_points)
-    TextView mScorePointsTextView;
-    @BindView(R.id.score_title)
-    TextView mScoreTitleTextView;
-    @BindView(R.id.button_facebook_share)
-    ShareButton mShareButton;
+    @BindView(R.id.score_image) ImageView mScoreImage;
+    @BindView(R.id.score_points) TextView mScorePointsTextView;
+    @BindView(R.id.score_title) TextView mScoreTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +47,6 @@ public class ScoreActivity extends AppCompatActivity {
 
         mScoreTitleTextView.setText(getResources().getString(textToShow));
         mScorePointsTextView.setText(getString(R.string.score_value, result, maxResult));
-
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setQuote("Whatever")
-                .setContentUrl(Uri.parse("https://stat.gov.pl/"))
-                .build();
-        mShareButton.setShareContent(content);
 
         // TODO(kedzior) mp3 final
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
