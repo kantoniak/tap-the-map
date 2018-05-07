@@ -4,13 +4,56 @@
   <img src="main_menu.png" align="center" alt="Main menu" />
 </p>
 
-## Game settings
-All game settings are hardcoded in `.gameplay.Gameplay.Settings`. In future, we may move them to a separate file or download from somewhere.
+# Architecture overview
+TapTheMap is a native Android app written in Java. As usual, project is build for gradle, preferably for use with Android Studio. The application itself is contained in `app` subproject, with a default run configuration `app` targeted at devices with API level 24+. App uses Java 8, the newest supported by Android SDK at the time of development (April 2018).
 
-## Country identifiers
-We use country identifiers in multiple places of the app. `Country` is an identifier class from which you can obtain both ISO alpha 2 codes (e.g. `GR` for Greece) and codes given by European Union (e.g. `EL` for Greece). European country codes, received from Eurostat API, are here: http://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Country_codes.
+## Desing decisions
 
-Names of all assets (OBJ files, textures etc.) use EU names.
+### 3D rendering
+Europe map rendering is done trough a 3rd party library called Rajawali. The renderer is completely independent from the AR library. By design, there should be no references to `ar` package from `scene`. `MapRenderer` can have a `RenderingDelegate` bound to itself, to handle events important for AR libraries, like `GLSurfaceView` being attached to screen. The intent of this division was to:
 
-## AR support
+1. Enable gameplay for version not using augmented reality at all;
+1. To make it simpler to switch to some other library later, for example to ARCore when the device coverage gets bigger
+
+### Data transfer
+Internet connection is necessary to use the application. The first thing is, EasyAR requires an application to register itself every time a tracking engine starts. The application does not work otherwise. Second this is, the datasets by Eurostat change relatively often (~every few months). By downloading the data every time, we greatly imcreasy application liveability. Since there is no advanced data analysis, the single request is done in an [`AsyncTask`](https://developer.android.com/reference/android/os/AsyncTask) initiated in `LoadingFragment`.
+
+### Questions handling
+Questions are the basis of the gameplay. These are based on data that changes relatively frequently, what leads to a few observations:
+
+1. We expect the question set to evolve and possibly be expanded in the future;
+1. Regarding the initial game project, there's a chance question list will be curated online and sent to the devices at application runtime.
+
+That's why all questions are kept in a single JSON file, so it can later be easily integrated in an online workflow. This is also means the question text translations are stored along the data.
+
+### Country identifiers
+We use country identifiers in multiple places of the app. `Country` is an identifier class from which you can obtain both ISO alpha 2 codes (e.g. `GR` for Greece) and codes given by European Union (e.g. `EL` for Greece). European country codes, received from Eurostat API, are [here](http://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Country_codes). `Country` class should be used wherever possible for consistent ID handling. Names of all assets (OBJ files, textures etc.) use EU names.
+
+## Application flow
+Main application flow is divided into Activities, and Fragments in case of `GameActivity`.
+
+*TODO(kantoniak):* screens from application with the names of Activity/Fragment.
+
+## Android Studio project
+
+### Compilation
+*TODO(kantoniak)*
+
+### Project contents by package
+* The main package: activities and general utility classes, e.g. for work with `SharedPreferences`.
+* `ar`: support for AR and classes needed to connect with 3D renderer
+* `communication`: handles downloading data from public Eurostat databases
+* `game_ui`: `Fragment`s used to implement `GameActivity`
+* `gameplay`: Encapsulates game logic
+* `scene`: 3D renderers, classes representing 3D objects
+
+### Used libraries
+*TODO(kantoniak)*
+
+## Misc
+
+### Game settings
+All game settings are hardcoded in `.gameplay.Gameplay.Settings`. In future, these can be moved to a separate file or download from somewhere.
+
+### AR support
 Application uses EasyAR to handle augmented reality. All marker images are defined in `assets/targets.json`, images are held in the same folder.
