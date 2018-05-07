@@ -5,6 +5,9 @@ import android.util.AttributeSet;
 
 import org.rajawali3d.view.SurfaceView;
 
+/**
+ * Class responsible for game surface view.
+ */
 public class GameSurfaceView extends SurfaceView {
 
     private RenderingDelegate renderingDelegate;
@@ -13,10 +16,16 @@ public class GameSurfaceView extends SurfaceView {
         super(context, attrs);
     }
 
+    /**
+     * Set rendering delegate.
+     */
     public void setRenderingDelegate(RenderingDelegate renderingDelegate) {
         this.renderingDelegate = renderingDelegate;
     }
 
+    /**
+     * When attached to window.
+     */
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -25,6 +34,9 @@ public class GameSurfaceView extends SurfaceView {
         }
     }
 
+    /**
+     * When detached from window.
+     */
     @Override
     protected void onDetachedFromWindow() {
         if (renderingDelegate != null) {
@@ -33,6 +45,9 @@ public class GameSurfaceView extends SurfaceView {
         super.onDetachedFromWindow();
     }
 
+    /**
+     * When resumed.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -41,6 +56,9 @@ public class GameSurfaceView extends SurfaceView {
         }
     }
 
+    /**
+     * When paused.
+     */
     @Override
     public void onPause() {
         if (renderingDelegate != null) {

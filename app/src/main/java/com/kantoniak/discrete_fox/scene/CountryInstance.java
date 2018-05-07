@@ -54,6 +54,9 @@ public class CountryInstance {
         this.disabled = true;
     }
 
+    /**
+     * Initialize meshes.
+     */
     public void initMeshes(Object3D countryBase, Object3D countryTop, ATexture countryNameTexture) {
         this.countryBase = countryBase;
         this.countryTop = countryTop;
@@ -80,6 +83,9 @@ public class CountryInstance {
         }
     }
 
+    /**
+     * Initialize positions.
+     */
     public void initPositions(Vector3 worldOffset, Vector2 countryMiddle) {
         countryBase.setPosition(worldOffset);
         countryTop.setPosition(worldOffset);
@@ -88,12 +94,18 @@ public class CountryInstance {
         countryName.setZ(-countryMiddle.getY() + worldOffset.z);
     }
 
+    /**
+     * Reset state.
+     */
     public void resetState() {
         height = 0;
         disabled = true;
         updateVisuals();
     }
 
+    /**
+     * Register object.
+     */
     public void registerObject(Scene scene, ObjectColorPicker objectPicker) {
         scene.addChild(countryBase);
         scene.addChild(countryTop);
@@ -104,10 +116,19 @@ public class CountryInstance {
         objectPicker.registerObject(countryName);
     }
 
+    /**
+     * Check whether object3D belongs to country.
+     * @param object Object3D
+     * @return True if it belongs
+     */
     public boolean containsObject(final Object3D object) {
         return countryBase == object || countryTop == object || countryName == object;
     }
 
+    /**
+     * Set the height of the country.
+     * @param height New height
+     */
     public void setHeight(int height) {
         this.height = height;
         if (this.height > Gameplay.Settings.MAX_COUNTRY_HEIGHT) {
@@ -116,6 +137,9 @@ public class CountryInstance {
         updateVisuals();
     }
 
+    /**
+     * When country tapped.
+     */
     public void onPicked() {
         if (disabled) {
             return;
@@ -124,6 +148,9 @@ public class CountryInstance {
         updateVisuals();
     }
 
+    /**
+     * Update visuals.
+     */
     private void updateVisuals() {
 
         countryTop.setVisible(visible);
@@ -158,29 +185,55 @@ public class CountryInstance {
 
     }
 
+    /**
+     * Get the base color.
+     * @param topColor Top color
+     * @return Base color
+     */
     private int getBaseColor(int topColor) {
         return ColorUtils.blendARGB(COLOR_BLACK, topColor, 0.5f);
     }
 
+    /**
+     * Get current height of the country.
+     * @return Height of the country
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Get country.
+     * @return Country
+     */
     public Country getCountry() {
         return country;
     }
 
+    /**
+     * Disable/enable the country.
+     * @param disabled New disabled state
+     */
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
         updateVisuals();
     }
 
+    /**
+     * Set colors for countries.
+     * @param minColor Minimum color
+     * @param maxColor Maximum color
+     */
     public void setColors(int minColor, int maxColor) {
         this.minColor = minColor;
         this.maxColor = maxColor;
         updateVisuals();
     }
 
+    /**
+     * Set visibility of the country.
+     * @param visible New visible value
+     */
     public void setVisible(boolean visible) {
         this.visible = visible;
         updateVisuals();

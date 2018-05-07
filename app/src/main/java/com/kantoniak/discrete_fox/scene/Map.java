@@ -9,6 +9,9 @@ import org.rajawali3d.math.vector.Vector2;
 import java.util.Collections;
 import java.util.HashMap;
 
+/**
+ * Class representing the map.
+ */
 public class Map {
     private HashMap<Country, CountryInstance> countries = new HashMap<>();
 
@@ -60,27 +63,51 @@ public class Map {
         countryMiddles = Collections.unmodifiableMap(middles);
     }
 
+    /**
+     * Add country instance to the map.
+     * @param countryInstance Country instance that will be added
+     */
     public void addCountryInstance(CountryInstance countryInstance) {
         countries.put(countryInstance.getCountry(), countryInstance);
     }
 
+    /**
+     * Get hashmap of the countries.
+     * @return Hashmap of the countries
+     */
     public HashMap<Country, CountryInstance> getCountries() {
         return countries;
     }
 
+    /**
+     * Reset state of all country instances.
+     */
     public void reset() {
         getCountries().forEach((country, instance) -> instance.resetState());
     }
 
+    /**
+     * Set the visibility state.
+     * @param visible New visibility state
+     */
     public void setVisible(boolean visible) {
         getCountries().forEach((country, instance) -> instance.setVisible(visible));
     }
 
+    /**
+     * Get country.
+     * @param country Which country
+     * @return Country instance of the given country
+     */
     public @Nullable
     CountryInstance getCountry(Country country) {
         return getCountries().get(country);
     }
 
+    /**
+     * Enable country.
+     * @param country Which country
+     */
     public void enableCountry(Country country) {
         CountryInstance countryInstance = getCountries().get(country);
         if (countryInstance == null) {
@@ -89,10 +116,20 @@ public class Map {
         countryInstance.setDisabled(false);
     }
 
+    /**
+     * Set colors.
+     * @param minColor Minimum color
+     * @param maxColor Maximum color
+     */
     public void setColors(int minColor, int maxColor) {
         getCountries().forEach((country, instance) -> instance.setColors(minColor, maxColor));
     }
 
+    /**
+     * Get center of the country.
+     * @param country Which country
+     * @return Position of the center
+     */
     public Vector2 getCountryMiddle(Country country) {
         return countryMiddles.get(country);
     }

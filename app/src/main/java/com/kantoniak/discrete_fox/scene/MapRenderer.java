@@ -20,6 +20,9 @@ import org.rajawali3d.util.OnObjectPickedListener;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+/**
+ * Class responsible for rendering the map.
+ */
 public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     private static final Vector2 MAP_SIZE = new Vector2(2.438f, 2.889f);
@@ -40,10 +43,17 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         this.loader = new AssetLoader(context, mTextureManager);
     }
 
+    /**
+     * Set rendering delegate.
+     * @param renderingDelegate Rendering delegate
+     */
     public void setRenderingDelegate(RenderingDelegate renderingDelegate) {
         this.renderingDelegate = renderingDelegate;
     }
 
+    /**
+     * When render surface created.
+     */
     @Override
     public void onRenderSurfaceCreated(EGLConfig config, GL10 gl, int width, int height) {
         super.onRenderSurfaceCreated(config, gl, width, height);
@@ -52,6 +62,9 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         }
     }
 
+    /**
+     * When render surface size changed.
+     */
     @Override
     public void onRenderSurfaceSizeChanged(GL10 gl, int width, int height) {
         super.onRenderSurfaceSizeChanged(gl, width, height);
@@ -60,6 +73,9 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         }
     }
 
+    /**
+     * Initialize scene.
+     */
     @Override
     protected void initScene() {
         setupObjectPicker();
@@ -84,6 +100,10 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         showMap(false);
     }
 
+    /**
+     * Add country instance.
+     * @param countryInstance Which country instance
+     */
     public void addCountryInstance(CountryInstance countryInstance) {
         Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
 
@@ -93,6 +113,9 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         map.addCountryInstance(countryInstance);
     }
 
+    /**
+     * Update visibility.
+     */
     private void updateVisibility() {
         if (mapBase != null) {
             mapBase.setVisible(visible);
@@ -100,16 +123,25 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         map.setVisible(visible);
     }
 
+    /**
+     * Set up object picker.
+     */
     private void setupObjectPicker() {
         objectPicker = new ObjectColorPicker(this);
         objectPicker.setOnObjectPickedListener(this);
     }
 
+    /**
+     * When offsets changed.
+     */
     @Override
     public void onOffsetsChanged(float xOffset, float yOffset, float xOffsetStep, float yOffsetStep, int xPixelOffset, int yPixelOffset) {
 
     }
 
+    /**
+     * When touch event.
+     */
     @Override
     public void onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -117,6 +149,10 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         }
     }
 
+    /**
+     * When object picked.
+     * @param object Which object
+     */
     @Override
     public void onObjectPicked(@NonNull Object3D object) {
         for (java.util.Map.Entry<Country, CountryInstance> entry : map.getCountries().entrySet()) {
@@ -126,23 +162,42 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         }
     }
 
+    /**
+     * When no object picked.
+     */
     @Override
     public void onNoObjectPicked() {
         // Do nothing
     }
 
+    /**
+     * Set camera.
+     * @param camera Which camera
+     */
     public void setCamera(Camera camera) {
         getCurrentScene().addAndSwitchCamera(camera);
     }
 
+    /**
+     * Get loader.
+     * @return Asset loader
+     */
     public AssetLoader getLoader() {
         return loader;
     }
 
+    /**
+     * Get map.
+     * @return Map
+     */
     public Map getMap() {
         return map;
     }
 
+    /**
+     * Show map.
+     * @param show Whether to show or not
+     */
     public void showMap(boolean show) {
         this.visible = show;
         updateVisibility();
