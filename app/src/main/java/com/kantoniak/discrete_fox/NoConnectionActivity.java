@@ -7,8 +7,14 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Activity for lack of internet connection.
+ */
 public class NoConnectionActivity extends AppCompatActivity {
 
+    /**
+     * Set up activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,11 +22,17 @@ public class NoConnectionActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    /**
+     * When pressed go back button.
+     */
     @OnClick(R.id.button_go_back)
     public void onClickBack(View view) {
         onBackPressed();
     }
 
+    /**
+     * When pressed system back button.
+     */
     @Override
     public void onBackPressed() {
         finish();

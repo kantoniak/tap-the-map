@@ -26,22 +26,45 @@ public class Country {
      */
     private final String euCode;
 
+    /**
+     * Creates object from two letter Eurostat code.
+     * @param euCode two letter Eurostat code
+     */
     private Country(String euCode) {
         this.euCode = euCode;
     }
 
+    /**
+     * Returns Eurostat code.
+     * @return Eurostat code
+     */
     public String getEuCode() {
         return euCode;
     }
 
+    /**
+     * Returns the stringID from the resources.
+     * @param resources Resources of the application
+     * @return Localized stringID
+     */
     private int getLocalizedStringId(Resources resources) {
         return resources.getIdentifier("country_name_" + euCode, "string", BuildConfig.APPLICATION_ID);
     }
 
+    /**
+     * Returns the localized name.
+     * @param resources Resources of the application
+     * @return Localized name
+     */
     public String getLocalizedName(Resources resources) {
         return resources.getString(getLocalizedStringId(resources));
     }
 
+    /**
+     * Compare two objects of class Country.
+     * @param o The other object
+     * @return True if the objects are equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,13 +73,25 @@ public class Country {
         return Objects.equals(euCode, country.euCode);
     }
 
+    /**
+     * Returns hash code of the code.
+     * @return Hash code of the code
+     */
     @Override
     public int hashCode() {
         return Objects.hash(euCode);
     }
 
+    /**
+     * Helper class for creating Country objects.
+     */
     public static class Builder {
 
+        /**
+         * Create object from given Eurostat code.
+         * @param code Eurostat code
+         * @return Created object
+         */
         public static Country fromEuCode(String code) {
             if (!EU_CODES.contains(code)) {
                 throw new IllegalArgumentException("Country inexistent/not supported");

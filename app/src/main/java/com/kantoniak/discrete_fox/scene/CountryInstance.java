@@ -123,7 +123,6 @@ public class CountryInstance {
         setHeight(++height);
         updateVisuals();
 
-        // TODO(kedzior) mp3 play height
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.);
         //mp.start();
     }

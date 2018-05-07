@@ -11,12 +11,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Activity for displaying the score.
+ */
 public class ScoreActivity extends AppCompatActivity {
 
     @BindView(R.id.score_image) ImageView mScoreImage;
     @BindView(R.id.score_points) TextView mScorePointsTextView;
     @BindView(R.id.score_title) TextView mScoreTitleTextView;
 
+    /**
+     * Set up activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +37,12 @@ public class ScoreActivity extends AppCompatActivity {
         setupUI(result, maxResult, newHighscore);
     }
 
+    /**
+     * Set up the UI of the activity.
+     * @param result Result of the game
+     * @param maxResult Maximum result of the game
+     * @param newHighscore Whether this result is the new highscore
+     */
     private void setupUI(int result, int maxResult, boolean newHighscore) {
 
         int textToShow;
@@ -48,7 +60,6 @@ public class ScoreActivity extends AppCompatActivity {
         mScoreTitleTextView.setText(getResources().getString(textToShow));
         mScorePointsTextView.setText(getString(R.string.score_value, result, maxResult));
 
-        // TODO(kedzior) mp3 final
         //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
         //mp.start();
 //        try {
@@ -60,12 +71,18 @@ public class ScoreActivity extends AppCompatActivity {
 //        }
     }
 
+    /**
+     * When pressed play again button.
+     */
     @OnClick(R.id.button_play_again)
     public void restartGame(View view) {
         startActivity(new Intent(this, GameActivity.class));
         finish();
     }
 
+    /**
+     * When pressed system back button.
+     */
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainMenuActivity.class));

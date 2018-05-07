@@ -30,7 +30,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTouch;
 
-
+/**
+ * Activity for displaying the main game screen.
+ */
 public class GameActivity extends AppCompatActivity
         implements LoadingFragment.InteractionListener, RulesBoardFragment.InteractionListener, AboutMarkerFragment.InteractionListener, ScanToStartFragment.InteractionListener, QuestionSeriesFragment.InteractionListener {
 
@@ -48,6 +50,9 @@ public class GameActivity extends AppCompatActivity
     private MapRenderer renderer;
     private List<Question> questionList;
 
+    /**
+     * Set up the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +64,18 @@ public class GameActivity extends AppCompatActivity
         questionList = new ArrayList<>();
     }
 
+    /**
+     * When activity starts.
+     */
     @Override
     protected void onStart() {
         super.onStart();
         switchToLoader();
     }
 
+    /**
+     * Set up game surface view.
+     */
     private void setupGameSurfaceView() {
         renderer = new MapRenderer(this, new Map());
         renderer.setCamera(camera);
@@ -78,6 +89,9 @@ public class GameActivity extends AppCompatActivity
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
     }
 
+    /**
+     * Present loading bar.
+     */
     public void switchToLoader() {
         LoadingFragment loadingFragment = new LoadingFragment();
         loadingFragment.init(renderer, questionList);
@@ -85,12 +99,18 @@ public class GameActivity extends AppCompatActivity
         this.currentTouchListener = null;
     }
 
+    /**
+     * Present rules.
+     */
     public void switchToRules() {
         RulesBoardFragment rulesBoardFragment = new RulesBoardFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, rulesBoardFragment).commit();
         this.currentTouchListener = null;
     }
 
+    /**
+     * Present marker scanner.
+     */
     public void switchToScanner() {
         ScanToStartFragment scanFragment = new ScanToStartFragment();
         scanFragment.init(arController);
@@ -98,12 +118,18 @@ public class GameActivity extends AppCompatActivity
         this.currentTouchListener = null;
     }
 
+    /**
+     * Present about marker information.
+     */
     public void switchToAboutMarker() {
         AboutMarkerFragment aboutFragment = new AboutMarkerFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, aboutFragment).commit();
         this.currentTouchListener = null;
     }
 
+    /**
+     * Present questions.
+     */
     public void switchToQuestions() {
         QuestionSeriesFragment questionFragment = new QuestionSeriesFragment();
         questionFragment.init(renderer, camera, questionList);
@@ -112,11 +138,17 @@ public class GameActivity extends AppCompatActivity
         renderer.showMap(true);
     }
 
+    /**
+     * When touched.
+     */
     @OnTouch(R.id.game_map_preview)
     public boolean onTouch(View view, MotionEvent event) {
         return currentTouchListener != null && currentTouchListener.onTouch(view, event);
     }
 
+    /**
+     * When activity was loaded.
+     */
     @Override
     public void onLoaded() {
         if (SharedPrefsUtil.shouldShowRules(this)) {
@@ -126,6 +158,10 @@ public class GameActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Display the rules.
+     * @param showRulesAgain Whether we should display the rules
+     */
     @Override
     public void onRulesRead(boolean showRulesAgain) {
         if (!showRulesAgain) {
@@ -134,26 +170,43 @@ public class GameActivity extends AppCompatActivity
         switchToScanner();
     }
 
+    /**
+     * Display the help.
+     */
     @Override
     public void onHelpClick() {
         switchToAboutMarker();
     }
 
+    /**
+     * Display the marker scanner view.
+     */
     @Override
     public void onAboutRead() {
         switchToScanner();
     }
 
+    /**
+     * When marker was found.
+     */
     @Override
     public void onScanned() {
         switchToQuestions();
     }
 
+    /**
+     * Close triggered.
+     */
     @Override
     public void onCloseTriggered() {
         this.finish();
     }
 
+    /**
+     * When series of questions has finished.
+     * @param score Score of the series of questions
+     * @param outOf Maximum of the series of questions
+     */
     @Override
     public void onSeriesDone(int score, int outOf) {
         boolean isHighscore = SharedPrefsUtil.updateHighScore(this, score);
@@ -166,6 +219,9 @@ public class GameActivity extends AppCompatActivity
         finish();
     }
 
+    /**
+     * Game resume.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -174,6 +230,9 @@ public class GameActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Game pause.
+     */
     @Override
     public void onPause() {
         if (gameMapPreview != null) {
@@ -182,6 +241,9 @@ public class GameActivity extends AppCompatActivity
         super.onPause();
     }
 
+    /**
+     * When pressed system back button.
+     */
     @Override
     public void onBackPressed() {
         finish();

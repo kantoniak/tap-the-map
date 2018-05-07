@@ -14,11 +14,17 @@ import java.io.InputStream;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Activity for displaying the licenses.
+ */
 public class LicensesActivity extends AppCompatActivity {
 
     @BindView(R.id.licenses)
     TextView mLicensesTextView;
 
+    /**
+     * Set up the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +34,11 @@ public class LicensesActivity extends AppCompatActivity {
         mLicensesTextView.setText(loadLicenses(this));
     }
 
+    /**
+     * Load licenses from resources.
+     * @param context Context of the application
+     * @return String containing all licenses
+     */
     private String loadLicenses(@NonNull Context context) {
         try {
             try (ByteArrayOutputStream result = new ByteArrayOutputStream()) {
@@ -46,6 +57,9 @@ public class LicensesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * When pressed system back button.
+     */
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, AboutActivity.class));

@@ -136,7 +136,6 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mMidColorView.setBackgroundColor(midColor);
         mLowColorView.setBackgroundColor(minColor);
 
-        // TODO mp3 question
         /*try {
             int objFileId = getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt() + 1), "raw", BuildConfig.APPLICATION_ID);
             MediaPlayer mp = MediaPlayer.create(getActivity(), objFileId);

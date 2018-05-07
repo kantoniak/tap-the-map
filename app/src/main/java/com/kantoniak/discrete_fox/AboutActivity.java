@@ -8,8 +8,14 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Activity for displaying the about screen.
+ */
 public class AboutActivity extends AppCompatActivity {
 
+    /**
+     * Set up activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,17 +23,26 @@ public class AboutActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    /**
+     * Licenses button clicked.
+     */
     @OnClick(R.id.button_licenses)
     public void onClickLicenses(View view) {
         startActivity(new Intent(this, LicensesActivity.class));
         finish();
     }
 
+    /**
+     * When pressed go back button.
+     */
     @OnClick(R.id.button_go_back)
     public void onClickBack(View view) {
         onBackPressed();
     }
 
+    /**
+     * When pressed system back button.
+     */
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainMenuActivity.class));
