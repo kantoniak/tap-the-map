@@ -1,7 +1,7 @@
 # Tap The Map
 
 <p align="center">
-  <img src="main_menu.png" align="center" alt="Main menu" />
+  <img src="readme/main_menu.png" align="center" alt="Main menu" />
 </p>
 
 # Architecture overview
@@ -32,12 +32,14 @@ We use country identifiers in multiple places of the app. `Country` is an identi
 ## Application flow
 Main application flow is divided into Activities, and Fragments in case of `GameActivity`.
 
-*TODO(kantoniak):* screens from application with the names of Activity/Fragment.
+<p align="center">
+  <img src="readme/flow.png" align="center" alt="Application flow" />
+</p>
 
 ## Android Studio project
 
 ### Compilation
-*TODO(kantoniak)*
+Open project in Android Studio 3.1.0 or higher. Compile `app` configuration.
 
 ### Project contents by package
 * The main package: activities and general utility classes, e.g. for work with `SharedPreferences`.
@@ -48,7 +50,13 @@ Main application flow is divided into Activities, and Fragments in case of `Game
 * `scene`: 3D renderers, classes representing 3D objects
 
 ### Used libraries
-*TODO(kantoniak)*
+All libraries are added as gradle dependencies in `app/build.gradle`
+
+* [Butterknife 8.8.1](http://jakewharton.github.io/butterknife/)
+* [Rajawali 1.1.970](https://github.com/Rajawali/Rajawali)
+* [EasyAR](https://easyar.com/)
+* [Triava 1.0.5](https://github.com/trivago/triava)
+* [GSON 2.8.4](https://github.com/google/gson)
 
 ## Misc
 
