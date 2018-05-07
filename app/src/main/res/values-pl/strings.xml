@@ -34,6 +34,9 @@
     <string name="scan_marker_to_start">Znajdź marker żeby rozpocząć</string>
     <string name="help">Pomoc</string>
 
+    <!-- No connection screen-->
+    <string name="no_connection_info">Smuteczek :( Brak połączenia z internetem</string>
+
     <!-- Questions screen -->
     <string name="loading_objects">Ładowanie obiektów...</string>
     <string name="loading_questions">Ładowanie pytań...</string>

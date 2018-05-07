@@ -1,7 +1,6 @@
 package com.kantoniak.discrete_fox.gameplay;
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -9,9 +8,6 @@ import com.kantoniak.discrete_fox.communication.APIResponse;
 import com.kantoniak.discrete_fox.communication.AsyncTaskParams;
 import com.kantoniak.discrete_fox.communication.DataProvider;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
@@ -128,13 +124,16 @@ public class QuestionChest {
             String fullQuery = questionObjects.get(i).getQuery() + COUNTRIES + LAST_TIME_PERIOD + PRECISION;
             DataProvider dp = new DataProvider();
             AsyncTaskParams atp = new AsyncTaskParams(fullQuery, questionObjects.get(i).getDescription());
+            APIResponse response = null;
             try {
-                APIResponse response = dp.execute(atp).get();
-                Question q = new Question(fullQuery, response.getContent().getHashMap(), questionObjects.get(i).getDescription(), questionObjects.get(i).getBaseUnit(), questionObjects.get(i).getCategory(), questionObjects.get(i).getMultiplier());
-                questionsArrayList.add(q);
-            } catch (Exception e) {
-                e.printStackTrace();
+                response = dp.execute(atp).get();
+            } catch (Exception ignored) {
             }
+            if (response == null) {
+                return;
+            }
+            Question q = new Question(fullQuery, response.getContent().getHashMap(), questionObjects.get(i).getDescription(), questionObjects.get(i).getBaseUnit(), questionObjects.get(i).getCategory(), questionObjects.get(i).getMultiplier());
+            questionsArrayList.add(q);
         }
         Collections.shuffle(questionsArrayList);
         while (questionsArrayList.size() > numberOfQuestions) {

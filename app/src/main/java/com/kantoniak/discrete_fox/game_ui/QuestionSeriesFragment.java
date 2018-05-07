@@ -2,6 +2,7 @@ package com.kantoniak.discrete_fox.game_ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,20 +18,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.kantoniak.discrete_fox.BuildConfig;
 import com.kantoniak.discrete_fox.Country;
+import com.kantoniak.discrete_fox.NoConnectionActivity;
 import com.kantoniak.discrete_fox.R;
 import com.kantoniak.discrete_fox.ar.ViewMatrixOverrideCamera;
 import com.kantoniak.discrete_fox.gameplay.Answer;
 import com.kantoniak.discrete_fox.gameplay.AnswersAdapter;
 import com.kantoniak.discrete_fox.gameplay.Gameplay;
 import com.kantoniak.discrete_fox.gameplay.Question;
-import com.kantoniak.discrete_fox.gameplay.QuestionChest;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -109,7 +108,8 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
             Question question = gameplay.getCurrentQuestion();
             showQuestion(question);
         } catch (Exception e) {
-            //TODO Add screen with no internet connection
+            Intent myIntent = new Intent(getActivity(), NoConnectionActivity.class);
+            getActivity().startActivity(myIntent);
         }
     }
 
@@ -136,13 +136,13 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mLowColorView.setBackgroundColor(minColor);
 
         // TODO mp3 question
-        try {
+        /*try {
             int objFileId = getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt() + 1), "raw", BuildConfig.APPLICATION_ID);
             MediaPlayer mp = MediaPlayer.create(getActivity(), objFileId);
             mp.start();
         } catch (Exception e) {
-            // TODO: Empty catch block
-        }
+
+        }*/
     }
 
     @OnClick(R.id.button_close)

@@ -66,8 +66,6 @@ public class Gameplay {
     private Question nextQuestion(Context context) {
         currentQuestion++;
         if (mquestions.size() == currentQuestion) {
-            // TODO Present superb view of the final result!
-            // TODO: We probably should delete this gameplay, and create a new one, otherwise, we should clean this one.
             currentQuestion--;
             return null;
         }
@@ -81,7 +79,6 @@ public class Gameplay {
 
     private Integer calculateScore(Map map) {
         int score = 0;
-        HashMap<Country, CountryInstance> mapCountries = map.getCountries();
         Question question = getCurrentQuestion();
         List<Country> countries = question.getCountries();
         for (int i = 0; i < mnumberOfCountries; i++) {
@@ -94,7 +91,6 @@ public class Gameplay {
                     score += 1;
                 }
             } catch (Exception e) {
-                int qq = q.getCorrectAnswer(country);
                 e.printStackTrace();
             }
         }

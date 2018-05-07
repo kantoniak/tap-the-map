@@ -1,6 +1,5 @@
 package com.kantoniak.discrete_fox.communication;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -11,11 +10,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -47,8 +43,12 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      */
     public APIResponse doInBackground(AsyncTaskParams... params){
         mquery = params[0].getQuery();
-        //mdesc = params[0].getDesc();
-        String buffer = retrieveObject(mquery);
+        String buffer = null;
+        try {
+            buffer = retrieveObject(mquery);
+        } catch (IOException e) {
+            return null;
+        }
         return parseObject(buffer);
     }
 
@@ -77,7 +77,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      * Retrieve json from Eurostat API.
      * @return return json in String format
      */
-    private String retrieveObject(String query) {
+    private String retrieveObject(String query) throws IOException {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -104,9 +104,6 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
             if (buffer.length() == 0)
                 return null;
             return buffer.toString();
-        } catch (IOException e) {
-            Log.e(TAG, "IO Exception", e);
-            return null;
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -129,8 +126,8 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      */
     private APIResponse parseObject(String response) {
         APIResponse res = null;
+        JSONObject obj = null;
         try {
-            JSONObject obj;
             obj = new JSONObject(response);
             String version = obj.getString("version");
             String label = obj.getString("label");
@@ -140,15 +137,14 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
             String className = obj.getString("class");
             assertEquals(className, "dataset");
             // String status = obj.getString("status");
-            JSONObject extension = obj.getJSONObject("extension");
             JSONObject value = obj.getJSONObject("value");
+            JSONObject extension = obj.getJSONObject("extension");
             JSONObject dimension = obj.getJSONObject("dimension");
             JSONArray id = obj.getJSONArray("id");
             JSONArray size = obj.getJSONArray("size");
-
             res = new APIResponse(version, label, href, source, updated, extension, value, dimension, id, size);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            res = null;
         }
         return res;
     }

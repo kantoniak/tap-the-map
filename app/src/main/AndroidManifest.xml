@@ -43,6 +43,11 @@
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".NoConnectionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
