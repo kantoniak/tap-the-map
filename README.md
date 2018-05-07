@@ -63,5 +63,8 @@ All libraries are added as gradle dependencies in `app/build.gradle`
 ### Game settings
 All game settings are hardcoded in `.gameplay.Gameplay.Settings`. In future, these can be moved to a separate file or download from somewhere.
 
+### Questions
+Questions used in the application are stored in `assets/questions.json` file.
+
 ### AR support
 Application uses EasyAR to handle augmented reality. All marker images are defined in `assets/targets.json`, images are held in the same folder.
