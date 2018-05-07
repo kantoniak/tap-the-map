@@ -101,6 +101,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
 
     public void startGame() {
         showingAnswers = false;
+        map.setVisible(true);
         mAnswersContainer.setVisibility(View.INVISIBLE);
 
         gameplay = new Gameplay(questionList, Gameplay.Settings.COUNTRIES_PER_QUESTION);

@@ -92,6 +92,7 @@ public class LoadingFragment extends Fragment {
                 CountryInstance countryInstance = new CountryInstance(result.country);
                 countryInstance.initMeshes(result.countryBase, result.countryTop, result.countryNameTexture);
                 renderer.addCountryInstance(countryInstance);
+                countryInstance.setVisible(false);
             });
 
             questionsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

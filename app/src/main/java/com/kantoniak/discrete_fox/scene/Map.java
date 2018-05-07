@@ -72,7 +72,7 @@ public class Map {
         getCountries().forEach((country, instance) -> instance.resetState());
     }
 
-    void setVisible(boolean visible) {
+    public void setVisible(boolean visible) {
         getCountries().forEach((country, instance) -> instance.setVisible(visible));
     }
 
