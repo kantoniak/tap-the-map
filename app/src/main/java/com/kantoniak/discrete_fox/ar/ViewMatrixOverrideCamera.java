@@ -13,8 +13,8 @@ public class ViewMatrixOverrideCamera extends Camera {
     private Matrix4 viewMatrixOverrideScaled = new Matrix4();
 
     private static final float MAX_ZOOM = 4.f;
-    private static final float MIN_ZOOM = 0.75f;
-    private static final float ZOOM_STEP = 0.25f;
+    private static final float MIN_ZOOM = 0.20f;
+    private static final float ZOOM_STEP = 0.20f;
     private float currentZoom = 1.f;
 
     public void setViewMatrixOverride(Matrix4 viewMatrixOverride) {
