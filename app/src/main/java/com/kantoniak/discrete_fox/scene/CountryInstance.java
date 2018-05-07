@@ -122,9 +122,6 @@ public class CountryInstance {
         }
         setHeight(++height);
         updateVisuals();
-
-        //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.);
-        //mp.start();
     }
 
     private void updateVisuals() {

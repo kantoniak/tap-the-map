@@ -59,16 +59,6 @@ public class ScoreActivity extends AppCompatActivity {
 
         mScoreTitleTextView.setText(getResources().getString(textToShow));
         mScorePointsTextView.setText(getString(R.string.score_value, result, maxResult));
-
-        //MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.twoj_wynik_to);
-        //mp.start();
-//        try {
-//            int objFileId = getApplicationContext().getResources().getIdentifier("a" + String.valueOf(GameActivity.MESSAGE_SCORE) + "pkt", "raw", BuildConfig.APPLICATION_ID);
-//            MediaPlayer mp2 = MediaPlayer.create(getApplicationContext(), objFileId);
-//            mp2.start();
-//        } catch (Exception e) {
-        // Warning: empty catch block
-//        }
     }
 
     /**

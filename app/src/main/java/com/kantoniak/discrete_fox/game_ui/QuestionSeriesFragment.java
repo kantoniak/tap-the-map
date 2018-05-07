@@ -135,14 +135,6 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mHighColorView.setBackgroundColor(maxColor);
         mMidColorView.setBackgroundColor(midColor);
         mLowColorView.setBackgroundColor(minColor);
-
-        /*try {
-            int objFileId = getResources().getIdentifier("q" + String.valueOf(gameplay.getCurrentQuestionInt() + 1), "raw", BuildConfig.APPLICATION_ID);
-            MediaPlayer mp = MediaPlayer.create(getActivity(), objFileId);
-            mp.start();
-        } catch (Exception e) {
-
-        }*/
     }
 
     @OnClick(R.id.button_close)
