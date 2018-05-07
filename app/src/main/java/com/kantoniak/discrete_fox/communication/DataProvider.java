@@ -19,7 +19,7 @@ import static junit.framework.Assert.assertEquals;
  * Class that asynchronously retrieves and parses the data from Eurostat API.
  */
 public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> {
-    private static final String MAINURL ="http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/";
+    private static final String MAINURL = "http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/";
     private static final String TAG = "[DATAPROVIDER]";
 
     //private WeakReference<ArrayList<Question>> mquestions;
@@ -31,7 +31,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      * onPostExecute method.
      */
     public DataProvider() {//ArrayList<Question> questions) {
-    //    mquestions = new WeakReference<>(questions);
+        //    mquestions = new WeakReference<>(questions);
     }
 
     /**
@@ -41,7 +41,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
      * @param params pass query
      * @return APIResponse object for given query in params
      */
-    public APIResponse doInBackground(AsyncTaskParams... params){
+    public APIResponse doInBackground(AsyncTaskParams... params) {
         mquery = params[0].getQuery();
         String buffer = null;
         try {
@@ -75,6 +75,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
 
     /**
      * Retrieve json from Eurostat API.
+     *
      * @return return json in String format
      */
     private String retrieveObject(String query) throws IOException {
@@ -85,7 +86,7 @@ public class DataProvider extends AsyncTask<AsyncTaskParams, Void, APIResponse> 
         StringBuilder buffer = new StringBuilder();
         try {
             url = new URL(MAINURL + query);
-            urlConnection = (HttpURLConnection)url.openConnection();
+            urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 

@@ -19,7 +19,8 @@ public class SharedPrefsUtil {
 
     /**
      * Update the highscore in the preferences
-     * @param context Context of the application
+     *
+     * @param context  Context of the application
      * @param newScore New score acquired during the game
      * @return True if newScore is indeed the new high score
      */
@@ -35,6 +36,7 @@ public class SharedPrefsUtil {
 
     /**
      * Read the flag for not showing the rules
+     *
      * @param context Context of the application
      * @return True if we should show the rules
      */
@@ -45,6 +47,7 @@ public class SharedPrefsUtil {
 
     /**
      * Set flag for not showing the rules
+     *
      * @param context Context of the application
      */
     public static void dontShowRulesAgain(Context context) {

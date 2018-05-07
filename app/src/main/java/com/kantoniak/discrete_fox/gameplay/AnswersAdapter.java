@@ -19,8 +19,10 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.answer_item_color) public View color;
-        @BindView(R.id.answer_item_country) public TextView country;
+        @BindView(R.id.answer_item_color)
+        public View color;
+        @BindView(R.id.answer_item_country)
+        public TextView country;
 
         public ViewHolder(View itemView) {
             super(itemView);

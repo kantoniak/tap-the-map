@@ -36,6 +36,7 @@ public class LicensesActivity extends AppCompatActivity {
 
     /**
      * Load licenses from resources.
+     *
      * @param context Context of the application
      * @return String containing all licenses
      */

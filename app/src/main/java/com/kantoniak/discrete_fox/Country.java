@@ -28,6 +28,7 @@ public class Country {
 
     /**
      * Creates object from two letter Eurostat code.
+     *
      * @param euCode two letter Eurostat code
      */
     private Country(String euCode) {
@@ -36,6 +37,7 @@ public class Country {
 
     /**
      * Returns Eurostat code.
+     *
      * @return Eurostat code
      */
     public String getEuCode() {
@@ -44,6 +46,7 @@ public class Country {
 
     /**
      * Returns the stringID from the resources.
+     *
      * @param resources Resources of the application
      * @return Localized stringID
      */
@@ -53,6 +56,7 @@ public class Country {
 
     /**
      * Returns the localized name.
+     *
      * @param resources Resources of the application
      * @return Localized name
      */
@@ -62,6 +66,7 @@ public class Country {
 
     /**
      * Compare two objects of class Country.
+     *
      * @param o The other object
      * @return True if the objects are equal
      */
@@ -75,6 +80,7 @@ public class Country {
 
     /**
      * Returns hash code of the code.
+     *
      * @return Hash code of the code
      */
     @Override
@@ -89,6 +95,7 @@ public class Country {
 
         /**
          * Create object from given Eurostat code.
+         *
          * @param code Eurostat code
          * @return Created object
          */

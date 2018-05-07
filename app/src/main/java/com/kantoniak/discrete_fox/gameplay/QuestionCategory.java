@@ -17,6 +17,7 @@ public enum QuestionCategory {
 
     /**
      * Returns low level color for category.
+     *
      * @return int value of low level color for category
      */
     public int getMinColor() {
@@ -25,6 +26,7 @@ public enum QuestionCategory {
 
     /**
      * Returns high level color for category.
+     *
      * @return int value of high level color for category
      */
     public int getMaxColor() {

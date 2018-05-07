@@ -6,7 +6,6 @@ import com.kantoniak.discrete_fox.Country;
 import com.kantoniak.discrete_fox.scene.CountryInstance;
 import com.kantoniak.discrete_fox.scene.Map;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

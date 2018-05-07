@@ -16,9 +16,12 @@ import butterknife.OnClick;
  */
 public class ScoreActivity extends AppCompatActivity {
 
-    @BindView(R.id.score_image) ImageView mScoreImage;
-    @BindView(R.id.score_points) TextView mScorePointsTextView;
-    @BindView(R.id.score_title) TextView mScoreTitleTextView;
+    @BindView(R.id.score_image)
+    ImageView mScoreImage;
+    @BindView(R.id.score_points)
+    TextView mScorePointsTextView;
+    @BindView(R.id.score_title)
+    TextView mScoreTitleTextView;
 
     /**
      * Set up activity.
@@ -39,8 +42,9 @@ public class ScoreActivity extends AppCompatActivity {
 
     /**
      * Set up the UI of the activity.
-     * @param result Result of the game
-     * @param maxResult Maximum result of the game
+     *
+     * @param result       Result of the game
+     * @param maxResult    Maximum result of the game
      * @param newHighscore Whether this result is the new highscore
      */
     private void setupUI(int result, int maxResult, boolean newHighscore) {

@@ -21,8 +21,10 @@ public class RulesBoardFragment extends Fragment {
 
     private InteractionListener mListener;
 
-    @BindView(R.id.image) ImageView mLeftImage;
-    @BindView(R.id.checkbox_dont_show_again) CheckBox mDontShowAgainCheckbox;
+    @BindView(R.id.image)
+    ImageView mLeftImage;
+    @BindView(R.id.checkbox_dont_show_again)
+    CheckBox mDontShowAgainCheckbox;
 
     public RulesBoardFragment() {
         // Required empty public constructor

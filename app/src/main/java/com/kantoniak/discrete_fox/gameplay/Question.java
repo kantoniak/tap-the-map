@@ -9,7 +9,6 @@ import com.trivago.triava.util.UnitSystem;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +45,7 @@ public class Question {
 
     private void setCountries() {
         List<Country> availableCountries = new ArrayList<>(ansDouble.keySet());
-        assert(availableCountries.size() > Gameplay.Settings.COUNTRIES_PER_QUESTION);
+        assert (availableCountries.size() > Gameplay.Settings.COUNTRIES_PER_QUESTION);
         Collections.shuffle(availableCountries);
 
         mcountries = availableCountries.subList(0, Gameplay.Settings.COUNTRIES_PER_QUESTION);
@@ -144,7 +143,7 @@ public class Question {
 
     public List<Answer> getAnswers() {
         List<Answer> list = new ArrayList<>();
-        for (Country country: mcountries) {
+        for (Country country : mcountries) {
             double value = 0.0;
             try {
                 value = ansDouble.get(country);
@@ -163,7 +162,7 @@ public class Question {
                     valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, munit);
                     break;
             }
-            int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(country)-1)*0.5f);
+            int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(country) - 1) * 0.5f);
             Answer answer = new Answer(country, valuePresented, value, color);
             list.add(answer);
         }

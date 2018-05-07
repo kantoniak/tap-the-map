@@ -12,5 +12,8 @@ public class AsyncTaskParams {
     public String getQuery() {
         return mquery;
     }
-    public String getDesc() { return mdesc; }
+
+    public String getDesc() {
+        return mdesc;
+    }
 }

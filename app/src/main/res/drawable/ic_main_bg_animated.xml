@@ -2,10 +2,19 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt">
     <aapt:attr name="android:drawable">
-        <vector android:height="24dp" android:viewportHeight="700" android:viewportWidth="700" android:width="24dp">
-            <group android:name="rotatable" android:pivotX="350" android:pivotY="350">
-                <path android:fillAlpha="0.09" android:fillColor="#B23F00"
-                    android:pathData="M350,-150A500,500 0,0 0,100 -83.014L350,350ZM350,350 L783.012,100A500,500 0,0 0,600 -83.012ZM350,350 L783.014,600A500,500 0,0 0,850 350ZM350,350v500a500,500 0,0 0,250 -66.986zM350,350 L-83.014,600A500,500 0,0 0,100 783.014ZM350,350L-83.014,100A500,500 0,0 0,-150 350Z"/>
+        <vector
+            android:height="24dp"
+            android:viewportHeight="700"
+            android:viewportWidth="700"
+            android:width="24dp">
+            <group
+                android:name="rotatable"
+                android:pivotX="350"
+                android:pivotY="350">
+                <path
+                    android:fillAlpha="0.09"
+                    android:fillColor="#B23F00"
+                    android:pathData="M350,-150A500,500 0,0 0,100 -83.014L350,350ZM350,350 L783.012,100A500,500 0,0 0,600 -83.012ZM350,350 L783.014,600A500,500 0,0 0,850 350ZM350,350v500a500,500 0,0 0,250 -66.986zM350,350 L-83.014,600A500,500 0,0 0,100 783.014ZM350,350L-83.014,100A500,500 0,0 0,-150 350Z" />
             </group>
         </vector>
     </aapt:attr>
@@ -17,7 +26,7 @@
                 android:valueFrom="0"
                 android:valueTo="360"
                 android:repeatCount="infinite"
-                android:interpolator="@android:anim/linear_interpolator"/>
+                android:interpolator="@android:anim/linear_interpolator" />
         </aapt:attr>
     </target>
 </animated-vector>

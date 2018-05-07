@@ -68,6 +68,7 @@ public class ScanToStartFragment extends Fragment implements EasyARController.On
 
     public interface InteractionListener {
         void onScanned();
+
         void onHelpClick();
     }
 }

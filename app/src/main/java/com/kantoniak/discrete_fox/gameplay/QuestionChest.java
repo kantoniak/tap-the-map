@@ -143,6 +143,7 @@ public class QuestionChest {
 
     /**
      * Returns number of all the questions in the chest.
+     *
      * @return number of all the questions in the chest
      */
     public int numberOfQuestions() {
@@ -151,6 +152,7 @@ public class QuestionChest {
 
     /**
      * Get one, specific question.
+     *
      * @param idx index of the question
      * @return question at given index
      */
@@ -183,7 +185,8 @@ public class QuestionChest {
             InputStream inputStream = context.getAssets().open(QUESTION_FILENAME);
             String buffer = inputStreamToString(inputStream);
 
-            Type questionObjectType = new TypeToken<List<QuestionObject>>() {}.getType();
+            Type questionObjectType = new TypeToken<List<QuestionObject>>() {
+            }.getType();
             Gson gson = new Gson();
             res = gson.fromJson(buffer, questionObjectType);
         } catch (IOException e) {

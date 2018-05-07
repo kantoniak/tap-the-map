@@ -17,7 +17,6 @@ import com.kantoniak.discrete_fox.game_ui.QuestionSeriesFragment;
 import com.kantoniak.discrete_fox.game_ui.RulesBoardFragment;
 import com.kantoniak.discrete_fox.game_ui.ScanToStartFragment;
 import com.kantoniak.discrete_fox.gameplay.Question;
-import com.kantoniak.discrete_fox.gameplay.QuestionChest;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
@@ -160,6 +159,7 @@ public class GameActivity extends AppCompatActivity
 
     /**
      * Display the rules.
+     *
      * @param showRulesAgain Whether we should display the rules
      */
     @Override
@@ -204,6 +204,7 @@ public class GameActivity extends AppCompatActivity
 
     /**
      * When series of questions has finished.
+     *
      * @param score Score of the series of questions
      * @param outOf Maximum of the series of questions
      */

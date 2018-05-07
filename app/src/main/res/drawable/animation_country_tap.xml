@@ -3,7 +3,7 @@
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/ic_tap_phase_1"/>
+        android:drawable="@drawable/ic_tap_phase_1" />
 
     <item android:duration="400">
         <layer-list>
@@ -14,7 +14,7 @@
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/ic_tap_phase_2"/>
+        android:drawable="@drawable/ic_tap_phase_2" />
 
     <item android:duration="400">
         <layer-list>
@@ -25,7 +25,7 @@
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/ic_tap_phase_3"/>
+        android:drawable="@drawable/ic_tap_phase_3" />
 
     <item android:duration="400">
         <layer-list>
@@ -36,6 +36,6 @@
 
     <item
         android:duration="2000"
-        android:drawable="@drawable/ic_tap_phase_4"/>
+        android:drawable="@drawable/ic_tap_phase_4" />
 
 </animation-list>

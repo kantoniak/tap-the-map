@@ -26,7 +26,7 @@ public class ContentObject {
      * Setup PupulationWithNoToilet object and populate the hashmap in proper way.
      *
      * @param dimensions dimensions retrieved from Eurostat
-     * @param values exact values retrieved from Eurostat
+     * @param values     exact values retrieved from Eurostat
      */
     ContentObject(JSONObject dimensions, JSONObject values) {
         data = new HashMap<>();
@@ -53,14 +53,14 @@ public class ContentObject {
                     data.put(key1.toLowerCase(), value);
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
      * Returns the map with values for each country
+     *
      * @return map Country -> Value
      */
     public HashMap<String, Double> getHashMap() {

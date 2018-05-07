@@ -1,11 +1,13 @@
 {
-  "images" :
-  [
+  "images": [
     {
-      "image" : "tracker.png",
-      "uid" : "debug-qr-tracker",
-      "name" : "debug-qr-tracker",
-      "size" : [2.5, 2.5]
+      "image": "tracker.png",
+      "uid": "debug-qr-tracker",
+      "name": "debug-qr-tracker",
+      "size": [
+        2.5,
+        2.5
+      ]
     }
   ]
 }

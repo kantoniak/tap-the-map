@@ -3,7 +3,6 @@ package com.kantoniak.discrete_fox.game_ui;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -42,22 +41,36 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
 
     private InteractionListener mListener;
 
-    @BindView(R.id.button_close) View mCloseView;
-    @BindView(R.id.question) TextView mQuestionTextView;
-    @BindView(R.id.round_progress) TextView mRoundProgress;
-    @BindView(R.id.button_zoom_in) View mZoomIn;
-    @BindView(R.id.button_zoom_out) View mZoomOut;
+    @BindView(R.id.button_close)
+    View mCloseView;
+    @BindView(R.id.question)
+    TextView mQuestionTextView;
+    @BindView(R.id.round_progress)
+    TextView mRoundProgress;
+    @BindView(R.id.button_zoom_in)
+    View mZoomIn;
+    @BindView(R.id.button_zoom_out)
+    View mZoomOut;
 
-    @BindView(R.id.legend_high_text) TextView mHighTextView;
-    @BindView(R.id.legend_mid_text) TextView mMidTextView;
-    @BindView(R.id.legend_low_text) TextView mLowTextView;
-    @BindView(R.id.legend_high_color) View mHighColorView;
-    @BindView(R.id.legend_mid_color) View mMidColorView;
-    @BindView(R.id.legend_low_color) View mLowColorView;
-    @BindView(R.id.next_button_icon) ImageView mNextIcon;
+    @BindView(R.id.legend_high_text)
+    TextView mHighTextView;
+    @BindView(R.id.legend_mid_text)
+    TextView mMidTextView;
+    @BindView(R.id.legend_low_text)
+    TextView mLowTextView;
+    @BindView(R.id.legend_high_color)
+    View mHighColorView;
+    @BindView(R.id.legend_mid_color)
+    View mMidColorView;
+    @BindView(R.id.legend_low_color)
+    View mLowColorView;
+    @BindView(R.id.next_button_icon)
+    ImageView mNextIcon;
 
-    @BindView(R.id.answers_recycler) RecyclerView mAnswersRecycler;
-    @BindView(R.id.answers_container) LinearLayout mAnswersContainer;
+    @BindView(R.id.answers_recycler)
+    RecyclerView mAnswersRecycler;
+    @BindView(R.id.answers_container)
+    LinearLayout mAnswersContainer;
 
     private Gameplay gameplay;
     boolean showingAnswers = false;
@@ -213,6 +226,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
 
     public interface InteractionListener {
         void onCloseTriggered();
+
         void onSeriesDone(int score, int outOf);
     }
 }
