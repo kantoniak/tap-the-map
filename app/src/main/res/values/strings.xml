@@ -31,8 +31,8 @@
     <string name="ok">OK</string>
     <string name="about_using_markers">To play you need to print out marker image and put it on the table. You can also display it on another device. Download marker from tapthemap.stat.gov.pl</string>
 
-    <!-- No connection screen-->
-    <string name="no_connection_info">What a pity! :( There is no internet connection</string>
+    <!-- No connection activity -->
+    <string name="no_connection_info">We need internet access to get question data.</string>
 
     <!-- Marker scanner -->
     <string name="scan_marker_to_start">Scan marker to start</string>

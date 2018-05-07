@@ -108,8 +108,8 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
             Question question = gameplay.getCurrentQuestion();
             showQuestion(question);
         } catch (Exception e) {
-            Intent myIntent = new Intent(getActivity(), NoConnectionActivity.class);
-            getActivity().startActivity(myIntent);
+            getActivity().startActivity(new Intent(getActivity(), NoConnectionActivity.class));
+            getActivity().finish();
         }
     }
 

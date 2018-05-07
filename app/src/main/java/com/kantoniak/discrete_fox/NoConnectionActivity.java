@@ -1,10 +1,11 @@
 package com.kantoniak.discrete_fox;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class NoConnectionActivity extends AppCompatActivity {
 
@@ -15,9 +16,13 @@ public class NoConnectionActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.button_go_back)
+    public void onClickBack(View view) {
+        onBackPressed();
+    }
+
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, MainMenuActivity.class));
         finish();
     }
 }
