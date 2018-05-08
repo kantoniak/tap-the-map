@@ -5,7 +5,7 @@
     "baseUnit": "€",
     "category": "ECONOMY",
     "localized_text": {
-      "pl": "Jakie PKB jest w danym kraju?",
+      "pl": "Jakie jest PKB w danym kraju?",
       "en": "What is GDP?"
     }
   },
@@ -26,7 +26,7 @@
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaki jest wskaźnik stopy bezrobocia w danym kraju?",
-      "en": "What is the unemployment rate in the country?"
+      "en": "What is the unemployment rate?"
     }
   },
   {
@@ -75,7 +75,7 @@
     "baseUnit": "€",
     "category": "ECONOMY",
     "localized_text": {
-      "pl": "Jakie PKB per capita jest w danym kraju?",
+      "pl": "Jakie jest PKB per capita w danym kraju?",
       "en": "What is GDP per capita?"
     }
   },
@@ -86,7 +86,7 @@
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaka jest powierzchnia danego kraju?",
-      "en": "What is the area?"
+      "en": "What is the area of the given country?"
     }
   },
   {
@@ -106,7 +106,7 @@
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaki jest udział populacji danego kraju w populacji UE?",
-      "en": "What is the share of the EU population is in the given country?"
+      "en": "What is the share of the population of a given country in the EU population?"
     }
   },
   {
@@ -116,7 +116,7 @@
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaki jest współczynnik dzietności w danym kraju?",
-      "en": "What is fertility rate?"
+      "en": "What is the fertility rate?"
     }
   },
   {
@@ -145,7 +145,7 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest samoocena stanu zdrowia? Zły stan",
+      "pl": "Jaki jest udział osób, których samoocena ogólnego stanu zdrowia jest zła",
       "en": "What is the share of people whose self-evaluated general health condition is bad?"
     }
   },
@@ -155,7 +155,7 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest samoocena stanu zdrowia? Dobry stan",
+      "pl": "Jaki jest udział osób, których samoocena ogólnego stanu zdrowia jest dobra?",
       "en": "What is the share of people whose self-evaluated general health condition is good?"
     }
   },
@@ -176,7 +176,7 @@
     "category": "AGRICULTURE",
     "localized_text": {
       "pl": "Jaki jest udział produkcji i upraw ekologicznych w powierzchni upraw w ogóle?",
-      "en": "What is the share of the organic farming?"
+      "en": "What is the share of organic production and farming in the total crop area?"
     }
   },
   {
@@ -185,8 +185,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest częstotliwość uczestnictwa w zawodach sportowych w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy",
-      "en": "Frequency of participation in sport activities in the last 12 months"
+      "pl": "Jaka jest częstotliwość uczestnictwa w zawodach sportowych w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
+      "en": "What is the frequency of participation in sports competitions in the last 12 months (at least 4 times)?"
     }
   },
   {
@@ -195,8 +195,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest częstotliwość uczestnictwa w zajęciach kulturalnych (KINO) - w ciągu ostatnich 12 miesięcy? Co najmniej 4 razy",
-      "en": "Frequency of participation in cultural(cinema) activities in the last 12 months"
+      "pl": "Jaka jest częstotliwość wyjść do kina dla jednej osoby w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
+      "en": "What is the frequency of going to the cinema for one person in the last 12 months (at least 4 times)?"
     }
   },
   {
@@ -205,8 +205,8 @@
     "baseUnit": "%",
     "category": "SCIENCE",
     "localized_text": {
-      "pl": "Jaki jest współczynnik osób dokonujących zakupy internetowe? W ciągu ostatnich 3 miesięcy",
-      "en": "Internet purchases by individuals"
+      "pl": "Jaki jest współczynnik osób dokonujących zakupy internetowe w ciągu ostatnich 3 miesięcy?",
+      "en": "What is the ratio of people shopping online in the last 3 months?"
     }
   },
   {
@@ -215,8 +215,8 @@
     "baseUnit": "%",
     "category": "SCIENCE",
     "localized_text": {
-      "pl": "Jaki jest współczynnik osób korzystających z sieci społecznościowych? W ciągu ostatnich 3 miesięcy",
-      "en": "Individuals - social network activities"
+      "pl": "Jaki jest współczynnik osób korzystających z sieci społecznościowych w ciągu ostatnich 3 miesięcy?",
+      "en": "What is the ratio of people using social networks in the last 3 months?"
     }
   },
   {
@@ -225,8 +225,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaki jest współczynnik osób wykonujący cotygodniowy wysiłek fizyczny? (min. 150min)",
-      "en": "Time spent on health-enhancing (non-work-related) aerobic physical activity"
+      "pl": "Jaki jest współczynnik osób wykonujących cotygodniowy wysiłek fizyczny (min. 150min)?",
+      "en": "What is the ratio of people performing a weekly physical effort (min. 150min)?"
     }
   }
 ]
