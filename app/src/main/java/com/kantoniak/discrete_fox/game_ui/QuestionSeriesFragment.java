@@ -36,7 +36,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
+/**
+ * Class responsible for displaying the question series fragment.
+ */
 public class QuestionSeriesFragment extends Fragment implements View.OnTouchListener {
 
     private InteractionListener mListener;
@@ -85,6 +87,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         // Required empty public constructor
     }
 
+    /**
+     * Initialize.
+     */
     public void init(MapRenderer renderer, ViewMatrixOverrideCamera camera, List<Question> questionList) {
         this.renderer = renderer;
         this.map = renderer.getMap();
@@ -92,6 +97,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         this.questionList = questionList;
     }
 
+    /**
+     * When create view.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,6 +112,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         return view;
     }
 
+    /**
+     * Setup answers recycler.
+     */
     public void setupAnswersRecycler() {
         mAnswersRecycler.setHasFixedSize(true);
         mAnswersRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -112,6 +123,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mAnswersRecycler.setAdapter(answersAdapter);
     }
 
+    /**
+     * Start game.
+     */
     public void startGame() {
         showingAnswers = false;
         map.setVisible(true);
@@ -127,6 +141,11 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         }
     }
 
+    /**
+     * Show question.
+     *
+     * @param question Question to show
+     */
     private void showQuestion(Question question) {
         showingAnswers = false;
         map.reset();
@@ -150,21 +169,33 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mLowColorView.setBackgroundColor(minColor);
     }
 
+    /**
+     * Button close.
+     */
     @OnClick(R.id.button_close)
     public void buttonClose() {
         mListener.onCloseTriggered();
     }
 
+    /**
+     * Zoomed in.
+     */
     @OnClick(R.id.button_zoom_in)
     public void zoomIn() {
         camera.zoomIn();
     }
 
+    /**
+     * Zoomed out.
+     */
     @OnClick(R.id.button_zoom_out)
     public void zoomOut() {
         camera.zoomOut();
     }
 
+    /**
+     * When next button clicked.
+     */
     @OnClick(R.id.next_button)
     public void onNextButtonClick(View view) {
         if (showingAnswers) {
@@ -200,6 +231,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         }
     }
 
+    /**
+     * When touched.
+     */
     @SuppressLint("ClickableViewAccessibility")
     public boolean onTouch(View view, MotionEvent event) {
         if (!showingAnswers) {
@@ -208,6 +242,11 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         return false;
     }
 
+    /**
+     * When attached.
+     *
+     * @param context Context of the application
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -218,15 +257,30 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         }
     }
 
+    /**
+     * When detached.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    /**
+     * Interaction listener.
+     */
     public interface InteractionListener {
+        /**
+         * When close triggered.
+         */
         void onCloseTriggered();
 
+        /**
+         * When series done.
+         *
+         * @param score Result
+         * @param outOf Maximum result
+         */
         void onSeriesDone(int score, int outOf);
     }
 }

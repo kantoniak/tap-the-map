@@ -13,6 +13,9 @@ import com.kantoniak.discrete_fox.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Class responsible for displaying about marker fragment.
+ */
 public class AboutMarkerFragment extends Fragment {
 
     private InteractionListener mListener;
@@ -21,6 +24,9 @@ public class AboutMarkerFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * When create view.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,11 +35,19 @@ public class AboutMarkerFragment extends Fragment {
         return view;
     }
 
+    /**
+     * When OK button clicked.
+     */
     @OnClick(R.id.button_ok)
     public void onOkButtonClick(View view) {
         mListener.onAboutRead();
     }
 
+    /**
+     * When attached.
+     *
+     * @param context Context of the application
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -44,13 +58,22 @@ public class AboutMarkerFragment extends Fragment {
         }
     }
 
+    /**
+     * When detached.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    /**
+     * Interaction listener.
+     */
     public interface InteractionListener {
+        /**
+         * When about read.
+         */
         void onAboutRead();
     }
 }

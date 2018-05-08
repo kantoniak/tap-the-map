@@ -33,8 +33,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Class responsible for displaying the loading fragment.
+ */
 public class LoadingFragment extends Fragment {
 
+    /**
+     * Class responsible for loading objects.
+     */
     @SuppressLint("StaticFieldLeak")
     private class LoadObjectsTask extends AsyncTask<Void, Integer, List<LoadObjectsTask.LoadedForCountry>> {
 
@@ -59,6 +65,9 @@ public class LoadingFragment extends Fragment {
             this.countriesToLoad = new HashSet<>(countriesToLoad);
         }
 
+        /**
+         * Before task execution.
+         */
         @Override
         protected void onPreExecute() {
             mDescTextView.setText(R.string.loading_objects);
@@ -66,6 +75,12 @@ public class LoadingFragment extends Fragment {
             mProgressBar.setMax(countriesToLoad.size());
         }
 
+        /**
+         * Actual task that is executed in the background.
+         *
+         * @param params Parameters of the task
+         * @return Result of the task
+         */
         protected List<LoadObjectsTask.LoadedForCountry> doInBackground(Void... params) {
             List<LoadObjectsTask.LoadedForCountry> result = new LinkedList<>();
 
@@ -83,10 +98,20 @@ public class LoadingFragment extends Fragment {
             return result;
         }
 
+        /**
+         * Update progress.
+         *
+         * @param progress Progress
+         */
         protected void onProgressUpdate(Integer... progress) {
             mProgressBar.setProgress(progress[0]);
         }
 
+        /**
+         * After task execution.
+         *
+         * @param loaded Loaded results
+         */
         protected void onPostExecute(List<LoadObjectsTask.LoadedForCountry> loaded) {
             loaded.forEach(result -> {
                 CountryInstance countryInstance = new CountryInstance(result.country);
@@ -99,23 +124,35 @@ public class LoadingFragment extends Fragment {
         }
     }
 
+    /**
+     * Class responsible for loading questions.
+     */
     @SuppressLint("StaticFieldLeak")
     private class LoadQuestionsTask extends AsyncTask<Void, Void, List<Question>> {
         private List<Question> mQuestionList;
 
         /**
-         * @param questionList
+         * @param questionList List of questions
          */
         LoadQuestionsTask(List<Question> questionList) {
             this.mQuestionList = questionList;
         }
 
+        /**
+         * Before task execution.
+         */
         @Override
         protected void onPreExecute() {
             mDescTextView.setText(R.string.loading_questions);
             mProgressBar.setIndeterminate(true);
         }
 
+        /**
+         * Actual task that is executed in the background.
+         *
+         * @param params Parameters of the task
+         * @return Result of the task
+         */
         protected List<Question> doInBackground(Void... params) {
             QuestionChest qc = new QuestionChest(getContext(), Gameplay.Settings.COUNTRIES_PER_QUESTION, Gameplay.Settings.QUESTIONS_PER_SERIES);
             ArrayList<Question> questions = new ArrayList<>();
@@ -125,6 +162,11 @@ public class LoadingFragment extends Fragment {
             return questions;
         }
 
+        /**
+         * After task execution.
+         *
+         * @param loaded Loaded results
+         */
         protected void onPostExecute(List<Question> loaded) {
             mQuestionList.addAll(loaded);
             mListener.onLoaded();
@@ -144,11 +186,17 @@ public class LoadingFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * Initialize.
+     */
     public void init(MapRenderer renderer, List<Question> questionList) {
         this.loadingTask = new LoadObjectsTask(renderer, Gameplay.Settings.ENABLED_COUNTRIES);
         this.questionsTask = new LoadQuestionsTask(questionList);
     }
 
+    /**
+     * When create view.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -158,6 +206,11 @@ public class LoadingFragment extends Fragment {
         return view;
     }
 
+    /**
+     * When attached.
+     *
+     * @param context Context of the application
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -168,13 +221,22 @@ public class LoadingFragment extends Fragment {
         }
     }
 
+    /**
+     * When detached.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    /**
+     * Interaction listener.
+     */
     public interface InteractionListener {
+        /**
+         * When loaded.
+         */
         void onLoaded();
     }
 }

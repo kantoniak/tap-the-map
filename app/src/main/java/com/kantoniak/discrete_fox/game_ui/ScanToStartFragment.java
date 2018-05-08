@@ -15,6 +15,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.easyar.Target;
 
+/**
+ * Class that is responsible for displaying the fragment about scan.
+ */
 public class ScanToStartFragment extends Fragment implements EasyARController.OnScanListener {
 
     private EasyARController easyARController;
@@ -24,10 +27,18 @@ public class ScanToStartFragment extends Fragment implements EasyARController.On
         // Required empty public constructor
     }
 
+    /**
+     * Initialize.
+     *
+     * @param easyARController Easy AR controller
+     */
     public void init(EasyARController easyARController) {
         this.easyARController = easyARController;
     }
 
+    /**
+     * When create view.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,17 +50,28 @@ public class ScanToStartFragment extends Fragment implements EasyARController.On
         return view;
     }
 
+    /**
+     * When help button clicked.
+     */
     @OnClick
-    public void onHelpButtionClick(View view) {
+    public void onHelpButtonClick(View view) {
         mListener.onHelpClick();
     }
 
+    /**
+     * When tracked.
+     */
     @Override
     public void onTracked(Target target) {
         easyARController.setOnScanListener(null);
         mListener.onScanned();
     }
 
+    /**
+     * When attached.
+     *
+     * @param context Context of the application
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -60,15 +82,27 @@ public class ScanToStartFragment extends Fragment implements EasyARController.On
         }
     }
 
+    /**
+     * When detached.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    /**
+     * Interaction listener.
+     */
     public interface InteractionListener {
+        /**
+         * When scanned.
+         */
         void onScanned();
 
+        /**
+         * When help clicked.
+         */
         void onHelpClick();
     }
 }

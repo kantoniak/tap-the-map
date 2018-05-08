@@ -17,6 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Class responsible for displaying the rules board fragment.
+ */
 public class RulesBoardFragment extends Fragment {
 
     private InteractionListener mListener;
@@ -30,6 +33,9 @@ public class RulesBoardFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * When create view.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,11 +48,19 @@ public class RulesBoardFragment extends Fragment {
         return view;
     }
 
+    /**
+     * When OK button clicked.
+     */
     @OnClick(R.id.button_ok)
     public void onOkButtonClick(View view) {
         mListener.onRulesRead(!mDontShowAgainCheckbox.isChecked());
     }
 
+    /**
+     * When attached.
+     *
+     * @param context Context of the application
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -57,13 +71,24 @@ public class RulesBoardFragment extends Fragment {
         }
     }
 
+    /**
+     * When detached.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    /**
+     * Interaction listener.
+     */
     public interface InteractionListener {
+        /**
+         * When rules read.
+         *
+         * @param showRulesAgain Whether to show rules
+         */
         void onRulesRead(boolean showRulesAgain);
     }
 }
