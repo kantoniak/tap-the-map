@@ -165,6 +165,12 @@ public class QuestionChest {
         return null;
     }
 
+    /**
+     * Converts the input stream into string.
+     *
+     * @param inputStream Input stream to convert
+     * @return String converted from input stream
+     */
     private String inputStreamToString(InputStream inputStream) {
         try {
             byte[] bytes = new byte[inputStream.available()];
@@ -178,6 +184,9 @@ public class QuestionChest {
 
     /**
      * Reads questions and metainfo about them. Fills query, category, multiplier and baseUnit array lists.
+     *
+     * @param context Context of the application
+     * @return List of QuestionObjects
      */
     private List<QuestionObject> importQuestions(Context context) {
         List<QuestionObject> res = null;

@@ -65,6 +65,7 @@ public class Map {
 
     /**
      * Add country instance to the map.
+     *
      * @param countryInstance Country instance that will be added
      */
     public void addCountryInstance(CountryInstance countryInstance) {
@@ -73,6 +74,7 @@ public class Map {
 
     /**
      * Get hashmap of the countries.
+     *
      * @return Hashmap of the countries
      */
     public HashMap<Country, CountryInstance> getCountries() {
@@ -88,6 +90,7 @@ public class Map {
 
     /**
      * Set the visibility state.
+     *
      * @param visible New visibility state
      */
     public void setVisible(boolean visible) {
@@ -96,6 +99,7 @@ public class Map {
 
     /**
      * Get country.
+     *
      * @param country Which country
      * @return Country instance of the given country
      */
@@ -106,6 +110,7 @@ public class Map {
 
     /**
      * Enable country.
+     *
      * @param country Which country
      */
     public void enableCountry(Country country) {
@@ -118,6 +123,7 @@ public class Map {
 
     /**
      * Set colors.
+     *
      * @param minColor Minimum color
      * @param maxColor Maximum color
      */
@@ -127,6 +133,7 @@ public class Map {
 
     /**
      * Get center of the country.
+     *
      * @param country Which country
      * @return Position of the center
      */

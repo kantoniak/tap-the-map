@@ -118,6 +118,7 @@ public class CountryInstance {
 
     /**
      * Check whether object3D belongs to country.
+     *
      * @param object Object3D
      * @return True if it belongs
      */
@@ -127,6 +128,7 @@ public class CountryInstance {
 
     /**
      * Set the height of the country.
+     *
      * @param height New height
      */
     public void setHeight(int height) {
@@ -187,6 +189,7 @@ public class CountryInstance {
 
     /**
      * Get the base color.
+     *
      * @param topColor Top color
      * @return Base color
      */
@@ -196,6 +199,7 @@ public class CountryInstance {
 
     /**
      * Get current height of the country.
+     *
      * @return Height of the country
      */
     public int getHeight() {
@@ -204,6 +208,7 @@ public class CountryInstance {
 
     /**
      * Get country.
+     *
      * @return Country
      */
     public Country getCountry() {
@@ -212,6 +217,7 @@ public class CountryInstance {
 
     /**
      * Disable/enable the country.
+     *
      * @param disabled New disabled state
      */
     public void setDisabled(boolean disabled) {
@@ -221,6 +227,7 @@ public class CountryInstance {
 
     /**
      * Set colors for countries.
+     *
      * @param minColor Minimum color
      * @param maxColor Maximum color
      */
@@ -232,6 +239,7 @@ public class CountryInstance {
 
     /**
      * Set visibility of the country.
+     *
      * @param visible New visible value
      */
     public void setVisible(boolean visible) {

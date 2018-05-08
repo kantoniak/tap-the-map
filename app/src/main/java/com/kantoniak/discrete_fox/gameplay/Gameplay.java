@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Class responsible for gameplay,
+ */
 public class Gameplay {
 
     public static class Settings {
@@ -45,10 +48,21 @@ public class Gameplay {
         mquestions = questions;
     }
 
+    /**
+     * Acquire next question to display.
+     *
+     * @param context Context of the application
+     * @return Next question
+     */
     public Question finishQuestion(Context context) {
         return nextQuestion(context);
     }
 
+    /**
+     * Update score.
+     *
+     * @param map Current map
+     */
     public void updateScore(Map map) {
         // Gather decisions
         HashMap<Country, CountryInstance> mapCountries = map.getCountries();
@@ -62,6 +76,12 @@ public class Gameplay {
         scoreTotal += score;
     }
 
+    /**
+     * Get next question, or return null on the last one.
+     *
+     * @param context Context of the application
+     * @return Next question or null
+     */
     private Question nextQuestion(Context context) {
         currentQuestion++;
         if (mquestions.size() == currentQuestion) {
@@ -72,10 +92,21 @@ public class Gameplay {
         return mquestions.get(currentQuestion);
     }
 
+    /**
+     * Get result.
+     *
+     * @return Result
+     */
     public int getResult() {
         return scoreTotal;
     }
 
+    /**
+     * Calculate score.
+     *
+     * @param map Current map
+     * @return Current score
+     */
     private Integer calculateScore(Map map) {
         int score = 0;
         Question question = getCurrentQuestion();
@@ -96,14 +127,29 @@ public class Gameplay {
         return score;
     }
 
+    /**
+     * Get current question.
+     *
+     * @return Question
+     */
     public Question getCurrentQuestion() {
         return mquestions.get(currentQuestion);
     }
 
+    /**
+     * Get maximum result.
+     *
+     * @return Maximum result
+     */
     public int getMaxResult() {
         return maxScore;
     }
 
+    /**
+     * Get current question index.
+     *
+     * @return Index of current question
+     */
     public int getCurrentQuestionInt() {
         return currentQuestion;
     }

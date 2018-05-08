@@ -11,7 +11,8 @@ public interface RenderingDelegate {
 
     /**
      * When surface has changed.
-     * @param width width
+     *
+     * @param width  width
      * @param height height
      */
     void onSurfaceChanged(int width, int height);

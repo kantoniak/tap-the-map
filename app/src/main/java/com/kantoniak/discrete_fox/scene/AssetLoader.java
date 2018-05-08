@@ -28,6 +28,7 @@ public class AssetLoader {
 
     /**
      * Loads 3D object.
+     *
      * @param filename Name of the file with object.
      * @return Loaded 3D object
      */
@@ -46,6 +47,7 @@ public class AssetLoader {
 
     /**
      * Loads texture.
+     *
      * @param drawableName Name of the texture
      * @return Loaded texture
      */
@@ -56,6 +58,7 @@ public class AssetLoader {
 
     /**
      * Load country base.
+     *
      * @param country Country for which the base will be loaded
      * @return Loaded object for country base
      */
@@ -65,6 +68,7 @@ public class AssetLoader {
 
     /**
      * Load country top.
+     *
      * @param country Country for which the top will be loaded
      * @return Loaded object for country top
      */
@@ -74,6 +78,7 @@ public class AssetLoader {
 
     /**
      * Load country name texture.
+     *
      * @param country Country for which the name texture will be loaded
      * @return Loaded texture for country name
      */
@@ -83,6 +88,7 @@ public class AssetLoader {
 
     /**
      * Get resource string for country base object.
+     *
      * @param country Country for which string for the base we need
      * @return Resource string for country base
      */
@@ -92,6 +98,7 @@ public class AssetLoader {
 
     /**
      * Get resource string for country top object.
+     *
      * @param country Country for which string for the top we need
      * @return Resource string for country top
      */
@@ -101,6 +108,7 @@ public class AssetLoader {
 
     /**
      * Get resource string for drawable name.
+     *
      * @param country Country for which string for the drawable name we need
      * @return Resource string for drawable name
      */

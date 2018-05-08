@@ -45,6 +45,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     /**
      * Set rendering delegate.
+     *
      * @param renderingDelegate Rendering delegate
      */
     public void setRenderingDelegate(RenderingDelegate renderingDelegate) {
@@ -102,6 +103,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     /**
      * Add country instance.
+     *
      * @param countryInstance Which country instance
      */
     public void addCountryInstance(CountryInstance countryInstance) {
@@ -151,6 +153,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     /**
      * When object picked.
+     *
      * @param object Which object
      */
     @Override
@@ -172,6 +175,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     /**
      * Set camera.
+     *
      * @param camera Which camera
      */
     public void setCamera(Camera camera) {
@@ -180,6 +184,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     /**
      * Get loader.
+     *
      * @return Asset loader
      */
     public AssetLoader getLoader() {
@@ -188,6 +193,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     /**
      * Get map.
+     *
      * @return Map
      */
     public Map getMap() {
@@ -196,6 +202,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     /**
      * Show map.
+     *
      * @param show Whether to show or not
      */
     public void showMap(boolean show) {
