@@ -4,6 +4,9 @@ import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.scene.ASceneFrameCallback;
 
+/**
+ * Class responsible for background update and matrices callback.
+ */
 public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
 
     private final EasyARController arController;
@@ -14,11 +17,19 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
         this.camera = camera;
     }
 
+    /**
+     * Call pre frame.
+     *
+     * @return True
+     */
     @Override
     public boolean callPreFrame() {
         return true;
     }
 
+    /**
+     * When pre frame.
+     */
     @Override
     public void onPreFrame(long sceneTime, double deltaTime) {
         synchronized (arController) {
@@ -45,11 +56,17 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
         }
     }
 
+    /**
+     * When pre draw.
+     */
     @Override
     public void onPreDraw(long sceneTime, double deltaTime) {
 
     }
 
+    /**
+     * When post frame.
+     */
     @Override
     public void onPostFrame(long sceneTime, double deltaTime) {
 

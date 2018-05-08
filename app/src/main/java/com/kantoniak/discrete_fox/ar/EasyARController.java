@@ -25,6 +25,9 @@ import cn.easyar.Vec4I;
 
 import static com.kantoniak.discrete_fox.ar.EasyARUtils.TAG_AR;
 
+/**
+ * Class responsible for east AR controller.
+ */
 public class EasyARController {
 
     private final static String TARGETS_FILE = "targets.json";
@@ -48,6 +51,11 @@ public class EasyARController {
         trackers = new ArrayList<>();
     }
 
+    /**
+     * Load all from json file.
+     *
+     * @param tracker Image tracker
+     */
     @SuppressLint("DefaultLocale")
     private void loadAllFromJsonFile(ImageTracker tracker) {
         for (ImageTarget target : ImageTarget.setupAll(TARGETS_FILE, StorageType.Assets)) {
@@ -63,6 +71,11 @@ public class EasyARController {
         }
     }
 
+    /**
+     * Initialize.
+     *
+     * @return True if succeeded
+     */
     public boolean initialize() {
         camera = new CameraDevice();
         streamer = new CameraFrameStreamer();
@@ -82,6 +95,9 @@ public class EasyARController {
         return true;
     }
 
+    /**
+     * Dispose.
+     */
     public void dispose() {
         for (ImageTracker tracker : trackers) {
             tracker.dispose();
@@ -101,6 +117,11 @@ public class EasyARController {
         }
     }
 
+    /**
+     * Start.
+     *
+     * @return True if succeeded
+     */
     public boolean start() {
         boolean status = (camera != null) && camera.start();
         status &= (streamer != null) && streamer.start();
@@ -116,6 +137,9 @@ public class EasyARController {
         return status;
     }
 
+    /**
+     * Stop.
+     */
     public void stop() {
         for (ImageTracker tracker : trackers) {
             tracker.stop();
@@ -128,6 +152,9 @@ public class EasyARController {
         }
     }
 
+    /**
+     * Initialize GL.
+     */
     public void initGL() {
         if (videobg_renderer != null) {
             videobg_renderer.dispose();
@@ -135,11 +162,20 @@ public class EasyARController {
         videobg_renderer = new Renderer();
     }
 
+    /**
+     * Resize GL.
+     *
+     * @param width  Width
+     * @param height Height
+     */
     public void resizeGL(int width, int height) {
         view_size = new Vec2I(width, height);
         viewport_changed = true;
     }
 
+    /**
+     * Update viewport.
+     */
     private void updateViewport() {
         CameraCalibration calib = camera != null ? camera.cameraCalibration() : null;
         int rotation = calib != null ? calib.rotation() : 0;
@@ -164,6 +200,9 @@ public class EasyARController {
         }
     }
 
+    /**
+     * Render.
+     */
     public void render() {
 
         if (videobg_renderer != null) {
@@ -207,20 +246,38 @@ public class EasyARController {
         }
     }
 
+    /**
+     * Get projection matrix.
+     *
+     * @return Projection matrix
+     */
     public Matrix44F getProjectionMatrix() {
         return projectionMatrix;
     }
 
+    /**
+     * Get view matrix.
+     *
+     * @return View matrix
+     */
     public Matrix44F getViewMatrix() {
         return viewMatrix;
     }
 
+    /**
+     * On scan listener interface.
+     */
     public interface OnScanListener {
+        /**
+         * When tracked.
+         */
         void onTracked(Target target);
     }
 
+    /**
+     * Set on scan listener.
+     */
     public void setOnScanListener(OnScanListener listener) {
         this.mListener = listener;
     }
 }
-
