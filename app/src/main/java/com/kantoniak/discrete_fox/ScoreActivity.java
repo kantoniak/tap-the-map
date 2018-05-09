@@ -55,7 +55,7 @@ public class ScoreActivity extends AppCompatActivity {
             mScoreImage.setImageResource(R.drawable.ic_trophy);
         } else if ((result * 1.0) / maxResult < 0.2f) {
             textToShow = R.string.score_needs_improvement;
-            mScoreImage.setVisibility(View.GONE);
+            mScoreImage.setImageResource(R.drawable.ic_smile);
         } else {
             textToShow = R.string.score_great_job;
             mScoreImage.setImageResource(R.drawable.ic_good_job);
