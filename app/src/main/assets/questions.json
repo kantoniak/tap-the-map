@@ -115,7 +115,7 @@
     "baseUnit": "D",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaki jest współczynnik dzietności w danym kraju?",
+      "pl": "Jaki jest współczynnik dzietności?",
       "en": "What is the fertility rate?"
     }
   },
@@ -165,7 +165,7 @@
     "baseUnit": "g",
     "category": "ENVIRONMENT",
     "localized_text": {
-      "pl": "Ile jest wytworzonych odpadów poddanych recyklingowi na osobę w danym kraju?",
+      "pl": "Ile jest wytworzonych odpadów poddanych recyklingowi na osobę?",
       "en": "What is the share of recycled wasted per person?"
     }
   },
