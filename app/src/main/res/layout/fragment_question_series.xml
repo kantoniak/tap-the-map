@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/biggerPadding"
             android:layout_marginStart="@dimen/biggerPadding"
+            android:layout_marginEnd="@dimen/biggerPadding"
             android:textAlignment="center"
             android:textColor="@color/textColorOnPrimary"
             android:textSize="@dimen/questionTextSize"
