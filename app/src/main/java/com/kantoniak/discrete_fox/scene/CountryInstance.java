@@ -38,6 +38,10 @@ public class CountryInstance {
     private boolean disabled;
     private boolean visible = true;
 
+    // Position
+    private Vector3 worldOffset;
+    private Vector2 countryMiddle;
+
     // Colors
     private int minColor = COLOR_DEFAULT;
     private int maxColor = COLOR_DEFAULT;
@@ -87,11 +91,9 @@ public class CountryInstance {
      * Initialize positions.
      */
     public void initPositions(Vector3 worldOffset, Vector2 countryMiddle) {
-        countryBase.setPosition(worldOffset);
-        countryTop.setPosition(worldOffset);
-
-        countryName.setX(countryMiddle.getX() + worldOffset.x);
-        countryName.setZ(-countryMiddle.getY() + worldOffset.z);
+        this.worldOffset = worldOffset;
+        this.countryMiddle = countryMiddle;
+        updateOffsets();
     }
 
     /**
@@ -148,6 +150,15 @@ public class CountryInstance {
         }
         setHeight(++height);
         updateVisuals();
+    }
+
+    private void updateOffsets() {
+        countryBase.setX(worldOffset.x);
+        countryBase.setZ(worldOffset.z);
+        countryTop.setX(worldOffset.x);
+        countryTop.setZ(worldOffset.z);
+        countryName.setX(countryMiddle.getX() + worldOffset.x);
+        countryName.setZ(-countryMiddle.getY() + worldOffset.z);
     }
 
     /**
@@ -245,5 +256,10 @@ public class CountryInstance {
     public void setVisible(boolean visible) {
         this.visible = visible;
         updateVisuals();
+    }
+
+    public void setWorldOffset(Vector3 worldOffset) {
+        this.worldOffset = worldOffset;
+        updateOffsets();
     }
 }

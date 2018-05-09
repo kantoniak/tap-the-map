@@ -17,6 +17,7 @@ import com.kantoniak.discrete_fox.game_ui.QuestionSeriesFragment;
 import com.kantoniak.discrete_fox.game_ui.RulesBoardFragment;
 import com.kantoniak.discrete_fox.game_ui.ScanToStartFragment;
 import com.kantoniak.discrete_fox.gameplay.Question;
+import com.kantoniak.discrete_fox.scene.GameSurfaceOnTouchLister;
 import com.kantoniak.discrete_fox.scene.GameSurfaceView;
 import com.kantoniak.discrete_fox.scene.Map;
 import com.kantoniak.discrete_fox.scene.MapRenderer;
@@ -38,8 +39,6 @@ public class GameActivity extends AppCompatActivity
     public static final String MESSAGE_SCORE = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE";
     public static final String MESSAGE_SCORE_OUT_OF = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_SCORE_OUT_OF";
     public static final String MESSAGE_IS_HIGHSCORE = "com.kantoniak.discrete_fox.GameActivity.MESSAGE_IS_HIGHSCORE";
-
-    private View.OnTouchListener currentTouchListener;
 
     @BindView(R.id.game_map_preview)
     GameSurfaceView gameMapPreview;
@@ -86,6 +85,8 @@ public class GameActivity extends AppCompatActivity
 
         UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, camera);
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
+
+        gameMapPreview.setOnTouchListener(new GameSurfaceOnTouchLister(this, renderer));
     }
 
     /**
@@ -95,7 +96,6 @@ public class GameActivity extends AppCompatActivity
         LoadingFragment loadingFragment = new LoadingFragment();
         loadingFragment.init(renderer, questionList);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, loadingFragment).commit();
-        this.currentTouchListener = null;
     }
 
     /**
@@ -104,7 +104,6 @@ public class GameActivity extends AppCompatActivity
     public void switchToRules() {
         RulesBoardFragment rulesBoardFragment = new RulesBoardFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, rulesBoardFragment).commit();
-        this.currentTouchListener = null;
     }
 
     /**
@@ -114,7 +113,6 @@ public class GameActivity extends AppCompatActivity
         ScanToStartFragment scanFragment = new ScanToStartFragment();
         scanFragment.init(arController);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, scanFragment).commit();
-        this.currentTouchListener = null;
     }
 
     /**
@@ -123,7 +121,6 @@ public class GameActivity extends AppCompatActivity
     public void switchToAboutMarker() {
         AboutMarkerFragment aboutFragment = new AboutMarkerFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, aboutFragment).commit();
-        this.currentTouchListener = null;
     }
 
     /**
@@ -132,17 +129,8 @@ public class GameActivity extends AppCompatActivity
     public void switchToQuestions() {
         QuestionSeriesFragment questionFragment = new QuestionSeriesFragment();
         questionFragment.init(renderer, camera, questionList);
-        this.currentTouchListener = questionFragment;
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, questionFragment).commit();
         renderer.showMap(true);
-    }
-
-    /**
-     * When touched.
-     */
-    @OnTouch(R.id.game_map_preview)
-    public boolean onTouch(View view, MotionEvent event) {
-        return currentTouchListener != null && currentTouchListener.onTouch(view, event);
     }
 
     /**

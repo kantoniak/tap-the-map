@@ -26,7 +26,8 @@ import javax.microedition.khronos.opengles.GL10;
 public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     private static final Vector2 MAP_SIZE = new Vector2(2.438f, 2.889f);
-    private static final Vector2 MAP_CORRECTION = new Vector2(-0.01f, -0.01f);
+    private static final Vector3 MAP_CORRECTION = new Vector3(-0.005f, 0, 0.005f);
+    public static final Vector3 MAP_MIDDLE = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
 
     private final Map map;
     private final AssetLoader loader;
@@ -84,7 +85,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         mapBase = new Plane();
         mapBase.setDoubleSided(true);
         mapBase.setScale(MAP_SIZE.getX(), 1, MAP_SIZE.getY());
-        mapBase.setPosition(MAP_CORRECTION.getX() * 0.5f, 0, -MAP_CORRECTION.getY() * 0.5f);
+        mapBase.setPosition(MAP_CORRECTION);
         mapBase.rotate(Vector3.Axis.X, +90);
         mapBase.setTransparent(true);
         getCurrentScene().addChild(mapBase);
@@ -107,9 +108,8 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
      * @param countryInstance Which country instance
      */
     public void addCountryInstance(CountryInstance countryInstance) {
-        Vector3 worldOffset = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
 
-        countryInstance.initPositions(worldOffset, map.getCountryMiddle(countryInstance.getCountry()));
+        countryInstance.initPositions(MAP_MIDDLE, map.getCountryMiddle(countryInstance.getCountry()));
         countryInstance.registerObject(getCurrentScene(), objectPicker);
         countryInstance.resetState();
         map.addCountryInstance(countryInstance);
@@ -146,7 +146,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
      */
     @Override
     public void onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (event.getActionMasked() == MotionEvent.ACTION_UP) {
             objectPicker.getObjectAt(event.getX(), event.getY());
         }
     }
@@ -208,5 +208,10 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     public void showMap(boolean show) {
         this.visible = show;
         updateVisibility();
+    }
+
+    public void setWorldOffset(Vector3 worldOffset) {
+        mapBase.setPosition(worldOffset.clone().add(MAP_MIDDLE.clone().multiply(-1.f)).add(MAP_CORRECTION));
+        map.getCountries().forEach((country, instance) -> instance.setWorldOffset(worldOffset));
     }
 }

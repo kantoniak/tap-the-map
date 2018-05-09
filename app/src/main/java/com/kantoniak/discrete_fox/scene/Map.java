@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.kantoniak.discrete_fox.Country;
 
 import org.rajawali3d.math.vector.Vector2;
+import org.rajawali3d.math.vector.Vector3;
 
 import java.util.Collections;
 import java.util.HashMap;
