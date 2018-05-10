@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.kantoniak.discrete_fox.scene.GameSurfaceView
+    <pl.gov.stat.tapthemap.scene.GameSurfaceView
         android:id="@+id/game_map_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

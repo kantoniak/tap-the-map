@@ -1,0 +1,79 @@
+package pl.gov.stat.tapthemap.game_ui;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import pl.gov.stat.tapthemap.R;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Class responsible for displaying about marker fragment.
+ */
+public class AboutMarkerFragment extends Fragment {
+
+    private InteractionListener mListener;
+
+    public AboutMarkerFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * When create view.
+     */
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_about_marker, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    /**
+     * When OK button clicked.
+     */
+    @OnClick(R.id.button_ok)
+    public void onOkButtonClick(View view) {
+        mListener.onAboutRead();
+    }
+
+    /**
+     * When attached.
+     *
+     * @param context Context of the application
+     */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof InteractionListener) {
+            mListener = (InteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement InteractionListener");
+        }
+    }
+
+    /**
+     * When detached.
+     */
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * Interaction listener.
+     */
+    public interface InteractionListener {
+        /**
+         * When about read.
+         */
+        void onAboutRead();
+    }
+}
