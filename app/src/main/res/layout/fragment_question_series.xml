@@ -83,6 +83,12 @@
             android:src="@drawable/ic_zoom_in_24dp" />
 
         <ImageView
+            android:id="@+id/button_reset"
+            style="@style/ZoomButton"
+            android:padding="6dp"
+            android:src="@drawable/ic_location" />
+
+        <ImageView
             android:id="@+id/button_zoom_out"
             style="@style/ZoomButton"
             android:src="@drawable/ic_zoom_out_24dp" />

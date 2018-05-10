@@ -34,7 +34,6 @@ public class GameSurfaceOnTouchLister implements View.OnTouchListener {
 
     private final MapRenderer mRenderer;
     private final ViewMatrixOverrideCamera mCamera;
-    private Vector3 worldOffset = MapRenderer.MAP_MIDDLE.clone();
 
     private final GestureDetector mTapDetector;
     private @Nullable
@@ -122,8 +121,7 @@ public class GameSurfaceOnTouchLister implements View.OnTouchListener {
 
                     final double cameraCoefficient = 0.0005d / mCamera.getZoom();
                     final Vector3 delta = new Vector3(dx, 0, dy).multiply(cameraCoefficient);
-                    worldOffset.add(delta);
-                    mRenderer.setWorldOffset(worldOffset);
+                    mRenderer.setWorldOffset(mRenderer.getWorldOffset().add(delta));
 
                     // Scaling
                     float scaleFactor = (float) (calculatePointersDistance() / initialScaleDistance);
@@ -139,8 +137,9 @@ public class GameSurfaceOnTouchLister implements View.OnTouchListener {
                     final double dx = x - touchFocalPoint.getX();
                     final double dy = y - touchFocalPoint.getY();
 
-                    worldOffset.add(new Vector3(dx, 0, dy).multiply(0.001f));
-                    mRenderer.setWorldOffset(worldOffset);
+                    final double cameraCoefficient = 0.0005d / mCamera.getZoom();
+                    final Vector3 delta = new Vector3(dx, 0, dy).multiply(cameraCoefficient);
+                    mRenderer.setWorldOffset(mRenderer.getWorldOffset().add(delta));
 
                     touchFocalPoint.setAll(x, y);
                 }

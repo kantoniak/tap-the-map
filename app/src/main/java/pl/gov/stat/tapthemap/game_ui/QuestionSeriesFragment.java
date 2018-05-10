@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.rajawali3d.math.vector.Vector3;
+
 import pl.gov.stat.tapthemap.Country;
 import pl.gov.stat.tapthemap.NoConnectionActivity;
 import pl.gov.stat.tapthemap.R;
@@ -183,6 +185,12 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     @OnClick(R.id.button_zoom_in)
     public void zoomIn() {
         camera.zoomIn();
+    }
+
+    @OnClick(R.id.button_reset)
+    public void resetMap() {
+        camera.setZoom(1.0f);
+        renderer.setWorldOffset(renderer.getDefaultWorldOffset());
     }
 
     /**

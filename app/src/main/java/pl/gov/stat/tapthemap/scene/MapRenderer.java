@@ -27,7 +27,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
 
     private static final Vector2 MAP_SIZE = new Vector2(2.438f, 2.889f);
     private static final Vector3 MAP_CORRECTION = new Vector3(-0.005f, 0, 0.005f);
-    public static final Vector3 MAP_MIDDLE = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
+    private static final Vector3 MAP_MIDDLE = new Vector3(-MapRenderer.MAP_SIZE.getX(), 0, MapRenderer.MAP_SIZE.getY()).multiply(0.5f);
 
     private final Map map;
     private final AssetLoader loader;
@@ -37,6 +37,8 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     private Plane mapBase;
 
     private boolean visible = true;
+
+    private Vector3 worldOffset = getDefaultWorldOffset();
 
     public MapRenderer(Context context, Map map) {
         super(context);
@@ -213,5 +215,14 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     public void setWorldOffset(Vector3 worldOffset) {
         mapBase.setPosition(worldOffset.clone().add(MAP_MIDDLE.clone().multiply(-1.f)).add(MAP_CORRECTION));
         map.getCountries().forEach((country, instance) -> instance.setWorldOffset(worldOffset));
+        this.worldOffset = worldOffset;
+    }
+
+    public Vector3 getWorldOffset() {
+        return worldOffset;
+    }
+
+    public Vector3 getDefaultWorldOffset() {
+        return MAP_MIDDLE.clone();
     }
 }
