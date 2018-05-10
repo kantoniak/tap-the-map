@@ -1,8 +1,12 @@
 package pl.gov.stat.tapthemap.ar;
 
+import org.rajawali3d.math.MathUtil;
 import org.rajawali3d.math.Matrix4;
+import org.rajawali3d.math.Quaternion;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.scene.ASceneFrameCallback;
+
+import pl.gov.stat.tapthemap.scene.MapRenderer;
 
 /**
  * Class responsible for background update and matrices callback.
@@ -10,10 +14,12 @@ import org.rajawali3d.scene.ASceneFrameCallback;
 public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
 
     private final EasyARController arController;
+    private final MapRenderer mRenderer;
     private final ViewMatrixOverrideCamera camera;
 
-    public UpdateBackgroundAndMatricesCallback(EasyARController arController, ViewMatrixOverrideCamera camera) {
+    public UpdateBackgroundAndMatricesCallback(EasyARController arController, MapRenderer renderer, ViewMatrixOverrideCamera camera) {
         this.arController = arController;
+        this.mRenderer = renderer;
         this.camera = camera;
     }
 
@@ -53,6 +59,17 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
             camera.setPosition(cameraPosition);
             camera.setRotation(viewMatrix);
             camera.setViewMatrixOverride(viewMatrix);
+
+            // Top 3x3 part of this 4x4 matrix is rotation.
+            double[] rotatorData = new Matrix4(arController.getViewMatrix().data).transpose().getDoubleValues();
+
+            // See the article about matrix decomposition (http://nghiaho.com/?page_id=846)
+            //double rotAroundTop = 180 + Math.toDegrees(Math.atan2(rotatorData[4], rotatorData[0]));
+            double rotAroundRight = Math.toDegrees(Math.atan2(rotatorData[9], rotatorData[10])) + 90;
+            //double rotAroundDepth = -Math.toDegrees(Math.atan2(rotatorData[8], Math.sqrt(rotatorData[4]*rotatorData[4] + rotatorData[0]*rotatorData[0])));
+
+            Quaternion testRot4 = new Quaternion().fromEuler(0, rotAroundRight, 0);
+            mRenderer.getMap().getCountries().forEach((country, instance) -> instance.setNamePlateRotation(testRot4));
         }
     }
 
@@ -70,5 +87,13 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
     @Override
     public void onPostFrame(long sceneTime, double deltaTime) {
 
+    }
+
+    private static String matrixToString(Matrix4 matrix) {
+        double[] data = matrix.getDoubleValues();
+        return "[" + data[0] + ", " + data[1] + ", " + data[2] + ", " + data[3] + "; "
+                + data[4] + ", " + data[5] + ", " + data[6] + ", " + data[7] + "; "
+                + data[8] + ", " + data[9] + ", " + data[10] + ", " + data[11] + "; "
+                + data[12] + ", " + data[13] + ", " + data[14] + ", " + data[15] + "]";
     }
 }

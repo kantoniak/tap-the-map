@@ -9,6 +9,9 @@ import org.rajawali3d.Object3D;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.materials.textures.TextureManager;
+import org.rajawali3d.math.Matrix;
+import org.rajawali3d.math.Matrix4;
+import org.rajawali3d.math.Quaternion;
 import org.rajawali3d.math.vector.Vector2;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.primitives.Plane;
@@ -261,5 +264,9 @@ public class CountryInstance {
     public void setWorldOffset(Vector3 worldOffset) {
         this.worldOffset = worldOffset;
         updateOffsets();
+    }
+
+    public void setNamePlateRotation(Quaternion rotation) {
+        countryName.setRotation(rotation);
     }
 }
