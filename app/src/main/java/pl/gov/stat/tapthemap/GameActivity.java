@@ -83,7 +83,7 @@ public class GameActivity extends AppCompatActivity
         UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, camera);
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
 
-        gameMapPreview.setOnTouchListener(new GameSurfaceOnTouchLister(this, renderer));
+        gameMapPreview.setOnTouchListener(new GameSurfaceOnTouchLister(this, renderer, camera));
     }
 
     /**

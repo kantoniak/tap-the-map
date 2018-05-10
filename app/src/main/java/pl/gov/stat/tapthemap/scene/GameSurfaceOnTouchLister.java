@@ -1,17 +1,29 @@
 package pl.gov.stat.tapthemap.scene;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import org.rajawali3d.math.vector.Vector2;
 import org.rajawali3d.math.vector.Vector3;
 
-import static android.view.MotionEvent.INVALID_POINTER_ID;
+import pl.gov.stat.tapthemap.ar.ViewMatrixOverrideCamera;
 
 public class GameSurfaceOnTouchLister implements View.OnTouchListener {
 
-    class GestureTap extends GestureDetector.SimpleOnGestureListener {
+    private class PointerData {
+        final int pointerId;
+        float lastTouchX;
+        float lastTouchY;
+
+        public PointerData(int pointerId) {
+            this.pointerId = pointerId;
+        }
+    }
+
+    private class GestureTap extends GestureDetector.SimpleOnGestureListener {
 
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
@@ -21,82 +33,163 @@ public class GameSurfaceOnTouchLister implements View.OnTouchListener {
     }
 
     private final MapRenderer mRenderer;
-
-    private int mActivePointerId = INVALID_POINTER_ID;
-    private GestureDetector mTapDetector;
-
+    private final ViewMatrixOverrideCamera mCamera;
     private Vector3 worldOffset = MapRenderer.MAP_MIDDLE.clone();
 
-    private float mLastTouchX;
-    private float mLastTouchY;
+    private final GestureDetector mTapDetector;
+    private @Nullable
+    PointerData primaryPointer;
+    private @Nullable
+    PointerData secondaryPointer;
+    private @Nullable
+    Vector2 touchFocalPoint;
+    private double initialScaleDistance;
+    private float initialZoom;
 
-    public GameSurfaceOnTouchLister(Context context, MapRenderer renderer) {
+    public GameSurfaceOnTouchLister(Context context, MapRenderer renderer, ViewMatrixOverrideCamera camera) {
         this.mRenderer = renderer;
+        this.mCamera = camera;
         this.mTapDetector = new GestureDetector(context, new GestureTap());
+        this.primaryPointer = null;
+        this.secondaryPointer = null;
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent e) {
 
+        // Country tapping
         if (mTapDetector.onTouchEvent(e)) {
             return true;
         }
 
+        // Dragging & scale
         final int action = e.getActionMasked();
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                final int pointerIndex = e.getActionIndex();
+                if (primaryPointer == null) {
+                    primaryPointer = new PointerData(e.getPointerId(e.getActionIndex()));
 
-                mLastTouchX = e.getX(pointerIndex);
-                mLastTouchY = e.getY(pointerIndex);
+                    final int pointerIndex = e.getActionIndex();
+                    primaryPointer.lastTouchX = e.getX(pointerIndex);
+                    primaryPointer.lastTouchY = e.getY(pointerIndex);
+                    touchFocalPoint = new Vector2(primaryPointer.lastTouchX, primaryPointer.lastTouchY);
+                }
+                break;
+            }
 
-                mActivePointerId = e.getPointerId(0);
+            case MotionEvent.ACTION_POINTER_DOWN: {
+                if (secondaryPointer == null) {
+                    final int primaryPointerIndex = e.findPointerIndex(primaryPointer.pointerId);
+                    primaryPointer.lastTouchX = e.getX(primaryPointerIndex);
+                    primaryPointer.lastTouchY = e.getY(primaryPointerIndex);
+
+                    final int pointerIndex = e.getActionIndex();
+                    secondaryPointer = new PointerData(e.getPointerId(pointerIndex));
+                    secondaryPointer.lastTouchX = e.getX(pointerIndex);
+                    secondaryPointer.lastTouchY = e.getY(pointerIndex);
+
+                    touchFocalPoint = new Vector2(
+                            (primaryPointer.lastTouchX + secondaryPointer.lastTouchX) * 0.5f,
+                            (primaryPointer.lastTouchY + secondaryPointer.lastTouchY) * 0.5f
+                    );
+
+                    initialScaleDistance = calculatePointersDistance();
+                    initialZoom = mCamera.getZoom();
+                }
                 break;
             }
 
             case MotionEvent.ACTION_MOVE: {
-                final int pointerIndex = e.findPointerIndex(mActivePointerId);
 
-                final float x = e.getX(pointerIndex);
-                final float y = e.getY(pointerIndex);
+                if (secondaryPointer != null) {
+                    final int primaryPointerIndex = e.findPointerIndex(primaryPointer.pointerId);
+                    final int secondaryPointerIndex = e.findPointerIndex(secondaryPointer.pointerId);
 
-                final float dx = x - mLastTouchX;
-                final float dy = y - mLastTouchY;
+                    primaryPointer.lastTouchX = e.getX(primaryPointerIndex);
+                    primaryPointer.lastTouchY = e.getY(primaryPointerIndex);
+                    secondaryPointer.lastTouchX = e.getX(secondaryPointerIndex);
+                    secondaryPointer.lastTouchY = e.getY(secondaryPointerIndex);
 
-                worldOffset.add(new Vector3(dx, 0, dy).multiply(0.001f));
-                mRenderer.setWorldOffset(worldOffset);
+                    // Dragging
+                    Vector2 newTouchFocalPoint = new Vector2(
+                            (primaryPointer.lastTouchX + secondaryPointer.lastTouchX) * 0.5f,
+                            (primaryPointer.lastTouchY + secondaryPointer.lastTouchY) * 0.5f
+                    );
 
-                mLastTouchX = x;
-                mLastTouchY = y;
+                    final double dx = newTouchFocalPoint.getX() - touchFocalPoint.getX();
+                    final double dy = newTouchFocalPoint.getY() - touchFocalPoint.getY();
+
+                    final double cameraCoefficient = 0.0005d / mCamera.getZoom();
+                    final Vector3 delta = new Vector3(dx, 0, dy).multiply(cameraCoefficient);
+                    worldOffset.add(delta);
+                    mRenderer.setWorldOffset(worldOffset);
+
+                    // Scaling
+                    float scaleFactor = (float) (calculatePointersDistance() / initialScaleDistance);
+                    mCamera.setZoom(initialZoom * scaleFactor);
+
+                    touchFocalPoint = newTouchFocalPoint;
+                } else if (primaryPointer != null) {
+                    final int pointerIndex = e.findPointerIndex(primaryPointer.pointerId);
+
+                    final float x = e.getX(pointerIndex);
+                    final float y = e.getY(pointerIndex);
+
+                    final double dx = x - touchFocalPoint.getX();
+                    final double dy = y - touchFocalPoint.getY();
+
+                    worldOffset.add(new Vector3(dx, 0, dy).multiply(0.001f));
+                    mRenderer.setWorldOffset(worldOffset);
+
+                    touchFocalPoint.setAll(x, y);
+                }
                 break;
             }
 
-            case MotionEvent.ACTION_UP: {
-                mActivePointerId = INVALID_POINTER_ID;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP: {
+
+                final int pointerIndex = e.getActionIndex();
+                final int releasedPointerId = e.getPointerId(pointerIndex);
+
+                if (secondaryPointer != null && releasedPointerId == secondaryPointer.pointerId) {
+                    secondaryPointer = null;
+                    touchFocalPoint = new Vector2(primaryPointer.lastTouchX, primaryPointer.lastTouchY);
+                }
+
+                if (primaryPointer != null && releasedPointerId == primaryPointer.pointerId) {
+                    primaryPointer = null;
+
+                    if (secondaryPointer != null) {
+                        touchFocalPoint.setAll(secondaryPointer.lastTouchX, secondaryPointer.lastTouchY);
+                        primaryPointer = secondaryPointer;
+                        secondaryPointer = null;
+                    }
+                }
+
+                initialScaleDistance = 0;
                 break;
             }
 
             case MotionEvent.ACTION_CANCEL: {
-                mActivePointerId = INVALID_POINTER_ID;
-                break;
-            }
-
-            case MotionEvent.ACTION_POINTER_UP: {
-
-                final int pointerIndex = e.getActionIndex();
-                final int pointerId = e.getPointerId(pointerIndex);
-
-                if (pointerId == mActivePointerId) {
-                    final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-                    mLastTouchX = e.getX(newPointerIndex);
-                    mLastTouchY = e.getY(newPointerIndex);
-                    mActivePointerId = e.getPointerId(newPointerIndex);
-                }
+                primaryPointer = null;
+                secondaryPointer = null;
+                touchFocalPoint = null;
                 break;
             }
         }
         return true;
 
+    }
+
+    private double calculatePointersDistance() {
+        return calculateDistance(primaryPointer.lastTouchX, primaryPointer.lastTouchY, secondaryPointer.lastTouchX, secondaryPointer.lastTouchY);
+    }
+
+    private double calculateDistance(double A_x, double A_y, double B_x, double B_y) {
+        double dx = Math.abs(A_x - B_x);
+        double dy = Math.abs(A_y - B_y);
+        return Math.sqrt(dx * dx + dy * dy);
     }
 }
