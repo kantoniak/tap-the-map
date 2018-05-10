@@ -24,7 +24,7 @@ import org.rajawali3d.util.ObjectColorPicker;
 public class CountryInstance {
 
     private static int COLOR_DEFAULT = 0xFFFAFAFA;
-    private static int COLOR_DISABLED = 0xFFF5F5F5;
+    private static int COLOR_DISABLED = 0xFFF0F0F0;
     private static int COLOR_BLACK = 0xFF000000;
 
     private static float BASE_HEIGHT = 0.1f;
