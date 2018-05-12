@@ -80,7 +80,8 @@
         <ImageView
             android:id="@+id/button_zoom_in"
             style="@style/ZoomButton"
-            android:src="@drawable/ic_zoom_in_24dp" />
+            android:src="@drawable/ic_zoom_in_24dp"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/button_reset"
@@ -91,7 +92,8 @@
         <ImageView
             android:id="@+id/button_zoom_out"
             style="@style/ZoomButton"
-            android:src="@drawable/ic_zoom_out_24dp" />
+            android:src="@drawable/ic_zoom_out_24dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
