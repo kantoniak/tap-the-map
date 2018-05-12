@@ -17,6 +17,8 @@ public class SharedPrefsUtil {
      */
     private static final String PREF_RULES_NOT_AGAIN = "rules_not_again";
 
+    private static final String PREF_VERTICAL_MAP = "vertical_map";
+
     /**
      * Update the highscore in the preferences
      *
@@ -55,4 +57,19 @@ public class SharedPrefsUtil {
         prefs.edit().putBoolean(PREF_RULES_NOT_AGAIN, true).apply();
     }
 
+    /**
+     * Check if map should be displayed vertically.
+     */
+    public static boolean isMapVertical(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
+        return prefs.getBoolean(PREF_VERTICAL_MAP, false);
+    }
+
+    /**
+     * Set if map should be displayed vertically.
+     */
+    public static void setMapVertical(Context context, boolean isVertical) {
+        SharedPreferences prefs = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
+        prefs.edit().putBoolean(PREF_VERTICAL_MAP, isVertical).apply();
+    }
 }

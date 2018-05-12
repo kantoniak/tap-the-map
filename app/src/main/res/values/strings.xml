@@ -13,6 +13,11 @@
     <string name="we_need_camera_permission">We need camera permission to track the marker.</string>
     <string name="button_try_again">Try again</string>
 
+    <!-- Settings screen -->
+    <string name="map_orientation">Map orientation:</string>
+    <string name="horizontal">Horizontal</string>
+    <string name="vertical">Vertical</string>
+
     <!-- About screen -->
     <string name="button_licenses">Licenses</string>
     <string name="button_go_back">Go back</string>

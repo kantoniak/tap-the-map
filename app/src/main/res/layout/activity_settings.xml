@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
     android:padding="@dimen/triplePadding">
 
@@ -20,13 +20,38 @@
             style="@style/HeaderText"
             android:text="@string/button_settings" />
 
-        <TextView
-            android:id="@+id/text_about"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/doublePadding"
-            android:layout_marginTop="@dimen/doublePadding"
-            tools:text="-SETTINGS-" />
+            android:layout_marginTop="@dimen/doublePadding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/doublePadding"
+                android:text="@string/map_orientation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="@dimen/subsubheaderTextSize" />
+
+            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                android:id="@+id/map_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:activeBgColor="@android:color/white"
+                app:activeTextColor="@color/colorPrimary"
+                app:cornerRadius="0dp"
+                app:inactiveBgColor="@color/colorPrimaryDark"
+                app:inactiveTextColor="@color/textColorOnPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:textToggleLeft="@string/horizontal"
+                app:textToggleRight="@string/vertical"
+                app:toggleWidth="160dp"
+                android:textSize="@dimen/subsubheaderTextSize" />
+
+        </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
 

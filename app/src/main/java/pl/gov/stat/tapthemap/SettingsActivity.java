@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -12,6 +14,8 @@ import butterknife.OnClick;
  * Activity for displaying the about screen.
  */
 public class SettingsActivity extends AppCompatActivity {
+
+    @BindView(R.id.map_vertical) ToggleSwitch mToggleSwitch;
 
     /**
      * Set up activity.
@@ -21,6 +25,12 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
+
+        mToggleSwitch.setCheckedTogglePosition(SharedPrefsUtil.isMapVertical(this) ? 1 : 0);
+
+        mToggleSwitch.setOnToggleSwitchChangeListener((position, isChecked) -> {
+            SharedPrefsUtil.setMapVertical(this, mToggleSwitch.getCheckedTogglePosition() > 0);
+        });
     }
 
     /**

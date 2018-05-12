@@ -13,6 +13,11 @@
     <string name="we_need_camera_permission">Potrzebujemy dostępu do aparatu żeby śledzić marker.</string>
     <string name="button_try_again">Spróbuj ponownie</string>
 
+    <!-- Settings screen -->
+    <string name="map_orientation">Orientacja mapy:</string>
+    <string name="horizontal">Poziomo</string>
+    <string name="vertical">Pionowo</string>
+
     <!-- About screen -->
     <string name="button_licenses">Licencje</string>
     <string name="button_go_back">Powrót</string>
