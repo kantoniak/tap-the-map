@@ -63,8 +63,25 @@ All libraries are added as gradle dependencies in `app/build.gradle`
 ### Game settings
 All game settings are hardcoded in `.gameplay.Gameplay.Settings`. In future, these can be moved to a separate file or download from somewhere.
 
-### Questions
-Questions used in the application are stored in `assets/questions.json` file.
-
 ### AR support
 Application uses EasyAR to handle augmented reality. All marker images are defined in `assets/targets.json`, images are held in the same folder.
+
+### Adding questions step by step
+1. Locate the file `assets/questions.json`. Standard json file. It contains all necessary data to download questions from Eurostat API and display them properly in application.
+2. In the file one can find a list of dictionaries. Each dictionary represents one question. Consists of following keys:
+ - `query` - query for Eurostat API (query that one can acquire from Eurostat API Query Builder, but you **should not** add countries and precision in the query, the application will set the propper values by itself)
+ - `multiplier` - multiplier of the prefix of the unit (e.g. `1000000`)
+ - `base_unit` - the base unit used in the question (e.g. `€`) (in this case `multiplier` and `base_unit` represent the question, where the unit is milions of euros)
+ - `category` - category of the question based on Eurostat, possible categories are listed in pl.gov.stat.tapthemap.gameplay.QuestionCategory enum
+ - `localized_text` - JSON map, consists of country codes as keys and translations of the question string that is displayed to the user
+3. In order to add a question one need to create a new dictionary and place it in the main list.
+
+### Adding marker step by step
+
+1. In order to add a new marker to the application, one need to add a `*.png` file to the assets directory.
+2. One also need to add a new entry in `assets/targets.json` file. In the main dictionary, for the key `images` the value is the list of the dictionaries containing entry for each marker that application is aware of. Each of dictionaries consists of following keys:
+ - `image` - name of the file
+ - `uid` - id of the marker (might be any arbitrary id)
+ - `name` - name of the marker (might be any arbitrary name)
+ - `size` - list consists of two double values, please use [2.5, 2.5] ???? [TODO Cris]
+ 
