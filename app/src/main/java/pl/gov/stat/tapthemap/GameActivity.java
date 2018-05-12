@@ -80,7 +80,8 @@ public class GameActivity extends AppCompatActivity
         renderer.setRenderingDelegate(arDelegate);
         gameMapPreview.setRenderingDelegate(arDelegate);
 
-        UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, renderer, camera);
+        boolean mapVertical = SharedPrefsUtil.isMapVertical(this);
+        UpdateBackgroundAndMatricesCallback updateMatricesCallback = new UpdateBackgroundAndMatricesCallback(arController, renderer, camera, mapVertical);
         renderer.getCurrentScene().registerFrameCallback(updateMatricesCallback);
 
         gameMapPreview.setOnTouchListener(new GameSurfaceOnTouchLister(this, renderer, camera));

@@ -16,11 +16,13 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
     private final EasyARController arController;
     private final MapRenderer mRenderer;
     private final ViewMatrixOverrideCamera camera;
+    private final boolean mapVertical;
 
-    public UpdateBackgroundAndMatricesCallback(EasyARController arController, MapRenderer renderer, ViewMatrixOverrideCamera camera) {
+    public UpdateBackgroundAndMatricesCallback(EasyARController arController, MapRenderer renderer, ViewMatrixOverrideCamera camera, boolean mapVertical) {
         this.arController = arController;
         this.mRenderer = renderer;
         this.camera = camera;
+        this.mapVertical = mapVertical;
     }
 
     /**
@@ -49,6 +51,9 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
             Matrix4 viewMatrix = new Matrix4(arController.getViewMatrix().data)
                     .scale(-1.f, 1.f, 1.f)
                     .rotate(Vector3.Axis.X, -90);
+            if (mapVertical) {
+                viewMatrix.rotate(Vector3.Axis.X, -90);
+            }
 
             Vector3 cameraPosition = new Vector3(
                     viewMatrix.getDoubleValues()[12],
@@ -65,7 +70,7 @@ public class UpdateBackgroundAndMatricesCallback extends ASceneFrameCallback {
 
             // See the article about matrix decomposition (http://nghiaho.com/?page_id=846)
             //double rotAroundTop = 180 + Math.toDegrees(Math.atan2(rotatorData[4], rotatorData[0]));
-            double rotAroundRight = Math.toDegrees(Math.atan2(rotatorData[9], rotatorData[10])) + 90;
+            double rotAroundRight = Math.toDegrees(Math.atan2(rotatorData[9], rotatorData[10])) + 90 + (mapVertical ? 90 : 0);
             //double rotAroundDepth = -Math.toDegrees(Math.atan2(rotatorData[8], Math.sqrt(rotatorData[4]*rotatorData[4] + rotatorData[0]*rotatorData[0])));
 
             Quaternion testRot4 = new Quaternion().fromEuler(0, rotAroundRight, 0);

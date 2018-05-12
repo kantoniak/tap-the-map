@@ -52,4 +52,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.trivago:triava:1.0.5'
     implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'us.belka:androidtoggleswitch:1.2.2'
 }

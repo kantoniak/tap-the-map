@@ -56,6 +56,14 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     /**
+     * Settings button clicked.
+     */
+    @OnClick(R.id.settings_button)
+    public void onClickSettings(View view) {
+        startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    /**
      * About button clicked.
      */
     @OnClick(R.id.about_button)

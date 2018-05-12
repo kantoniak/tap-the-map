@@ -35,6 +35,11 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity
+            android:name="pl.gov.stat.tapthemap.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
+        <activity
             android:name="pl.gov.stat.tapthemap.AboutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:label="@string/app_name"
