@@ -83,5 +83,5 @@ Application uses EasyAR to handle augmented reality. All marker images are defin
  - `image` - name of the file
  - `uid` - id of the marker (might be any arbitrary id)
  - `name` - name of the marker (might be any arbitrary name)
- - `size` - list consists of two double values, please use [2.5, 2.5] ???? [TODO Cris]
+ - `size` - says how big the marker size is in the virtual world (`[1, 1]` by default, we use `[2.5, 2.5]`)
  
