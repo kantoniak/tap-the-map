@@ -5,7 +5,7 @@
     "baseUnit": "€",
     "category": "ECONOMY",
     "localized_text": {
-      "pl": "Jakie jest PKB w danym kraju?",
+      "pl": "Jakie jest PKB?",
       "en": "What is GDP?"
     }
   },
@@ -15,8 +15,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest liczba gospodarstw domowych bez dostępu do toalety w danym kraju?",
-      "en": "What is the level of no toilet rate?"
+      "pl": "Jak dużo gospodarstw domowych nie ma dostępu do toalety?",
+      "en": "How many households do not have access to the toilet?"
     }
   },
   {
@@ -25,7 +25,7 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaki jest wskaźnik stopy bezrobocia w danym kraju?",
+      "pl": "Jaki jest wskaźnik stopy bezrobocia?",
       "en": "What is the unemployment rate?"
     }
   },
@@ -35,8 +35,8 @@
     "baseUnit": "%",
     "category": "GENERAL",
     "localized_text": {
-      "pl": "Jaki jest poziom zalesienia w danym kraju?",
-      "en": "What is the afforestation rate?"
+      "pl": "Jaki jest udział powierzchni lasów w powierzchni całkowitej kraju?",
+      "en": "What is the share of forest area in the total area of ​​the country?"
     }
   },
   {
@@ -45,27 +45,17 @@
     "baseUnit": "/km2",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest gęstość zaludnienia w danym kraju?",
+      "pl": "Jaka jest gęstość zaludnienia?",
       "en": "What is the population density?"
     }
   },
-  {
-    "query": "env_wasmun?wst_oper=GEN&unit=KG_HAB",
-    "multiplier": 1000,
-    "baseUnit": "g",
-    "category": "ENVIRONMENT",
-    "localized_text": {
-      "pl": "Jaki jest poziom wytwarzania odpadów w danym kraju?",
-      "en": "What is the waste generation rate?"
-    }
-  },
-  {
+   {
     "query": "tin00134?unit=PC_HH",
     "multiplier": 1,
     "baseUnit": "%",
     "category": "SCIENCE",
     "localized_text": {
-      "pl": "Jaka jest liczba gospodarstw domowych z dostępem do internetu?",
+      "pl": "Jak dużo gospodarstw domowych nie ma dostępu do internetu?",
       "en": "What is the level of internet access by households?"
     }
   },
@@ -75,7 +65,7 @@
     "baseUnit": "€",
     "category": "ECONOMY",
     "localized_text": {
-      "pl": "Jakie jest PKB per capita w danym kraju?",
+      "pl": "Jakie jest PKB per capita?",
       "en": "What is GDP per capita?"
     }
   },
@@ -95,8 +85,8 @@
     "baseUnit": "",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest populacja danego kraju?",
-      "en": "What is the population?"
+      "pl": "Jak duża jest populacja?",
+      "en": "How big is the population?"
     }
   },
   {
@@ -135,8 +125,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaki jest udział młodych dorosłych (18-34) mieszkających z rodzicami?",
-      "en": "What is the share of the young adults (18–34) living with their parents?"
+      "pl": "Jaki jest udział młodych dorosłych (18-34 lat) mieszkających z rodzicami?",
+      "en": "What is the share of the young adults (18–34 years old) living with their parents?"
     }
   },
   {
@@ -145,8 +135,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaki jest udział osób, których samoocena ogólnego stanu zdrowia jest zła",
-      "en": "What is the share of people whose self-evaluated general health condition is bad?"
+      "pl": "Jak dużo osób określa samoocenę swojego stanu zdrowia jako złą?",
+      "en": "How many people describe their health status as bad?"
     }
   },
   {
@@ -155,8 +145,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaki jest udział osób, których samoocena ogólnego stanu zdrowia jest dobra?",
-      "en": "What is the share of people whose self-evaluated general health condition is good?"
+      "pl": "Jak dużo osób określa samoocenę swojego stanu zdrowia jako dobrą?",
+      "en": "How many people describe their health status as good?"
     }
   },
   {
@@ -165,8 +155,8 @@
     "baseUnit": "g",
     "category": "ENVIRONMENT",
     "localized_text": {
-      "pl": "Ile jest wytworzonych odpadów poddanych recyklingowi na osobę?",
-      "en": "What is the share of recycled wasted per person?"
+      "pl": "Jak dużo jest wytworzonych odpadów komunalnych poddawanych recyklingowi na osobę?",
+      "en": "How much municipal waste is recycled per person?"
     }
   },
   {
@@ -185,8 +175,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest częstotliwość uczestnictwa w zawodach sportowych w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
-      "en": "What is the frequency of participation in sports competitions in the last 12 months (at least 4 times)?"
+      "pl": "Jak dużo osób uczestniczyło w zawodach sportowych w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
+      "en": "How many people participated in sports competitions in the last 12 months (at least 4 times)?"
     }
   },
   {
@@ -195,8 +185,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaka jest częstotliwość wyjść do kina dla jednej osoby w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
-      "en": "What is the frequency of going to the cinema for one person in the last 12 months (at least 4 times)?"
+      "pl": "Jak dużo osób było w kinie w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
+      "en": "How many people have been in the cinema in the last 12 months (at least 4 times)?"
     }
   },
   {
@@ -205,8 +195,8 @@
     "baseUnit": "%",
     "category": "SCIENCE",
     "localized_text": {
-      "pl": "Jaki jest współczynnik osób dokonujących zakupy internetowe w ciągu ostatnich 3 miesięcy?",
-      "en": "What is the ratio of people shopping online in the last 3 months?"
+      "pl": "Jak dużo osób dokonało zakupów internetowych w ciągu ostatnich 3 miesięcy?",
+      "en": "How many people have made online purchases in the last 3 months?"
     }
   },
   {
@@ -215,8 +205,8 @@
     "baseUnit": "%",
     "category": "SCIENCE",
     "localized_text": {
-      "pl": "Jaki jest współczynnik osób korzystających z sieci społecznościowych w ciągu ostatnich 3 miesięcy?",
-      "en": "What is the ratio of people using social networks in the last 3 months?"
+      "pl": "Jak dużo osób korzystało z sieci społecznościowych w ciągu ostatnich 3 miesięcy?",
+      "en": "How many people have used social networks in the last 3 months?"
     }
   },
   {
@@ -225,8 +215,8 @@
     "baseUnit": "%",
     "category": "POPULATION",
     "localized_text": {
-      "pl": "Jaki jest współczynnik osób wykonujących cotygodniowy wysiłek fizyczny (min. 150min)?",
-      "en": "What is the ratio of people performing a weekly physical effort (min. 150min)?"
+      "pl": "Jak dużo osób wykonuje cotygodniowy wysiłek fizyczny (min. 150 min)?",
+      "en": "How many people do a weekly physical effort (minimum 150 minutes)?"
     }
   }
 ]
