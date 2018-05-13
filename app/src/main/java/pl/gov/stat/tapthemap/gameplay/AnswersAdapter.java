@@ -67,9 +67,9 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
 
         boolean correct = answer.isCorrect();
         if (correct) {
-            holder.tick.setImageDrawable(resources.getDrawable(R.drawable.ic_check_black_24dp));
+            holder.tick.setImageDrawable(resources.getDrawable(R.drawable.ic_check_green_24dp));
         } else {
-            holder.tick.setImageDrawable(resources.getDrawable(R.drawable.ic_close_black_24dp));
+            holder.tick.setImageDrawable(resources.getDrawable(R.drawable.ic_close_red_24dp));
         }
     }
 

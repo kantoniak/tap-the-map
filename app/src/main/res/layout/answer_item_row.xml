@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/standardPadding"
+        android:width="150dp"
         tools:text="Country name" />
 
     <ImageView
@@ -26,6 +27,7 @@
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_marginRight="@dimen/standardPadding"
         android:layout_weight="1" />
 
 </LinearLayout>
