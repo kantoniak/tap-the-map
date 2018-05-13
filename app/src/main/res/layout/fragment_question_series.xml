@@ -7,27 +7,6 @@
     tools:background="#FF9900"
     tools:context=".game_ui.QuestionSeriesFragment">
 
-    <LinearLayout
-        android:id="@+id/remaining_container"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginLeft="@dimen/standardPadding"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/triplePadding"
-        android:paddingTop="@dimen/standardPadding"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_topbar">
-
-        <TextView
-            android:id="@+id/remaining_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/countries_marked"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/question_topbar"
         style="@style/ElevatedContainer"
@@ -50,8 +29,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/biggerPadding"
-            android:layout_marginStart="@dimen/biggerPadding"
             android:layout_marginEnd="@dimen/biggerPadding"
+            android:layout_marginStart="@dimen/doublePadding"
             android:textAlignment="center"
             android:textColor="@color/textColorOnPrimary"
             android:textSize="@dimen/questionTextSize"
@@ -71,6 +50,56 @@
 
     </android.support.constraint.ConstraintLayout>
 
+    <LinearLayout
+        android:id="@+id/remaining_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/standardPadding"
+        android:layout_marginTop="@dimen/standardPadding"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_topbar"
+        tools:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/remaining_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent_black"
+            android:gravity="center"
+            android:paddingLeft="@dimen/standardPadding"
+            android:paddingRight="@dimen/standardPadding"
+            android:text="@string/countries_marked"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            style="@style/RemainingContainer"
+            android:src="@drawable/country_pl_plate"
+            tools:visibility="visible" />
+
+        <ImageView
+            style="@style/RemainingContainer"
+            android:src="@drawable/country_pl_plate"
+            tools:visibility="visible" />
+
+        <ImageView
+            style="@style/RemainingContainer"
+            android:src="@drawable/country_pl_plate"
+            tools:visibility="visible" />
+
+        <ImageView
+            style="@style/RemainingContainer"
+            android:src="@drawable/country_pl_plate"
+            tools:visibility="visible" />
+
+        <ImageView
+            style="@style/RemainingContainer"
+            android:src="@drawable/country_pl_plate"
+            tools:visibility="visible" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/answers_container"

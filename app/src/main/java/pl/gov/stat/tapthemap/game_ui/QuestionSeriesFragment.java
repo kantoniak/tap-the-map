@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -140,6 +143,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
             Question question = gameplay.getCurrentQuestion();
             showQuestion(question);
         } catch (Exception e) {
+            e.printStackTrace();
             getActivity().startActivity(new Intent(getActivity(), NoConnectionActivity.class));
             getActivity().finish();
         }
@@ -154,7 +158,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         showingAnswers = false;
         map.reset();
         question.getCountries().forEach(map::enableCountry);
-        updateLabels();
+        initLabels();
 
         mQuestionTextView.setText(question.getDesc());
         mRoundProgress.setText(getString(R.string.question_progress_counter, gameplay.getCurrentQuestionInt() + 1, Gameplay.Settings.QUESTIONS_PER_SERIES));
@@ -174,22 +178,42 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mLowColorView.setBackgroundColor(minColor);
     }
 
-    public void updateLabels() {
-        mRemainingContainer.removeViews(1, mRemainingContainer.getChildCount() - 1);
-        mRemainingContainer.getChildAt(0).setVisibility(View.VISIBLE);
-        map.getEnabledCountries().forEach(this::displayLabel);
-        if (mRemainingContainer.getChildCount() == 1) {
-            mRemainingContainer.getChildAt(0).setVisibility(View.INVISIBLE);
+    public void initLabels() {
+        for (int i=1; i < mRemainingContainer.getChildCount(); i++) {
+            ImageView plate = (ImageView) mRemainingContainer.getChildAt(i);
+            plate.setTag(null);
         }
+
+        map.getEnabledCountries().forEach(((country, countryInstance) -> {
+            for (int i=1; i < mRemainingContainer.getChildCount(); i++) {
+                ImageView plate = (ImageView) mRemainingContainer.getChildAt(i);
+                if (plate.getTag() != null) {
+                    continue;
+                }
+                int plateResId = getResources().getIdentifier("country_" + country.getEuCode() + "_plate", "drawable", BuildConfig.APPLICATION_ID);
+                plate.setImageResource(plateResId);
+                plate.setTag(country);
+                plate.setVisibility(View.VISIBLE);
+                break;
+            }
+        }));
+    }
+
+    public void updateLabels() {
+        Supplier<Stream<java.util.Map.Entry<Country, CountryInstance>>> enabled = () -> map.getEnabledCountries().entrySet().stream();
+        enabled.get().forEach(e -> displayLabel(e.getKey(), e.getValue()));
+
+        long remainingCount = enabled.get().filter(e -> e.getValue().getHeight() == 0).count();
+        mRemainingContainer.getChildAt(0).setVisibility(remainingCount > 0 ? View.VISIBLE : View.GONE);
     }
 
 
     private void displayLabel(Country country, CountryInstance instance) {
-        if (instance.getHeight() == 0) {
-            ImageView imageView = new ImageView(getContext());
-            int id = getResources().getIdentifier("country_" + country.getEuCode() + "_plate", "drawable", BuildConfig.APPLICATION_ID);
-            imageView.setImageResource(id);
-            mRemainingContainer.addView(imageView);
+        for (int i=1; i < mRemainingContainer.getChildCount(); i++) {
+            ImageView plate = (ImageView) mRemainingContainer.getChildAt(i);
+            if (plate.getTag().equals(country)) {
+                plate.setVisibility(instance.getHeight() == 0 ? View.VISIBLE : View.GONE);
+            }
         }
     }
 

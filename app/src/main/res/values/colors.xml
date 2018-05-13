@@ -7,4 +7,5 @@
     <color name="colorBackgroundLight">#FFFFFF</color>
 
     <color name="textColorOnPrimary">#FFFFFF</color>
+    <color name="transparent_black">#66000000</color>
 </resources>

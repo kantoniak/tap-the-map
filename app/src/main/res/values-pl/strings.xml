@@ -46,7 +46,7 @@
     <!-- Questions screen -->
     <string name="loading_objects">Ładowanie obiektów...</string>
     <string name="loading_questions">Ładowanie pytań...</string>
-    <string name="countries_marked">Kraje pozostałe do zaznaczenia:</string>
+    <string name="countries_marked">Wybierz dla:</string>
 
     <!-- Country names -->
     <string name="country_name_al">Albania</string>

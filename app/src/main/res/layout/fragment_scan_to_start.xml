@@ -22,7 +22,7 @@
         android:id="@+id/info_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#66000000"
+        android:background="@color/transparent_black"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

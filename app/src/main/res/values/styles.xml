@@ -71,6 +71,13 @@
         <item name="android:padding">@dimen/halfPadding</item>
     </style>
 
+    <style name="RemainingContainer">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginLeft">@dimen/halfPadding</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
     <style name="LegendEntry" parent="ElevatedContainer">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
