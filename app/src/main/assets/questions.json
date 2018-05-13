@@ -2,7 +2,7 @@
   {
     "query": "nama_10_gdp?na_item=B1GQ&unit=CP_MEUR",
     "multiplier": 1000000,
-    "baseUnit": "€",
+    "base_unit": "€",
     "category": "ECONOMY",
     "localized_text": {
       "pl": "Jakie jest PKB?",
@@ -12,7 +12,7 @@
   {
     "query": "ilc_mdho05?incgrp=TOTAL&unit=PC&hhtyp=TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jak dużo gospodarstw domowych nie ma dostępu do toalety?",
@@ -22,7 +22,7 @@
   {
     "query": "une_rt_a?unit=PC_POP",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaki jest wskaźnik stopy bezrobocia?",
@@ -32,7 +32,7 @@
   {
     "query": "lan_lcv_fao?landcover=LCC1&unit=PC",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "GENERAL",
     "localized_text": {
       "pl": "Jaki jest udział powierzchni lasów w powierzchni całkowitej kraju?",
@@ -42,7 +42,7 @@
   {
     "query": "demo_r_d3dens?unit=HAB_KM2",
     "multiplier": 1,
-    "baseUnit": "/km2",
+    "base_unit": "/km2",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaka jest gęstość zaludnienia?",
@@ -52,7 +52,7 @@
    {
     "query": "tin00134?unit=PC_HH",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "SCIENCE",
     "localized_text": {
       "pl": "Jak dużo gospodarstw domowych nie ma dostępu do internetu?",
@@ -62,7 +62,7 @@
   {
     "query": "nama_10_pc?na_item=B1GQ&unit=CP_EUR_HAB",
     "multiplier": 1,
-    "baseUnit": "€",
+    "base_unit": "€",
     "category": "ECONOMY",
     "localized_text": {
       "pl": "Jakie jest PKB per capita?",
@@ -72,7 +72,7 @@
   {
     "query": "demo_r_d3area?landuse=TOTAL&unit=KM2",
     "multiplier": 1,
-    "baseUnit": "km2",
+    "base_unit": "km2",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaka jest powierzchnia danego kraju?",
@@ -82,7 +82,7 @@
   {
     "query": "demo_gind?indic_de=JAN",
     "multiplier": 1,
-    "baseUnit": "",
+    "base_unit": "",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jak duża jest populacja?",
@@ -92,7 +92,7 @@
   {
     "query": "demo_gind?indic_de=POPSHARE",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaki jest udział populacji danego kraju w populacji UE?",
@@ -102,7 +102,7 @@
   {
     "query": "demo_find?indic_de=TOTFERRT",
     "multiplier": 1,
-    "baseUnit": "D",
+    "base_unit": "D",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaki jest współczynnik dzietności?",
@@ -112,7 +112,7 @@
   {
     "query": "nrg_ind_335a?unit=PC&indic_en=119800",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "ENVIRONMENT",
     "localized_text": {
       "pl": "Jaki jest udział energii odnawialnej w zużyciu energii ogółem?",
@@ -122,7 +122,7 @@
   {
     "query": "ilc_lvps08?sex=T&unit=PC&age=Y18-34",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jaki jest udział młodych dorosłych (18-34 lat) mieszkających z rodzicami?",
@@ -132,7 +132,7 @@
   {
     "query": "hlth_silc_18?sex=T&unit=PC&levels=B_VB&age=TOTAL&deg_urb=TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jak dużo osób określa samoocenę swojego stanu zdrowia jako złą?",
@@ -142,7 +142,7 @@
   {
     "query": "hlth_silc_18?sex=T&unit=PC&levels=VG_G&age=TOTAL&deg_urb=TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jak dużo osób określa samoocenę swojego stanu zdrowia jako dobrą?",
@@ -152,7 +152,7 @@
   {
     "query": "env_wasmun?wst_oper=RCY_M&unit=KG_HAB",
     "multiplier": 1000,
-    "baseUnit": "g",
+    "base_unit": "g",
     "category": "ENVIRONMENT",
     "localized_text": {
       "pl": "Jak dużo jest wytworzonych odpadów komunalnych poddawanych recyklingowi na osobę?",
@@ -162,7 +162,7 @@
   {
     "query": "org_cropar?unit=PC_UAA&agprdmet=TOTAL&crops=UAAXK0000",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "AGRICULTURE",
     "localized_text": {
       "pl": "Jaki jest udział produkcji i upraw ekologicznych w powierzchni upraw w ogóle?",
@@ -172,7 +172,7 @@
   {
     "query": "ilc_scp04?precision=1&unit=PC&acl00=AC525&frequenc=GE4&deg_urb=TOTAL&hhtyp=TOTAL&quantile=TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jak dużo osób uczestniczyło w zawodach sportowych w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
@@ -182,7 +182,7 @@
   {
     "query": "ilc_scp04?precision=1&unit=PC&acl00=AC521&frequenc=GE4&deg_urb=TOTAL&hhtyp=TOTAL&quantile=TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jak dużo osób było w kinie w ciągu ostatnich 12 miesięcy (co najmniej 4 razy)?",
@@ -192,7 +192,7 @@
   {
     "query": "isoc_ec_ibuy?indic_is=I_BUY3&unit=PC_IND&ind_type=IND_TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "SCIENCE",
     "localized_text": {
       "pl": "Jak dużo osób dokonało zakupów internetowych w ciągu ostatnich 3 miesięcy?",
@@ -202,7 +202,7 @@
   {
     "query": "isoc_ci_ac_i?indic_is=I_IUSNET&unit=PC_IND_IU3&ind_type=IND_TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "SCIENCE",
     "localized_text": {
       "pl": "Jak dużo osób korzystało z sieci społecznościowych w ciągu ostatnich 3 miesięcy?",
@@ -212,7 +212,7 @@
   {
     "query": "hlth_ehis_pe2e?sex=T&unit=PC&duration=MN_GE150&isced11=TOTAL&age=TOTAL",
     "multiplier": 1,
-    "baseUnit": "%",
+    "base_unit": "%",
     "category": "POPULATION",
     "localized_text": {
       "pl": "Jak dużo osób wykonuje cotygodniowy wysiłek fizyczny (min. 150 min)?",

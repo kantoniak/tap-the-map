@@ -72,13 +72,13 @@ public class QuestionChest {
         /**
          * Base unit of the questions. Read from asset file.
          */
-        private String baseUnit;
+        private String base_unit;
         private Map<String, String> localized_text;
 
         QuestionObject() {
             query = "";
             multiplier = 0;
-            baseUnit = "";
+            base_unit = "";
             localized_text = new HashMap<>();
         }
 
@@ -91,7 +91,7 @@ public class QuestionChest {
         }
 
         String getBaseUnit() {
-            return baseUnit;
+            return base_unit;
         }
 
         QuestionCategory getCategory() {
@@ -175,15 +175,14 @@ public class QuestionChest {
         try {
             byte[] bytes = new byte[inputStream.available()];
             inputStream.read(bytes, 0, bytes.length);
-            String json = new String(bytes);
-            return json;
+            return new String(bytes);
         } catch (IOException e) {
             return null;
         }
     }
 
     /**
-     * Reads questions and metainfo about them. Fills query, category, multiplier and baseUnit array lists.
+     * Reads questions and metainfo about them. Fills query, category, multiplier and base_unit array lists.
      *
      * @param context Context of the application
      * @return List of QuestionObjects
