@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
-import pl.gov.stat.tapthemap.Country;
-
 import org.rajawali3d.Object3D;
 import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.materials.Material;
@@ -20,6 +18,10 @@ import org.rajawali3d.util.OnObjectPickedListener;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import pl.gov.stat.tapthemap.Country;
+import pl.gov.stat.tapthemap.GameActivity;
+import pl.gov.stat.tapthemap.game_ui.QuestionSeriesFragment;
+
 /**
  * Class responsible for rendering the map.
  */
@@ -32,6 +34,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     private final Map map;
     private final AssetLoader loader;
     private RenderingDelegate renderingDelegate;
+    private GameActivity mContext;
 
     private ObjectColorPicker objectPicker;
     private Plane mapBase;
@@ -44,6 +47,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
         super(context);
         this.map = map;
         this.loader = new AssetLoader(context, mTextureManager);
+        this.mContext = (GameActivity) context;
     }
 
     /**
@@ -165,6 +169,7 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
                 entry.getValue().onPicked();
             }
         }
+        mContext.runOnUiThread(() -> ((QuestionSeriesFragment) mContext.getSupportFragmentManager().findFragmentByTag("QuestionSeriesFragment")).updateLabels());
     }
 
     /**

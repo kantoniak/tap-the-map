@@ -8,13 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import pl.gov.stat.tapthemap.R;
-
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.gov.stat.tapthemap.R;
 
 /**
  * Class responsible for displaying the answers.

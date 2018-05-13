@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
-import pl.gov.stat.tapthemap.R;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.gov.stat.tapthemap.R;
 
 /**
  * Class responsible for displaying the rules board fragment.

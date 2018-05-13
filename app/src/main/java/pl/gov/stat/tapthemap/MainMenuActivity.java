@@ -11,11 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import pl.gov.stat.tapthemap.ar.EasyARUtils;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.gov.stat.tapthemap.ar.EasyARUtils;
 
 /**
  * Activity for displaying the main menu.

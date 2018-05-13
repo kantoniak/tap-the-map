@@ -1,8 +1,7 @@
 package pl.gov.stat.tapthemap.ar;
 
-import pl.gov.stat.tapthemap.scene.RenderingDelegate;
-
 import cn.easyar.Engine;
+import pl.gov.stat.tapthemap.scene.RenderingDelegate;
 
 /**
  * Class responsible for easy AR rendering delegate.

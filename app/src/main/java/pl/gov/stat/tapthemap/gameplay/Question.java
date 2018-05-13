@@ -2,7 +2,6 @@ package pl.gov.stat.tapthemap.gameplay;
 
 import android.support.v4.graphics.ColorUtils;
 
-import pl.gov.stat.tapthemap.Country;
 import com.trivago.triava.util.UnitFormatter;
 import com.trivago.triava.util.UnitSystem;
 
@@ -12,27 +11,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import pl.gov.stat.tapthemap.Country;
+
 /**
  * Class representing single question.
  */
 public class Question {
-    private final String mlink;
+    private final String mLink;
     private HashMap<Country, Integer> ans;
     private HashMap<Country, Double> ansDouble;
 
     private double midThres;
     private double highThres;
     private String mdesc;
-    private List<Country> mcountries;
-    private String munit;
-    private QuestionCategory mcategory;
+    private List<Country> mCountries;
+    private List<Country> mRemainingCountries;
+    private String mUnit;
+    private QuestionCategory mCategory;
     private HashMap<Country, Boolean> isCorrectAnswer;
 
     Question(String link, HashMap<String, Double> data, String desc, String unit, QuestionCategory category, int multiplier) {
-        mcategory = category;
+        mCategory = category;
         mdesc = desc;
-        mlink = link;
-        munit = unit;
+        mLink = link;
+        mUnit = unit;
         ansDouble = new HashMap<>();
         isCorrectAnswer = new HashMap<>();
         ArrayList<Double> valueList = new ArrayList<>();
@@ -56,7 +58,7 @@ public class Question {
         assert (availableCountries.size() > Gameplay.Settings.COUNTRIES_PER_QUESTION);
         Collections.shuffle(availableCountries);
 
-        mcountries = availableCountries.subList(0, Gameplay.Settings.COUNTRIES_PER_QUESTION);
+        mCountries = availableCountries.subList(0, Gameplay.Settings.COUNTRIES_PER_QUESTION);
     }
 
     /**
@@ -92,7 +94,7 @@ public class Question {
      * @return Category of the question
      */
     public QuestionCategory getCategory() {
-        return mcategory;
+        return mCategory;
     }
 
     /**
@@ -142,7 +144,7 @@ public class Question {
      * @return List of countries
      */
     public List<Country> getCountries() {
-        return mcountries;
+        return mCountries;
     }
 
     /**
@@ -151,13 +153,13 @@ public class Question {
      * @return Label
      */
     public String getMinLabel() {
-        switch (munit) {
+        switch (mUnit) {
             case "%":
-                return "<" + midThres + munit;
+                return "<" + midThres + mUnit;
             case "D":
                 return "<" + midThres;
             default:
-                return "<" + UnitFormatter.formatAsUnit((long) midThres, UnitSystem.SI, munit);
+                return "<" + UnitFormatter.formatAsUnit((long) midThres, UnitSystem.SI, mUnit);
         }
     }
 
@@ -167,13 +169,13 @@ public class Question {
      * @return Label
      */
     public String getMidLabel() {
-        switch (munit) {
+        switch (mUnit) {
             case "%":
-                return midThres + munit + " - " + highThres + munit;
+                return midThres + mUnit + " - " + highThres + mUnit;
             case "D":
                 return midThres + " - " + highThres;
             default:
-                return UnitFormatter.formatAsUnit((long) midThres, UnitSystem.SI, munit) + " - " + UnitFormatter.formatAsUnit((long) highThres, UnitSystem.SI, munit);
+                return UnitFormatter.formatAsUnit((long) midThres, UnitSystem.SI, mUnit) + " - " + UnitFormatter.formatAsUnit((long) highThres, UnitSystem.SI, mUnit);
         }
     }
 
@@ -183,13 +185,13 @@ public class Question {
      * @return Label
      */
     public String getMaxLabel() {
-        switch (munit) {
+        switch (mUnit) {
             case "%":
-                return ">" + highThres + munit;
+                return ">" + highThres + mUnit;
             case "D":
                 return ">" + highThres;
             default:
-                return ">" + UnitFormatter.formatAsUnit((long) highThres, UnitSystem.SI, munit);
+                return ">" + UnitFormatter.formatAsUnit((long) highThres, UnitSystem.SI, mUnit);
         }
     }
 
@@ -208,7 +210,7 @@ public class Question {
      * @return Unit
      */
     public String getUnit() {
-        return munit;
+        return mUnit;
     }
 
     /**
@@ -218,7 +220,7 @@ public class Question {
      */
     public List<Answer> getAnswers() {
         List<Answer> list = new ArrayList<>();
-        for (Country country : mcountries) {
+        for (Country country : mCountries) {
             double value = 0.0;
             try {
                 value = ansDouble.get(country);
@@ -226,18 +228,18 @@ public class Question {
                 e.printStackTrace();
             }
             String valuePresented;
-            switch (munit) {
+            switch (mUnit) {
                 case "%":
-                    valuePresented = String.format("%.2f", value) + munit;
+                    valuePresented = String.format("%.2f", value) + mUnit;
                     break;
                 case "D":
                     valuePresented = String.format("%.2f", value);
                     break;
                 default:
-                    valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, munit);
+                    valuePresented = UnitFormatter.formatAsUnit((long) value, UnitSystem.SI, mUnit);
                     break;
             }
-            int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(country) - 1) * 0.5f);
+            int color = ColorUtils.blendARGB(mCategory.getMinColor(), mCategory.getMaxColor(), (ans.get(country) - 1) * 0.5f);
             Answer answer = new Answer(this, country, valuePresented, value, color);
             list.add(answer);
         }
@@ -246,7 +248,8 @@ public class Question {
 
     /**
      * Set isCorrectAnswer hashmap.
-     * @param country Country
+     *
+     * @param country   Country
      * @param isCorrect Is the answer for country correct or not
      */
     public void setAnswer(Country country, boolean isCorrect) {
@@ -255,6 +258,7 @@ public class Question {
 
     /**
      * Check whether the answer for country is correct.
+     *
      * @param country Country
      * @return True if answer is correct
      */

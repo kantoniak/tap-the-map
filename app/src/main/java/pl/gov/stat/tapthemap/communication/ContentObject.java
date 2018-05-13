@@ -1,11 +1,11 @@
 package pl.gov.stat.tapthemap.communication;
 
-import pl.gov.stat.tapthemap.gameplay.QuestionChest;
-
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+
+import pl.gov.stat.tapthemap.gameplay.QuestionChest;
 
 public class ContentObject {
     /**

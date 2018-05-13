@@ -58,6 +58,7 @@ public class Answer {
 
     /**
      * Check whether the answer is correct.
+     *
      * @return True if answer is correct.
      */
     public boolean isCorrect() {

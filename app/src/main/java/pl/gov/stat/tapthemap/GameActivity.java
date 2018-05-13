@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.gov.stat.tapthemap.ar.EasyARController;
 import pl.gov.stat.tapthemap.ar.EasyARRenderingDelegate;
 import pl.gov.stat.tapthemap.ar.UpdateBackgroundAndMatricesCallback;
@@ -20,12 +25,6 @@ import pl.gov.stat.tapthemap.scene.GameSurfaceView;
 import pl.gov.stat.tapthemap.scene.Map;
 import pl.gov.stat.tapthemap.scene.MapRenderer;
 import pl.gov.stat.tapthemap.scene.RenderingDelegate;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Activity for displaying the main game screen.
@@ -127,7 +126,7 @@ public class GameActivity extends AppCompatActivity
     public void switchToQuestions() {
         QuestionSeriesFragment questionFragment = new QuestionSeriesFragment();
         questionFragment.init(renderer, camera, questionList);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, questionFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, questionFragment, "QuestionSeriesFragment").commit();
         renderer.showMap(true);
     }
 

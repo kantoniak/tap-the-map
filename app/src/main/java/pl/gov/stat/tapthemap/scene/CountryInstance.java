@@ -2,21 +2,19 @@ package pl.gov.stat.tapthemap.scene;
 
 import android.support.v4.graphics.ColorUtils;
 
-import pl.gov.stat.tapthemap.Country;
-import pl.gov.stat.tapthemap.gameplay.Gameplay;
-
 import org.rajawali3d.Object3D;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.materials.textures.TextureManager;
-import org.rajawali3d.math.Matrix;
-import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.Quaternion;
 import org.rajawali3d.math.vector.Vector2;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.primitives.Plane;
 import org.rajawali3d.scene.Scene;
 import org.rajawali3d.util.ObjectColorPicker;
+
+import pl.gov.stat.tapthemap.Country;
+import pl.gov.stat.tapthemap.gameplay.Gameplay;
 
 /**
  * Represents a single country on the map.
@@ -142,6 +140,15 @@ public class CountryInstance {
             this.height = 0;
         }
         updateVisuals();
+    }
+
+    /**
+     * Check whether country is enabled.
+     *
+     * @return True if country is enabled
+     */
+    public boolean isEnabled() {
+        return !disabled;
     }
 
     /**

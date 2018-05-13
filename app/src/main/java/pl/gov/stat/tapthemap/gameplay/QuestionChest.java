@@ -4,9 +4,6 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import pl.gov.stat.tapthemap.communication.APIResponse;
-import pl.gov.stat.tapthemap.communication.AsyncTaskParams;
-import pl.gov.stat.tapthemap.communication.DataProvider;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import pl.gov.stat.tapthemap.communication.APIResponse;
+import pl.gov.stat.tapthemap.communication.AsyncTaskParams;
+import pl.gov.stat.tapthemap.communication.DataProvider;
 
 /**
  * Class containing all the available questions.

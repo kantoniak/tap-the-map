@@ -1,6 +1,5 @@
 package pl.gov.stat.tapthemap;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,7 +14,8 @@ import butterknife.OnClick;
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    @BindView(R.id.map_vertical) ToggleSwitch mToggleSwitch;
+    @BindView(R.id.map_vertical)
+    ToggleSwitch mToggleSwitch;
 
     /**
      * Set up activity.

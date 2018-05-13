@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import pl.gov.stat.tapthemap.R;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.gov.stat.tapthemap.R;
 
 /**
  * Class responsible for displaying about marker fragment.

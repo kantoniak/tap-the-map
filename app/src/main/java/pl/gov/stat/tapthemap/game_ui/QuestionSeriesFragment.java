@@ -17,8 +17,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.rajawali3d.math.vector.Vector3;
+import java.util.Comparator;
+import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import pl.gov.stat.tapthemap.BuildConfig;
 import pl.gov.stat.tapthemap.Country;
 import pl.gov.stat.tapthemap.NoConnectionActivity;
 import pl.gov.stat.tapthemap.R;
@@ -30,13 +35,6 @@ import pl.gov.stat.tapthemap.gameplay.Question;
 import pl.gov.stat.tapthemap.scene.CountryInstance;
 import pl.gov.stat.tapthemap.scene.Map;
 import pl.gov.stat.tapthemap.scene.MapRenderer;
-
-import java.util.Comparator;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Class responsible for displaying the question series fragment.
@@ -75,6 +73,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
     RecyclerView mAnswersRecycler;
     @BindView(R.id.answers_container)
     LinearLayout mAnswersContainer;
+
+    @BindView(R.id.remaining_container)
+    LinearLayout mRemainingContainer;
 
     private Gameplay gameplay;
     boolean showingAnswers = false;
@@ -132,6 +133,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         showingAnswers = false;
         map.setVisible(true);
         mAnswersContainer.setVisibility(View.INVISIBLE);
+        mRemainingContainer.setVisibility(View.VISIBLE);
 
         gameplay = new Gameplay(questionList, Gameplay.Settings.COUNTRIES_PER_QUESTION);
         try {
@@ -152,6 +154,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         showingAnswers = false;
         map.reset();
         question.getCountries().forEach(map::enableCountry);
+        updateLabels();
 
         mQuestionTextView.setText(question.getDesc());
         mRoundProgress.setText(getString(R.string.question_progress_counter, gameplay.getCurrentQuestionInt() + 1, Gameplay.Settings.QUESTIONS_PER_SERIES));
@@ -169,6 +172,25 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mHighColorView.setBackgroundColor(maxColor);
         mMidColorView.setBackgroundColor(midColor);
         mLowColorView.setBackgroundColor(minColor);
+    }
+
+    public void updateLabels() {
+        mRemainingContainer.removeViews(1, mRemainingContainer.getChildCount() - 1);
+        mRemainingContainer.getChildAt(0).setVisibility(View.VISIBLE);
+        map.getEnabledCountries().forEach(this::displayLabel);
+        if (mRemainingContainer.getChildCount() == 1) {
+            mRemainingContainer.getChildAt(0).setVisibility(View.INVISIBLE);
+        }
+    }
+
+
+    private void displayLabel(Country country, CountryInstance instance) {
+        if (instance.getHeight() == 0) {
+            ImageView imageView = new ImageView(getContext());
+            int id = getResources().getIdentifier("country_" + country.getEuCode() + "_plate", "drawable", BuildConfig.APPLICATION_ID);
+            imageView.setImageResource(id);
+            mRemainingContainer.addView(imageView);
+        }
     }
 
     /**
@@ -210,6 +232,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
             mNextIcon.setImageResource(R.drawable.ic_done_24dp);
             showingAnswers = false;
             mAnswersContainer.setVisibility(View.INVISIBLE);
+            mRemainingContainer.setVisibility(View.VISIBLE);
 
             Question nextQuestion = gameplay.finishQuestion(getActivity());
             if (nextQuestion == null) {
@@ -225,6 +248,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
             answers.sort(Comparator.comparing(Answer::getValueRaw).reversed());
             answersAdapter.updateAnswers(answers);
 
+            mRemainingContainer.setVisibility(View.INVISIBLE);
             mAnswersContainer.setVisibility(View.VISIBLE);
             mNextIcon.setImageResource(R.drawable.ic_trending_flat_24dp);
             showingAnswers = true;

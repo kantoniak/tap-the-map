@@ -8,12 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import pl.gov.stat.tapthemap.R;
-import pl.gov.stat.tapthemap.ar.EasyARController;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.easyar.Target;
+import pl.gov.stat.tapthemap.R;
+import pl.gov.stat.tapthemap.ar.EasyARController;
 
 /**
  * Class that is responsible for displaying the fragment about scan.

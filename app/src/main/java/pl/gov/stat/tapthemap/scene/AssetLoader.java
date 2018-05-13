@@ -3,14 +3,14 @@ package pl.gov.stat.tapthemap.scene;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
-import pl.gov.stat.tapthemap.BuildConfig;
-import pl.gov.stat.tapthemap.Country;
-
 import org.rajawali3d.Object3D;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.textures.Texture;
 import org.rajawali3d.materials.textures.TextureManager;
+
+import pl.gov.stat.tapthemap.BuildConfig;
+import pl.gov.stat.tapthemap.Country;
 
 /**
  * Class used for loading assets.

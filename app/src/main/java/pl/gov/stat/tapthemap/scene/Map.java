@@ -2,12 +2,12 @@ package pl.gov.stat.tapthemap.scene;
 
 import android.support.annotation.Nullable;
 
-import pl.gov.stat.tapthemap.Country;
-
 import org.rajawali3d.math.vector.Vector2;
 
 import java.util.Collections;
 import java.util.HashMap;
+
+import pl.gov.stat.tapthemap.Country;
 
 /**
  * Class representing the map.
@@ -73,12 +73,27 @@ public class Map {
     }
 
     /**
-     * Get hashmap of the countries.
+     * Get hashmap of countries.
      *
-     * @return Hashmap of the countries
+     * @return Hashmap of countries
      */
     public HashMap<Country, CountryInstance> getCountries() {
         return countries;
+    }
+
+    /**
+     * Get hashmap of enabled countries.
+     *
+     * @return Hashmap of enabled countries
+     */
+    public HashMap<Country, CountryInstance> getEnabledCountries() {
+        HashMap<Country, CountryInstance> res = new HashMap<>();
+        for (Country c : countries.keySet()) {
+            if (countries.get(c).isEnabled()) {
+                res.put(c, countries.get(c));
+            }
+        }
+        return res;
     }
 
     /**

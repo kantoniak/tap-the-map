@@ -3,9 +3,8 @@ package pl.gov.stat.tapthemap.ar;
 import android.app.Activity;
 import android.util.Log;
 
-import pl.gov.stat.tapthemap.R;
-
 import cn.easyar.Engine;
+import pl.gov.stat.tapthemap.R;
 
 /**
  * Class responsible for east AR utils.

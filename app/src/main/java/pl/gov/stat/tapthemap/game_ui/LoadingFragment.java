@@ -12,15 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import pl.gov.stat.tapthemap.Country;
-import pl.gov.stat.tapthemap.R;
-import pl.gov.stat.tapthemap.gameplay.Gameplay;
-import pl.gov.stat.tapthemap.gameplay.Question;
-import pl.gov.stat.tapthemap.gameplay.QuestionChest;
-import pl.gov.stat.tapthemap.scene.AssetLoader;
-import pl.gov.stat.tapthemap.scene.CountryInstance;
-import pl.gov.stat.tapthemap.scene.MapRenderer;
-
 import org.rajawali3d.Object3D;
 import org.rajawali3d.materials.textures.Texture;
 
@@ -32,6 +23,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.gov.stat.tapthemap.Country;
+import pl.gov.stat.tapthemap.R;
+import pl.gov.stat.tapthemap.gameplay.Gameplay;
+import pl.gov.stat.tapthemap.gameplay.Question;
+import pl.gov.stat.tapthemap.gameplay.QuestionChest;
+import pl.gov.stat.tapthemap.scene.AssetLoader;
+import pl.gov.stat.tapthemap.scene.CountryInstance;
+import pl.gov.stat.tapthemap.scene.MapRenderer;
 
 /**
  * Class responsible for displaying the loading fragment.

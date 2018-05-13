@@ -2,15 +2,15 @@ package pl.gov.stat.tapthemap.gameplay;
 
 import android.content.Context;
 
-import pl.gov.stat.tapthemap.Country;
-import pl.gov.stat.tapthemap.scene.CountryInstance;
-import pl.gov.stat.tapthemap.scene.Map;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import pl.gov.stat.tapthemap.Country;
+import pl.gov.stat.tapthemap.scene.CountryInstance;
+import pl.gov.stat.tapthemap.scene.Map;
 
 /**
  * Class responsible for gameplay,

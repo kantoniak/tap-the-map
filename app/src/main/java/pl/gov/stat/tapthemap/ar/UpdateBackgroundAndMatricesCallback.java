@@ -1,6 +1,5 @@
 package pl.gov.stat.tapthemap.ar;
 
-import org.rajawali3d.math.MathUtil;
 import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.Quaternion;
 import org.rajawali3d.math.vector.Vector3;
