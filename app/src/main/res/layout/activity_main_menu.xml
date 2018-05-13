@@ -68,25 +68,33 @@
                 android:textAlignment="center"
                 android:textSize="@dimen/subsubheaderTextSize" />
 
-            <Button
-                android:id="@+id/settings_button"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/doublePadding"
-                android:minWidth="200dp"
-                android:text="@string/button_settings"
-                android:textAlignment="center"
-                android:textSize="@dimen/subsubheaderTextSize" />
+                android:layout_marginBottom="@dimen/doublePadding">
 
-            <Button
-                android:id="@+id/about_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/doublePadding"
-                android:minWidth="200dp"
-                android:text="@string/button_about"
-                android:textAlignment="center"
-                android:textSize="@dimen/subsubheaderTextSize" />
+                <Button
+                    android:id="@+id/settings_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/doublePadding"
+                    android:minWidth="160dp"
+                    android:text="@string/button_settings"
+                    android:textAlignment="center"
+                    android:textSize="16sp"/>
+
+                <Button
+                    android:id="@+id/about_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/doublePadding"
+                    android:layout_marginBottom="@dimen/doublePadding"
+                    android:minWidth="160dp"
+                    android:text="@string/button_about"
+                    android:textAlignment="center"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
