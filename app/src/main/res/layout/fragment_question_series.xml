@@ -10,10 +10,11 @@
     <LinearLayout
         android:id="@+id/remaining_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="@dimen/standardPadding"
         android:orientation="horizontal"
+        android:paddingLeft="@dimen/triplePadding"
+        android:paddingTop="@dimen/standardPadding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_topbar">
 
@@ -22,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Countries to select:"
+            android:text="@string/countries_marked"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

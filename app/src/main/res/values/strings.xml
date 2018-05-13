@@ -49,6 +49,7 @@
     <string name="loading_questions">Loading questions...</string>
     <string name="question_progress_counter" translatable="false">%1$d/%2$d</string>
     <string name="answer_country_value" translatable="false">%1$s (%2$s)</string>
+    <string name="countries_marked">Countries to be marked:</string>
 
     <!-- Country names -->
     <string name="country_name_al">Albania</string>
