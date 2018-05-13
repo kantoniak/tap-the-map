@@ -1,5 +1,5 @@
 # Secrets
-**/*/res/values/secrets.xml
+app/src/main/res/values/secrets.xml
 
 # LICENSE.txt copy in raw resources
 app/src/main/res/raw/license.txt
