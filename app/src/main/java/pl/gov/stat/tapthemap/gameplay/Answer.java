@@ -6,12 +6,14 @@ import pl.gov.stat.tapthemap.Country;
  * Class representing answer.
  */
 public class Answer {
+    private Question question;
     private Country country;
     private String value;
     private double valueRaw;
     private int color;
 
-    public Answer(Country country, String value, double valueRaw, int color) {
+    Answer(Question question, Country country, String value, double valueRaw, int color) {
+        this.question = question;
         this.country = country;
         this.value = value;
         this.valueRaw = valueRaw;
@@ -52,5 +54,13 @@ public class Answer {
      */
     public int getColor() {
         return color;
+    }
+
+    /**
+     * Check whether the answer is correct.
+     * @return True if answer is correct.
+     */
+    public boolean isCorrect() {
+        return question.getIsCorrectAnswer(country);
     }
 }

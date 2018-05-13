@@ -21,4 +21,11 @@
         android:layout_marginStart="@dimen/standardPadding"
         tools:text="Country name" />
 
+    <ImageView
+        android:id="@+id/answer_tick"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1" />
+
 </LinearLayout>

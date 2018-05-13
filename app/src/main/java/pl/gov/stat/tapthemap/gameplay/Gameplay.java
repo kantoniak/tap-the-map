@@ -119,6 +119,9 @@ public class Gameplay {
                 int qq = q.getCorrectAnswer(country);
                 if (Math.abs(dec - qq) == 0) {
                     score += 1;
+                    question.setAnswer(country, true);
+                } else {
+                    question.setAnswer(country, false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

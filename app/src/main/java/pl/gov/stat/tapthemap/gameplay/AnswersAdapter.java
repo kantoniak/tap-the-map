@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import pl.gov.stat.tapthemap.R;
@@ -29,6 +30,8 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
         public View color;
         @BindView(R.id.answer_item_country)
         public TextView country;
+        @BindView(R.id.answer_tick)
+        public ImageView tick;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,6 +65,13 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
 
         String countryName = answer.getCountry().getLocalizedName(resources);
         holder.country.setText(resources.getString(R.string.answer_country_value, countryName, answer.getValue()));
+
+        boolean correct = answer.isCorrect();
+        if (correct) {
+            holder.tick.setImageDrawable(resources.getDrawable(R.drawable.ic_check_black_24dp));
+        } else {
+            holder.tick.setImageDrawable(resources.getDrawable(R.drawable.ic_close_black_24dp));
+        }
     }
 
     /**

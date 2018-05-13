@@ -20,12 +20,13 @@ public class Question {
     private HashMap<Country, Integer> ans;
     private HashMap<Country, Double> ansDouble;
 
-    double midThres;
-    double highThres;
-    String mdesc;
-    List<Country> mcountries;
-    String munit;
-    QuestionCategory mcategory;
+    private double midThres;
+    private double highThres;
+    private String mdesc;
+    private List<Country> mcountries;
+    private String munit;
+    private QuestionCategory mcategory;
+    private HashMap<Country, Boolean> isCorrectAnswer;
 
     Question(String link, HashMap<String, Double> data, String desc, String unit, QuestionCategory category, int multiplier) {
         mcategory = category;
@@ -33,6 +34,7 @@ public class Question {
         mlink = link;
         munit = unit;
         ansDouble = new HashMap<>();
+        isCorrectAnswer = new HashMap<>();
         ArrayList<Double> valueList = new ArrayList<>();
         for (Object o : data.entrySet()) {
             Map.Entry pair = (Map.Entry) o;
@@ -236,9 +238,27 @@ public class Question {
                     break;
             }
             int color = ColorUtils.blendARGB(mcategory.getMinColor(), mcategory.getMaxColor(), (ans.get(country) - 1) * 0.5f);
-            Answer answer = new Answer(country, valuePresented, value, color);
+            Answer answer = new Answer(this, country, valuePresented, value, color);
             list.add(answer);
         }
         return list;
+    }
+
+    /**
+     * Set isCorrectAnswer hashmap.
+     * @param country Country
+     * @param isCorrect Is the answer for country correct or not
+     */
+    public void setAnswer(Country country, boolean isCorrect) {
+        isCorrectAnswer.put(country, isCorrect);
+    }
+
+    /**
+     * Check whether the answer for country is correct.
+     * @param country Country
+     * @return True if answer is correct
+     */
+    public boolean getIsCorrectAnswer(Country country) {
+        return isCorrectAnswer.get(country);
     }
 }
