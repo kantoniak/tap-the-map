@@ -11,7 +11,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "boolean", "SEEDENABLED", "true"
+            buildConfigField "long", "SEEDVALUE", "100"
+        }
         release {
+            buildConfigField "boolean", "SEEDENABLED", "false"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

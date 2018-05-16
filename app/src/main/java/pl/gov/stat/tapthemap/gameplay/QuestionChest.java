@@ -14,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
+import pl.gov.stat.tapthemap.BuildConfig;
 import pl.gov.stat.tapthemap.communication.APIResponse;
 import pl.gov.stat.tapthemap.communication.AsyncTaskParams;
 import pl.gov.stat.tapthemap.communication.DataProvider;
@@ -136,7 +138,11 @@ public class QuestionChest {
             Question q = new Question(fullQuery, response.getContent().getHashMap(), questionObjects.get(i).getDescription(), questionObjects.get(i).getBaseUnit(), questionObjects.get(i).getCategory(), questionObjects.get(i).getMultiplier());
             questionsArrayList.add(q);
         }
-        Collections.shuffle(questionsArrayList);
+        if (BuildConfig.SEEDENABLED) {
+            Collections.shuffle(questionsArrayList, new Random(BuildConfig.SEEDVALUE));
+        } else {
+            Collections.shuffle(questionsArrayList);
+        }
         while (questionsArrayList.size() > numberOfQuestions) {
             questionsArrayList.remove(questionsArrayList.size() - 1);
         }

@@ -10,7 +10,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import pl.gov.stat.tapthemap.BuildConfig;
 import pl.gov.stat.tapthemap.Country;
 
 /**
@@ -56,7 +58,11 @@ public class Question {
     private void setCountries() {
         List<Country> availableCountries = new ArrayList<>(ansDouble.keySet());
         assert (availableCountries.size() > Gameplay.Settings.COUNTRIES_PER_QUESTION);
-        Collections.shuffle(availableCountries);
+        if (BuildConfig.SEEDENABLED) {
+            Collections.shuffle(availableCountries, new Random(BuildConfig.SEEDVALUE));
+        } else {
+            Collections.shuffle(availableCountries);
+        }
 
         mCountries = availableCountries.subList(0, Gameplay.Settings.COUNTRIES_PER_QUESTION);
     }
