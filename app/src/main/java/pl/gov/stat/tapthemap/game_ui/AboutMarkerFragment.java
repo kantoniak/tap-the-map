@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.gov.stat.tapthemap.BuildConfig;
 import pl.gov.stat.tapthemap.R;
 
 /**
@@ -18,6 +21,8 @@ import pl.gov.stat.tapthemap.R;
 public class AboutMarkerFragment extends Fragment {
 
     private InteractionListener mListener;
+
+    @BindView(R.id.about_marker_desc) TextView mAboutMarkerDesc;
 
     public AboutMarkerFragment() {
         // Required empty public constructor
@@ -31,6 +36,9 @@ public class AboutMarkerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about_marker, container, false);
         ButterKnife.bind(this, view);
+
+        mAboutMarkerDesc.setText(getString(R.string.about_using_markers, BuildConfig.LANDING_URI));
+
         return view;
     }
 

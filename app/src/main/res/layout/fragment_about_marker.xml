@@ -36,6 +36,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/about_marker_desc"
             style="@style/SubSubHeaderText"
             android:layout_width="wrap_content"
             android:layout_marginBottom="@dimen/doublePadding"

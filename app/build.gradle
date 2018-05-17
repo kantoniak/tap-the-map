@@ -12,11 +12,13 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "boolean", "SEEDENABLED", "true"
+            buildConfigField "boolean", "SEEDENABLED", "false"
             buildConfigField "long", "SEEDVALUE", "100"
+            buildConfigField "String", "LANDING_URI", "\"hackathon.stat.gov.pl/aplikacje/tapthemap\""
         }
         release {
             buildConfigField "boolean", "SEEDENABLED", "false"
+            buildConfigField "String", "LANDING_URI", "\"hackathon.stat.gov.pl/aplikacje/tapthemap\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
