@@ -85,3 +85,9 @@ Application uses EasyAR to handle augmented reality. All marker images are defin
  - `name` - name of the marker (might be any arbitrary name)
  - `size` - says how big the marker size is in the virtual world (`[1, 1]` by default, we use `[2.5, 2.5]`)
  
+ 
+## <img src="https://opensource.org/files/osi_symbol.png" height="20" alt="Open Source" /> Open source license
+
+Copyright &copy; 2018 Główny Urząd Statystyczny
+
+Contents of this repository is licensed under GNU General Public License, version 3.0 (GPL-3.0).
