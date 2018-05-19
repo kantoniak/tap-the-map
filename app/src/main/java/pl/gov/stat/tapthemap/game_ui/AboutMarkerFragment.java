@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,9 @@ public class AboutMarkerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about_marker, container, false);
         ButterKnife.bind(this, view);
 
-        mAboutMarkerDesc.setText(getString(R.string.about_using_markers, BuildConfig.LANDING_URI));
+        String aboutString = getString(R.string.about_using_markers, BuildConfig.LANDING_URI);
+        mAboutMarkerDesc.setText(Html.fromHtml(aboutString, Html.FROM_HTML_MODE_COMPACT));
+        mAboutMarkerDesc.setMovementMethod(LinkMovementMethod.getInstance());
 
         return view;
     }

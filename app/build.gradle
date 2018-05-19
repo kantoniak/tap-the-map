@@ -14,11 +14,11 @@ android {
         debug {
             buildConfigField "boolean", "SEEDENABLED", "false"
             buildConfigField "long", "SEEDVALUE", "100"
-            buildConfigField "String", "LANDING_URI", "\"hackathon.stat.gov.pl/aplikacje/tapthemap\""
+            buildConfigField "String", "LANDING_URI", "\"https://hackathon.stat.gov.pl/aplikacje/tap-the-map\""
         }
         release {
             buildConfigField "boolean", "SEEDENABLED", "false"
-            buildConfigField "String", "LANDING_URI", "\"hackathon.stat.gov.pl/aplikacje/tapthemap\""
+            buildConfigField "String", "LANDING_URI", "\"https://hackathon.stat.gov.pl/aplikacje/tap-the-map\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

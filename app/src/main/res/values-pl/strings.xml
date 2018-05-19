@@ -34,7 +34,7 @@
     <string name="rules_description">Oszacuj skalę danego zjawiska, klikając na pięć wylosowanych państw.</string>
     <string name="dont_show_again">Nie pokazuj ponownie</string>
     <string name="ok">OK</string>
-    <string name="about_using_markers">Do gry wydrukuj obraz z markerem i połóż go na stole. Możesz też wyświetlić obraz z innego urządzenia. Pobierz marker z %1$s</string>
+    <string name="about_using_markers">Do gry wydrukuj obraz z markerem i połóż go na stole. Możesz też wyświetlić obraz z innego urządzenia. Pobierz marker ze <a href="%1$s">strony</a>.</string>
 
     <!-- Marker scanner -->
     <string name="scan_marker_to_start">Znajdź marker żeby rozpocząć</string>
