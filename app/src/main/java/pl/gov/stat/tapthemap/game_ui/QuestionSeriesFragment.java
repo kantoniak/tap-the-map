@@ -156,7 +156,9 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         showingAnswers = false;
         map.reset();
         question.getCountries().forEach(map::enableCountry);
+
         initLabels();
+        mRemainingContainer.getChildAt(0).setVisibility(View.VISIBLE);
 
         mQuestionTextView.setText(question.getDesc());
         mRoundProgress.setText(getString(R.string.question_progress_counter, gameplay.getCurrentQuestionInt() + 1, Gameplay.Settings.QUESTIONS_PER_SERIES));
