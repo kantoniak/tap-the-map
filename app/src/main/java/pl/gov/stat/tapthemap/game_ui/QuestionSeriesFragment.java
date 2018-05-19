@@ -182,6 +182,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         for (int i=1; i < mRemainingContainer.getChildCount(); i++) {
             ImageView plate = (ImageView) mRemainingContainer.getChildAt(i);
             plate.setTag(null);
+            plate.setOnClickListener(new CenterOnCountryFromTagTouchListener(renderer));
         }
 
         map.getEnabledCountries().forEach(((country, countryInstance) -> {

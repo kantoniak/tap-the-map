@@ -230,4 +230,9 @@ public class MapRenderer extends Renderer implements OnObjectPickedListener {
     public Vector3 getDefaultWorldOffset() {
         return MAP_MIDDLE.clone();
     }
+
+    public void centerViewAt(final Country country) {
+        final Vector2 countryMiddle = map.getCountryMiddle(country);
+        this.setWorldOffset(new Vector3(-countryMiddle.getX(), 0, countryMiddle.getY()));
+    }
 }
