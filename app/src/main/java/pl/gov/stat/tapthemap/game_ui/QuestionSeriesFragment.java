@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,7 +31,6 @@ import pl.gov.stat.tapthemap.NoConnectionActivity;
 import pl.gov.stat.tapthemap.R;
 import pl.gov.stat.tapthemap.ar.ViewMatrixOverrideCamera;
 import pl.gov.stat.tapthemap.gameplay.Answer;
-import pl.gov.stat.tapthemap.gameplay.AnswersAdapter;
 import pl.gov.stat.tapthemap.gameplay.Gameplay;
 import pl.gov.stat.tapthemap.gameplay.Question;
 import pl.gov.stat.tapthemap.scene.CountryInstance;
@@ -125,7 +123,7 @@ public class QuestionSeriesFragment extends Fragment implements View.OnTouchList
         mAnswersRecycler.setHasFixedSize(true);
         mAnswersRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        answersAdapter = new AnswersAdapter(getResources());
+        answersAdapter = new AnswersAdapter(getResources(), renderer);
         mAnswersRecycler.setAdapter(answersAdapter);
     }
 
