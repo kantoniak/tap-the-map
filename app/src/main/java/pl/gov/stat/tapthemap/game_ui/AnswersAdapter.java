@@ -1,4 +1,4 @@
-package pl.gov.stat.tapthemap.gameplay;
+package pl.gov.stat.tapthemap.game_ui;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +14,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.gov.stat.tapthemap.R;
+import pl.gov.stat.tapthemap.gameplay.Answer;
+import pl.gov.stat.tapthemap.scene.MapRenderer;
 
 /**
  * Class responsible for displaying the answers.
@@ -25,6 +27,7 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public View itemView;
         @BindView(R.id.answer_item_color)
         public View color;
         @BindView(R.id.answer_item_country)
@@ -35,14 +38,17 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            this.itemView = itemView;
         }
     }
 
     private final Resources resources;
+    private final MapRenderer renderer;
     private final List<Answer> dataset = new LinkedList<>();
 
-    public AnswersAdapter(Resources resources) {
+    public AnswersAdapter(Resources resources, final MapRenderer renderer) {
         this.resources = resources;
+        this.renderer = renderer;
     }
 
     /**
@@ -51,6 +57,7 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
     @Override
     public AnswersAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.answer_item_row, parent, false);
+        v.setOnClickListener(new CenterOnCountryFromTagTouchListener(renderer));
         return new ViewHolder(v);
     }
 
@@ -60,6 +67,8 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Answer answer = dataset.get(position);
+        holder.itemView.setTag(answer.getCountry());
+
         holder.color.setBackgroundColor(answer.getColor());
 
         String countryName = answer.getCountry().getLocalizedName(resources);

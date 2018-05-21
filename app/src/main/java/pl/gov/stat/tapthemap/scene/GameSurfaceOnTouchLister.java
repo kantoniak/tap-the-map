@@ -56,11 +56,6 @@ public class GameSurfaceOnTouchLister implements View.OnTouchListener {
     @Override
     public boolean onTouch(View view, MotionEvent e) {
 
-        // Country tapping
-        if (mTapDetector.onTouchEvent(e)) {
-            return true;
-        }
-
         // Dragging & scale
         final int action = e.getActionMasked();
 
@@ -178,8 +173,11 @@ public class GameSurfaceOnTouchLister implements View.OnTouchListener {
                 break;
             }
         }
-        return true;
 
+        // Country tapping
+        mTapDetector.onTouchEvent(e);
+
+        return true;
     }
 
     private double calculatePointersDistance() {

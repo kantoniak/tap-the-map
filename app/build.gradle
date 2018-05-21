@@ -6,19 +6,19 @@ android {
         applicationId "pl.gov.stat.tapthemap"
         minSdkVersion 24
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
             buildConfigField "boolean", "SEEDENABLED", "false"
             buildConfigField "long", "SEEDVALUE", "100"
-            buildConfigField "String", "LANDING_URI", "\"hackathon.stat.gov.pl/aplikacje/tapthemap\""
+            buildConfigField "String", "LANDING_URI", "\"https://hackathon.stat.gov.pl/aplikacje/tap-the-map\""
         }
         release {
             buildConfigField "boolean", "SEEDENABLED", "false"
-            buildConfigField "String", "LANDING_URI", "\"hackathon.stat.gov.pl/aplikacje/tapthemap\""
+            buildConfigField "String", "LANDING_URI", "\"https://hackathon.stat.gov.pl/aplikacje/tap-the-map\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
