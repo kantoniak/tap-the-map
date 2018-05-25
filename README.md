@@ -4,7 +4,15 @@
   <img src="readme/main_menu.png" align="center" alt="Main menu" />
 </p>
 
-# Architecture overview
+# The game in Google Play
+TapTheMap is available in Google Play https://play.google.com/store/apps/details?id=pl.gov.stat.tapthemap
+
+It can be install directly from APk file (app-release.apk) - please follow the instructions: https://www.wikihow.tech/Install-APK-Files-on-Android
+
+# Markers to trigger augmented reality map
+To play the game a special marker is required. It should be downloaded and printed form the rpository or from application website https://hackathon.stat.gov.pl/aplikacje/tap-the-map (markers are available in colour and black-and-white versions). 
+
+# Architecture overview 
 TapTheMap is a native Android app written in Java. As usual, project is build for gradle, preferably for use with Android Studio. The application itself is contained in `app` subproject, with a default run configuration `app` targeted at devices with API level 24+. App uses Java 8, the newest supported by Android SDK at the time of development (April 2018).
 
 ## Desing decisions
