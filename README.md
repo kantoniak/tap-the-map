@@ -7,7 +7,7 @@
 # Installation
 TapTheMap is available in Google Play: https://play.google.com/store/apps/details?id=pl.gov.stat.tapthemap
 
-It can be install directly from APk file (app-release.apk) as well - please follow the instructions: https://www.wikihow.tech/Install-APK-Files-on-Android
+It can be installed directly from APK file (app-release.apk) as well - please follow the instructions: https://www.wikihow.tech/Install-APK-Files-on-Android
 
 # Marker to trigger augmented reality map
 To play the game a special marker is required. It should be downloaded and printed form this repository (tap-the-map/tree/master/app/src/main/assets) or from application website: https://hackathon.stat.gov.pl/aplikacje/tap-the-map. The marker is available in two versions: colour or black-and-white.
@@ -30,7 +30,7 @@ Internet connection is necessary to use the application. The first thing is, Eas
 Questions are the basis of the gameplay. These are based on data that changes relatively frequently, what leads to a few observations:
 
 1. We expect the question set to evolve and possibly be expanded in the future;
-1. Regarding the initial game project, there's a chance question list will be curated online and sent to the devices at application runtime.
+2. Regarding the initial game project, there's a chance question list will be curated online and sent to the devices at application runtime.
 
 That's why all questions are kept in a single JSON file, so it can later be easily integrated in an online workflow. This is also means the question text translations are stored along the data.
 
